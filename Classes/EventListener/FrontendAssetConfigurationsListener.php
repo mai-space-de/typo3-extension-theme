@@ -25,7 +25,8 @@ class FrontendAssetConfigurationsListener
 
     public function __construct()
     {
-        $this->serverRequest = $GLOBALS['TYPO3_REQUEST'];
+        $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
+        $this->serverRequest = $request instanceof ServerRequest ? $request : null;
     }
 
     public function setStyleSheetConfiguration(BeforeStylesheetsRenderingEvent $event): void
@@ -62,24 +63,33 @@ class FrontendAssetConfigurationsListener
         }
     }
 
+    /**
+     * @return array<string, array<string, mixed>>
+     */
     private function getAssetsForCurrentSite(string $siteIdentifier, ApplicationType $applicationType, string $assetType): array
     {
         $assets = GeneralUtility::makeInstance(ActiveExtensionConfigurationLoader::class)
             ->getMergedConfigurationByFilename($assetType);
 
         if ($applicationType->isFrontend()) {
-            $assets = $assets[self::APPLICATION_TYPE_FRONTEND] ?? [];
+            $assets = (array)($assets[self::APPLICATION_TYPE_FRONTEND] ?? []);
         } elseif ($applicationType->isBackend()) {
-            return $assets[self::APPLICATION_TYPE_BACKEND] ?? [];
+            /** @var array<string, array<string, mixed>> $backendAssets */
+            $backendAssets = (array)($assets[self::APPLICATION_TYPE_BACKEND] ?? []);
+
+            return $backendAssets;
         }
 
-        return array_filter($assets, static function ($asset) use ($siteIdentifier) {
-            if (array_key_exists('site-identifier', $asset)) {
+        /** @var array<string, array<string, mixed>> $filteredAssets */
+        $filteredAssets = array_filter($assets, static function ($asset) use ($siteIdentifier) {
+            if (is_array($asset) && array_key_exists('site-identifier', $asset)) {
                 return $asset['site-identifier'] === $siteIdentifier;
             }
 
             return true;
         });
+
+        return $filteredAssets;
     }
 
     private function getRegisterClosure(AssetCollector $assetCollector): \Closure
@@ -88,16 +98,16 @@ class FrontendAssetConfigurationsListener
             if ($type === self::ASSET_TYPE_STYLESHEET) {
                 $assetCollector->addStyleSheet(
                     $assetIdentifier,
-                    $asset['source'],
-                    $asset['attributes'] ?? [],
-                    $asset['options'] ?? []
+                    is_string($asset['source'] ?? null) ? $asset['source'] : '',
+                    (array)($asset['attributes'] ?? []),
+                    (array)($asset['options'] ?? [])
                 );
             } elseif ($type === self::ASSET_TYPE_JAVASCRIPT) {
                 $assetCollector->addJavaScript(
                     $assetIdentifier,
-                    $asset['source'],
-                    $asset['attributes'] ?? [],
-                    $asset['options'] ?? []
+                    is_string($asset['source'] ?? null) ? $asset['source'] : '',
+                    (array)($asset['attributes'] ?? []),
+                    (array)($asset['options'] ?? [])
                 );
             }
         };

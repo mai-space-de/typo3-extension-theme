@@ -15,6 +15,9 @@ class ActiveExtensionConfigurationLoader
         $this->packageManager = $packageManager ?? GeneralUtility::makeInstance(PackageManager::class);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getMergedConfigurationByFilename(string $filename): array
     {
         $configuration = [];
@@ -22,10 +25,13 @@ class ActiveExtensionConfigurationLoader
             $configurationFile = $activePackage->getPackagePath() . 'Configuration/' . $filename . '.php';
             if (file_exists($configurationFile)) {
                 $configArray = require $configurationFile;
-                ArrayUtility::mergeRecursiveWithOverrule($configuration, $configArray);
+                if (is_array($configArray)) {
+                    ArrayUtility::mergeRecursiveWithOverrule($configuration, $configArray);
+                }
             }
         }
 
-        return $configuration;
+        // @phpstan-ignore-next-line
+        return (array)$configuration;
     }
 }

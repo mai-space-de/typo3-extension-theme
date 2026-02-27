@@ -1,4 +1,9 @@
-# TYPO3 Extension: theme
+# maispace/theme — TYPO3 Theme Loader
+
+[![CI](https://github.com/mai-space-de/typo3-extension-theme/actions/workflows/ci.yml/badge.svg)](https://github.com/mai-space-de/typo3-extension-theme/actions/workflows/ci.yml)
+[![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue)](https://www.php.net/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-13.0%2B-orange)](https://typo3.org/)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 This extension provides a way to load assets (stylesheets and JavaScripts) and backend theme configurations from other active packages in a TYPO3 instance.
 
