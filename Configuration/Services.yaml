@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+  Maispace\Theme\EventListener\FrontendAssetConfigurationsListener:
+    tags:
+      - name: event.listener
+        method: setJavaScriptConfiguration
+        identifier: 'Maispace/JavaScriptConfigurationsListener'
+      - name: event.listener
+        method: setStyleSheetConfiguration
+        identifier: 'Maispace/StyleSheetConfigurationsListener'

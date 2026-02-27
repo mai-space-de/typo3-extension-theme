@@ -1,0 +1,36 @@
+{
+    "name": "maispace/theme",
+    "type": "typo3-cms-extension",
+    "description": "Theme extension for TYPO3 CMS",
+    "homepage": "https://www.maispace.de",
+    "authors": [{
+        "name": "Joel Maximilian Mai",
+        "email": "joel@maispace.de",
+        "role": "Lead Developer"
+    }],
+    "autoload": {
+        "psr-4": {
+            "Maispace\\Theme\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Maispace\\Theme\\Tests\\": "Tests/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "theme"
+        },
+        "branch-alias": {
+            "dev-main": "13.0.x-dev"
+        }
+    },
+    "require": {
+        "scssphp/scssphp": "^1.13"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "typo3/testing-framework": "^8.0"
+    }
+}

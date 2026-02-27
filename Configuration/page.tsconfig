@@ -1,0 +1,4 @@
+# --- BEGIN: Include Page TsConfig -------------------------------------------------------------------------------------
+
+# Sinve TYPO3 v12 needed here
+@import 'EXT:theme/Configuration/TsConfig/page.tsconfig'
