@@ -119,7 +119,7 @@ jobs:
           COMPOSER_ROOT_VERSION: "1.0.0"
 
       - name: Check EditorConfig
-        run: vendor/bin/ec -unv -e vendor/
+        run: vendor/bin/ec -unv -e vendor/ -e public/
 
       - name: Check code style
         run: composer check:phpcs
