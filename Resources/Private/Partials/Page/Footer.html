@@ -1,0 +1,26 @@
+<!--
+    Page/Footer partial — maispace/theme
+    ──────────────────────────────────────────────────────────────────────────
+    Simple site footer. Override via partialRootPaths in your own extension.
+-->
+<footer class="site-footer" role="contentinfo">
+    <div class="container">
+        <f:if condition="{settings.footer.columns}">
+            <div class="auto-grid">
+                <f:render partial="Page/FooterColumns" arguments="{data: data, settings: settings}" optional="true" />
+            </div>
+        </f:if>
+
+        <div class="cluster" style="justify-content: space-between; padding-block: var(--space-md); border-block-start: 1px solid var(--color-border); margin-block-start: var(--space-xl);">
+            <small class="color-muted">
+                &copy; {f:format.date(format: 'Y')} {settings.site.name}
+            </small>
+
+            <f:if condition="{settings.footer.showNav}">
+                <nav class="navigation" aria-label="{f:translate(key: 'LLL:EXT:theme/Resources/Private/Language/locallang.xlf:nav.footer', default: 'Footer navigation')}">
+                    <f:render partial="Page/FooterNavigation" arguments="{data: data, settings: settings}" optional="true" />
+                </nav>
+            </f:if>
+        </div>
+    </div>
+</footer>

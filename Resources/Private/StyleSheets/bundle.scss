@@ -1,0 +1,56 @@
+// =============================================================================
+// bundle.scss — maispace/theme stylesheet bundle
+//
+// ITCSS (Inverted Triangle CSS) import order following the Atomic Design
+// methodology from https://github.com/mai-space/minimal-stylesheet-maximum-impact
+//
+// Layer overview (specificity increases from top to bottom):
+//   01-settings  — CSS custom properties (design tokens)
+//   02-mixins    — SCSS helpers (no output)
+//   03-generic   — Reset, base HTML element styles, layout primitives
+//   04-atoms     — Smallest UI components (button, link, image, …)
+//   05-molecules — Combinations of atoms (card, form-field, …)
+//   06-organisms — Complex sections (header, navigation, form)
+//   07-templates — Page-level skeleton and the shame file
+//   08-utilities — Single-purpose override classes
+//
+// This file is compiled server-side by maispace/assets via <mai:scss>
+// — no Node.js build step required.
+// =============================================================================
+
+// -- 01 Settings --------------------------------------------------------------
+@use "01-settings/variables";
+
+// -- 02 Mixins (no CSS output) ------------------------------------------------
+// Imported per-partial where needed via `@use "../02-mixins/media-breakpoint"`
+
+// -- 03 Generic ---------------------------------------------------------------
+@use "03-generic/reset";
+@use "03-generic/layout";
+@use "03-generic/typography";
+
+// -- 04 Atoms -----------------------------------------------------------------
+@use "04-atoms/accessibility";
+@use "04-atoms/button";
+@use "04-atoms/link";
+@use "04-atoms/image";
+@use "04-atoms/list";
+@use "04-atoms/table";
+
+// -- 05 Molecules -------------------------------------------------------------
+@use "05-molecules/card";
+@use "05-molecules/external-link";
+@use "05-molecules/form-field";
+@use "05-molecules/button-group";
+@use "05-molecules/media-object";
+
+// -- 06 Organisms -------------------------------------------------------------
+@use "06-organisms/header";
+@use "06-organisms/navigation";
+@use "06-organisms/form";
+
+// -- 07 Templates -------------------------------------------------------------
+@use "07-templates/shame";
+
+// -- 08 Utilities -------------------------------------------------------------
+@use "08-utilities/classes";

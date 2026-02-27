@@ -1,0 +1,85 @@
+// =============================================================================
+// 05-molecules/_external-link.scss
+//
+// Automatically injects contextual icons into anchor elements based on their
+// href protocol or file extension.
+//
+// External links  → ↗  (upward-right arrow, animates on hover)
+// Email links     → ✉  (envelope icon before the text)
+// Phone links     → ☎  (phone icon before the text)
+// Download links  → ⬇  (downward arrow after the text)
+//
+// Suppression: add .internal-link to any <a> to opt out of the external icon.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// External links — https:// or http:// links that don't carry .internal-link
+// ---------------------------------------------------------------------------
+a[href^="https://"],
+a[href^="http://"] {
+    &:not(.internal-link) {
+        &::after {
+            content:         " ↗";
+            display:         inline-block;
+            font-style:      normal;
+            margin-inline-start: var(--space-2xs);
+            transition:      transform 200ms ease;
+            color:           inherit;
+            font-size:       0.85em;
+        }
+
+        &:hover::after {
+            transform: translate(2px, -2px);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Email links — mailto:
+// ---------------------------------------------------------------------------
+a[href^="mailto:"] {
+    &::before {
+        content:           "✉ ";
+        display:           inline-block;
+        font-style:        normal;
+        margin-inline-end: var(--space-2xs);
+        color:             inherit;
+        font-size:         0.9em;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Phone links — tel:
+// ---------------------------------------------------------------------------
+a[href^="tel:"] {
+    &::before {
+        content:           "☎ ";
+        display:           inline-block;
+        font-style:        normal;
+        margin-inline-end: var(--space-2xs);
+        color:             inherit;
+        font-size:         0.9em;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Download links — common file extensions or download attribute
+// ---------------------------------------------------------------------------
+a[href$=".pdf"],
+a[href$=".doc"],
+a[href$=".docx"],
+a[href$=".xls"],
+a[href$=".xlsx"],
+a[href$=".zip"],
+a[href$=".tar"],
+a[href$=".gz"],
+a[download] {
+    &::after {
+        content:           " ⬇";
+        display:           inline-block;
+        font-style:        normal;
+        margin-inline-start: var(--space-2xs);
+        color:             inherit;
+        font-size:         0.85em;
+    }
+}

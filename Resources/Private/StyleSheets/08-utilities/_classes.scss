@@ -1,0 +1,167 @@
+// =============================================================================
+// 08-utilities/_classes.scss
+//
+// Single-purpose utility classes for common presentation needs.
+// These are intentionally narrow in scope — they should not be used as
+// substitutes for component styles, but as escape hatches for one-off tweaks.
+//
+// All classes are non-prefixed for brevity. If your project uses a utility
+// framework alongside this stylesheet, consider prefixing them (e.g. .u-*).
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Text alignment
+// ---------------------------------------------------------------------------
+.text-center { text-align: center; }
+.text-start  { text-align: start; }
+.text-end    { text-align: end; }
+
+// ---------------------------------------------------------------------------
+// Text transforms
+// ---------------------------------------------------------------------------
+.text-uppercase  { text-transform: uppercase; }
+.text-lowercase  { text-transform: lowercase; }
+.text-capitalize { text-transform: capitalize; }
+
+// ---------------------------------------------------------------------------
+// Font weight
+// ---------------------------------------------------------------------------
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-bold   { font-weight: var(--font-weight-bold); }
+
+// ---------------------------------------------------------------------------
+// Font size helpers
+// ---------------------------------------------------------------------------
+.text-xs   { font-size: var(--font-size-xs); }
+.text-sm   { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg   { font-size: var(--font-size-lg); }
+.text-xl   { font-size: var(--font-size-xl); }
+
+// ---------------------------------------------------------------------------
+// Colour utilities — text colour only.
+// Override the corresponding custom property in :root to change the swatch.
+// ---------------------------------------------------------------------------
+.color-primary   { color: var(--color-primary);   }
+.color-secondary { color: var(--color-secondary);  }
+.color-accent    { color: var(--color-accent);     }
+.color-success   { color: var(--color-success);    }
+.color-warning   { color: var(--color-warning);    }
+.color-danger    { color: var(--color-danger);     }
+.color-muted     { color: var(--color-disabled-text); }
+
+// ---------------------------------------------------------------------------
+// Display helpers
+// ---------------------------------------------------------------------------
+.d-none  { display: none !important; }
+.d-block { display: block; }
+.d-flex  { display: flex; }
+.d-grid  { display: grid; }
+.d-inline       { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-inline-flex  { display: inline-flex; }
+
+// ---------------------------------------------------------------------------
+// Overflow
+// ---------------------------------------------------------------------------
+.overflow-hidden { overflow: hidden; }
+.overflow-auto   { overflow: auto; }
+.overflow-x-auto { overflow-x: auto; }
+
+// ---------------------------------------------------------------------------
+// Position
+// ---------------------------------------------------------------------------
+.relative { position: relative; }
+.absolute { position: absolute; }
+.sticky   { position: sticky; }
+
+// ---------------------------------------------------------------------------
+// Flexbox helpers
+// ---------------------------------------------------------------------------
+.flex-wrap   { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.items-start  { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end    { align-items: flex-end; }
+.justify-start   { justify-content: flex-start; }
+.justify-center  { justify-content: center; }
+.justify-end     { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around  { justify-content: space-around; }
+.flex-1 { flex: 1 1 auto; }
+
+// ---------------------------------------------------------------------------
+// Full-bleed effect
+// Breaks a contained element out of its parent's padding to span the full
+// viewport width. Requires the parent to have overflow: hidden.
+// Override --full-bleed-bg to set the background behind the breakout element.
+// ---------------------------------------------------------------------------
+.full-bleed {
+    --full-bleed-bg: var(--color-surface);
+
+    box-shadow:  0 0 0 100vmax var(--full-bleed-bg);
+    clip-path:   inset(0 -100vmax);
+    background:  var(--full-bleed-bg);
+}
+
+// ---------------------------------------------------------------------------
+// Spacing helpers (margin and padding — selected, not exhaustive)
+// ---------------------------------------------------------------------------
+.m-0 { margin: 0; }
+.mt-auto { margin-block-start: auto; }
+.mb-auto { margin-block-end: auto; }
+.mx-auto { margin-inline: auto; }
+
+.p-0  { padding: 0; }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+
+// ---------------------------------------------------------------------------
+// Borders and radius
+// ---------------------------------------------------------------------------
+.rounded    { border-radius: var(--layout-radius); }
+.rounded-lg { border-radius: var(--layout-radius-lg); }
+.rounded-full { border-radius: var(--layout-radius-full); }
+.border     { border: 1px solid var(--color-border); }
+
+// ---------------------------------------------------------------------------
+// Width / sizing
+// ---------------------------------------------------------------------------
+.w-full  { width: 100%; }
+.max-w-content { max-width: var(--layout-content-width); }
+.max-w-text    { max-width: var(--layout-text-width); }
+
+// ---------------------------------------------------------------------------
+// Truncate long text with an ellipsis on a single line.
+// ---------------------------------------------------------------------------
+.truncate {
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+}
+
+// Line-clamp — truncate after N lines.
+// Usage: style="--clamp-lines: 3" class="line-clamp"
+.line-clamp {
+    display:            -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--clamp-lines, 3);
+    overflow:           hidden;
+}
+
+// ---------------------------------------------------------------------------
+// Screen reader only — same as .visually-hidden but as a utility.
+// ---------------------------------------------------------------------------
+.sr-only {
+    position:   absolute;
+    width:      1px;
+    height:     1px;
+    padding:    0;
+    margin:     -1px;
+    overflow:   hidden;
+    clip:       rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border:     0;
+}

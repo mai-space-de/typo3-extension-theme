@@ -1,0 +1,94 @@
+// =============================================================================
+// 05-molecules/_card.scss
+//
+// Card component — a self-contained content container with optional image,
+// header, body, and footer sections.
+//
+// Override --card-* custom properties to customise per-site or per-variant
+// without touching this file.
+// =============================================================================
+
+:root {
+    --card-bg:            var(--color-background);
+    --card-border-color:  var(--color-border);
+    --card-border-radius: var(--layout-radius);
+    --card-shadow:        0 1px 3px 0 var(--color-shadow), 0 1px 2px -1px var(--color-shadow);
+    --card-shadow-hover:  0 10px 15px -3px var(--color-shadow), 0 4px 6px -4px var(--color-shadow);
+    --card-padding:       var(--space-md);
+    --card-gap:           var(--space-sm);
+    --card-transition:    box-shadow 200ms ease, transform 200ms ease;
+}
+
+.card {
+    display:       flex;
+    flex-direction: column;
+    background:    var(--card-bg);
+    border:        1px solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow:    var(--card-shadow);
+    overflow:      hidden;
+    transition:    var(--card-transition);
+
+    // Clickable / linked card variant
+    &.card-clickable {
+        cursor: pointer;
+
+        &:hover,
+        &:focus-within {
+            box-shadow: var(--card-shadow-hover);
+            transform:  translateY(-2px);
+        }
+    }
+}
+
+// Card image at the top of the card.
+.card-image {
+    img {
+        width:      100%;
+        height:     auto;
+        object-fit: var(--img-object-fit, cover);
+        aspect-ratio: 16 / 9;
+        border-radius: 0; // image sits flush against card edges
+    }
+}
+
+// Card body — the main text content area.
+.card-body {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--card-gap);
+    padding:        var(--card-padding);
+    flex:           1 1 auto; // stretch to fill remaining card height
+}
+
+// Card heading
+.card-title {
+    font-size:   var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
+    color:       var(--color-text);
+}
+
+// Supplementary metadata line (date, category, author…)
+.card-meta {
+    font-size: var(--font-size-sm);
+    color:     var(--color-secondary);
+}
+
+// Card text content
+.card-text {
+    font-size: var(--font-size-base);
+    color:     var(--color-text);
+    flex:      1 1 auto;
+}
+
+// Card footer — typically holds action buttons.
+.card-footer {
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         var(--space-sm);
+    align-items: center;
+    padding:     var(--card-padding);
+    border-block-start: 1px solid var(--card-border-color);
+    background:  var(--color-surface);
+}

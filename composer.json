@@ -28,6 +28,7 @@
         }
     },
     "require": {
+        "maispace/assets": "^1.0",
         "scssphp/scssphp": "^1.13"
     },
     "require-dev": {

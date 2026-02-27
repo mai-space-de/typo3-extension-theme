@@ -1,0 +1,238 @@
+// =============================================================================
+// 06-organisms/_navigation.scss
+//
+// Navigation organism — supports horizontal, vertical, dropdown, breadcrumb,
+// and mobile toggle variants. All built on CSS custom properties for easy
+// overriding.
+//
+// Required ARIA attributes for accessibility:
+//   - <nav aria-label="…">  on the nav element
+//   - aria-current="page"   on the active link
+//   - aria-expanded="true|false" on mobile toggle button
+//
+// Override --nav-* custom properties to customise.
+// =============================================================================
+
+@use "../02-mixins/media-breakpoint" as *;
+
+:root {
+    --nav-gap:             var(--space-md);
+    --nav-link-color:      var(--color-text);
+    --nav-link-weight:     var(--font-weight-medium);
+    --nav-link-padding:    var(--space-xs) var(--space-sm);
+    --nav-link-radius:     var(--layout-radius);
+    --nav-link-hover-bg:   color-mix(in srgb, var(--color-primary) 10%, transparent);
+    --nav-active-bg:       var(--color-primary);
+    --nav-active-color:    #ffffff;
+    --nav-dropdown-bg:     var(--color-background);
+    --nav-dropdown-border: var(--color-border);
+    --nav-dropdown-shadow: 0 4px 6px -1px var(--color-shadow);
+    --nav-dropdown-radius: var(--layout-radius);
+    --nav-dropdown-width:  12rem;
+}
+
+// ---------------------------------------------------------------------------
+// Base navigation wrapper
+// ---------------------------------------------------------------------------
+.navigation {
+    display: flex;
+    gap:     var(--nav-gap);
+
+    ul {
+        list-style:          none;
+        padding-inline-start: 0;
+        margin:              0;
+        display:             flex;
+        gap:                 var(--nav-gap);
+        flex-wrap:           wrap;
+        align-items:         center;
+    }
+
+    a {
+        display:         block;
+        color:           var(--nav-link-color);
+        font-weight:     var(--nav-link-weight);
+        text-decoration: none;
+        padding:         var(--nav-link-padding);
+        border-radius:   var(--nav-link-radius);
+        transition:      background-color 150ms ease, color 150ms ease;
+        white-space:     nowrap;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--nav-link-hover-bg);
+            color:            var(--color-primary);
+            text-decoration:  none;
+        }
+
+        // Active / current page
+        &[aria-current="page"] {
+            background-color: var(--nav-active-bg);
+            color:            var(--nav-active-color);
+            font-weight:      var(--font-weight-bold);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Horizontal navigation (default in header)
+// ---------------------------------------------------------------------------
+.navigation-horizontal {
+    flex-direction: row;
+    align-items:    center;
+
+    ul {
+        flex-direction: row;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Vertical navigation (sidebar, footer column)
+// ---------------------------------------------------------------------------
+.navigation-vertical {
+    flex-direction: column;
+    align-items:    flex-start;
+
+    ul {
+        flex-direction: column;
+        width:          100%;
+    }
+
+    a {
+        width: 100%;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Dropdown menus
+// Place .navigation-dropdown on a <li> element that wraps the sub-list.
+// ---------------------------------------------------------------------------
+.navigation-dropdown {
+    position: relative;
+
+    // The dropdown menu
+    > ul {
+        display:       flex;
+        flex-direction: column;
+        gap:           0;
+        position:      absolute;
+        inset-block-start: 100%;
+        inset-inline-start: 0;
+        min-width:     var(--nav-dropdown-width);
+        background:    var(--nav-dropdown-bg);
+        border:        1px solid var(--nav-dropdown-border);
+        border-radius: var(--nav-dropdown-radius);
+        box-shadow:    var(--nav-dropdown-shadow);
+        padding-block: var(--space-xs);
+        z-index:       200;
+        // Hidden by default
+        opacity:       0;
+        visibility:    hidden;
+        pointer-events: none;
+        transform:     translateY(-4px);
+        transition:    opacity 150ms ease, transform 150ms ease, visibility 0s 150ms;
+
+        a {
+            border-radius: 0;
+            padding:       var(--space-sm) var(--space-md);
+            width:         100%;
+        }
+    }
+
+    // Reveal on hover or keyboard focus within the item.
+    &:hover > ul,
+    &:focus-within > ul {
+        opacity:        1;
+        visibility:     visible;
+        pointer-events: auto;
+        transform:      translateY(0);
+        transition-delay: 0s;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Breadcrumb navigation
+// ---------------------------------------------------------------------------
+.breadcrumb {
+    display:   flex;
+    flex-wrap: wrap;
+    gap:       var(--space-xs);
+    font-size: var(--font-size-sm);
+    color:     var(--color-secondary);
+
+    ol,
+    ul {
+        list-style:          none;
+        padding-inline-start: 0;
+        margin:              0;
+        display:             flex;
+        flex-wrap:           wrap;
+        align-items:         center;
+        gap:                 var(--space-xs);
+    }
+
+    li {
+        display:     flex;
+        align-items: center;
+        gap:         var(--space-xs);
+
+        // Separator between items
+        & + li::before {
+            content: "/";
+            color:   var(--color-border);
+        }
+    }
+
+    a {
+        color:           var(--color-secondary);
+        text-decoration: none;
+
+        &:hover {
+            color:           var(--color-primary);
+            text-decoration: underline;
+        }
+    }
+
+    // Current page — not a link
+    [aria-current="page"] {
+        color:       var(--color-text);
+        font-weight: var(--font-weight-medium);
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Mobile navigation toggle
+// On narrow viewports the nav list collapses and is revealed by the toggle.
+// The toggle button must carry aria-expanded="true|false".
+// The <nav> or a wrapper must carry data-nav-mobile.
+// ---------------------------------------------------------------------------
+.navigation-mobile-toggle {
+    display: none; // Hidden on wide viewports
+
+    @include bp-down(md) {
+        display: flex;
+        align-items:  center;
+        gap:          var(--space-xs);
+        background:   none;
+        border:       none;
+        cursor:       pointer;
+        padding:      var(--nav-link-padding);
+        color:        var(--color-text);
+        font-weight:  var(--font-weight-medium);
+    }
+}
+
+@include bp-down(md) {
+    .navigation-mobile {
+        > ul {
+            display:        flex;
+            flex-direction: column;
+            width:          100%;
+
+            // Collapsed by default — toggle reveals via aria-expanded
+            &[aria-hidden="true"] {
+                display: none;
+            }
+        }
+    }
+}

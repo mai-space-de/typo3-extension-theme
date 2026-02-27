@@ -1,0 +1,97 @@
+// =============================================================================
+// 04-atoms/_list.scss
+//
+// Ordered, unordered, and description list styles plus layout helpers.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Base list styles
+// ---------------------------------------------------------------------------
+ul,
+ol {
+    padding-inline-start: var(--space-lg);
+    margin-block:         var(--space-sm);
+    line-height:          var(--line-height-base);
+
+    li {
+        margin-block: var(--space-xs);
+    }
+
+    // Nested lists get tighter vertical spacing.
+    ul,
+    ol {
+        margin-block-start: var(--space-xs);
+        margin-block-end:   var(--space-xs);
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Description list
+// ---------------------------------------------------------------------------
+dl {
+    margin-block: var(--space-sm);
+}
+
+dt {
+    font-weight: var(--font-weight-bold);
+    margin-block-start: var(--space-sm);
+}
+
+dd {
+    margin-inline-start: var(--space-lg);
+}
+
+// ---------------------------------------------------------------------------
+// Utility: remove list decoration (bullets/numbers) and padding.
+// Useful for navigation lists or custom-styled lists.
+// ---------------------------------------------------------------------------
+.list-unstyled {
+    list-style:          none;
+    padding-inline-start: 0;
+    margin-block:         0;
+}
+
+// ---------------------------------------------------------------------------
+// Inline list — horizontal flex row with wrapping.
+// ---------------------------------------------------------------------------
+.list-inline {
+    list-style:          none;
+    padding-inline-start: 0;
+    margin-block:         0;
+    display:             flex;
+    flex-wrap:           wrap;
+    gap:                 var(--space-sm);
+}
+
+// ---------------------------------------------------------------------------
+// Custom marker variants — use CSS marker pseudo-element for clean colouring.
+// ---------------------------------------------------------------------------
+
+// Checkmark list (✓)
+.list-check {
+    list-style: none;
+    padding-inline-start: var(--space-lg);
+
+    li::marker {
+        content: "✓ ";
+        color:   var(--color-success);
+    }
+}
+
+// Arrow list (→)
+.list-arrow {
+    list-style: none;
+    padding-inline-start: var(--space-lg);
+
+    li::marker {
+        content: "→ ";
+        color:   var(--color-primary);
+    }
+}
+
+// Bullet list (•)
+.list-bullet {
+    li::marker {
+        color: var(--color-primary);
+    }
+}

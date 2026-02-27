@@ -1,0 +1,125 @@
+// =============================================================================
+// 05-molecules/_form-field.scss
+//
+// Reusable form-field molecule: a label stacked above its input control,
+// with optional help text and error state.
+//
+// Markup pattern:
+//   <div class="form-field">
+//     <label for="id">Label</label>
+//     <input id="id" type="text" />
+//     <span class="form-field-help">Optional helper text</span>
+//   </div>
+//
+//   <div class="form-field form-field-error">
+//     <label for="id">Label</label>
+//     <input id="id" type="text" aria-describedby="id-error" />
+//     <span class="form-field-error-message" id="id-error">Error message</span>
+//   </div>
+//
+// Override --field-* custom properties to customise per-site.
+// =============================================================================
+
+:root {
+    --field-border-color:       var(--color-border);
+    --field-border-radius:      var(--layout-radius);
+    --field-padding:            var(--space-sm) var(--space-md);
+    --field-focus-border-color: var(--color-primary);
+    --field-focus-shadow:       0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+    --field-error-border-color: var(--color-danger);
+    --field-disabled-bg:        var(--color-disabled-bg);
+    --field-disabled-color:     var(--color-disabled-text);
+    --field-placeholder-color:  var(--color-disabled-text);
+}
+
+// The outer wrapping element — stack label above control.
+.form-field {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-xs);
+
+    label {
+        font-weight:  var(--font-weight-medium);
+        font-size:    var(--font-size-base);
+        cursor:       pointer;
+        color:        var(--color-text);
+    }
+}
+
+// ---------------------------------------------------------------------------
+// All text-like inputs, textarea, and select
+// ---------------------------------------------------------------------------
+input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+    width:         100%;
+    padding:       var(--field-padding);
+    font-family:   var(--font-family-base);
+    font-size:     var(--font-size-base);
+    color:         var(--color-text);
+    background:    var(--color-background);
+    border:        2px solid var(--field-border-color);
+    border-radius: var(--field-border-radius);
+    transition:    border-color 150ms ease, box-shadow 150ms ease;
+    appearance:    none;
+
+    &:focus {
+        outline:      none;
+        border-color: var(--field-focus-border-color);
+        box-shadow:   var(--field-focus-shadow);
+    }
+
+    &:disabled {
+        background: var(--field-disabled-bg);
+        color:      var(--field-disabled-color);
+        cursor:     not-allowed;
+        opacity:    0.75;
+    }
+
+    &::placeholder {
+        color:   var(--field-placeholder-color);
+        opacity: 0.7;
+    }
+}
+
+// Textarea: allow only vertical resize to prevent layout breaking.
+textarea {
+    min-height: 100px;
+    resize:     vertical;
+}
+
+// Checkbox and radio: auto width only.
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+}
+
+// ---------------------------------------------------------------------------
+// Helper text
+// ---------------------------------------------------------------------------
+.form-field-help {
+    font-size: var(--font-size-sm);
+    color:     var(--color-disabled-text);
+}
+
+// ---------------------------------------------------------------------------
+// Error state — applied to the .form-field wrapper
+// ---------------------------------------------------------------------------
+.form-field.form-field-error {
+    input,
+    textarea,
+    select {
+        border-color: var(--field-error-border-color);
+
+        &:focus {
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 25%, transparent);
+        }
+    }
+}
+
+// Inline error message beneath the field.
+.form-field-error-message {
+    font-size:   var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color:       var(--color-danger);
+}

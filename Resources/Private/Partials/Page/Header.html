@@ -1,0 +1,38 @@
+<!--
+    Page/Header partial — maispace/theme
+    ──────────────────────────────────────────────────────────────────────────
+    Renders the site header using the .site-header organism class.
+    Override by registering a higher-priority partialRootPaths entry in
+    your project extension's TypoScript.
+-->
+<header class="site-header" role="banner">
+    <!-- Logo / site name -->
+    <a class="site-header-logo link-unstyled" href="{f:uri.page(pageUid: settings.rootPageUid, absolute: 1)}" aria-label="{settings.site.name}">
+        <f:if condition="{settings.site.logoSrc}">
+            <f:then>
+                <mai:image
+                    src="{settings.site.logoSrc}"
+                    alt="{settings.site.name}"
+                    width="160"
+                    height="40"
+                    loading="eager"
+                />
+            </f:then>
+            <f:else>
+                {settings.site.name}
+            </f:else>
+        </f:if>
+    </a>
+
+    <!-- Main navigation -->
+    <nav class="navigation navigation-horizontal" aria-label="{f:translate(key: 'LLL:EXT:theme/Resources/Private/Language/locallang.xlf:nav.main', default: 'Main navigation')}">
+        <f:render partial="Page/Navigation" arguments="{data: data, settings: settings}" />
+    </nav>
+
+    <!-- Optional header actions (CTA, search, language) -->
+    <f:if condition="{settings.header.showActions}">
+        <div class="site-header-actions">
+            <f:render partial="Page/HeaderActions" arguments="{data: data, settings: settings}" optional="true" />
+        </div>
+    </f:if>
+</header>

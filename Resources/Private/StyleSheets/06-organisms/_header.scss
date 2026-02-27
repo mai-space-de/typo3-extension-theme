@@ -1,0 +1,82 @@
+// =============================================================================
+// 06-organisms/_header.scss
+//
+// Site header organism — horizontally distributed logo and navigation bar.
+// Pairs with the .navigation organism (06-organisms/_navigation.scss).
+//
+// Markup pattern:
+//   <header class="site-header">
+//     <a class="site-header-logo link-unstyled" href="/">Brand</a>
+//     <nav class="navigation navigation-horizontal" aria-label="Main">
+//       …
+//     </nav>
+//   </header>
+//
+// Override --header-* custom properties to customise colours, height, and spacing.
+// =============================================================================
+
+@use "../02-mixins/media-breakpoint" as *;
+
+:root {
+    --header-bg:           var(--color-background);
+    --header-border-color: var(--color-border);
+    --header-height:       4rem;
+    --header-padding-x:    var(--layout-grid-gap);
+    --header-shadow:       0 1px 3px 0 var(--color-shadow);
+    --header-logo-size:    var(--font-size-lg);
+    --header-logo-weight:  var(--font-weight-bold);
+    --header-logo-color:   var(--color-accent);
+    --header-z:            100;
+}
+
+// ---------------------------------------------------------------------------
+// Site header
+// ---------------------------------------------------------------------------
+.site-header {
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    gap:             var(--space-lg);
+    height:          var(--header-height);
+    padding-inline:  var(--header-padding-x);
+    background:      var(--header-bg);
+    border-block-end: 1px solid var(--header-border-color);
+    box-shadow:      var(--header-shadow);
+    position:        sticky;
+    inset-block-start: 0;
+    z-index:         var(--header-z);
+
+    // Full-width variant (no max-width constraint inside the header)
+    &.site-header-full {
+        max-width: none;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Logo / site title
+// ---------------------------------------------------------------------------
+.site-header-logo {
+    font-size:   var(--header-logo-size);
+    font-weight: var(--header-logo-weight);
+    font-family: var(--font-family-accent);
+    color:       var(--header-logo-color);
+    white-space: nowrap;
+    text-decoration: none;
+    flex-shrink: 0;
+
+    &:hover,
+    &:focus-visible {
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Actions area (e.g. CTA button, search, language switcher)
+// ---------------------------------------------------------------------------
+.site-header-actions {
+    display:     flex;
+    align-items: center;
+    gap:         var(--space-sm);
+    flex-shrink: 0;
+}

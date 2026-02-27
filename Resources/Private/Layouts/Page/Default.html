@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+    Base page layout — maispace/theme
+    ──────────────────────────────────────────────────────────────────────────
+    This layout is compiled by <mai:scss> from maispace/assets, which handles
+    server-side SCSS compilation (no Node.js or build pipeline required).
+
+    Extending:
+      - Override the Head section to inject per-page <meta>, canonical, or
+        additional stylesheets via additional <mai:scss> / <mai:css> calls.
+      - Override the Body section to change the outer page wrapper structure.
+      - Override the Footer section or add new sections as needed.
+
+    See: EXT:theme/Resources/Private/StyleSheets/bundle.scss for all tokens.
+-->
+<html lang="{f:translate(key: 'LLL:EXT:theme/Resources/Private/Language/locallang.xlf:html.lang', default: 'en')}">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><f:render section="Title" optional="true" /></title>
+
+    <!--
+        Compile and inject the ITCSS stylesheet bundle.
+        maispace/assets caches the compiled CSS in typo3temp/ and invalidates
+        it automatically when the source .scss file changes.
+    -->
+    <mai:scss
+        src="EXT:theme/Resources/Private/StyleSheets/bundle.scss"
+        identifier="maispace-theme-bundle"
+        priority="1"
+        minify="1"
+    />
+
+    <f:render section="Head" optional="true" />
+</head>
+<body>
+    <f:render section="SkipLink" optional="true">
+        <f:defaultCase>
+            <a class="skip-link" href="#main-content">
+                <f:translate key="LLL:EXT:theme/Resources/Private/Language/locallang.xlf:skip.to.content" default="Skip to main content" />
+            </a>
+        </f:defaultCase>
+    </f:render>
+
+    <f:render section="Body" />
+
+    <f:render section="Scripts" optional="true" />
+</body>
+</html>
