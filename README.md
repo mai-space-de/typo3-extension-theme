@@ -62,4 +62,3 @@ The `theme` extension will automatically find these files in any active package 
 ## License
 
 GPL-2.0-or-later
-

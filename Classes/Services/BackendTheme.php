@@ -13,7 +13,7 @@ class BackendTheme
         'loginFootnote',
         'loginHighlightColor',
         'loginLogo',
-        'loginLogoAlt'
+        'loginLogoAlt',
     ];
 
     public function registerBackendTheme(): void

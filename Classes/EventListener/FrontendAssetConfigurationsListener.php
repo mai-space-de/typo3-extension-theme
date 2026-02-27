@@ -1,15 +1,15 @@
 <?php
-declare(strict_types=1);
+
+declare(strict_types = 1);
 
 namespace Maispace\Theme\EventListener;
 
-use Closure;
 use Maispace\Theme\Services\ActiveExtensionConfigurationLoader;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Page\AssetCollector;
-use TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent;
 use TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent;
+use TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -20,6 +20,7 @@ class FrontendAssetConfigurationsListener
     private const string APPLICATION_TYPE_FRONTEND = 'frontend';
     private const string APPLICATION_TYPE_BACKEND = 'backend';
     private const string DEFAULT_SITE_IDENTIFIER = 'default';
+
     private ?ServerRequest $serverRequest;
 
     public function __construct()
@@ -37,11 +38,6 @@ class FrontendAssetConfigurationsListener
         $this->registerAssetsByType($event, self::ASSET_TYPE_JAVASCRIPT);
     }
 
-    /**
-     * @param BeforeStylesheetsRenderingEvent|BeforeJavaScriptsRenderingEvent $event
-     * @param string $type
-     * @return void
-     */
     private function registerAssetsByType(BeforeStylesheetsRenderingEvent|BeforeJavaScriptsRenderingEvent $event, string $type): void
     {
         if (!$this->serverRequest instanceof ServerRequest || !$this->serverRequest->getAttribute('applicationType')) {
@@ -86,11 +82,7 @@ class FrontendAssetConfigurationsListener
         });
     }
 
-    /**
-     * @param AssetCollector $assetCollector
-     * @return Closure
-     */
-    private function getRegisterClosure(AssetCollector $assetCollector): Closure
+    private function getRegisterClosure(AssetCollector $assetCollector): \Closure
     {
         return static function (string $type, string $assetIdentifier, array $asset) use ($assetCollector) {
             if ($type === self::ASSET_TYPE_STYLESHEET) {
