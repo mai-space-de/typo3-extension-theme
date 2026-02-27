@@ -13,6 +13,20 @@
 # =============================================================================
 
 # -----------------------------------------------------------------------------
+# maispace/assets — SCSS compiler configuration
+#
+# Register the theme's SCSS partials directory as a default import path.
+# This means any SCSS file compiled via <mai:scss> (in this extension or in
+# any downstream site package) can import theme partials with short paths:
+#
+#   @use "02-mixins/media-breakpoint" as *;
+#   @use "01-settings/variables";
+#
+# instead of specifying the full EXT: path every time.
+# -----------------------------------------------------------------------------
+plugin.tx_maispace_assets.scss.defaultImportPaths = EXT:theme/Resources/Private/StyleSheets
+
+# -----------------------------------------------------------------------------
 # Page object
 # -----------------------------------------------------------------------------
 page = PAGE

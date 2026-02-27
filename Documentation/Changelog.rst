@@ -57,7 +57,8 @@ Added
   * ``08-utilities/_classes.scss`` — text, colour, display, flexbox, sizing,
     overflow, truncation, and full-bleed utilities
 
-* **``bundle.scss``** — ITCSS entry point imported by ``<mai:scss>``
+* **``bundle.scss``** — ITCSS entry point; compiled by ``<mai:scss>`` from
+  ``maispace/assets`` — no custom PHP compilation code in the theme extension
 
 * **Base Fluid page templates**:
 
@@ -73,10 +74,9 @@ Added
 
 * **``Configuration/TypoScript/setup.typoscript``** — registers the ``page``
   object, ``lib.content``, and ``lib.sidebar`` with overridable template paths
-  and ``settings`` TypoScript
-
-* **``Configuration/StyleSheets.php``** — auto-discovered stylesheet
-  registration file (frontend / backend slots)
+  and ``settings`` TypoScript; sets
+  ``plugin.tx_maispace_assets.scss.defaultImportPaths`` so downstream SCSS
+  can import theme partials with short paths
 
 * **``composer.json``** — added ``maispace/assets ^1.0`` as a dependency;
   SCSS compilation is delegated to ``<mai:scss>`` instead of being handled

@@ -16,8 +16,9 @@ How compilation works
 ---------------------
 
 The bundle entry point is ``EXT:theme/Resources/Private/StyleSheets/bundle.scss``.
-It is compiled to CSS by `maispace/assets`_ using ``scssphp`` — entirely in PHP,
-with no Node.js or build pipeline required.
+Compilation, caching, and registration are entirely handled by `maispace/assets`_
+using ``scssphp`` — no Node.js or build pipeline required, and no custom PHP
+code in the theme extension is involved in the SCSS pipeline.
 
 The ``<mai:scss>`` ViewHelper is placed in the base Fluid layout:
 
@@ -33,6 +34,23 @@ The ``<mai:scss>`` ViewHelper is placed in the base Fluid layout:
 
 ``maispace/assets`` caches the compiled CSS in ``typo3temp/`` and invalidates
 the cache automatically when the source ``.scss`` file changes.
+
+Default import paths
+~~~~~~~~~~~~~~~~~~~~~
+
+The theme TypoScript registers the SCSS directory as a ``defaultImportPaths``
+entry so downstream SCSS files can import partials with short paths:
+
+.. code-block:: typoscript
+
+   plugin.tx_maispace_assets.scss.defaultImportPaths = EXT:theme/Resources/Private/StyleSheets
+
+This means any ``<mai:scss>``-compiled file in any extension can write:
+
+.. code-block:: scss
+
+   @use "02-mixins/media-breakpoint" as *;   // ✓ short path
+   @use "01-settings/variables";             // ✓ short path
 
 .. _maispace/assets: https://github.com/mai-space-de/typo3-extension-assets
 

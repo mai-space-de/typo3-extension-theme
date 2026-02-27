@@ -73,22 +73,27 @@ Overriding the stylesheet bundle
 ---------------------------------
 
 The ITCSS bundle is compiled by ``<mai:scss>`` inside the base layout
-(``EXT:theme/Resources/Private/Layouts/Page/Default.html``). To customise the
-design tokens without touching the source files, override CSS custom properties
-in your own stylesheet:
+(``EXT:theme/Resources/Private/Layouts/Page/Default.html``). SCSS compilation
+and registration are both handled by ``maispace/assets`` — no PHP registration
+code in the theme extension is involved.
+
+To customise the design tokens without touching the source files, override CSS
+custom properties in ``:root``:
 
 .. code-block:: css
 
    /* your_extension/Resources/Public/StyleSheet/overrides.css */
 
    :root {
-       --color-primary:   #e11d48;   /* rose-600 */
-       --color-accent:    #f59e0b;
+       --color-primary:    #e11d48;   /* rose-600 */
+       --color-accent:     #f59e0b;
        --font-family-base: 'Inter', system-ui, sans-serif;
-       --layout-radius:   0.25rem;
+       --layout-radius:    0.25rem;
    }
 
-Register the override file in ``Configuration/StyleSheets.php``:
+Register the override file in ``Configuration/StyleSheets.php`` of your
+extension — ``EXT:theme``'s ``FrontendAssetConfigurationsListener`` picks it
+up automatically from any active package:
 
 .. code-block:: php
 
@@ -103,5 +108,31 @@ Register the override file in ``Configuration/StyleSheets.php``:
        ],
    ];
 
-The FrontendAssetConfigurationsListener in ``EXT:theme`` picks this up
-automatically from any active extension.
+Adding your own SCSS
+~~~~~~~~~~~~~~~~~~~~~
+
+Because the theme TypoScript registers its ``StyleSheets/`` directory as a
+``defaultImportPaths`` entry for ``maispace/assets``, you can import theme
+partials in your own SCSS without specifying full ``EXT:`` paths:
+
+.. code-block:: scss
+
+   // your_extension/Resources/Private/StyleSheets/site.scss
+   @use "02-mixins/media-breakpoint" as *;
+   @use "01-settings/variables";
+
+   .my-component {
+       @include bp-up(lg) {
+           display: flex;
+       }
+   }
+
+Include it via ``<mai:scss>`` in your overridden layout or partial:
+
+.. code-block:: html
+
+   <mai:scss
+       src="EXT:your_extension/Resources/Private/StyleSheets/site.scss"
+       identifier="your-extension-scss"
+       priority="2"
+   />
