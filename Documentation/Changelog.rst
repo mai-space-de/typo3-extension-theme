@@ -78,7 +78,7 @@ Added
   ``plugin.tx_maispace_assets.scss.defaultImportPaths`` so downstream SCSS
   can import theme partials with short paths
 
-* **``composer.json``** — added ``maispace/assets ^1.0`` as a dependency;
+* **``composer.json``** — added ``maispace/assets ^13.0`` as a dependency;
   SCSS compilation is delegated to ``<mai:scss>`` instead of being handled
   directly in PHP
 

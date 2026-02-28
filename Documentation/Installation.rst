@@ -10,7 +10,7 @@ Requirements
 
 * TYPO3 13.4 LTS
 * PHP 8.2 or higher
-* `maispace/assets`_ ^1.0 (provides server-side SCSS compilation)
+* `maispace/assets`_ ^13.0 (provides server-side SCSS compilation)
 
 .. _maispace/assets: https://github.com/mai-space-de/typo3-extension-assets
 
