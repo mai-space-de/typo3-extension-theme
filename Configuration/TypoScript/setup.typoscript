@@ -88,27 +88,28 @@ page {
         }
     }
 }
-
-# -----------------------------------------------------------------------------
-# lib.content — main content column
-# -----------------------------------------------------------------------------
-lib.content = CONTENT
-lib.content {
-    table = tt_content
-    select {
-        orderBy = sorting
-        where = {#colPos} = 0
+lib {
+    # -----------------------------------------------------------------------------
+    # lib.content — main content column
+    # -----------------------------------------------------------------------------
+    content = CONTENT
+    content {
+        table = tt_content
+        select {
+            orderBy = sorting
+            where = {#colPos} = 0
+        }
     }
-}
 
-# -----------------------------------------------------------------------------
-# lib.sidebar — sidebar content column
-# -----------------------------------------------------------------------------
-lib.sidebar = CONTENT
-lib.sidebar {
-    table = tt_content
-    select {
-        orderBy = sorting
-        where = {#colPos} = 1
+    # -----------------------------------------------------------------------------
+    # lib.sidebar — sidebar content column
+    # -----------------------------------------------------------------------------
+    sidebar = CONTENT
+    sidebar {
+        table = tt_content
+        select {
+            orderBy = sorting
+            where = {#colPos} = 1
+        }
     }
 }
