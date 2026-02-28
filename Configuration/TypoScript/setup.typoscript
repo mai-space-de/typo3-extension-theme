@@ -1,0 +1,126 @@
+# =============================================================================
+# EXT:theme — TypoScript setup
+# =============================================================================
+# Configures the Fluid page renderer to use the base templates provided by
+# this extension. Site-specific extensions should register their own
+# templateRootPaths / partialRootPaths at a higher numeric key to override.
+#
+# Required dependency: EXT:maispace_assets must be loaded.
+# Import its setup before this file in your site package's setup.typoscript:
+#
+#   @import 'EXT:maispace_assets/Configuration/TypoScript/setup.typoscript'
+#   @import 'EXT:theme/Configuration/TypoScript/setup.typoscript'
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# maispace/assets — SCSS compiler configuration
+#
+# Register the theme's SCSS partials directory as a default import path.
+# This means any SCSS file compiled via <mai:scss> (in this extension or in
+# any downstream site package) can import theme partials with short paths:
+#
+#   @use "02-mixins/media-breakpoint" as *;
+#   @use "01-settings/variables";
+#
+# instead of specifying the full EXT: path every time.
+# -----------------------------------------------------------------------------
+plugin.tx_maispace_assets {
+    scss {
+        defaultImportPaths = EXT:theme/Resources/Private/StyleSheets
+    }
+
+    # Wrap critical CSS in a dedicated @layer for better specificity control.
+    # When enabled, the CriticalCssInlineMiddleware wraps injected <style> content
+    # in @layer theme-critical { ... }.
+    criticalCss {
+        layer = theme-critical
+    }
+}
+
+# -----------------------------------------------------------------------------
+# Page object
+# -----------------------------------------------------------------------------
+page = PAGE
+page {
+    typeNum = 0
+
+    10 = FLUIDTEMPLATE
+    10 {
+        # Template roots — lower numbers have lower priority.
+        # Downstream extensions override by registering a higher numeric key.
+        templateRootPaths {
+            0 = EXT:theme/Resources/Private/Templates/
+        }
+
+        partialRootPaths {
+            0 = EXT:theme/Resources/Private/Partials/
+        }
+
+        layoutRootPaths {
+            0 = EXT:theme/Resources/Private/Layouts/
+        }
+
+        # Default template file (can be overridden per page via page properties).
+        file = EXT:theme/Resources/Private/Templates/Page/Default.html
+
+        # Variables available in all templates.
+        variables {
+            # Pass the page data record so templates can access seo_title etc.
+            data = TEXT
+            data.data = page:uid
+        }
+
+        # TypoScript settings passed to {settings} in Fluid.
+        settings {
+            # Site name — override in your site package.
+            site {
+                name = TYPO3 Site
+                logoSrc =
+            }
+
+            # Root page UID for logo href.
+            rootPageUid = 1
+
+            # Layout: set to 1 to enable the sidebar-layout wrapper.
+            layout {
+                sidebar = 0
+            }
+
+            # Header: set to 1 to render the actions slot.
+            header {
+                showActions = 0
+            }
+
+            # Footer: set to 1 to render footer navigation.
+            footer {
+                showNav = 1
+                columns = 0
+            }
+        }
+    }
+}
+lib {
+    # -----------------------------------------------------------------------------
+    # lib.content — main content column
+    # -----------------------------------------------------------------------------
+    content = CONTENT
+    content {
+        table = tt_content
+        select {
+            orderBy = sorting
+            where = {#colPos} = 0
+        }
+    }
+
+    # -----------------------------------------------------------------------------
+    # lib.sidebar — sidebar content column
+    # -----------------------------------------------------------------------------
+    sidebar = CONTENT
+    sidebar {
+        table = tt_content
+        select {
+            orderBy = sorting
+            where = {#colPos} = 1
+        }
+    }
+}

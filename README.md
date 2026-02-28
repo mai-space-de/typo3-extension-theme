@@ -5,19 +5,60 @@
 [![TYPO3](https://img.shields.io/badge/TYPO3-13.0%2B-orange)](https://typo3.org/)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
-This extension provides a way to load assets (stylesheets and JavaScripts) and backend theme configurations from other active packages in a TYPO3 instance.
+This extension provides two things:
+
+1. **An ITCSS stylesheet bundle** — compiled server-side via [`maispace/assets`](https://github.com/mai-space-de/typo3-extension-assets) using `<mai:scss>`, no Node.js required.
+2. **A loader mechanism** — auto-discovers `StyleSheets.php`, `JavaScripts.php`, and `BackendTheme.php` from all active TYPO3 packages and registers their assets automatically.
 
 ## Features
 
-- **Automated Asset Inclusion**: Automatically register stylesheets and JavaScripts for frontend and backend.
-- **Backend Theme Management**: Easily override TYPO3 backend settings like logos, favicons, and login images from configuration files.
-- **Configuration Merging**: Merges configuration files from all active packages, allowing for modular theme development.
+- **ITCSS stylesheet bundle** — 22 SCSS partials across 8 layers (settings → utilities), derived from [minimal-stylesheet-maximum-impact](https://github.com/mai-space/minimal-stylesheet-maximum-impact)
+- **Full CSS Layers support** — the bundle and all partials are wrapped in `@layer` blocks for predictable specificity
+- **CSS custom properties throughout** — every design token is overridable without touching source files
+- **Atomic Design structure** — atoms, molecules, organisms, templates, and utilities
+- **Base Fluid page templates** — layout, templates, and partials ready to override in your site package
+- **Server-side SCSS compilation** — delegated to `maispace/assets` (`<mai:scss>` ViewHelper, powered by `scssphp`)
+- **Automated asset inclusion** — auto-registers stylesheets and JavaScripts from any active extension
+- **Backend theme management** — logos, favicon, and login-page customisation via configuration files
+- **Configuration merging** — merges configuration files from all active packages for modular theme development
 
 ## Installation
 
 ```bash
 composer require maispace/theme
 ```
+
+Import TypoScript in your site package's setup file:
+
+```typoscript
+@import 'EXT:maispace_assets/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:theme/Configuration/TypoScript/setup.typoscript'
+```
+
+### Critical CSS & Layers
+
+The theme is pre-configured to work with `maispace/assets`'s critical CSS extraction. It defines a dedicated CSS layer `theme-critical` in its TypoScript setup:
+
+```typoscript
+plugin.tx_maispace_assets.criticalCss.layer = theme-critical
+```
+
+This ensures that any inlined critical CSS (extracted via `maispace:assets:critical:extract`) is wrapped in `@layer theme-critical { ... }`, providing predictable specificity when used alongside the theme's main SCSS bundle.
+
+## Stylesheet customisation
+
+Override any CSS custom property in `:root` to customise the design system:
+
+```css
+/* your_extension/Resources/Public/StyleSheet/overrides.css */
+:root {
+    --color-primary:      #7c3aed;
+    --font-family-accent: 'Playfair Display', serif;
+    --layout-radius:      0rem;
+}
+```
+
+Register overrides via `Configuration/StyleSheets.php` in your extension — they are picked up automatically.
 
 ## Usage
 
@@ -55,10 +96,61 @@ return [
 return [
     'backendLogo' => 'EXT:my_extension/Resources/Public/Icons/logo.svg',
     'loginBackgroundImage' => 'EXT:my_extension/Resources/Public/Images/login-bg.jpg',
+    'loginHighlightColor' => '#2563eb',
 ];
 ```
 
 The `theme` extension will automatically find these files in any active package and apply the configurations.
+
+## SCSS bundle structure
+
+```
+Resources/Private/StyleSheets/
+├── bundle.scss                    ← ITCSS entry point (compiled by <mai:scss>)
+├── 01-settings/
+│   └── _variables.scss            ← All CSS custom properties
+├── 02-mixins/
+│   └── _media-breakpoint.scss     ← bp-up(), bp-down(), bp-only()
+├── 03-generic/
+│   ├── _reset.scss
+│   ├── _layout.scss               ← Grid, sidebar, reel, container…
+│   └── _typography.scss
+├── 04-atoms/
+│   ├── _accessibility.scss
+│   ├── _button.scss
+│   ├── _image.scss
+│   ├── _link.scss
+│   ├── _list.scss
+│   └── _table.scss
+├── 05-molecules/
+│   ├── _button-group.scss
+│   ├── _card.scss
+│   ├── _external-link.scss
+│   ├── _form-field.scss
+│   └── _media-object.scss
+├── 06-organisms/
+│   ├── _form.scss
+│   ├── _header.scss
+│   └── _navigation.scss
+├── 07-templates/
+│   └── _shame.scss
+└── 08-utilities/
+    └── _classes.scss
+```
+
+## Template structure
+
+```
+Resources/Private/
+├── Layouts/Page/Default.html      ← <mai:scss> injection point
+├── Templates/Page/Default.html    ← Page template (sidebar-aware)
+└── Partials/Page/
+    ├── Header.html
+    ├── Footer.html
+    └── Navigation.html
+```
+
+Override any template by registering a higher-priority `templateRootPaths` / `partialRootPaths` key in your site package's TypoScript.
 
 ## Development
 

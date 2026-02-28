@@ -1,0 +1,80 @@
+// =============================================================================
+// 03-generic/_reset.scss
+//
+// Minimal, opinionated CSS reset.
+// Removes browser inconsistencies and establishes sensible defaults
+// without overriding component-level styles.
+// =============================================================================
+
+@layer theme-generic {
+// Apply border-box sizing to every element and its pseudo-elements.
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Remove default margins globally.
+* {
+    margin: 0;
+}
+
+// Declare support for both colour schemes — TYPO3-served sites often need
+// dark-mode handling baked in from the start.
+html {
+    color-scheme: light dark;
+    // Prevent font-size adjustments in landscape on mobile devices.
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    // Smooth scrolling when triggered by in-page anchor links.
+    scroll-behavior: smooth;
+
+    @media (prefers-reduced-motion: reduce) {
+        scroll-behavior: auto;
+    }
+}
+
+// Constrain replaced elements to their container and display them as blocks to
+// remove the phantom gap below inline images.
+img,
+picture,
+video,
+canvas,
+svg {
+    max-inline-size: 100%;
+    display: block;
+}
+
+// Inherit fonts for form controls (browser resets ignore these by default).
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+// Allow long words to break rather than overflow.
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+// Remove list decoration when a list carries a role attribute (nav lists etc.).
+// This lets screen readers still announce list semantics while removing bullets
+// that have no visual meaning in that context.
+[role="list"] {
+    list-style: none;
+    padding: 0;
+}
+
+// Visually hidden, still accessible to assistive technologies.
+// Override: apply the .visually-hidden utility class (04-atoms/_accessibility.scss).
+[hidden] {
+    display: none !important;
+}
+}

@@ -1,0 +1,108 @@
+// =============================================================================
+// 04-atoms/_table.scss
+//
+// Responsive table styles.
+// On narrow viewports the table collapses to a label-per-row layout
+// driven by data-label attributes on <td> elements.
+//
+// Markup requirement for responsive mode:
+//   <td data-label="Column Header">Cell value</td>
+//
+// Override --table-* properties to customise colours, borders, and spacing.
+// =============================================================================
+
+@use "../02-mixins/media-breakpoint" as *;
+
+@layer theme-atoms {
+:root {
+    --table-border-color:  var(--color-border);
+    --table-header-bg:     var(--color-surface);
+    --table-stripe-bg:     color-mix(in srgb, var(--color-surface) 50%, transparent);
+    --table-caption-color: var(--color-disabled-text);
+    --table-cell-padding:  var(--space-sm) var(--space-md);
+}
+
+table {
+    width:           100%;
+    border-collapse: collapse;
+    font-size:       var(--font-size-base);
+}
+
+caption {
+    caption-side:   bottom;
+    font-size:      var(--font-size-sm);
+    font-style:     italic;
+    color:          var(--table-caption-color);
+    padding-block:  var(--space-xs);
+    text-align:     start;
+}
+
+th,
+td {
+    padding:    var(--table-cell-padding);
+    text-align: start;
+    border-block-end: 1px solid var(--table-border-color);
+    vertical-align: top;
+}
+
+th {
+    font-weight:     var(--font-weight-bold);
+    background:      var(--table-header-bg);
+    border-block-end-width: 2px;
+}
+
+// Striped rows — add .table-striped to <table>.
+.table-striped tbody tr:nth-child(even) td {
+    background: var(--table-stripe-bg);
+}
+
+// Bordered table — add .table-bordered to <table>.
+.table-bordered {
+    th,
+    td {
+        border: 1px solid var(--table-border-color);
+    }
+}
+
+// Compact table — add .table-sm to <table>.
+.table-sm th,
+.table-sm td {
+    padding: var(--space-xs) var(--space-sm);
+}
+
+// ---------------------------------------------------------------------------
+// Responsive: stack cells below md breakpoint.
+// Each cell reveals its column header via the data-label attribute.
+// ---------------------------------------------------------------------------
+@include bp-down(md) {
+    .table-responsive {
+        thead {
+            display: none;
+        }
+
+        tr {
+            display:             grid;
+            grid-template-columns: auto 1fr;
+            gap:                 var(--space-xs);
+            border-block-end:    2px solid var(--table-border-color);
+            padding-block:       var(--space-sm);
+        }
+
+        td {
+            display:          contents;
+            border:           none;
+            padding:          0;
+
+            // Data label displayed as a pseudo-element before the cell value.
+            &::before {
+                content:     attr(data-label);
+                font-weight: var(--font-weight-bold);
+                color:       var(--color-secondary);
+                font-size:   var(--font-size-sm);
+                align-self:  center;
+            }
+        }
+    }
+}
+
+}

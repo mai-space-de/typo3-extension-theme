@@ -1,0 +1,81 @@
+// =============================================================================
+// 04-atoms/_image.scss
+//
+// Base image element styles and responsive helper classes.
+// Works in concert with <mai:image> and <mai:picture> ViewHelpers from
+// maispace/assets — those ViewHelpers emit the HTML; this file provides the CSS.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Base img
+// ---------------------------------------------------------------------------
+@layer theme-atoms {
+img {
+    max-inline-size: 100%;
+    height:          auto;
+    display:         block;
+    border-radius:   var(--img-border-radius, 0);
+}
+
+// ---------------------------------------------------------------------------
+// Sizing helpers
+// ---------------------------------------------------------------------------
+
+// Fluid: fills available width while keeping aspect ratio.
+.img-fluid {
+    width:  100%;
+    height: auto;
+}
+
+// Cover: fills the element's box, cropping edges if necessary.
+.img-cover {
+    width:      100%;
+    height:     100%;
+    object-fit: var(--img-object-fit, cover);
+}
+
+// Contain: shows the entire image inside the element's box.
+.img-contain {
+    width:      100%;
+    height:     100%;
+    object-fit: contain;
+}
+
+// ---------------------------------------------------------------------------
+// Shape modifiers
+// ---------------------------------------------------------------------------
+
+.img-rounded {
+    border-radius: var(--img-border-radius, var(--layout-radius));
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+// ---------------------------------------------------------------------------
+// Shadow modifier
+// Override --img-shadow in a parent or :root to change the elevation.
+// ---------------------------------------------------------------------------
+.img-shadow {
+    box-shadow: var(--img-shadow);
+}
+
+// ---------------------------------------------------------------------------
+// Figure & caption
+// Pairs nicely with <mai:figure> from maispace/assets.
+// ---------------------------------------------------------------------------
+figure {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-xs);
+}
+
+figcaption {
+    font-size:   var(--font-size-sm);
+    font-style:  italic;
+    color:       var(--color-disabled-text);
+    text-align:  center;
+}
+
+}

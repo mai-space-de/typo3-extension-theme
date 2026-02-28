@@ -1,0 +1,38 @@
+<!--
+    Page/Navigation partial — maispace/theme
+    ──────────────────────────────────────────────────────────────────────────
+    Renders the main menu using TYPO3's HMENU / f:widget.menu or a custom
+    data source. Override via partialRootPaths.
+
+    Accessibility requirements:
+      - The wrapping <nav> (in Header.html) carries aria-label.
+      - Active link receives aria-current="page" automatically via the
+        f:if condition on the page UID.
+-->
+<ul class="list-unstyled" role="list">
+    <f:for each="{settings.navigationPages}" as="item">
+        <li>
+            <a
+                href="{f:uri.page(pageUid: item.uid)}"
+                {f:if(condition: item.isActive, then: 'aria-current="page"')}
+            >
+                {item.title}
+            </a>
+
+            <f:if condition="{item.children}">
+                <ul class="list-unstyled" role="list">
+                    <f:for each="{item.children}" as="child">
+                        <li>
+                            <a
+                                href="{f:uri.page(pageUid: child.uid)}"
+                                {f:if(condition: child.isActive, then: 'aria-current="page"')}
+                            >
+                                {child.title}
+                            </a>
+                        </li>
+                    </f:for>
+                </ul>
+            </f:if>
+        </li>
+    </f:for>
+</ul>

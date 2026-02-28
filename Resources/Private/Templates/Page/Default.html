@@ -1,0 +1,49 @@
+<f:layout name="Page/Default" />
+
+<!--
+    Default page template — maispace/theme
+    ──────────────────────────────────────────────────────────────────────────
+    This template wires up the canonical three-area page structure:
+      Site header  →  Main content (with sidebar support)  →  Site footer
+
+    Copy this file into your own extension and register the path via
+    TypoScript (templateRootPaths) to override the default layout.
+
+    See: EXT:theme/Configuration/TypoScript/setup.typoscript
+-->
+
+<f:section name="Title">
+    <f:if condition="{data.seo_title}">
+        <f:then>{data.seo_title}</f:then>
+        <f:else>{data.title} — {settings.site.name}</f:else>
+    </f:if>
+</f:section>
+
+<f:section name="Body">
+    <!-- ── Site Header ──────────────────────────────────────────────────── -->
+    <f:render partial="Page/Header" arguments="{data: data, settings: settings}" />
+
+    <!-- ── Main Content ─────────────────────────────────────────────────── -->
+    <main id="main-content" class="container section">
+        <f:if condition="{settings.layout.sidebar}">
+            <f:then>
+                <div class="sidebar-layout">
+                    <div class="main-grid">
+                        <f:cObject typoscriptObjectPath="lib.content" />
+                    </div>
+                    <aside class="sidebar">
+                        <f:cObject typoscriptObjectPath="lib.sidebar" />
+                    </aside>
+                </div>
+            </f:then>
+            <f:else>
+                <div class="main-grid">
+                    <f:cObject typoscriptObjectPath="lib.content" />
+                </div>
+            </f:else>
+        </f:if>
+    </main>
+
+    <!-- ── Site Footer ──────────────────────────────────────────────────── -->
+    <f:render partial="Page/Footer" arguments="{data: data, settings: settings}" />
+</f:section>
