@@ -15,6 +15,7 @@
 // ---------------------------------------------------------------------------
 // External links — https:// or http:// links that don't carry .internal-link
 // ---------------------------------------------------------------------------
+@layer theme-molecules {
 a[href^="https://"],
 a[href^="http://"] {
     &:not(.internal-link) {
@@ -82,4 +83,6 @@ a[download] {
         color:             inherit;
         font-size:         0.85em;
     }
+}
+
 }

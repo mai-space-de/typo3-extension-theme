@@ -6,6 +6,7 @@
 // on :root or any scoping selector before this stylesheet is imported.
 // =============================================================================
 
+@layer theme-settings {
 :root {
     // -------------------------------------------------------------------------
     // Colour palette
@@ -179,4 +180,5 @@
         --btn-primary-bg-hover:  color-mix(in srgb, var(--color-primary) 80%, white);
         --btn-outline-bg-hover:  color-mix(in srgb, var(--color-primary) 80%, transparent);
     }
+}
 }

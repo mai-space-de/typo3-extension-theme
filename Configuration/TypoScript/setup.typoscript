@@ -24,7 +24,18 @@
 #
 # instead of specifying the full EXT: path every time.
 # -----------------------------------------------------------------------------
-plugin.tx_maispace_assets.scss.defaultImportPaths = EXT:theme/Resources/Private/StyleSheets
+plugin.tx_maispace_assets {
+    scss {
+        defaultImportPaths = EXT:theme/Resources/Private/StyleSheets
+    }
+
+    # Wrap critical CSS in a dedicated @layer for better specificity control.
+    # When enabled, the CriticalCssInlineMiddleware wraps injected <style> content
+    # in @layer theme-critical { ... }.
+    criticalCss {
+        layer = theme-critical
+    }
+}
 
 # -----------------------------------------------------------------------------
 # Page object

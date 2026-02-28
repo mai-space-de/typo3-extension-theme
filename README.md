@@ -13,6 +13,7 @@ This extension provides two things:
 ## Features
 
 - **ITCSS stylesheet bundle** — 22 SCSS partials across 8 layers (settings → utilities), derived from [minimal-stylesheet-maximum-impact](https://github.com/mai-space/minimal-stylesheet-maximum-impact)
+- **Full CSS Layers support** — the bundle and all partials are wrapped in `@layer` blocks for predictable specificity
 - **CSS custom properties throughout** — every design token is overridable without touching source files
 - **Atomic Design structure** — atoms, molecules, organisms, templates, and utilities
 - **Base Fluid page templates** — layout, templates, and partials ready to override in your site package
@@ -33,6 +34,16 @@ Import TypoScript in your site package's setup file:
 @import 'EXT:maispace_assets/Configuration/TypoScript/setup.typoscript'
 @import 'EXT:theme/Configuration/TypoScript/setup.typoscript'
 ```
+
+### Critical CSS & Layers
+
+The theme is pre-configured to work with `maispace/assets`'s critical CSS extraction. It defines a dedicated CSS layer `theme-critical` in its TypoScript setup:
+
+```typoscript
+plugin.tx_maispace_assets.criticalCss.layer = theme-critical
+```
+
+This ensures that any inlined critical CSS (extracted via `maispace:assets:critical:extract`) is wrapped in `@layer theme-critical { ... }`, providing predictable specificity when used alongside the theme's main SCSS bundle.
 
 ## Stylesheet customisation
 

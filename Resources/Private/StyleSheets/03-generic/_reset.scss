@@ -6,6 +6,7 @@
 // without overriding component-level styles.
 // =============================================================================
 
+@layer theme-generic {
 // Apply border-box sizing to every element and its pseudo-elements.
 *,
 *::before,
@@ -75,4 +76,5 @@ h6 {
 // Override: apply the .visually-hidden utility class (04-atoms/_accessibility.scss).
 [hidden] {
     display: none !important;
+}
 }

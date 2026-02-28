@@ -20,6 +20,7 @@
 // Override --field-* custom properties to customise per-site.
 // =============================================================================
 
+@layer theme-molecules {
 :root {
     --field-border-color:       var(--color-border);
     --field-border-radius:      var(--layout-radius);
@@ -122,4 +123,6 @@ input[type="radio"] {
     font-size:   var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     color:       var(--color-danger);
+}
+
 }

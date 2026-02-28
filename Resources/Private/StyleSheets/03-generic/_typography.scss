@@ -7,6 +7,7 @@
 // =============================================================================
 
 // Body & root text
+@layer theme-generic {
 body {
     font-family:  var(--font-family-base);
     font-size:    var(--font-size-base);
@@ -166,4 +167,5 @@ hr {
 abbr[title] {
     cursor:          help;
     text-decoration: underline dotted;
+}
 }

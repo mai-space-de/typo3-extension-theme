@@ -17,6 +17,7 @@
 
 @use "../02-mixins/media-breakpoint" as *;
 
+@layer theme-organisms {
 :root {
     --header-bg:           var(--color-background);
     --header-border-color: var(--color-border);
@@ -79,4 +80,6 @@
     align-items: center;
     gap:         var(--space-sm);
     flex-shrink: 0;
+}
+
 }

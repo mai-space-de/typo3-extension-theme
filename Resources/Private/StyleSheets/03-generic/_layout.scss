@@ -11,6 +11,7 @@
 
 @use "../02-mixins/media-breakpoint" as *;
 
+@layer theme-generic {
 // ---------------------------------------------------------------------------
 // Main content grid
 // Provides full-bleed, feature, popout, indent, and content zones.
@@ -167,4 +168,5 @@
 // ---------------------------------------------------------------------------
 .flow > * + * {
     margin-block-start: var(--flow-space, 1em);
+}
 }

@@ -21,6 +21,7 @@
 
 @use "../02-mixins/media-breakpoint" as *;
 
+@layer theme-molecules {
 :root {
     --media-object-gap:          var(--space-md);
     --media-object-figure-width: 4rem;
@@ -64,4 +65,6 @@
         max-width: 100%;
         flex-basis: auto;
     }
+}
+
 }

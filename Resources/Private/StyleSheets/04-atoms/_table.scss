@@ -13,6 +13,7 @@
 
 @use "../02-mixins/media-breakpoint" as *;
 
+@layer theme-atoms {
 :root {
     --table-border-color:  var(--color-border);
     --table-header-bg:     var(--color-surface);
@@ -102,4 +103,6 @@ th {
             }
         }
     }
+}
+
 }

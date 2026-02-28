@@ -15,6 +15,7 @@
 // Targets semantic <button>, <input type="submit|reset|button">, and the
 // utility class .button (for <a> elements styled as buttons).
 // ---------------------------------------------------------------------------
+@layer theme-atoms {
 button,
 .button,
 input[type="submit"],
@@ -113,4 +114,6 @@ input[type="button"] {
 .button-block {
     display: block;
     width:   100%;
+}
+
 }

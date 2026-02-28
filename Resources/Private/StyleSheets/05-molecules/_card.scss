@@ -8,6 +8,7 @@
 // without touching this file.
 // =============================================================================
 
+@layer theme-molecules {
 :root {
     --card-bg:            var(--color-background);
     --card-border-color:  var(--color-border);
@@ -91,4 +92,6 @@
     padding:     var(--card-padding);
     border-block-start: 1px solid var(--card-border-color);
     background:  var(--color-surface);
+}
+
 }

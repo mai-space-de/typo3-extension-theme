@@ -13,6 +13,7 @@
 // ---------------------------------------------------------------------------
 // Default button group — uses Flexbox, keeps per-button border-radius.
 // ---------------------------------------------------------------------------
+@layer theme-molecules {
 .button-group {
     display:     flex;
     flex-wrap:   wrap;
@@ -60,4 +61,6 @@
             position: relative;
         }
     }
+}
+
 }

@@ -15,6 +15,7 @@
 
 @use "../02-mixins/media-breakpoint" as *;
 
+@layer theme-organisms {
 :root {
     --nav-gap:             var(--space-md);
     --nav-link-color:      var(--color-text);
@@ -235,4 +236,6 @@
             }
         }
     }
+}
+
 }

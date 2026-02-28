@@ -4,19 +4,17 @@
 // ITCSS (Inverted Triangle CSS) import order following the Atomic Design
 // methodology from https://github.com/mai-space/minimal-stylesheet-maximum-impact
 //
-// Layer overview (specificity increases from top to bottom):
-//   01-settings  — CSS custom properties (design tokens)
-//   02-mixins    — SCSS helpers (no output)
-//   03-generic   — Reset, base HTML element styles, layout primitives
-//   04-atoms     — Smallest UI components (button, link, image, …)
-//   05-molecules — Combinations of atoms (card, form-field, …)
-//   06-organisms — Complex sections (header, navigation, form)
-//   07-templates — Page-level skeleton and the shame file
-//   08-utilities — Single-purpose override classes
-//
-// This file is compiled server-side by maispace/assets via <mai:scss>
-// — no Node.js build step required.
+// CSS Layers are used to manage specificity and ordering.
+// The layer order is defined explicitly to ensure predictable overrides.
 // =============================================================================
+
+@layer theme-settings,
+       theme-generic,
+       theme-atoms,
+       theme-molecules,
+       theme-organisms,
+       theme-templates,
+       theme-utilities;
 
 // -- 01 Settings --------------------------------------------------------------
 @use "01-settings/variables";

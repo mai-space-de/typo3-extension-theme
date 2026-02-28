@@ -9,6 +9,7 @@
 // ---------------------------------------------------------------------------
 // Base img
 // ---------------------------------------------------------------------------
+@layer theme-atoms {
 img {
     max-inline-size: 100%;
     height:          auto;
@@ -75,4 +76,6 @@ figcaption {
     font-style:  italic;
     color:       var(--color-disabled-text);
     text-align:  center;
+}
+
 }
