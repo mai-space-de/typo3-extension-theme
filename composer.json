@@ -60,8 +60,9 @@
         "check:phpstan": "phpstan analyse --no-progress",
         "check:phpstan:baseline": "phpstan analyse --no-progress --generate-baseline=phpstan-baseline.neon",
         "check:typoscript": "typoscript-lint --fail-on-warnings -c typoscript-lint.yml Configuration/TypoScript/",
-        "test": "phpunit --configuration phpunit.xml.dist",
-        "test:unit": "phpunit --configuration phpunit.xml.dist --testsuite Unit"
+        "test": "phpunit --configuration phpunit.xml.dist --testdox",
+        "test:unit": "phpunit --configuration phpunit.xml.dist --testsuite Unit",
+        "test:fluid": "phpunit --configuration phpunit.xml.dist --testsuite Fluid"
     },
     "config": {
         "allow-plugins": {

@@ -30,6 +30,7 @@ jobs:
 
   # ---------------------------------------------------------------------------
   # Unit tests (PHP 8.2 / 8.3 × TYPO3 13)
+  # Tests PHP class logic: config loading, asset registration, backend theme.
   # ---------------------------------------------------------------------------
   unit-tests:
     name: "Unit tests · PHP ${{ matrix.php }} · TYPO3 ${{ matrix.typo3 }}"
@@ -62,7 +63,38 @@ jobs:
           COMPOSER_ROOT_VERSION: "1.0.0"
 
       - name: Run unit tests
-        run: vendor/bin/phpunit --configuration phpunit.xml.dist --testdox
+        run: vendor/bin/phpunit --configuration phpunit.xml.dist --testsuite Unit --testdox
+
+  # ---------------------------------------------------------------------------
+  # Fluid template structure tests (PHP 8.3 only — no TYPO3 version matrix)
+  # Verifies HTML structure, accessibility attributes, and Fluid wiring without
+  # requiring a running TYPO3 instance. Catches missing tags and broken partials.
+  # ---------------------------------------------------------------------------
+  fluid-tests:
+    name: Fluid template structure tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: gd, intl, mbstring, xml
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: >
+          composer install
+          --prefer-dist
+          --no-progress
+          --no-interaction
+        env:
+          COMPOSER_ROOT_VERSION: "1.0.0"
+
+      - name: Run Fluid template structure tests
+        run: vendor/bin/phpunit --configuration phpunit.xml.dist --testsuite Fluid --testdox
 
   # ---------------------------------------------------------------------------
   # Static analysis

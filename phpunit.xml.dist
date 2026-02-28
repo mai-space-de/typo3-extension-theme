@@ -9,7 +9,11 @@
 
     <testsuites>
         <testsuite name="Unit">
-            <directory>Tests/Unit</directory>
+            <directory>Tests/Unit/Services</directory>
+            <directory>Tests/Unit/EventListener</directory>
+        </testsuite>
+        <testsuite name="Fluid">
+            <directory>Tests/Unit/Fluid</directory>
         </testsuite>
     </testsuites>
 
