@@ -11,11 +11,13 @@
         <f:if condition="{settings.site.logoSrc}">
             <f:then>
                 <mai:image
-                    src="{settings.site.logoSrc}"
+                    image="{settings.site.logoSrc}"
                     alt="{settings.site.name}"
                     width="160"
                     height="40"
-                    loading="eager"
+                    lazyloading="false"
+                    preload="true"
+                    fetchPriority="high"
                 />
             </f:then>
             <f:else>

@@ -28,8 +28,7 @@
         }
     },
     "require": {
-        "maispace/assets": "^1.0",
-        "scssphp/scssphp": "^1.13"
+        "maispace/assets": "^1.0"
     },
     "require-dev": {
         "armin/editorconfig-cli": "^2.1",
