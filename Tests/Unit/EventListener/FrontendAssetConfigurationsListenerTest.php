@@ -7,7 +7,7 @@ namespace Maispace\Theme\Tests\Unit\EventListener;
 use Maispace\Theme\EventListener\FrontendAssetConfigurationsListener;
 use Maispace\Theme\Services\ActiveExtensionConfigurationLoader;
 use PHPUnit\Framework\TestCase;
-use TYPO3\CMS\Core\Http\ApplicationType;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Page\AssetCollector;
 use TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent;
@@ -42,8 +42,8 @@ class FrontendAssetConfigurationsListenerTest extends TestCase
 
     private function makeFrontendRequest(string $siteIdentifier = 'default'): ServerRequest
     {
-        $request = new ServerRequest('GET', 'https://example.com/');
-        $request = $request->withAttribute('applicationType', ApplicationType::FRONTEND);
+        $request = new ServerRequest('https://example.com/', 'GET');
+        $request = $request->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
 
         $siteMock = $this->createMock(Site::class);
         $siteMock->method('getIdentifier')->willReturn($siteIdentifier);
@@ -53,8 +53,8 @@ class FrontendAssetConfigurationsListenerTest extends TestCase
 
     private function makeBackendRequest(): ServerRequest
     {
-        $request = new ServerRequest('GET', 'https://example.com/typo3/');
-        return $request->withAttribute('applicationType', ApplicationType::BACKEND);
+        $request = new ServerRequest('https://example.com/typo3/', 'GET');
+        return $request->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
     }
 
     private function injectLoader(array $config): void
@@ -66,16 +66,12 @@ class FrontendAssetConfigurationsListenerTest extends TestCase
 
     private function makeStylesheetsEvent(AssetCollector $collector): BeforeStylesheetsRenderingEvent
     {
-        $eventMock = $this->createMock(BeforeStylesheetsRenderingEvent::class);
-        $eventMock->method('getAssetCollector')->willReturn($collector);
-        return $eventMock;
+        return new BeforeStylesheetsRenderingEvent($collector, false, false);
     }
 
     private function makeJavaScriptsEvent(AssetCollector $collector): BeforeJavaScriptsRenderingEvent
     {
-        $eventMock = $this->createMock(BeforeJavaScriptsRenderingEvent::class);
-        $eventMock->method('getAssetCollector')->willReturn($collector);
-        return $eventMock;
+        return new BeforeJavaScriptsRenderingEvent($collector, false, false);
     }
 
     // ── Early-return guards ────────────────────────────────────────────────────
@@ -94,7 +90,7 @@ class FrontendAssetConfigurationsListenerTest extends TestCase
 
     public function testNoAssetsRegisteredWhenRequestHasNoApplicationType(): void
     {
-        $GLOBALS['TYPO3_REQUEST'] = new ServerRequest('GET', 'https://example.com/');
+        $GLOBALS['TYPO3_REQUEST'] = new ServerRequest('https://example.com/', 'GET');
         $this->injectLoader(['frontend' => ['my-style' => ['source' => 'EXT:ext/style.css']]]);
 
         $collector = $this->createMock(AssetCollector::class);
@@ -311,8 +307,9 @@ class FrontendAssetConfigurationsListenerTest extends TestCase
         $registered = [];
         $collector = $this->createMock(AssetCollector::class);
         $collector->method('addStyleSheet')
-            ->willReturnCallback(static function (string $id) use (&$registered): void {
+            ->willReturnCallback(static function (string $id) use (&$registered, $collector): AssetCollector {
                 $registered[] = $id;
+                return $collector;
             });
 
         $listener = new FrontendAssetConfigurationsListener();
