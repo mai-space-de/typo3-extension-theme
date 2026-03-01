@@ -66,26 +66,37 @@ jobs:
         run: vendor/bin/phpunit --configuration phpunit.xml.dist --testsuite Unit --testdox
 
   # ---------------------------------------------------------------------------
-  # Fluid template structure tests (PHP 8.3 only — no TYPO3 version matrix)
-  # Verifies HTML structure, accessibility attributes, and Fluid wiring without
-  # requiring a running TYPO3 instance. Catches missing tags and broken partials.
+  # Functional integration tests (PHP 8.2 / 8.3 × TYPO3 13)
+  # Boots a real TYPO3 instance (SQLite in-process), imports page fixtures,
+  # fires InternalRequests against the frontend and asserts HTTP status codes
+  # plus HTML content (DOCTYPE, skip-link, main#main-content, stylesheet <link>,
+  # <header>, <footer>). Catches rendering regressions that mocks cannot find.
   # ---------------------------------------------------------------------------
-  fluid-tests:
-    name: Fluid template structure tests
+  functional-tests:
+    name: "Functional tests · PHP ${{ matrix.php }} · TYPO3 ${{ matrix.typo3 }}"
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.2", "8.3"]
+        typo3: ["^13.0"]
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.3"
-          extensions: gd, intl, mbstring, xml
+          php-version: ${{ matrix.php }}
+          extensions: gd, intl, mbstring, pdo_sqlite, xml
           coverage: none
           tools: composer:v2
 
       - name: Install dependencies
         run: >
+          composer require "typo3/cms-core:${{ matrix.typo3 }}" --no-update &&
           composer install
           --prefer-dist
           --no-progress
@@ -93,8 +104,10 @@ jobs:
         env:
           COMPOSER_ROOT_VERSION: "1.0.0"
 
-      - name: Run Fluid template structure tests
-        run: vendor/bin/phpunit --configuration phpunit.xml.dist --testsuite Fluid --testdox
+      - name: Run functional tests
+        run: vendor/bin/phpunit --configuration phpunit.functional.xml.dist --testdox
+        env:
+          typo3DatabaseDriver: pdo_sqlite
 
   # ---------------------------------------------------------------------------
   # Static analysis
