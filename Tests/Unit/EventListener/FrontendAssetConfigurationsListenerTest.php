@@ -17,19 +17,26 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class FrontendAssetConfigurationsListenerTest extends TestCase
 {
-    /** @var array<string, mixed> */
-    private array $originalRequest;
+    /** @var mixed */
+    private $originalRequest;
+
+    private bool $hadOriginalRequest = false;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->originalRequest = $GLOBALS['TYPO3_REQUEST'] ?? [];
+        $this->hadOriginalRequest = array_key_exists('TYPO3_REQUEST', $GLOBALS);
+        $this->originalRequest = $this->hadOriginalRequest ? $GLOBALS['TYPO3_REQUEST'] : null;
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-        $GLOBALS['TYPO3_REQUEST'] = $this->originalRequest;
+        if ($this->hadOriginalRequest) {
+            $GLOBALS['TYPO3_REQUEST'] = $this->originalRequest;
+        } else {
+            unset($GLOBALS['TYPO3_REQUEST']);
+        }
         GeneralUtility::purgeInstances();
     }
 
