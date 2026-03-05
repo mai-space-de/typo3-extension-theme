@@ -6,11 +6,13 @@ namespace Maispace\Theme\Tests\Unit\Services;
 
 use Maispace\Theme\Services\ActiveExtensionConfigurationLoader;
 use Maispace\Theme\Services\BackendTheme;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-class BackendThemeTest extends TestCase
+class BackendThemeTest extends UnitTestCase
 {
+    protected bool $resetSingletonInstances = true;
+
     /** @var array<string, mixed> */
     private array $originalTypo3ConfVars;
 

@@ -6,7 +6,6 @@ namespace Maispace\Theme\Tests\Unit\EventListener;
 
 use Maispace\Theme\EventListener\FrontendAssetConfigurationsListener;
 use Maispace\Theme\Services\ActiveExtensionConfigurationLoader;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Page\AssetCollector;
@@ -14,9 +13,12 @@ use TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent;
 use TYPO3\CMS\Core\Page\Event\BeforeStylesheetsRenderingEvent;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-class FrontendAssetConfigurationsListenerTest extends TestCase
+class FrontendAssetConfigurationsListenerTest extends UnitTestCase
 {
+    protected bool $resetSingletonInstances = true;
+
     /** @var mixed */
     private $originalRequest;
 
@@ -79,7 +81,6 @@ class FrontendAssetConfigurationsListenerTest extends TestCase
     public function testNoAssetsRegisteredWhenGlobalsRequestIsAbsent(): void
     {
         $GLOBALS['TYPO3_REQUEST'] = null;
-        $this->injectLoader(['frontend' => ['my-style' => ['source' => 'EXT:ext/style.css']]]);
 
         $collector = $this->createMock(AssetCollector::class);
         $collector->expects($this->never())->method('addStyleSheet');
@@ -91,7 +92,6 @@ class FrontendAssetConfigurationsListenerTest extends TestCase
     public function testNoAssetsRegisteredWhenRequestHasNoApplicationType(): void
     {
         $GLOBALS['TYPO3_REQUEST'] = new ServerRequest('https://example.com/', 'GET');
-        $this->injectLoader(['frontend' => ['my-style' => ['source' => 'EXT:ext/style.css']]]);
 
         $collector = $this->createMock(AssetCollector::class);
         $collector->expects($this->never())->method('addStyleSheet');
