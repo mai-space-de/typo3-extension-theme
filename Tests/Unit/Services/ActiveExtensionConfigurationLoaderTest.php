@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Maispace\Theme\Tests\Unit\Services;
 
 use Maispace\Theme\Services\ActiveExtensionConfigurationLoader;
-use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Package\PackageInterface;
 use TYPO3\CMS\Core\Package\PackageManager;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-class ActiveExtensionConfigurationLoaderTest extends TestCase
+class ActiveExtensionConfigurationLoaderTest extends UnitTestCase
 {
     private string $tempDir;
 
