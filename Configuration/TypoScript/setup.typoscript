@@ -66,8 +66,8 @@ page {
         # Variables available in all templates.
         variables {
             # Pass the page data record so templates can access seo_title etc.
-            data = TEXT
-            data.data = page:uid
+            pagedata = TEXT
+            pagedata.data = page:uid
         }
 
         # TypoScript settings passed to {settings} in Fluid.

@@ -1,0 +1,5 @@
+name: maispace/theme
+label: 'MaiSpace Theme'
+dependencies:
+  - maispace/assets
+  - maispace/base
