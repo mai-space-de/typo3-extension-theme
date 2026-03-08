@@ -9,7 +9,7 @@
 // gaps, and column counts without touching this file.
 // =============================================================================
 
-@use "../02-mixins/media-breakpoint" as *;
+@import "../02-mixins/media-breakpoint";
 
 @layer theme-generic {
 // ---------------------------------------------------------------------------

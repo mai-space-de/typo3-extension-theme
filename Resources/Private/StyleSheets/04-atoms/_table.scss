@@ -11,7 +11,7 @@
 // Override --table-* properties to customise colours, borders, and spacing.
 // =============================================================================
 
-@use "../02-mixins/media-breakpoint" as *;
+@import "../02-mixins/media-breakpoint";
 
 @layer theme-atoms {
 :root {

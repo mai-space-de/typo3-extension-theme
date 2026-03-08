@@ -118,8 +118,8 @@ partials in your own SCSS without specifying full ``EXT:`` paths:
 .. code-block:: scss
 
    // your_extension/Resources/Private/StyleSheets/site.scss
-   @use "02-mixins/media-breakpoint" as *;
-   @use "01-settings/variables";
+   @import "02-mixins/media-breakpoint";
+   @import "01-settings/variables";
 
    .my-component {
        @include bp-up(lg) {

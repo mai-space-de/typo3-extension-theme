@@ -1,29 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"  xmlns:mai="http://typo3.org/ns/Maispace/MaispaceAssets/ViewHelpers"  data-namespace-typo3-fluid="true">
 <f:layout name="Page/Default" />
 
-<!--
-    Default page template — maispace/theme
-    ──────────────────────────────────────────────────────────────────────────
-    This template wires up the canonical three-area page structure:
-      Site header  →  Main content (with sidebar support)  →  Site footer
-
-    Copy this file into your own extension and register the path via
-    TypoScript (templateRootPaths) to override the default layout.
-
-    See: EXT:theme/Configuration/TypoScript/setup.typoscript
--->
-
-<f:section name="Title">
-    <f:if condition="{data.seo_title}">
-        <f:then>{data.seo_title}</f:then>
-        <f:else>{data.title} — {settings.site.name}</f:else>
-    </f:if>
-</f:section>
-
 <f:section name="Body">
-    <!-- ── Site Header ──────────────────────────────────────────────────── -->
-    <f:render partial="Page/Header" arguments="{data: data, settings: settings}" />
+    <mai:scss
+        src="EXT:theme/Resources/Private/StyleSheets/bundle.scss"
+        identifier="maispace-theme-bundle"
+        priority="1"
+        deferred="false"
+        minify="1"
+        integrity="true"
+    />
+    <f:asset.css identifier="test">
+        * {
+            border: 1px solid red;
+        }
+    </f:asset.css>
+    <f:render partial="Page/Header" arguments="{data: data, settings: settings, menuMain: menuMain}" />
 
-    <!-- ── Main Content ─────────────────────────────────────────────────── -->
     <main id="main-content" class="container section">
         <f:if condition="{settings.layout.sidebar}">
             <f:then>
@@ -44,6 +37,6 @@
         </f:if>
     </main>
 
-    <!-- ── Site Footer ──────────────────────────────────────────────────── -->
     <f:render partial="Page/Footer" arguments="{data: data, settings: settings}" />
 </f:section>
+</html>

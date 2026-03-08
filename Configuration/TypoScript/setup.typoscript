@@ -19,8 +19,8 @@
 # This means any SCSS file compiled via <mai:scss> (in this extension or in
 # any downstream site package) can import theme partials with short paths:
 #
-#   @use "02-mixins/media-breakpoint" as *;
-#   @use "01-settings/variables";
+#   @import "02-mixins/media-breakpoint";
+#   @import "01-settings/variables";
 #
 # instead of specifying the full EXT: path every time.
 # -----------------------------------------------------------------------------
@@ -70,6 +70,53 @@ page {
             pagedata.data = page:uid
         }
 
+        dataProcessing {
+            1 = TYPO3\CMS\Frontend\DataProcessing\SiteProcessor
+            1 {
+                as = site
+            }
+
+            10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+            10 {
+                special = directory
+                special {
+                    value = {$pids.default.mainMenu}
+                }
+                as = menuMain
+                levels = 2
+                expandAll = 1
+                includeSpacer = 1
+                titleField = nav_title // title
+            }
+
+            20 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+            20 {
+                special = directory
+                special {
+                    value = {$pids.default.metaMenu}
+                }
+                as = menuMeta
+                levels = 1
+                expandAll = 1
+                includeSpacer = 1
+                titleField = nav_title // title
+            }
+
+            30 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            30 {
+                table = pages
+                pidInList = this
+                references.fieldName = media
+                as = files
+            }
+
+            50 = TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
+            50 {
+                languages = auto
+                as = menuLanguage
+            }
+        }
+
         # TypoScript settings passed to {settings} in Fluid.
         settings {
             # Site name — override in your site package.
@@ -99,6 +146,25 @@ page {
         }
     }
 }
+# -----------------------------------------------------------------------------
+# Body tag
+# -----------------------------------------------------------------------------
+page {
+    bodyTagCObject = COA
+    bodyTagCObject {
+        stdWrap {
+            trim = 1
+            wrap = <body class="|>
+        }
+
+        20 = TEXT
+        20 {
+            data = page:uid
+            noTrimWrap = |" id=page-| |
+        }
+    }
+}
+
 lib {
     # -----------------------------------------------------------------------------
     # lib.content — main content column

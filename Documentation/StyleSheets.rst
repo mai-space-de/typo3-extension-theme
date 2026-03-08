@@ -49,8 +49,8 @@ This means any ``<mai:scss>``-compiled file in any extension can write:
 
 .. code-block:: scss
 
-   @use "02-mixins/media-breakpoint" as *;   // ✓ short path
-   @use "01-settings/variables";             // ✓ short path
+   @import "02-mixins/media-breakpoint";   // ✓ short path
+   @import "01-settings/variables";             // ✓ short path
 
 .. _maispace/assets: https://github.com/mai-space-de/typo3-extension-assets
 
@@ -180,7 +180,7 @@ Import the partial with ``@use`` to use them in your own SCSS files:
 
 .. code-block:: scss
 
-   @use 'EXT:theme/Resources/Private/StyleSheets/02-mixins/media-breakpoint' as *;
+   @import 'EXT:theme/Resources/Private/StyleSheets/02-mixins/media-breakpoint';
 
    .my-component {
        display: block;
