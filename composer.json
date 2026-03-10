@@ -28,7 +28,8 @@
         }
     },
     "require": {
-        "maispace/assets": "^13.0"
+        "maispace/assets": "^13.0",
+        "sitegeist/fluid-components": "^3.0"
     },
     "require-dev": {
         "armin/editorconfig-cli": "^2.1",

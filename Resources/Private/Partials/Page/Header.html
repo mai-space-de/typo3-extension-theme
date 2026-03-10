@@ -1,40 +1,19 @@
+{namespace theme=Maispace\Theme\Components}
 <!--
     Page/Header partial — maispace/theme
     ──────────────────────────────────────────────────────────────────────────
-    Renders the site header using the .site-header organism class.
+    Delegates to the Organism/SiteHeader Fluid Component, which provides a
+    clearly defined parameter interface for the site header.
+    Kept as a partial for backward compatibility: downstream extensions that
+    override via partialRootPaths continue to work unchanged.
+
     Override by registering a higher-priority partialRootPaths entry in
     your project extension's TypoScript.
 -->
-<header class="site-header" role="banner">
-    <!-- Logo / site name -->
-    <a class="site-header-logo link-unstyled" href="{f:uri.page(pageUid: settings.rootPageUid, absolute: 1)}" aria-label="{settings.site.name}">
-        <f:if condition="{settings.site.logoSrc}">
-            <f:then>
-                <mai:image
-                    image="{settings.site.logoSrc}"
-                    alt="{settings.site.name}"
-                    width="160"
-                    height="40"
-                    lazyloading="false"
-                    preload="true"
-                    fetchPriority="high"
-                />
-            </f:then>
-            <f:else>
-                {settings.site.name}
-            </f:else>
-        </f:if>
-    </a>
-
-    <!-- Main navigation -->
-    <nav class="navigation navigation-horizontal" aria-label="{f:translate(key: 'LLL:EXT:theme/Resources/Private/Language/locallang.xlf:nav.main', default: 'Main navigation')}">
-        <f:render partial="Page/Navigation" arguments="{data: data, settings: settings}" />
-    </nav>
-
-    <!-- Optional header actions (CTA, search, language) -->
-    <f:if condition="{settings.header.showActions}">
-        <div class="site-header-actions">
-            <f:render partial="Page/HeaderActions" arguments="{data: data, settings: settings}" optional="true" />
-        </div>
-    </f:if>
-</header>
+<theme:organism.siteHeader
+    siteName="{settings.site.name}"
+    rootPageUid="{settings.rootPageUid}"
+    navigationPages="{settings.navigationPages}"
+    logoSrc="{settings.site.logoSrc}"
+    showActions="{settings.header.showActions}"
+/>
