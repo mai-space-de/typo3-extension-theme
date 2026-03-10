@@ -1,4 +1,5 @@
 /vendor/
+/public/
 /.phpunit.cache/
 /.php-cs-fixer.cache
 /phpstan-baseline.neon
