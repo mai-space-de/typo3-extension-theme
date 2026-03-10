@@ -1,3 +1,4 @@
+{namespace theme=Maispace\Theme\Components}
 <f:layout name="Page/Default" />
 
 <!--
@@ -5,6 +6,11 @@
     ──────────────────────────────────────────────────────────────────────────
     This template wires up the canonical three-area page structure:
       Site header  →  Main content (with sidebar support)  →  Site footer
+
+    Header and footer are rendered as Fluid Components (sitegeist/fluid-components),
+    giving integrators a clearly defined parameter interface. Override individual
+    components by registering a higher-priority templateRootPaths entry and
+    placing a replacement component at the same path.
 
     Copy this file into your own extension and register the path via
     TypoScript (templateRootPaths) to override the default layout.
@@ -21,7 +27,13 @@
 
 <f:section name="Body">
     <!-- ── Site Header ──────────────────────────────────────────────────── -->
-    <f:render partial="Page/Header" arguments="{data: data, settings: settings}" />
+    <theme:organism.siteHeader
+        siteName="{settings.site.name}"
+        rootPageUid="{settings.rootPageUid}"
+        navigationPages="{settings.navigationPages}"
+        logoSrc="{settings.site.logoSrc}"
+        showActions="{settings.header.showActions}"
+    />
 
     <!-- ── Main Content ─────────────────────────────────────────────────── -->
     <main id="main-content" class="container section">
@@ -45,5 +57,9 @@
     </main>
 
     <!-- ── Site Footer ──────────────────────────────────────────────────── -->
-    <f:render partial="Page/Footer" arguments="{data: data, settings: settings}" />
+    <theme:organism.siteFooter
+        siteName="{settings.site.name}"
+        showNav="{settings.footer.showNav}"
+        showColumns="{settings.footer.columns}"
+    />
 </f:section>

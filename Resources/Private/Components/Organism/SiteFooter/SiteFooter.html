@@ -1,0 +1,55 @@
+<!--
+    Organism/SiteFooter — maispace/theme
+    ──────────────────────────────────────────────────────────────────────────
+    Full site footer organism: optional columns area, copyright line, and an
+    optional footer navigation. Styled via 06-organisms and layout utilities.
+
+    Parameters:
+      siteName    – Site name displayed in the copyright notice.
+      showNav     – Renders the footer navigation slot when true.
+      showColumns – Renders the footer columns slot when true.
+
+    Named slots:
+      columns – Content rendered inside the .auto-grid columns area.
+      nav     – Navigation markup rendered inside the footer <nav>.
+
+    Usage:
+      {namespace theme=Maispace\Theme\Components}
+      <theme:organism.siteFooter
+          siteName="{settings.site.name}"
+          showNav="{settings.footer.showNav}"
+          showColumns="{settings.footer.columns}"
+      />
+-->
+<fc:component>
+    <fc:param name="siteName" type="string" />
+    <fc:param name="showNav" type="boolean" optional="1" default="1" />
+    <fc:param name="showColumns" type="boolean" optional="1" default="0" />
+
+    <fc:renderer>
+        <footer class="site-footer" role="contentinfo">
+            <div class="container">
+                <f:if condition="{showColumns}">
+                    <div class="auto-grid">
+                        <fc:slot name="columns" />
+                    </div>
+                </f:if>
+
+                <div class="cluster" style="justify-content: space-between; padding-block: var(--space-md); border-block-start: 1px solid var(--color-border); margin-block-start: var(--space-xl);">
+                    <small class="color-muted">
+                        &copy; {f:format.date(format: 'Y')} {siteName}
+                    </small>
+
+                    <f:if condition="{showNav}">
+                        <nav
+                            class="navigation"
+                            aria-label="{f:translate(key: 'LLL:EXT:theme/Resources/Private/Language/locallang.xlf:nav.footer', default: 'Footer navigation')}"
+                        >
+                            <fc:slot name="nav" />
+                        </nav>
+                    </f:if>
+                </div>
+            </div>
+        </footer>
+    </fc:renderer>
+</fc:component>
