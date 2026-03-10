@@ -16,8 +16,9 @@ maispace/theme — TYPO3 Theme Loader
 
 **maispace/theme** is a TYPO3 extension that loads assets and backend theme
 configurations from all active packages in a TYPO3 instance. It ships a
-complete ITCSS stylesheet bundle (compiled server-side via :t3ext:`maispace/assets`)
-and a set of base Fluid page templates ready to extend.
+complete ITCSS stylesheet bundle (compiled server-side via :t3ext:`maispace/assets`),
+a set of base Fluid page templates ready to extend, and six pre-built
+``sitegeist/fluid-components`` components.
 
 .. toctree::
    :maxdepth: 2
@@ -26,5 +27,6 @@ and a set of base Fluid page templates ready to extend.
    Introduction
    Installation
    StyleSheets
+   Components
    Templates
    Changelog
