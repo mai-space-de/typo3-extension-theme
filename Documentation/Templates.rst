@@ -15,6 +15,16 @@ File structure
 .. code-block:: text
 
    Resources/Private/
+   ├── Components/
+   │   ├── Atom/
+   │   │   ├── Button/Button.html
+   │   │   └── Link/Link.html
+   │   ├── Molecule/
+   │   │   └── Card/Card.html
+   │   └── Organism/
+   │       ├── Navigation/Navigation.html
+   │       ├── SiteHeader/SiteHeader.html
+   │       └── SiteFooter/SiteFooter.html
    ├── Layouts/
    │   └── Page/
    │       └── Default.html        ← <mai:scss> lives here
@@ -26,6 +36,9 @@ File structure
    └── Templates/
        └── Page/
            └── Default.html
+
+The ``Components/`` directory contains ``sitegeist/fluid-components`` definitions.
+See :ref:`components` for the full component reference.
 
 How the SCSS is injected
 -------------------------

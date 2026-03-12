@@ -5,7 +5,7 @@
 Introduction
 ============
 
-**maispace/theme** handles two complementary concerns in a TYPO3 13 project:
+**maispace/theme** handles three complementary concerns in a TYPO3 13 project:
 
 * **Asset loading** — auto-discovers ``StyleSheets.php`` and ``JavaScripts.php``
   configuration files from every active TYPO3 package and registers the listed
@@ -14,12 +14,18 @@ Introduction
 * **Backend theming** — reads ``BackendTheme.php`` from active packages and
   applies logo, favicon, and login-page overrides to the TYPO3 backend.
 
+* **Fluid Components** — ships six pre-built `sitegeist/fluid-components`_
+  components (Button, Link, Card, Navigation, SiteHeader, SiteFooter) that
+  serve as ready-to-use building blocks or starting points for overrides in a
+  site package.
+
 In addition, this extension ships a complete front-end stylesheet system built
 on the `minimal-stylesheet-maximum-impact`_ methodology and a set of base
 Fluid page templates. Both are ready to use out of the box and straightforward
 to override in a site package.
 
 .. _minimal-stylesheet-maximum-impact: https://github.com/mai-space/minimal-stylesheet-maximum-impact
+.. _sitegeist/fluid-components: https://github.com/sitegeist/fluid-components
 
 Features
 --------
@@ -35,6 +41,12 @@ Features
 * **Atomic Design structure** — layers map to *settings*, *generic*, *atoms*,
   *molecules*, *organisms*, *templates*, and *utilities*, making it trivial to
   locate and extend individual components.
+
+* **Fluid Components** — six ``fc:component`` definitions backed by
+  `sitegeist/fluid-components`_. Register the namespace
+  ``{namespace theme=Maispace\Theme\Components}`` in any template and use
+  ``<theme:atom.button>``, ``<theme:molecule.card>``,
+  ``<theme:organism.siteHeader>``, and friends directly.
 
 * **Base Fluid page templates** — a default layout (``Page/Default.html``),
   page template, header, navigation, and footer partials. Override any partial
@@ -88,3 +100,32 @@ Stylesheet layers at a glance
    * - ``08-utilities``
      - Utilities
      - Single-purpose helper classes (text alignment, colours, spacing, display…)
+
+Fluid Components at a glance
+-----------------------------
+
+.. list-table::
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Component
+     - Tag
+     - Description
+   * - Atom/Button
+     - ``<theme:atom.button>``
+     - ``<button>`` with variant and disabled support
+   * - Atom/Link
+     - ``<theme:atom.link>``
+     - ``<a>`` resolved via ``f:uri.typolink``; external rel support
+   * - Molecule/Card
+     - ``<theme:molecule.card>``
+     - Article card with optional image, linked title, and content slot
+   * - Organism/Navigation
+     - ``<theme:organism.navigation>``
+     - Two-level ``<ul>`` navigation from a pages array
+   * - Organism/SiteHeader
+     - ``<theme:organism.siteHeader>``
+     - Full sticky header — logo, navigation, and optional actions slot
+   * - Organism/SiteFooter
+     - ``<theme:organism.siteFooter>``
+     - Footer with copyright, optional nav slot, and optional columns slot

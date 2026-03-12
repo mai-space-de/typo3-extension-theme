@@ -5,6 +5,37 @@
 Changelog
 =========
 
+13.1.0 — 2026-03-10
+---------------------
+
+Added
+~~~~~
+
+* **Fluid Components** — six pre-built `sitegeist/fluid-components`_
+  components introduced under ``Resources/Private/Components/``:
+
+  * ``Atom/Button`` — ``<button>`` with ``variant``, ``type``, and ``disabled``
+    parameters; slot-based label override
+  * ``Atom/Link`` — ``<a>`` resolved via ``f:uri.typolink``; supports
+    ``external`` flag for automatic ``rel="noopener noreferrer"``
+  * ``Molecule/Card`` — article card with optional media area (``mai:image``),
+    optionally linked title, and content slot
+  * ``Organism/Navigation`` — two-level ``<ul>`` navigation from a pages array;
+    ``aria-current="page"`` on active items; ``role="list"`` for screen-reader
+    compatibility
+  * ``Organism/SiteHeader`` — full sticky header using ``06-organisms/_header.scss``;
+    logo (image or text fallback), main navigation via ``Organism/Navigation``,
+    and optional ``actions`` named slot
+  * ``Organism/SiteFooter`` — footer with copyright, optional ``nav`` named
+    slot, and optional ``columns`` named slot in an ``.auto-grid``
+
+* **``sitegeist/fluid-components`` ^3.0** added as a Composer dependency
+
+* **Documentation** — new :ref:`components` page covering all six components
+  with parameter tables and usage examples
+
+.. _sitegeist/fluid-components: https://github.com/sitegeist/fluid-components
+
 13.0.0 — 2026-02-27
 ---------------------
 

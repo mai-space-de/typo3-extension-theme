@@ -11,8 +11,10 @@ Requirements
 * TYPO3 13.4 LTS
 * PHP 8.2 or higher
 * `maispace/assets`_ ^13.0 (provides server-side SCSS compilation)
+* `sitegeist/fluid-components`_ ^3.0 (provides the ``fc:component`` ViewHelper)
 
 .. _maispace/assets: https://github.com/mai-space-de/typo3-extension-assets
+.. _sitegeist/fluid-components: https://github.com/sitegeist/fluid-components
 
 Composer
 --------
@@ -21,7 +23,7 @@ Composer
 
    composer require maispace/theme
 
-This will also pull in ``maispace/assets`` as a dependency.
+This will also pull in ``maispace/assets`` and ``sitegeist/fluid-components`` as dependencies.
 
 TypoScript
 ----------
