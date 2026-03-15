@@ -54,6 +54,35 @@ This means any ``<mai:scss>``-compiled file in any extension can write:
 
 .. _maispace/assets: https://github.com/mai-space-de/typo3-extension-assets
 
+CSS Layers
+----------
+
+The bundle declares an explicit ``@layer`` order at the top of
+``bundle.scss``. This guarantees predictable specificity regardless of import
+order:
+
+.. code-block:: scss
+
+   @layer theme-settings,
+          theme-generic,
+          theme-atoms,
+          theme-molecules,
+          theme-organisms,
+          theme-templates,
+          theme-utilities;
+
+Each ITCSS partial wraps its output in the matching layer (e.g.
+``@layer theme-atoms { … }``). Downstream stylesheets that declare their own
+layers after the theme layers will always win in specificity, making overrides
+straightforward.
+
+The theme TypoScript also configures a dedicated ``theme-critical`` layer for
+inlined critical CSS extracted by ``maispace/assets``:
+
+.. code-block:: typoscript
+
+   plugin.tx_maispace_assets.criticalCss.layer = theme-critical
+
 Design tokens (CSS custom properties)
 --------------------------------------
 
@@ -70,6 +99,15 @@ Colours
    * - Property
      - Default
      - Purpose
+   * - ``--color-text``
+     - ``#191919``
+     - Default body text
+   * - ``--color-surface``
+     - ``#f3f3f3``
+     - Card / panel background
+   * - ``--color-background``
+     - ``#ffffff``
+     - Page background
    * - ``--color-primary``
      - ``#2563eb``
      - Main brand / interaction colour
@@ -79,21 +117,12 @@ Colours
    * - ``--color-secondary``
      - ``#64748b``
      - Muted secondary colour
+   * - ``--color-secondary-hover``
+     - ``#475569``
+     - Darkened secondary for hover states
    * - ``--color-accent``
      - ``#f59e0b``
      - Highlight / decoration colour
-   * - ``--color-text``
-     - ``#191919``
-     - Default body text
-   * - ``--color-background``
-     - ``#ffffff``
-     - Page background
-   * - ``--color-surface``
-     - ``#f3f3f3``
-     - Card / panel background
-   * - ``--color-border``
-     - ``#d1d5db``
-     - Default border colour
    * - ``--color-success``
      - ``#16a34a``
      - Success / valid state
@@ -103,6 +132,30 @@ Colours
    * - ``--color-danger``
      - ``#dc2626``
      - Error / invalid state
+   * - ``--color-info``
+     - ``#0891b2``
+     - Informational state
+   * - ``--color-border``
+     - ``#d1d5db``
+     - Default border colour
+   * - ``--color-shadow``
+     - ``rgb(0 0 0 / 10%)``
+     - Box-shadow colour
+   * - ``--color-disabled-bg``
+     - ``#e5e7eb``
+     - Disabled element background
+   * - ``--color-disabled-text``
+     - ``#9ca3af``
+     - Disabled element text
+   * - ``--color-link``
+     - ``var(--color-primary)``
+     - Default link colour
+   * - ``--color-link-hover``
+     - ``var(--color-secondary)``
+     - Link hover colour
+   * - ``--color-link-visited``
+     - ``var(--color-secondary)``
+     - Visited link colour
 
 Spacing
 ~~~~~~~
@@ -138,6 +191,65 @@ Spacing
    * - ``--space-3xl``
      - ``4rem``
      - Hero / section padding
+   * - ``--space-em-xs``
+     - ``0.25em``
+     - Relative tight gap (inside components)
+   * - ``--space-em-sm``
+     - ``0.5em``
+     - Relative small gap
+   * - ``--space-em-md``
+     - ``1em``
+     - Relative default gap
+   * - ``--space-em-lg``
+     - ``1.5em``
+     - Relative large gap
+
+Layout
+~~~~~~
+
+.. list-table::
+   :widths: 30 20 50
+   :header-rows: 1
+
+   * - Property
+     - Default
+     - Purpose
+   * - ``--layout-width-min``
+     - ``320px``
+     - Minimum page width
+   * - ``--layout-width-max``
+     - ``1400px``
+     - Maximum page width
+   * - ``--layout-content-width``
+     - ``75ch``
+     - Default content column width
+   * - ``--layout-card-width``
+     - ``32ch``
+     - Ideal card width for auto-grid
+   * - ``--layout-text-width``
+     - ``65ch``
+     - Optimal line length for readability
+   * - ``--layout-sidebar-main``
+     - ``75ch``
+     - Main column in sidebar layout
+   * - ``--layout-sidebar-aside``
+     - ``45ch``
+     - Sidebar column width
+   * - ``--layout-grid-gap``
+     - ``clamp(…, 3vw, …)``
+     - Responsive grid gap
+   * - ``--layout-grid-min-col``
+     - ``4rem``
+     - Minimum column width in auto-grid
+   * - ``--layout-radius``
+     - ``0.5rem``
+     - Default border radius
+   * - ``--layout-radius-lg``
+     - ``1rem``
+     - Large border radius
+   * - ``--layout-radius-full``
+     - ``9999px``
+     - Pill / fully rounded
 
 Typography
 ~~~~~~~~~~
@@ -155,12 +267,159 @@ Typography
    * - ``--font-family-accent``
      - ``var(--font-family-base)``
      - Heading font (override for a display typeface)
+   * - ``--font-family-mono``
+     - ``ui-monospace, "Cascadia Code", monospace``
+     - Monospace / code font
+   * - ``--font-weight-normal``
+     - ``400``
+     - Normal text weight
+   * - ``--font-weight-medium``
+     - ``500``
+     - Medium weight (buttons, labels)
+   * - ``--font-weight-bold``
+     - ``700``
+     - Bold text weight
+   * - ``--font-weight-black``
+     - ``800``
+     - Extra-bold / black weight
+   * - ``--font-size-xs``
+     - ``clamp(0.64rem, …, 0.72rem)``
+     - Smallest fluid text size
+   * - ``--font-size-sm``
+     - ``clamp(0.8rem, …, 0.9rem)``
+     - Small text
    * - ``--font-size-base``
      - ``clamp(1rem, …, 1.125rem)``
      - Default fluid body size
+   * - ``--font-size-lg``
+     - ``clamp(1.25rem, …, 1.4rem)``
+     - Large text / h4
+   * - ``--font-size-xl``
+     - ``clamp(1.563rem, …, 1.76rem)``
+     - h3 size
+   * - ``--font-size-2xl``
+     - ``clamp(1.953rem, …, 2.2rem)``
+     - h2 size
+   * - ``--font-size-3xl``
+     - ``clamp(2.441rem, …, 2.75rem)``
+     - Large heading size
    * - ``--font-size-4xl``
      - ``clamp(3.052rem, …, 3.44rem)``
      - h1 size
+   * - ``--line-height-tight``
+     - ``1.1``
+     - Headings
+   * - ``--line-height-snug``
+     - ``1.3``
+     - Compact text
+   * - ``--line-height-base``
+     - ``1.5``
+     - Default body line height
+   * - ``--line-height-relaxed``
+     - ``1.75``
+     - Spacious text
+
+Buttons
+~~~~~~~
+
+.. list-table::
+   :widths: 35 25 40
+   :header-rows: 1
+
+   * - Property
+     - Default
+     - Purpose
+   * - ``--btn-padding-y``
+     - ``var(--space-sm)``
+     - Vertical padding
+   * - ``--btn-padding-x``
+     - ``var(--space-lg)``
+     - Horizontal padding
+   * - ``--btn-font-size``
+     - ``var(--font-size-base)``
+     - Button font size
+   * - ``--btn-font-weight``
+     - ``var(--font-weight-medium)``
+     - Button font weight
+   * - ``--btn-border-radius``
+     - ``var(--layout-radius)``
+     - Button border radius
+   * - ``--btn-border-width``
+     - ``2px``
+     - Button border width
+   * - ``--btn-primary-bg``
+     - ``var(--color-primary)``
+     - Primary button background
+   * - ``--btn-primary-text``
+     - ``#ffffff``
+     - Primary button text colour
+   * - ``--btn-secondary-bg``
+     - ``var(--color-secondary)``
+     - Secondary button background
+   * - ``--btn-secondary-text``
+     - ``#ffffff``
+     - Secondary button text colour
+   * - ``--btn-outline-bg``
+     - ``transparent``
+     - Outline button background
+   * - ``--btn-outline-text``
+     - ``var(--color-primary)``
+     - Outline button text colour
+   * - ``--btn-sm-padding-y``
+     - ``var(--space-xs)``
+     - Small button vertical padding
+   * - ``--btn-sm-font-size``
+     - ``var(--font-size-sm)``
+     - Small button font size
+   * - ``--btn-lg-padding-y``
+     - ``var(--space-md)``
+     - Large button vertical padding
+   * - ``--btn-lg-font-size``
+     - ``var(--font-size-lg)``
+     - Large button font size
+
+Images
+~~~~~~
+
+.. list-table::
+   :widths: 30 30 40
+   :header-rows: 1
+
+   * - Property
+     - Default
+     - Purpose
+   * - ``--img-border-radius``
+     - ``var(--layout-radius)``
+     - Default image border radius
+   * - ``--img-shadow``
+     - ``0 4px 6px …``
+     - Default image box-shadow
+   * - ``--img-object-fit``
+     - ``cover``
+     - Default object-fit for images
+
+Icons
+~~~~~
+
+.. list-table::
+   :widths: 25 20 55
+   :header-rows: 1
+
+   * - Property
+     - Default
+     - Purpose
+   * - ``--icon-size-sm``
+     - ``1rem``
+     - Small icon size
+   * - ``--icon-size-md``
+     - ``1.25rem``
+     - Medium icon size (default)
+   * - ``--icon-size-lg``
+     - ``1.5rem``
+     - Large icon size
+   * - ``--icon-color``
+     - ``currentcolor``
+     - Default icon fill colour
 
 Override any property in ``:root`` to change the whole bundle:
 
@@ -171,6 +430,47 @@ Override any property in ``:root`` to change the whole bundle:
        --font-family-accent: 'Playfair Display', serif;
        --layout-radius:     0rem;      /* sharp corners */
    }
+
+Dark mode
+---------
+
+The bundle includes automatic dark-mode support via
+``@media (prefers-color-scheme: dark)`` inside ``01-settings/_variables.scss``.
+When the user's operating system or browser is set to dark mode the following
+tokens are overridden:
+
+.. list-table::
+   :widths: 35 25 40
+   :header-rows: 1
+
+   * - Property
+     - Dark value
+     - Notes
+   * - ``--color-text``
+     - ``#f3f3f3``
+     - Light text on dark background
+   * - ``--color-surface``
+     - ``#1e293b``
+     - Dark card / panel background
+   * - ``--color-background``
+     - ``#0f172a``
+     - Dark page background
+   * - ``--color-border``
+     - ``#334155``
+     - Subtle dark-mode borders
+   * - ``--color-shadow``
+     - ``rgb(0 0 0 / 30%)``
+     - Stronger shadow in dark mode
+   * - ``--btn-primary-bg-hover``
+     - ``color-mix(…, 80%, white)``
+     - Lighter primary hover
+   * - ``--btn-outline-bg-hover``
+     - ``color-mix(…, 80%, transparent)``
+     - Translucent outline hover
+
+No extra imports or configuration are required — dark mode works out of the box.
+To disable it, override the affected properties inside your own
+``:root`` declarations.
 
 Breakpoint mixins
 -----------------

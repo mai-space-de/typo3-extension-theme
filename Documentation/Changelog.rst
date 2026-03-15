@@ -5,6 +5,34 @@
 Changelog
 =========
 
+13.1.1 — 2026-03-15
+---------------------
+
+Changed
+~~~~~~~
+
+* **Documentation** — comprehensive update of all documentation to reflect the
+  latest functionality:
+
+  * New :ref:`configuration` page covering the auto-discovery mechanism,
+    ``StyleSheets.php``, ``JavaScripts.php``, and ``BackendTheme.php`` file
+    formats with full field references
+  * :ref:`stylesheets` page expanded with complete design token tables —
+    layout, button, image, and icon custom properties now fully documented
+  * Added CSS Layers section explaining the ``@layer`` order and
+    ``theme-critical`` layer
+  * Added dark mode section documenting the automatic
+    ``prefers-color-scheme: dark`` overrides
+  * Complete colour palette documented including ``--color-info``, neutral
+    palette (shadow, disabled), and link colour variables
+  * Full spacing scale including relative ``em`` units
+  * Full typography tokens including font weights, all fluid sizes, and
+    line heights
+  * :ref:`installation` updated with complete ``BackendTheme.php`` settings
+    (``loginLogo``, ``loginLogoAlt``, ``loginFootnote``)
+  * README updated with complete configuration examples (``attributes``,
+    ``options``, backend sections), dark mode feature, and development commands
+
 13.1.0 — 2026-03-10
 ---------------------
 

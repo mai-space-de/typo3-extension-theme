@@ -16,6 +16,7 @@ This extension provides three things:
 - **ITCSS stylesheet bundle** — 22 SCSS partials across 8 layers (settings → utilities), derived from [minimal-stylesheet-maximum-impact](https://github.com/mai-space/minimal-stylesheet-maximum-impact)
 - **Full CSS Layers support** — the bundle and all partials are wrapped in `@layer` blocks for predictable specificity
 - **CSS custom properties throughout** — every design token is overridable without touching source files
+- **Automatic dark mode** — built-in `prefers-color-scheme: dark` overrides for all base tokens; works out of the box
 - **Atomic Design structure** — atoms, molecules, organisms, templates, and utilities
 - **Fluid Components** — six pre-built components (Atom/Button, Atom/Link, Molecule/Card, Organism/Navigation, Organism/SiteHeader, Organism/SiteFooter) backed by `sitegeist/fluid-components`
 - **Base Fluid page templates** — layout, templates, and partials ready to override in your site package
@@ -73,7 +74,16 @@ return [
     'frontend' => [
         'my_stylesheet' => [
             'source' => 'EXT:my_extension/Resources/Public/Css/style.css',
-            'site-identifier' => 'my_site' // Optional: filter by site identifier
+            'site-identifier' => 'my_site', // Optional: filter by site identifier
+            'attributes' => [],              // Optional: HTML attributes for <link>
+            'options' => [],                 // Optional: AssetCollector options
+        ],
+    ],
+    'backend' => [
+        'my_backend_stylesheet' => [
+            'source' => 'EXT:my_extension/Resources/Public/Css/backend.css',
+            'attributes' => [],
+            'options' => [],
         ],
     ],
 ];
@@ -86,7 +96,16 @@ return [
     'frontend' => [
         'my_script' => [
             'source' => 'EXT:my_extension/Resources/Public/Js/script.js',
-            'site-identifier' => 'my_site'
+            'site-identifier' => 'my_site',  // Optional: filter by site identifier
+            'attributes' => ['defer' => 'defer'],
+            'options' => [],
+        ],
+    ],
+    'backend' => [
+        'my_backend_script' => [
+            'source' => 'EXT:my_extension/Resources/Public/Js/backend.js',
+            'attributes' => [],
+            'options' => [],
         ],
     ],
 ];
@@ -97,8 +116,12 @@ return [
 <?php
 return [
     'backendLogo' => 'EXT:my_extension/Resources/Public/Icons/logo.svg',
+    'backendFavicon' => 'EXT:my_extension/Resources/Public/Icons/favicon.ico',
+    'loginLogo' => 'EXT:my_extension/Resources/Public/Images/login-logo.png',
+    'loginLogoAlt' => 'My Project',
     'loginBackgroundImage' => 'EXT:my_extension/Resources/Public/Images/login-bg.jpg',
     'loginHighlightColor' => '#2563eb',
+    'loginFootnote' => '© 2026 My Company',
 ];
 ```
 
@@ -262,6 +285,23 @@ Resources/Private/
 Override any template by registering a higher-priority `templateRootPaths` / `partialRootPaths` key in your site package's TypoScript.
 
 ## Development
+
+```bash
+# Install dependencies
+composer install
+
+# Run all linting checks
+composer lint:check
+
+# Run tests
+composer test
+
+# Run individual checks
+composer check:phpstan         # Static analysis
+composer check:phpcs           # Code style
+composer check:typoscript      # TypoScript linting
+composer check:editorconfig    # EditorConfig compliance
+```
 
 -   **Backend Theme**: Call `GeneralUtility::makeInstance(BackendTheme::class)->registerBackendTheme()` in your `ext_localconf.php` to apply backend settings.
 

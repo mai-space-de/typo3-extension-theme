@@ -26,6 +26,7 @@ a set of base Fluid page templates ready to extend, and six pre-built
 
    Introduction
    Installation
+   Configuration
    StyleSheets
    Components
    Templates

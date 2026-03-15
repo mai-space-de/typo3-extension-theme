@@ -34,9 +34,16 @@ Features
   (settings → utilities). Compiled server-side by `maispace/assets`_ using
   ``scssphp``; no Node.js build pipeline required.
 
+* **CSS Layers** — the bundle declares an explicit ``@layer`` order for
+  predictable specificity. Downstream stylesheets that declare their own layers
+  after the theme layers will always win.
+
 * **CSS custom properties throughout** — every design token (colour, spacing,
   typography, component sizing) is exposed as a ``--variable`` that can be
   overridden in ``:root`` or any scoping selector.
+
+* **Automatic dark mode** — built-in ``prefers-color-scheme: dark`` overrides
+  for all base tokens. No extra configuration required.
 
 * **Atomic Design structure** — layers map to *settings*, *generic*, *atoms*,
   *molecules*, *organisms*, *templates*, and *utilities*, making it trivial to

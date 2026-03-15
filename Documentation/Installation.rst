@@ -65,11 +65,17 @@ Then create ``Configuration/BackendTheme.php`` in your extension:
    // your_extension/Configuration/BackendTheme.php
 
    return [
-       'backendLogo'        => 'EXT:your_extension/Resources/Public/Icons/logo.svg',
-       'backendFavicon'     => 'EXT:your_extension/Resources/Public/Icons/favicon.ico',
+       'backendLogo'          => 'EXT:your_extension/Resources/Public/Icons/logo.svg',
+       'backendFavicon'       => 'EXT:your_extension/Resources/Public/Icons/favicon.ico',
+       'loginLogo'            => 'EXT:your_extension/Resources/Public/Images/login-logo.png',
+       'loginLogoAlt'         => 'My Project',
        'loginBackgroundImage' => 'EXT:your_extension/Resources/Public/Images/login-bg.jpg',
        'loginHighlightColor'  => '#2563eb',
+       'loginFootnote'        => '© 2026 My Company',
    ];
+
+See :ref:`configuration` for the complete list of available backend theme
+settings.
 
 Overriding the stylesheet bundle
 ---------------------------------
