@@ -67,6 +67,11 @@ Features
   highlight colour are all configurable through ``Configuration/BackendTheme.php``
   in any active extension.
 
+* **Record Modules** — register dedicated backend modules for specific TCA
+  record types via ``Configuration/RecordModules.php``. Editors get direct
+  sidebar access to filtered record lists without navigating through the
+  generic List module.
+
 .. _maispace/assets: https://github.com/mai-space-de/typo3-extension-assets
 
 Stylesheet layers at a glance

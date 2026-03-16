@@ -8,6 +8,23 @@ Changelog
 13.1.1 — 2026-03-15
 ---------------------
 
+Added
+~~~~~
+
+* **Record Modules** — new ``Configuration/RecordModules.php`` auto-discovery
+  that allows any extension to register dedicated backend modules for specific
+  TCA record types:
+
+  * ``RecordModuleRegistrar`` service reads ``RecordModules.php`` from all
+    active extensions and builds TYPO3 backend module registrations
+  * ``RecordModuleController`` extends ``RecordListController`` to show a
+    filtered record list per table
+  * Configurable ``pids``, ``sorting``, ``title``, ``icon``, ``iconIdentifier``,
+    and ``parent`` per table entry
+  * Modules are placed in a custom "Records" sidebar group by default, or
+    under any existing module group via the ``parent`` option
+  * Language labels and Fluid template for the record list view
+
 Changed
 ~~~~~~~
 

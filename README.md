@@ -23,6 +23,7 @@ This extension provides three things:
 - **Server-side SCSS compilation** — delegated to `maispace/assets` (`<mai:scss>` ViewHelper, powered by `scssphp`)
 - **Automated asset inclusion** — auto-registers stylesheets and JavaScripts from any active extension
 - **Backend theme management** — logos, favicon, and login-page customisation via configuration files
+- **Record Modules** — register dedicated backend modules for specific record types via `Configuration/RecordModules.php`
 - **Configuration merging** — merges configuration files from all active packages for modular theme development
 
 ## Installation
@@ -126,6 +127,25 @@ return [
 ```
 
 The `theme` extension will automatically find these files in any active package and apply the configurations.
+
+### RecordModules.php
+```php
+<?php
+return [
+    'sys_category' => [
+        'pids' => '1,42',         // Optional: restrict to these page IDs
+        'sorting' => 10,          // Optional: sort order in sidebar
+        'title' => 'Categories',  // Optional: defaults to TCA table title
+        'parent' => 'web',        // Optional: defaults to 'theme_records' group
+    ],
+    'tx_news_domain_model_news' => [
+        'pids' => '5',
+        'sorting' => 20,
+    ],
+];
+```
+
+Each entry creates a dedicated backend module showing a filtered record list for that table.
 
 ## Fluid Components
 

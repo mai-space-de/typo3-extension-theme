@@ -35,12 +35,16 @@ Three filenames are used by the theme extension out of the box:
      - Register JavaScript files for automatic inclusion via ``AssetCollector``
    * - ``BackendTheme.php``
      - Customise the TYPO3 backend login page and logo
+   * - ``RecordModules.php``
+     - Register dedicated backend modules for specific record types
 
 The auto-discovery is driven by the
 ``FrontendAssetConfigurationsListener`` event listener (for stylesheets and
-JavaScripts) and the ``BackendTheme`` service (for backend theming). Both are
-registered in ``Configuration/Services.yaml`` and ``ext_localconf.php``
-respectively.
+JavaScripts), the ``BackendTheme`` service (for backend theming) and the
+``RecordModuleRegistrar`` service (for record modules). Both asset and backend
+theme services are registered in ``Configuration/Services.yaml`` and
+``ext_localconf.php`` respectively. Record modules are registered dynamically
+via ``Configuration/Backend/Modules.php``.
 
 StyleSheets.php
 ---------------
@@ -202,6 +206,67 @@ settings map directly to ``$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['backend']`
    ``BackendTheme::registerBackendTheme()`` must be called in your site
    package's ``ext_localconf.php`` for the settings to take effect. See
    :ref:`installation` for details.
+
+RecordModules.php
+-----------------
+
+Register dedicated backend modules that show a filtered record list for
+specific TCA tables. Editors can access records directly without navigating
+through the generic List module.
+
+.. code-block:: php
+
+   <?php
+   // your_extension/Configuration/RecordModules.php
+
+   return [
+       'sys_category' => [
+           'pids'    => '1,42',
+           'sorting' => 10,
+           'title'   => 'LLL:EXT:your_extension/Resources/Private/Language/locallang.xlf:categories',
+           'icon'    => 'EXT:your_extension/Resources/Public/Icons/categories.svg',
+           'parent'  => 'web',
+       ],
+       'tx_news_domain_model_news' => [
+           'pids'    => '5',
+           'sorting' => 20,
+       ],
+   ];
+
+**Fields:**
+
+.. list-table::
+   :widths: 20 10 70
+   :header-rows: 1
+
+   * - Key
+     - Required
+     - Description
+   * - ``pids``
+     - no
+     - Comma-separated page IDs or an array of IDs to restrict the record
+       listing. When omitted the TYPO3 page tree is shown so the editor can
+       select a page.
+   * - ``sorting``
+     - no
+     - Integer sort order. Modules with lower values appear first.
+       Defaults to ``9999``.
+   * - ``title``
+     - no
+     - Module title shown in the backend sidebar. Defaults to the TCA table
+       title. Supports ``LLL:`` references.
+   * - ``icon``
+     - no
+     - Path to an icon file (``EXT:`` syntax). Defaults to the icon configured
+       in the TCA ``ctrl.iconfile`` or ``ctrl.typeicon_classes``.
+   * - ``iconIdentifier``
+     - no
+     - Registered icon identifier (alternative to ``icon``).
+   * - ``parent``
+     - no
+     - Parent module identifier. Defaults to ``theme_records`` which creates a
+       custom "Records" module group. Use ``web`` to place the module under the
+       Web group.
 
 Multi-extension merging
 -----------------------
