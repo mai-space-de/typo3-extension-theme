@@ -11,3 +11,5 @@ services:
       - name: event.listener
         method: setStyleSheetConfiguration
         identifier: 'Maispace/StyleSheetConfigurationsListener'
+  Maispace\Theme\Controller\RecordModuleController:
+    public: true
