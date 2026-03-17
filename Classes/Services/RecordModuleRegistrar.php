@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Maispace\Theme\Services;
 
@@ -8,9 +8,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class RecordModuleRegistrar
 {
-    private const string CONFIGURATION_FILENAME = 'RecordModules';
-    private const string DEFAULT_PARENT = 'theme_records';
-    private const int DEFAULT_SORTING = 9999;
+    private const CONFIGURATION_FILENAME = 'RecordModules';
+    private const DEFAULT_PARENT = 'theme_records';
+    private const DEFAULT_SORTING = 9999;
 
     /**
      * @return array<string, array<string, mixed>>
@@ -37,7 +37,7 @@ class RecordModuleRegistrar
                 continue;
             }
 
-            /** @var array<string, mixed> $settings */
+            // @var array<string, mixed> $settings
 
             if (!isset($tca[$table])) {
                 continue;
@@ -66,27 +66,27 @@ class RecordModuleRegistrar
             $identifier = 'theme_recordmodule_' . $table;
             /** @var array<string, mixed> $moduleConfiguration */
             $moduleConfiguration = [
-                'parent' => $parent,
-                'position' => ['before' => 'web_list'],
-                'sorting' => $sorting,
-                'access' => 'user',
+                'parent'     => $parent,
+                'position'   => ['before' => 'web_list'],
+                'sorting'    => $sorting,
+                'access'     => 'user',
                 'workspaces' => 'live',
-                'path' => '/module/' . $identifier,
-                'labels' => [
+                'path'       => '/module/' . $identifier,
+                'labels'     => [
                     'title' => $title,
                 ],
-                'extensionName' => 'Theme',
-                'navigationComponent' => $navigationComponent,
+                'extensionName'                            => 'Theme',
+                'navigationComponent'                      => $navigationComponent,
                 'inheritNavigationComponentFromMainModule' => false,
-                'routes' => [
+                'routes'                                   => [
                     '_default' => [
                         'target' => \Maispace\Theme\Controller\RecordModuleController::class . '::mainAction',
                     ],
                 ],
                 'moduleData' => [
-                    'table' => $table,
-                    'title' => $title,
-                    'pids' => $pids,
+                    'table'     => $table,
+                    'title'     => $title,
+                    'pids'      => $pids,
                     'clipBoard' => true,
                     'searchBox' => true,
                 ],
@@ -101,16 +101,17 @@ class RecordModuleRegistrar
             uasort($modules, static function (array $a, array $b): int {
                 $sortA = is_int($a['sorting'] ?? null) ? $a['sorting'] : self::DEFAULT_SORTING;
                 $sortB = is_int($b['sorting'] ?? null) ? $b['sorting'] : self::DEFAULT_SORTING;
+
                 return $sortA <=> $sortB;
             });
         }
 
         if ($needsCustomModuleGroup) {
             $modules[self::DEFAULT_PARENT] = [
-                'labels' => 'LLL:EXT:theme/Resources/Private/Language/locallang_record_module.xlf',
-                'iconIdentifier' => 'actions-brand-typo3',
-                'extensionName' => 'Theme',
-                'position' => ['after' => 'web'],
+                'labels'              => 'LLL:EXT:theme/Resources/Private/Language/locallang_record_module.xlf',
+                'iconIdentifier'      => 'actions-brand-typo3',
+                'extensionName'       => 'Theme',
+                'position'            => ['after' => 'web'],
                 'navigationComponent' => '',
             ];
         }
@@ -136,6 +137,7 @@ class RecordModuleRegistrar
 
     /**
      * @param array<string, mixed> $settings
+     *
      * @return list<int>
      */
     private function resolvePids(array $settings): array
@@ -145,7 +147,9 @@ class RecordModuleRegistrar
         }
 
         if (is_array($settings['pids'])) {
-            return array_values(array_map(static fn(mixed $v): int => is_numeric($v) ? (int)$v : 0, $settings['pids']));
+            $pids = array_map(static fn (mixed $v): int => is_numeric($v) ? (int)$v : 0, $settings['pids']);
+
+            return array_values(array_filter($pids, static fn (int $pid): bool => $pid > 0));
         }
 
         if (is_string($settings['pids']) || is_int($settings['pids'])) {
@@ -164,11 +168,13 @@ class RecordModuleRegistrar
     {
         if (isset($settings['icon']) && is_string($settings['icon']) && $settings['icon'] !== '') {
             $moduleConfiguration['icon'] = $settings['icon'];
+
             return;
         }
 
         if (isset($settings['iconIdentifier']) && is_string($settings['iconIdentifier']) && $settings['iconIdentifier'] !== '') {
             $moduleConfiguration['iconIdentifier'] = $settings['iconIdentifier'];
+
             return;
         }
 

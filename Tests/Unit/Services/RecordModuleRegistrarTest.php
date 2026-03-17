@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Maispace\Theme\Tests\Unit\Services;
 
@@ -36,7 +36,7 @@ class RecordModuleRegistrarTest extends TestCase
     {
         $GLOBALS['TCA']['sys_category'] = [
             'ctrl' => [
-                'title' => 'Categories',
+                'title'    => 'Categories',
                 'iconfile' => 'EXT:core/Resources/Public/Icons/T3Icons/mimetypes/mimetypes-x-sys_category.svg',
             ],
         ];
@@ -46,7 +46,7 @@ class RecordModuleRegistrarTest extends TestCase
             ->with('RecordModules')
             ->willReturn([
                 'sys_category' => [
-                    'pids' => '1,2',
+                    'pids'    => '1,2',
                     'sorting' => 10,
                 ],
             ]);

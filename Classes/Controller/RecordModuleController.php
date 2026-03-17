@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Maispace\Theme\Controller;
 
@@ -32,6 +32,7 @@ class RecordModuleController extends RecordListController
         if ($module instanceof ModuleInterface && $this->moduleData !== null) {
             $defaultData = $module->getDefaultModuleData();
             $this->moduleData->set('table', $defaultData['table'] ?? '');
+            $this->moduleData->set('title', $defaultData['title'] ?? '');
             $this->moduleData->set('pids', $defaultData['pids'] ?? []);
         }
 
@@ -44,23 +45,28 @@ class RecordModuleController extends RecordListController
         $permsClause = $backendUser->getPagePermsClause(Permission::PAGE_SHOW);
         $currentTable = is_string($this->moduleData?->get('table')) ? (string)$this->moduleData->get('table') : '';
 
-        $rawId = $parsedBody['id'] ?? $queryParams['id'] ?? 0;
-        $this->id = is_numeric($rawId) ? (int)$rawId : 0;
         $this->table = $currentTable;
 
         $pids = $this->resolvePids($parsedBody, $queryParams);
-
         $pids = $this->filterAccessiblePids($pids, $permsClause);
+
+        $rawId = $parsedBody['id'] ?? $queryParams['id'] ?? 0;
+        $this->id = is_numeric($rawId) ? (int)$rawId : 0;
+
+        // When PID restriction is configured, enforce the requested id is within allowed PIDs
+        if ($pids !== [] && $this->id > 0 && !in_array($this->id, $pids, true)) {
+            $this->id = (int)reset($pids);
+        }
+
+        if ($this->id === 0 && $pids !== []) {
+            $this->id = (int)reset($pids);
+        }
 
         $this->pageRenderer->addInlineLanguageLabelFile(
             'EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf'
         );
 
         BackendUtility::lockRecords();
-
-        if ($this->id === 0 && $pids !== []) {
-            $this->id = (int)reset($pids);
-        }
 
         $rawPointer = $parsedBody['pointer'] ?? $queryParams['pointer'] ?? 0;
         $pointer = max(0, is_numeric($rawPointer) ? (int)$rawPointer : 0);
@@ -94,6 +100,7 @@ class RecordModuleController extends RecordListController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
+
             return $view->renderResponse('RecordModule/List');
         }
 
@@ -105,6 +112,7 @@ class RecordModuleController extends RecordListController
                 '',
                 ContextualFeedbackSeverity::ERROR
             );
+
             return $view->renderResponse('RecordModule/List');
         }
 
@@ -190,9 +198,9 @@ class RecordModuleController extends RecordListController
         $moduleTitle = $this->resolveModuleTitle();
 
         $view->assignMultiple([
-            'pageId' => $this->id,
-            'table' => $this->table,
-            'moduleTitle' => $moduleTitle,
+            'pageId'        => $this->id,
+            'table'         => $this->table,
+            'moduleTitle'   => $moduleTitle,
             'searchBoxHtml' => $searchBoxHtml,
             'tableListHtml' => $tableListHtml,
             'clipboardHtml' => $clipboardHtml,
@@ -208,6 +216,7 @@ class RecordModuleController extends RecordListController
             if (str_starts_with($title, 'LLL:')) {
                 return $this->getLanguageService()->sL($title);
             }
+
             return $title;
         }
 
@@ -227,6 +236,7 @@ class RecordModuleController extends RecordListController
     /**
      * @param array<string, mixed> $parsedBody
      * @param array<string, mixed> $queryParams
+     *
      * @return list<int>
      */
     private function resolvePids(array $parsedBody, array $queryParams): array
@@ -234,7 +244,9 @@ class RecordModuleController extends RecordListController
         $configuredPids = $this->moduleData?->get('pids');
 
         if (is_array($configuredPids) && $configuredPids !== []) {
-            return array_values(array_map(static fn(mixed $v): int => is_numeric($v) ? (int)$v : 0, $configuredPids));
+            $pids = array_map(static fn (mixed $v): int => is_numeric($v) ? (int)$v : 0, $configuredPids);
+
+            return array_values(array_filter($pids, static fn (int $pid): bool => $pid > 0));
         }
 
         if (is_string($configuredPids) && trim($configuredPids) !== '') {
@@ -252,12 +264,14 @@ class RecordModuleController extends RecordListController
 
     /**
      * @param list<int> $pids
+     *
      * @return list<int>
      */
     private function filterAccessiblePids(array $pids, string $permsClause): array
     {
         return array_values(array_filter($pids, static function (int $pid) use ($permsClause): bool {
             $pageInfo = BackendUtility::readPageAccess($pid, $permsClause);
+
             return is_array($pageInfo);
         }));
     }
