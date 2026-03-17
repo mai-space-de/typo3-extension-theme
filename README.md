@@ -5,11 +5,12 @@
 [![TYPO3](https://img.shields.io/badge/TYPO3-13.0%2B-orange)](https://typo3.org/)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
-This extension provides three things:
+This extension provides four things:
 
 1. **An ITCSS stylesheet bundle** — compiled server-side via [`maispace/assets`](https://github.com/mai-space-de/typo3-extension-assets) using `<mai:scss>`, no Node.js required.
-2. **A loader mechanism** — auto-discovers `StyleSheets.php`, `JavaScripts.php`, and `BackendTheme.php` from all active TYPO3 packages and registers their assets automatically.
+2. **A loader mechanism** — auto-discovers `StyleSheets.php`, `JavaScripts.php`, `BackendTheme.php`, and `RecordModules.php` from all active TYPO3 packages and registers their assets/modules automatically.
 3. **Fluid Components** — a set of reusable `sitegeist/fluid-components` components (Button, Link, Card, Navigation, SiteHeader, SiteFooter) ready to use or override in any site package.
+4. **Record Modules** — register dedicated backend modules for specific TCA record types via `Configuration/RecordModules.php`, giving editors direct sidebar access to filtered record lists.
 
 ## Features
 

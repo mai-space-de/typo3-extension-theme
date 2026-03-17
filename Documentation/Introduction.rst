@@ -5,7 +5,7 @@
 Introduction
 ============
 
-**maispace/theme** handles three complementary concerns in a TYPO3 13 project:
+**maispace/theme** handles four complementary concerns in a TYPO3 13 project:
 
 * **Asset loading** — auto-discovers ``StyleSheets.php`` and ``JavaScripts.php``
   configuration files from every active TYPO3 package and registers the listed
@@ -13,6 +13,11 @@ Introduction
 
 * **Backend theming** — reads ``BackendTheme.php`` from active packages and
   applies logo, favicon, and login-page overrides to the TYPO3 backend.
+
+* **Record Modules** — reads ``RecordModules.php`` from active packages and
+  dynamically registers dedicated backend modules for specific TCA record
+  types. Editors get direct sidebar access to filtered record lists without
+  navigating through the generic List module.
 
 * **Fluid Components** — ships six pre-built `sitegeist/fluid-components`_
   components (Button, Link, Card, Navigation, SiteHeader, SiteFooter) that

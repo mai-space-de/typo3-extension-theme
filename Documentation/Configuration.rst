@@ -21,7 +21,7 @@ package for a file matching ``Configuration/{Name}.php``. Each file must return
 a PHP array. When the same filename exists in multiple extensions the arrays are
 merged recursively — later packages override earlier ones.
 
-Three filenames are used by the theme extension out of the box:
+Four filenames are used by the theme extension out of the box:
 
 .. list-table::
    :widths: 25 75

@@ -77,6 +77,38 @@ Then create ``Configuration/BackendTheme.php`` in your extension:
 See :ref:`configuration` for the complete list of available backend theme
 settings.
 
+Record Modules (optional)
+-------------------------
+
+Register dedicated backend modules for specific TCA record types by creating
+``Configuration/RecordModules.php`` in your extension:
+
+.. code-block:: php
+
+   <?php
+   // your_extension/Configuration/RecordModules.php
+
+   return [
+       'sys_category' => [
+           'pids'    => '1,42',
+           'sorting' => 10,
+           'title'   => 'Categories',
+           'parent'  => 'web',
+       ],
+       'tx_news_domain_model_news' => [
+           'pids'    => '5',
+           'sorting' => 20,
+       ],
+   ];
+
+No additional setup is needed — ``EXT:theme`` automatically discovers
+``RecordModules.php`` files from all active extensions and registers the
+corresponding backend modules. Each entry creates a sidebar module that
+shows a filtered record list for the configured table.
+
+See :ref:`configuration` for the full list of available fields (``pids``,
+``sorting``, ``title``, ``icon``, ``iconIdentifier``, ``parent``).
+
 Overriding the stylesheet bundle
 ---------------------------------
 

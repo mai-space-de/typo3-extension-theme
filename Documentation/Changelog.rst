@@ -32,8 +32,8 @@ Changed
   latest functionality:
 
   * New :ref:`configuration` page covering the auto-discovery mechanism,
-    ``StyleSheets.php``, ``JavaScripts.php``, and ``BackendTheme.php`` file
-    formats with full field references
+    ``StyleSheets.php``, ``JavaScripts.php``, ``BackendTheme.php``, and
+    ``RecordModules.php`` file formats with full field references
   * :ref:`stylesheets` page expanded with complete design token tables —
     layout, button, image, and icon custom properties now fully documented
   * Added CSS Layers section explaining the ``@layer`` order and
@@ -46,9 +46,13 @@ Changed
   * Full typography tokens including font weights, all fluid sizes, and
     line heights
   * :ref:`installation` updated with complete ``BackendTheme.php`` settings
-    (``loginLogo``, ``loginLogoAlt``, ``loginFootnote``)
+    (``loginLogo``, ``loginLogoAlt``, ``loginFootnote``) and new Record
+    Modules setup section
+  * :ref:`introduction` updated to describe all four feature concerns
+    including Record Modules
   * README updated with complete configuration examples (``attributes``,
-    ``options``, backend sections), dark mode feature, and development commands
+    ``options``, backend sections), dark mode feature, Record Modules
+    usage example, and development commands
 
 13.1.0 — 2026-03-10
 ---------------------
