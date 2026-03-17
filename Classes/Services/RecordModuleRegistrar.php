@@ -37,7 +37,8 @@ class RecordModuleRegistrar
                 continue;
             }
 
-            // @var array<string, mixed> $settings
+            /** @var array<string, mixed> $settings */
+            $settings = $settings;
 
             if (!isset($tca[$table])) {
                 continue;
