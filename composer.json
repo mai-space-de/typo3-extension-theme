@@ -28,6 +28,7 @@
         }
     },
     "require": {
+        "friendsoftypo3/visual-editor": "^1.0",
         "maispace/assets": "^13.0",
         "sitegeist/fluid-components": "^3.0"
     },

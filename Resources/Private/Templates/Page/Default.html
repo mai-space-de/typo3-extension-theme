@@ -1,4 +1,5 @@
 {namespace theme=Maispace\Theme\Components}
+{namespace ve=TYPO3\CMS\VisualEditor\ViewHelpers}
 <f:layout name="Page/Default" />
 
 <!--
@@ -15,6 +16,14 @@
     Copy this file into your own extension and register the path via
     TypoScript (templateRootPaths) to override the default layout.
 
+    Visual Editor (friendsoftypo3/visual-editor):
+      ve:mark.contentArea  – Marks a colPos area as editable; enables drag-and-drop
+                             and inline WYSIWYG editing for content elements.
+      ve:render.text       – Renders a TCA text/RTE field with inline editing support.
+                             Usage: <ve:render.text record="{data}" field="bodytext" />
+      ve:editMode          – Conditional ViewHelper; renders "then" branch when the
+                             frontend is in backend edit mode, "else" otherwise.
+
     See: EXT:theme/Configuration/TypoScript/setup.typoscript
 -->
 
@@ -27,13 +36,19 @@
 
 <f:section name="Body">
     <!-- ── Site Header ──────────────────────────────────────────────────── -->
-    <theme:organism.siteHeader
-        siteName="{settings.site.name}"
-        rootPageUid="{settings.rootPageUid}"
-        navigationPages="{settings.navigationPages}"
-        logoSrc="{settings.site.logoSrc}"
-        showActions="{settings.header.showActions}"
-    />
+    <!--
+        In edit mode the header loses its sticky positioning so the
+        visual-editor toolbar remains accessible at the top of the viewport.
+    -->
+    <div class="site-header-wrapper{ve:editMode(then: ' site-header-wrapper--edit-mode')}">
+        <theme:organism.siteHeader
+            siteName="{settings.site.name}"
+            rootPageUid="{settings.rootPageUid}"
+            navigationPages="{settings.navigationPages}"
+            logoSrc="{settings.site.logoSrc}"
+            showActions="{settings.header.showActions}"
+        />
+    </div>
 
     <!-- ── Main Content ─────────────────────────────────────────────────── -->
     <main id="main-content" class="container section">
@@ -41,16 +56,27 @@
             <f:then>
                 <div class="sidebar-layout">
                     <div class="main-grid">
-                        <f:cObject typoscriptObjectPath="lib.content" />
+                        <!--
+                            ve:mark.contentArea marks colPos 0 as a visual-editor
+                            drop zone. Editors can add, reorder, and delete content
+                            elements directly in the frontend when logged in.
+                        -->
+                        <ve:mark.contentArea colPos="0">
+                            <f:cObject typoscriptObjectPath="lib.content" />
+                        </ve:mark.contentArea>
                     </div>
                     <aside class="sidebar">
-                        <f:cObject typoscriptObjectPath="lib.sidebar" />
+                        <ve:mark.contentArea colPos="1">
+                            <f:cObject typoscriptObjectPath="lib.sidebar" />
+                        </ve:mark.contentArea>
                     </aside>
                 </div>
             </f:then>
             <f:else>
                 <div class="main-grid">
-                    <f:cObject typoscriptObjectPath="lib.content" />
+                    <ve:mark.contentArea colPos="0">
+                        <f:cObject typoscriptObjectPath="lib.content" />
+                    </ve:mark.contentArea>
                 </div>
             </f:else>
         </f:if>
