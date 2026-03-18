@@ -27,6 +27,7 @@ dedicated backend modules for TCA record types.
 
    Introduction
    Installation
+   SiteSet
    Configuration
    StyleSheets
    Components

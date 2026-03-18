@@ -1,0 +1,241 @@
+# =============================================================================
+# maispace/theme — Site Settings Definitions
+# =============================================================================
+# Settings defined here are editable in the TYPO3 backend under
+# "Site Management > Sites > <your site> > Settings".
+#
+# They are automatically available as TypoScript constants under the same
+# dotted identifier, e.g. {$maispace.theme.colors.primary}.
+#
+# The site set's setup.typoscript maps these constants to:
+#   - page.10.settings.*  — Fluid template variables
+#   - page.headerData.100 — Inline <style> block with CSS custom properties
+#   - Backend theme       — Via BackendThemeFromSiteSettings middleware
+# =============================================================================
+
+categories:
+  maispace.theme:
+    label: 'maispace Theme'
+  maispace.theme.site:
+    label: 'Site Identity'
+    parent: maispace.theme
+  maispace.theme.colors:
+    label: 'Color Scheme'
+    parent: maispace.theme
+  maispace.theme.typography:
+    label: 'Typography'
+    parent: maispace.theme
+  maispace.theme.layout:
+    label: 'Layout'
+    parent: maispace.theme
+  maispace.theme.backend:
+    label: 'Backend Theme'
+    parent: maispace.theme
+
+# -----------------------------------------------------------------------------
+# Site Identity
+# -----------------------------------------------------------------------------
+
+maispace.theme.site.name:
+  label: 'Site name'
+  description: 'Displayed in the browser tab title and the footer copyright notice. Used as a fallback when no logo image is configured.'
+  category: maispace.theme.site
+  type: string
+  default: 'TYPO3 Site'
+
+maispace.theme.site.logoSrc:
+  label: 'Frontend logo'
+  description: 'Path to the logo image shown in the site header. Accepts EXT: paths (e.g. EXT:my_site/Resources/Public/Images/logo.svg) or fileadmin paths. Leave empty to show the site name as text.'
+  category: maispace.theme.site
+  type: string
+  default: ''
+
+# -----------------------------------------------------------------------------
+# Color Scheme
+# Each value is injected as a CSS custom property on :root, overriding the
+# SCSS bundle defaults at runtime without recompilation.
+# -----------------------------------------------------------------------------
+
+maispace.theme.colors.primary:
+  label: 'Primary color'
+  description: 'Main brand color. Used for primary buttons, active navigation links, and focus indicators. Must be a valid CSS color value (e.g. #2563eb or rgb(37 99 235)).'
+  category: maispace.theme.colors
+  type: color
+  default: '#2563eb'
+
+maispace.theme.colors.primaryHover:
+  label: 'Primary color (hover)'
+  description: 'Darker shade of the primary color shown on hover states for primary buttons and interactive elements.'
+  category: maispace.theme.colors
+  type: color
+  default: '#1d4ed8'
+
+maispace.theme.colors.secondary:
+  label: 'Secondary color'
+  description: 'Supporting brand color. Used for secondary buttons, secondary text, and muted accents.'
+  category: maispace.theme.colors
+  type: color
+  default: '#64748b'
+
+maispace.theme.colors.secondaryHover:
+  label: 'Secondary color (hover)'
+  description: 'Darker shade of the secondary color shown on hover states.'
+  category: maispace.theme.colors
+  type: color
+  default: '#475569'
+
+maispace.theme.colors.accent:
+  label: 'Accent color'
+  description: 'Highlight color for badges, tags, and decorative elements that need to stand out from the primary palette.'
+  category: maispace.theme.colors
+  type: color
+  default: '#f59e0b'
+
+maispace.theme.colors.text:
+  label: 'Body text color'
+  description: 'Default foreground color for body copy and headings on light backgrounds.'
+  category: maispace.theme.colors
+  type: color
+  default: '#191919'
+
+maispace.theme.colors.background:
+  label: 'Page background color'
+  description: 'Background color of the outermost page canvas (the <body> element).'
+  category: maispace.theme.colors
+  type: color
+  default: '#ffffff'
+
+maispace.theme.colors.surface:
+  label: 'Surface color'
+  description: 'Background color for raised surfaces such as cards, sidebar panels, and modal dialogs.'
+  category: maispace.theme.colors
+  type: color
+  default: '#f3f3f3'
+
+maispace.theme.colors.border:
+  label: 'Border color'
+  description: 'Default color for dividers, input borders, and card outlines.'
+  category: maispace.theme.colors
+  type: color
+  default: '#d1d5db'
+
+# -----------------------------------------------------------------------------
+# Typography
+# -----------------------------------------------------------------------------
+
+maispace.theme.typography.fontFamilyBase:
+  label: 'Body font family'
+  description: 'CSS font-family stack for body text and UI elements. Use a comma-separated list of font names, e.g. "''Inter'', system-ui, sans-serif". Self-hosted fonts must be loaded separately (e.g. via StyleSheets.php).'
+  category: maispace.theme.typography
+  type: string
+  default: 'system-ui, -apple-system, sans-serif'
+
+# -----------------------------------------------------------------------------
+# Layout
+# -----------------------------------------------------------------------------
+
+maispace.theme.layout.rootPageUid:
+  label: 'Root page UID'
+  description: 'UID of the site root page. Used as the link target for the header logo.'
+  category: maispace.theme.layout
+  type: int
+  default: 1
+
+maispace.theme.layout.borderRadius:
+  label: 'Border radius'
+  description: 'Default corner rounding radius applied to cards, buttons, and images. Use any valid CSS length value, e.g. 0.5rem, 8px, or 0 to disable rounding.'
+  category: maispace.theme.layout
+  type: string
+  default: '0.5rem'
+
+maispace.theme.layout.maxWidth:
+  label: 'Maximum content width'
+  description: 'Maximum width of the page wrapper. Use any valid CSS length value, e.g. 1400px or 90rem.'
+  category: maispace.theme.layout
+  type: string
+  default: '1400px'
+
+maispace.theme.layout.sidebar:
+  label: 'Enable sidebar layout'
+  description: 'When enabled, the default page template renders a two-column layout with a main content area (colPos 0) and a sidebar (colPos 1).'
+  category: maispace.theme.layout
+  type: bool
+  default: false
+
+maispace.theme.layout.showHeaderActions:
+  label: 'Show header actions slot'
+  description: 'When enabled, the site header renders its "actions" named slot, allowing additional markup (e.g. language switcher, login button) to be injected.'
+  category: maispace.theme.layout
+  type: bool
+  default: false
+
+maispace.theme.layout.showFooterNav:
+  label: 'Show footer navigation'
+  description: 'When enabled, the site footer renders its "nav" named slot for a footer navigation menu.'
+  category: maispace.theme.layout
+  type: bool
+  default: true
+
+maispace.theme.layout.footerColumns:
+  label: 'Show footer columns'
+  description: 'When enabled, the site footer renders its "columns" named slot inside an auto-grid container for multi-column footer content.'
+  category: maispace.theme.layout
+  type: bool
+  default: false
+
+# -----------------------------------------------------------------------------
+# Backend Theme
+# Configured once per instance via the site settings of any site that includes
+# this set. The BackendThemeFromSiteSettings middleware picks up these values
+# and applies them globally to the TYPO3 backend login page and toolbar.
+# For multi-site installations, the first site with a non-empty loginLogo wins.
+# -----------------------------------------------------------------------------
+
+maispace.theme.backend.logo:
+  label: 'Backend toolbar logo'
+  description: 'Logo displayed in the top-left corner of the TYPO3 backend toolbar. Accepts EXT: or fileadmin paths. Recommended: SVG or PNG, max 500 × 120 px. Leave empty to keep the TYPO3 default.'
+  category: maispace.theme.backend
+  type: string
+  default: ''
+
+maispace.theme.backend.favicon:
+  label: 'Backend favicon'
+  description: 'Favicon shown in the browser tab when the TYPO3 backend is open. Accepts EXT: or fileadmin paths (.ico or .png). Leave empty to keep the TYPO3 default.'
+  category: maispace.theme.backend
+  type: string
+  default: ''
+
+maispace.theme.backend.loginLogo:
+  label: 'Login page logo'
+  description: 'Logo shown above the login form on the TYPO3 backend login page. Accepts EXT: or fileadmin paths. Recommended: SVG or PNG, max 300 px wide. Leave empty to keep the TYPO3 default.'
+  category: maispace.theme.backend
+  type: string
+  default: ''
+
+maispace.theme.backend.loginLogoAlt:
+  label: 'Login logo alt text'
+  description: 'Alternative text for the login page logo, used by screen readers. Should describe the logo, e.g. "Acme Corp".'
+  category: maispace.theme.backend
+  type: string
+  default: ''
+
+maispace.theme.backend.loginBackground:
+  label: 'Login page background image'
+  description: 'Full-bleed background image for the TYPO3 backend login page. Accepts EXT: or fileadmin paths. Recommended: JPEG, min 1920 × 1080 px. Leave empty for the default gradient.'
+  category: maispace.theme.backend
+  type: string
+  default: ''
+
+maispace.theme.backend.loginHighlightColor:
+  label: 'Login page accent color'
+  description: 'Accent color used for the primary button and focus rings on the TYPO3 backend login page. Should contrast well against the login background.'
+  category: maispace.theme.backend
+  type: color
+  default: '#2563eb'
+
+maispace.theme.backend.loginFootnote:
+  label: 'Login page footnote'
+  description: 'Short text displayed below the login form, typically a copyright notice, e.g. "© 2026 Acme Corp". Supports plain text only.'
+  category: maispace.theme.backend
+  type: string
+  default: ''
