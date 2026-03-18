@@ -26,11 +26,11 @@
 
         {namespace ve=TYPO3\CMS\VisualEditor\ViewHelpers}
         <theme:molecule.card
+            title="{data.header}"
             link="{data.header_link}"
             image="{data.assets -> f:first()}"
             imageAlt="{data.header}"
         >
-            <f:render partial="Header" arguments="{_all}" />
             <ve:render.text record="{data}" field="bodytext" />
         </theme:molecule.card>
 -->
