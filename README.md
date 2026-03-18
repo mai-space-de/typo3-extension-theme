@@ -5,23 +5,26 @@
 [![TYPO3](https://img.shields.io/badge/TYPO3-13.0%2B-orange)](https://typo3.org/)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
-This extension provides three things:
+This extension provides four things:
 
 1. **An ITCSS stylesheet bundle** — compiled server-side via [`maispace/assets`](https://github.com/mai-space-de/typo3-extension-assets) using `<mai:scss>`, no Node.js required.
-2. **A loader mechanism** — auto-discovers `StyleSheets.php`, `JavaScripts.php`, and `BackendTheme.php` from all active TYPO3 packages and registers their assets automatically.
+2. **A loader mechanism** — auto-discovers `StyleSheets.php`, `JavaScripts.php`, `BackendTheme.php`, and `RecordModules.php` from all active TYPO3 packages and registers their assets/modules automatically.
 3. **Fluid Components** — a set of reusable `sitegeist/fluid-components` components (Button, Link, Card, Navigation, SiteHeader, SiteFooter) ready to use or override in any site package.
+4. **Record Modules** — register dedicated backend modules for specific TCA record types via `Configuration/RecordModules.php`, giving editors direct sidebar access to filtered record lists.
 
 ## Features
 
 - **ITCSS stylesheet bundle** — 22 SCSS partials across 8 layers (settings → utilities), derived from [minimal-stylesheet-maximum-impact](https://github.com/mai-space/minimal-stylesheet-maximum-impact)
 - **Full CSS Layers support** — the bundle and all partials are wrapped in `@layer` blocks for predictable specificity
 - **CSS custom properties throughout** — every design token is overridable without touching source files
+- **Automatic dark mode** — built-in `prefers-color-scheme: dark` overrides for all base tokens; works out of the box
 - **Atomic Design structure** — atoms, molecules, organisms, templates, and utilities
 - **Fluid Components** — six pre-built components (Atom/Button, Atom/Link, Molecule/Card, Organism/Navigation, Organism/SiteHeader, Organism/SiteFooter) backed by `sitegeist/fluid-components`
 - **Base Fluid page templates** — layout, templates, and partials ready to override in your site package
 - **Server-side SCSS compilation** — delegated to `maispace/assets` (`<mai:scss>` ViewHelper, powered by `scssphp`)
 - **Automated asset inclusion** — auto-registers stylesheets and JavaScripts from any active extension
 - **Backend theme management** — logos, favicon, and login-page customisation via configuration files
+- **Record Modules** — register dedicated backend modules for specific record types via `Configuration/RecordModules.php`
 - **Configuration merging** — merges configuration files from all active packages for modular theme development
 
 ## Installation
@@ -73,7 +76,16 @@ return [
     'frontend' => [
         'my_stylesheet' => [
             'source' => 'EXT:my_extension/Resources/Public/Css/style.css',
-            'site-identifier' => 'my_site' // Optional: filter by site identifier
+            'site-identifier' => 'my_site', // Optional: filter by site identifier
+            'attributes' => [],              // Optional: HTML attributes for <link>
+            'options' => [],                 // Optional: AssetCollector options
+        ],
+    ],
+    'backend' => [
+        'my_backend_stylesheet' => [
+            'source' => 'EXT:my_extension/Resources/Public/Css/backend.css',
+            'attributes' => [],
+            'options' => [],
         ],
     ],
 ];
@@ -86,7 +98,16 @@ return [
     'frontend' => [
         'my_script' => [
             'source' => 'EXT:my_extension/Resources/Public/Js/script.js',
-            'site-identifier' => 'my_site'
+            'site-identifier' => 'my_site',  // Optional: filter by site identifier
+            'attributes' => ['defer' => 'defer'],
+            'options' => [],
+        ],
+    ],
+    'backend' => [
+        'my_backend_script' => [
+            'source' => 'EXT:my_extension/Resources/Public/Js/backend.js',
+            'attributes' => [],
+            'options' => [],
         ],
     ],
 ];
@@ -97,12 +118,35 @@ return [
 <?php
 return [
     'backendLogo' => 'EXT:my_extension/Resources/Public/Icons/logo.svg',
+    'backendFavicon' => 'EXT:my_extension/Resources/Public/Icons/favicon.ico',
+    'loginLogo' => 'EXT:my_extension/Resources/Public/Images/login-logo.png',
+    'loginLogoAlt' => 'My Project',
     'loginBackgroundImage' => 'EXT:my_extension/Resources/Public/Images/login-bg.jpg',
     'loginHighlightColor' => '#2563eb',
+    'loginFootnote' => '© 2026 My Company',
 ];
 ```
 
 The `theme` extension will automatically find these files in any active package and apply the configurations.
+
+### RecordModules.php
+```php
+<?php
+return [
+    'sys_category' => [
+        'pids' => '1,42',         // Optional: restrict to these page IDs
+        'sorting' => 10,          // Optional: sort order in sidebar
+        'title' => 'Categories',  // Optional: defaults to TCA table title
+        'parent' => 'web',        // Optional: defaults to 'theme_records' group
+    ],
+    'tx_news_domain_model_news' => [
+        'pids' => '5',
+        'sorting' => 20,
+    ],
+];
+```
+
+Each entry creates a dedicated backend module showing a filtered record list for that table.
 
 ## Fluid Components
 
@@ -262,6 +306,23 @@ Resources/Private/
 Override any template by registering a higher-priority `templateRootPaths` / `partialRootPaths` key in your site package's TypoScript.
 
 ## Development
+
+```bash
+# Install dependencies
+composer install
+
+# Run all linting checks
+composer lint:check
+
+# Run tests
+composer test
+
+# Run individual checks
+composer check:phpstan         # Static analysis
+composer check:phpcs           # Code style
+composer check:typoscript      # TypoScript linting
+composer check:editorconfig    # EditorConfig compliance
+```
 
 -   **Backend Theme**: Call `GeneralUtility::makeInstance(BackendTheme::class)->registerBackendTheme()` in your `ext_localconf.php` to apply backend settings.
 

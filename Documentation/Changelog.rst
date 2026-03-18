@@ -5,6 +5,55 @@
 Changelog
 =========
 
+13.1.1 — 2026-03-15
+---------------------
+
+Added
+~~~~~
+
+* **Record Modules** — new ``Configuration/RecordModules.php`` auto-discovery
+  that allows any extension to register dedicated backend modules for specific
+  TCA record types:
+
+  * ``RecordModuleRegistrar`` service reads ``RecordModules.php`` from all
+    active extensions and builds TYPO3 backend module registrations
+  * ``RecordModuleController`` extends ``RecordListController`` to show a
+    filtered record list per table
+  * Configurable ``pids``, ``sorting``, ``title``, ``icon``, ``iconIdentifier``,
+    and ``parent`` per table entry
+  * Modules are placed in a custom "Records" sidebar group by default, or
+    under any existing module group via the ``parent`` option
+  * Language labels and Fluid template for the record list view
+
+Changed
+~~~~~~~
+
+* **Documentation** — comprehensive update of all documentation to reflect the
+  latest functionality:
+
+  * New :ref:`configuration` page covering the auto-discovery mechanism,
+    ``StyleSheets.php``, ``JavaScripts.php``, ``BackendTheme.php``, and
+    ``RecordModules.php`` file formats with full field references
+  * :ref:`stylesheets` page expanded with complete design token tables —
+    layout, button, image, and icon custom properties now fully documented
+  * Added CSS Layers section explaining the ``@layer`` order and
+    ``theme-critical`` layer
+  * Added dark mode section documenting the automatic
+    ``prefers-color-scheme: dark`` overrides
+  * Complete colour palette documented including ``--color-info``, neutral
+    palette (shadow, disabled), and link colour variables
+  * Full spacing scale including relative ``em`` units
+  * Full typography tokens including font weights, all fluid sizes, and
+    line heights
+  * :ref:`installation` updated with complete ``BackendTheme.php`` settings
+    (``loginLogo``, ``loginLogoAlt``, ``loginFootnote``) and new Record
+    Modules setup section
+  * :ref:`introduction` updated to describe all four feature concerns
+    including Record Modules
+  * README updated with complete configuration examples (``attributes``,
+    ``options``, backend sections), dark mode feature, Record Modules
+    usage example, and development commands
+
 13.1.0 — 2026-03-10
 ---------------------
 

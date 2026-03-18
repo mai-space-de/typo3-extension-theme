@@ -5,7 +5,7 @@
 Introduction
 ============
 
-**maispace/theme** handles three complementary concerns in a TYPO3 13 project:
+**maispace/theme** handles four complementary concerns in a TYPO3 13 project:
 
 * **Asset loading** — auto-discovers ``StyleSheets.php`` and ``JavaScripts.php``
   configuration files from every active TYPO3 package and registers the listed
@@ -13,6 +13,11 @@ Introduction
 
 * **Backend theming** — reads ``BackendTheme.php`` from active packages and
   applies logo, favicon, and login-page overrides to the TYPO3 backend.
+
+* **Record Modules** — reads ``RecordModules.php`` from active packages and
+  dynamically registers dedicated backend modules for specific TCA record
+  types. Editors get direct sidebar access to filtered record lists without
+  navigating through the generic List module.
 
 * **Fluid Components** — ships six pre-built `sitegeist/fluid-components`_
   components (Button, Link, Card, Navigation, SiteHeader, SiteFooter) that
@@ -34,9 +39,16 @@ Features
   (settings → utilities). Compiled server-side by `maispace/assets`_ using
   ``scssphp``; no Node.js build pipeline required.
 
+* **CSS Layers** — the bundle declares an explicit ``@layer`` order for
+  predictable specificity. Downstream stylesheets that declare their own layers
+  after the theme layers will always win.
+
 * **CSS custom properties throughout** — every design token (colour, spacing,
   typography, component sizing) is exposed as a ``--variable`` that can be
   overridden in ``:root`` or any scoping selector.
+
+* **Automatic dark mode** — built-in ``prefers-color-scheme: dark`` overrides
+  for all base tokens. No extra configuration required.
 
 * **Atomic Design structure** — layers map to *settings*, *generic*, *atoms*,
   *molecules*, *organisms*, *templates*, and *utilities*, making it trivial to
@@ -59,6 +71,11 @@ Features
 * **Backend theme customisation** — logos, favicon, login background, and
   highlight colour are all configurable through ``Configuration/BackendTheme.php``
   in any active extension.
+
+* **Record Modules** — register dedicated backend modules for specific TCA
+  record types via ``Configuration/RecordModules.php``. Editors get direct
+  sidebar access to filtered record lists without navigating through the
+  generic List module.
 
 .. _maispace/assets: https://github.com/mai-space-de/typo3-extension-assets
 
