@@ -5,15 +5,19 @@
 [![TYPO3](https://img.shields.io/badge/TYPO3-13.0%2B-orange)](https://typo3.org/)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
-This extension provides four things:
+This extension provides five things:
 
-1. **An ITCSS stylesheet bundle** — compiled server-side via [`maispace/assets`](https://github.com/mai-space-de/typo3-extension-assets) using `<mai:scss>`, no Node.js required.
-2. **A loader mechanism** — auto-discovers `StyleSheets.php`, `JavaScripts.php`, `BackendTheme.php`, and `RecordModules.php` from all active TYPO3 packages and registers their assets/modules automatically.
-3. **Fluid Components** — a set of reusable `sitegeist/fluid-components` components (Button, Link, Card, Navigation, SiteHeader, SiteFooter) ready to use or override in any site package.
-4. **Record Modules** — register dedicated backend modules for specific TCA record types via `Configuration/RecordModules.php`, giving editors direct sidebar access to filtered record lists.
+1. **A site set** — `maispace/theme-base` exposes all theme options (colors, logos, typography, layout, backend theming) as TYPO3 site settings, editable in the backend with no code changes required.
+2. **An ITCSS stylesheet bundle** — compiled server-side via [`maispace/assets`](https://github.com/mai-space-de/typo3-extension-assets) using `<mai:scss>`, no Node.js required. Site settings inject CSS custom property overrides at runtime, so color changes take effect without recompiling SCSS.
+3. **A loader mechanism** — auto-discovers `StyleSheets.php`, `JavaScripts.php`, `BackendTheme.php`, and `RecordModules.php` from all active TYPO3 packages and registers their assets/modules automatically.
+4. **Fluid Components** — a set of reusable `sitegeist/fluid-components` components (Button, Link, Card, Navigation, SiteHeader, SiteFooter) ready to use or override in any site package.
+5. **Record Modules** — register dedicated backend modules for specific TCA record types via `Configuration/RecordModules.php`, giving editors direct sidebar access to filtered record lists.
 
 ## Features
 
+- **Site set (`maispace/theme-base`)** — add one line to your site's `config.yaml` to unlock a full settings editor for colors, logos, typography, layout, and backend theming; no TypoScript or PHP knowledge needed
+- **CSS custom property injection** — site settings are rendered as an inline `<style>` block at `page.headerData.100`, overriding design tokens at runtime so cache-flush is all that is required after a color change
+- **Backend theming via site settings** — logos, favicon, login background, accent color and footnote are all configurable through the settings editor and applied via a PSR-15 middleware
 - **ITCSS stylesheet bundle** — 22 SCSS partials across 8 layers (settings → utilities), derived from [minimal-stylesheet-maximum-impact](https://github.com/mai-space/minimal-stylesheet-maximum-impact)
 - **Full CSS Layers support** — the bundle and all partials are wrapped in `@layer` blocks for predictable specificity
 - **CSS custom properties throughout** — every design token is overridable without touching source files
@@ -40,6 +44,20 @@ Import TypoScript in your site package's setup file:
 @import 'EXT:theme/Configuration/TypoScript/setup.typoscript'
 ```
 
+### Site set (recommended)
+
+Add the site set to your site configuration to enable the settings editor:
+
+```yaml
+# config/sites/my-site/config.yaml
+sets:
+  - maispace/theme-base
+```
+
+Then open **Site Management > Sites > \<your site\> > Settings** in the TYPO3
+backend to configure logos, colors, typography, layout, and backend theme.
+All changes take effect after clearing the page cache.
+
 ### Critical CSS & Layers
 
 The theme is pre-configured to work with `maispace/assets`'s critical CSS extraction. It defines a dedicated CSS layer `theme-critical` in its TypoScript setup:
@@ -49,6 +67,44 @@ plugin.tx_maispace_assets.criticalCss.layer = theme-critical
 ```
 
 This ensures that any inlined critical CSS (extracted via `maispace:assets:critical:extract`) is wrapped in `@layer theme-critical { ... }`, providing predictable specificity when used alongside the theme's main SCSS bundle.
+
+## Site settings
+
+When the `maispace/theme-base` site set is active, the following settings are
+available in the TYPO3 backend settings editor:
+
+| Category | Setting | Type | Description |
+|----------|---------|------|-------------|
+| Site Identity | `maispace.theme.site.name` | string | Site name (titles, footer copyright) |
+| Site Identity | `maispace.theme.site.logoSrc` | string | Frontend logo path (`EXT:` or `fileadmin`) |
+| Color Scheme | `maispace.theme.colors.primary` | color | Primary brand color (`--color-primary`) |
+| Color Scheme | `maispace.theme.colors.primaryHover` | color | Primary hover (`--color-primary-hover`) |
+| Color Scheme | `maispace.theme.colors.secondary` | color | Secondary color (`--color-secondary`) |
+| Color Scheme | `maispace.theme.colors.secondaryHover` | color | Secondary hover (`--color-secondary-hover`) |
+| Color Scheme | `maispace.theme.colors.accent` | color | Accent color (`--color-accent`) |
+| Color Scheme | `maispace.theme.colors.text` | color | Body text (`--color-text`) |
+| Color Scheme | `maispace.theme.colors.background` | color | Page background (`--color-background`) |
+| Color Scheme | `maispace.theme.colors.surface` | color | Card/panel background (`--color-surface`) |
+| Color Scheme | `maispace.theme.colors.border` | color | Borders and dividers (`--color-border`) |
+| Typography | `maispace.theme.typography.fontFamilyBase` | string | CSS font-family stack |
+| Layout | `maispace.theme.layout.rootPageUid` | int | Root page UID for logo link |
+| Layout | `maispace.theme.layout.borderRadius` | string | Corner radius (`--layout-radius`) |
+| Layout | `maispace.theme.layout.maxWidth` | string | Max page width (`--layout-width-max`) |
+| Layout | `maispace.theme.layout.sidebar` | bool | Enable sidebar layout |
+| Layout | `maispace.theme.layout.showHeaderActions` | bool | Show header actions slot |
+| Layout | `maispace.theme.layout.showFooterNav` | bool | Show footer navigation slot |
+| Layout | `maispace.theme.layout.footerColumns` | bool | Show footer columns slot |
+| Backend Theme | `maispace.theme.backend.logo` | string | Backend toolbar logo |
+| Backend Theme | `maispace.theme.backend.favicon` | string | Backend favicon |
+| Backend Theme | `maispace.theme.backend.loginLogo` | string | Login page logo |
+| Backend Theme | `maispace.theme.backend.loginLogoAlt` | string | Login logo alt text |
+| Backend Theme | `maispace.theme.backend.loginBackground` | string | Login background image |
+| Backend Theme | `maispace.theme.backend.loginHighlightColor` | color | Login accent color |
+| Backend Theme | `maispace.theme.backend.loginFootnote` | string | Login page footnote |
+
+Color settings are injected as CSS custom properties on `:root` via
+`page.headerData.100`, overriding the SCSS bundle defaults without recompilation.
+All `{$maispace.theme.*}` constants are also available in your own TypoScript setup.
 
 ## Stylesheet customisation
 

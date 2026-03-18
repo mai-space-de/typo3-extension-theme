@@ -41,11 +41,47 @@ The theme setup registers the ``page = PAGE`` object with the default Fluid
 template. If you already define your own ``page`` object, import the theme
 setup before it so that your page object takes precedence.
 
-Backend theme (optional)
-------------------------
+Site set (recommended)
+----------------------
 
-Call ``BackendTheme::registerBackendTheme()`` inside your site package's
-``ext_localconf.php`` to apply backend logo and login-page settings:
+Add the ``maispace/theme-base`` site set as a dependency of your site to
+unlock all theme settings in the TYPO3 backend settings editor (logos, colors,
+typography, layout):
+
+.. code-block:: yaml
+
+   # config/sites/my-site/config.yaml
+   sets:
+     - maispace/theme-base
+
+Once the set is active, open :guilabel:`Site Management > Sites > <your site> >
+Settings` to configure the theme. All settings take effect after clearing the
+page cache — no SCSS recompilation required.
+
+See :ref:`site-set` for the complete reference of all available settings and a
+detailed explanation of how they flow into TypoScript, Fluid, and CSS.
+
+Backend theme via site settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When the ``maispace/theme-base`` site set is active, backend logos and login-page
+customisation are configured through the same settings editor under the
+:guilabel:`Backend Theme` category. No PHP file is required.
+
+.. code-block:: yaml
+
+   # config/sites/my-site/settings.yaml (managed via TYPO3 backend)
+   maispace.theme.backend.loginLogo: 'EXT:my_site/Resources/Public/Images/login-logo.png'
+   maispace.theme.backend.loginHighlightColor: '#e11d48'
+   maispace.theme.backend.loginFootnote: '© 2026 Acme Corp'
+
+Backend theme via PHP (alternative)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For existing installations or multi-site setups that need an explicit global
+backend theme, continue using ``Configuration/BackendTheme.php``. Call
+``BackendTheme::registerBackendTheme()`` inside your site package's
+``ext_localconf.php``:
 
 .. code-block:: php
 

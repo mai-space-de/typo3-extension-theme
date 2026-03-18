@@ -13,3 +13,5 @@ services:
         identifier: 'Maispace/StyleSheetConfigurationsListener'
   Maispace\Theme\Controller\RecordModuleController:
     public: true
+  Maispace\Theme\Middleware\BackendThemeFromSiteSettings:
+    public: true
