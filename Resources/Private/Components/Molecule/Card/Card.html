@@ -18,6 +18,21 @@
       <theme:molecule.card title="TYPO3" link="https://typo3.org" image="..." imageAlt="TYPO3 Logo">
           The professional, flexible Content Management System.
       </theme:molecule.card>
+
+    Visual Editor (ve:render.text):
+      When rendering a Card from a TCA content element record, pass the field
+      output through ve:render.text so editors can click-to-edit inline.
+      Example in a content element template:
+
+        {namespace ve=TYPO3\CMS\VisualEditor\ViewHelpers}
+        <theme:molecule.card
+            link="{data.header_link}"
+            image="{data.assets -> f:first()}"
+            imageAlt="{data.header}"
+        >
+            <f:render partial="Header" arguments="{_all}" />
+            <ve:render.text record="{data}" field="bodytext" />
+        </theme:molecule.card>
 -->
 <fc:component>
     <fc:param name="title" type="string" />
