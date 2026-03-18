@@ -36,7 +36,7 @@ Enabling the site set
 ---------------------
 
 Open ``config/sites/<your-site>/config.yaml`` and add ``maispace/theme-base``
-to the ``dependencies`` array:
+to the ``sets`` array:
 
 .. code-block:: yaml
 
