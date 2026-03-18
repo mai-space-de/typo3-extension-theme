@@ -40,7 +40,7 @@
         In edit mode the header loses its sticky positioning so the
         visual-editor toolbar remains accessible at the top of the viewport.
     -->
-    <header class="site-header-wrapper{ve:editMode(then: ' site-header-wrapper--edit-mode')}">
+    <div class="site-header-wrapper{ve:editMode(then: ' site-header-wrapper--edit-mode')}">
         <theme:organism.siteHeader
             siteName="{settings.site.name}"
             rootPageUid="{settings.rootPageUid}"
@@ -48,7 +48,7 @@
             logoSrc="{settings.site.logoSrc}"
             showActions="{settings.header.showActions}"
         />
-    </header>
+    </div>
 
     <!-- ── Main Content ─────────────────────────────────────────────────── -->
     <main id="main-content" class="container section">
