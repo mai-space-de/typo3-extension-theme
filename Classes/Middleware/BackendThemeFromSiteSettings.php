@@ -81,7 +81,8 @@ final class BackendThemeFromSiteSettings implements MiddlewareInterface
         $targetSite = null;
         foreach ($sites as $site) {
             $siteSettings = $site->getSettings();
-            $loginLogo = (string)($siteSettings->get('maispace.theme.backend.loginLogo') ?? '');
+            $loginLogoRaw = $siteSettings->get('maispace.theme.backend.loginLogo');
+            $loginLogo = is_string($loginLogoRaw) ? $loginLogoRaw : '';
             if ($loginLogo !== '') {
                 $targetSite = $site;
                 break;
@@ -93,14 +94,22 @@ final class BackendThemeFromSiteSettings implements MiddlewareInterface
         }
 
         $siteSettings = $targetSite->getSettings();
+        $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+        $extensions = (array)($typo3ConfVars['EXTENSIONS'] ?? []);
+        $backend = (array)($extensions['backend'] ?? []);
 
         foreach (self::SETTING_MAP as $settingKey => $confVarsKey) {
-            $value = (string)($siteSettings->get($settingKey) ?? '');
+            $rawValue = $siteSettings->get($settingKey);
+            $value = is_string($rawValue) ? $rawValue : '';
             if ($value === '') {
                 continue;
             }
 
-            $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['backend'][$confVarsKey] = $value;
+            $backend[$confVarsKey] = $value;
         }
+
+        $extensions['backend'] = $backend;
+        $typo3ConfVars['EXTENSIONS'] = $extensions;
+        $GLOBALS['TYPO3_CONF_VARS'] = $typo3ConfVars;
     }
 }
