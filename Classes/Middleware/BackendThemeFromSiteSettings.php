@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Maispace\Theme\Middleware;
 
@@ -77,7 +77,7 @@ final class BackendThemeFromSiteSettings implements MiddlewareInterface
         }
 
         // Use the first site that has an explicit loginLogo configured.
-        // Falls back to the first site overall if none have a logo set.
+        // If no site has a loginLogo set, no backend theming is applied.
         $targetSite = null;
         foreach ($sites as $site) {
             $siteSettings = $site->getSettings();
