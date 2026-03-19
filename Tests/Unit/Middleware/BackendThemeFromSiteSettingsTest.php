@@ -110,10 +110,10 @@ final class BackendThemeFromSiteSettingsTest extends TestCase
             'maispace' => [
                 'theme' => [
                     'backend' => [
-                        'loginLogo' => 'EXT:theme/Resources/Public/Images/login.png',
-                        'loginLogoAlt' => 'My Project',
+                        'loginLogo'           => 'EXT:theme/Resources/Public/Images/login.png',
+                        'loginLogoAlt'        => 'My Project',
                         'loginHighlightColor' => '#e11d48',
-                        'loginFootnote' => '© 2026 Acme Corp',
+                        'loginFootnote'       => '© 2026 Acme Corp',
                     ],
                 ],
             ],
@@ -148,8 +148,8 @@ final class BackendThemeFromSiteSettingsTest extends TestCase
                 'theme' => [
                     'backend' => [
                         'loginLogo' => 'EXT:theme/Resources/Public/Images/login.png',
-                        'logo' => '',
-                        'favicon' => '',
+                        'logo'      => '',
+                        'favicon'   => '',
                     ],
                 ],
             ],
@@ -192,7 +192,7 @@ final class BackendThemeFromSiteSettingsTest extends TestCase
             'maispace' => [
                 'theme' => [
                     'backend' => [
-                        'loginLogo' => 'EXT:site2/Resources/Public/Images/login.png',
+                        'loginLogo'     => 'EXT:site2/Resources/Public/Images/login.png',
                         'loginFootnote' => '© Site 2',
                     ],
                 ],
