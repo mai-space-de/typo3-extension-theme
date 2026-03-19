@@ -43,18 +43,19 @@ final class BackendThemeFromSiteSettings implements MiddlewareInterface
      * @var array<string, string>
      */
     private const SETTING_MAP = [
-        'maispace.theme.backend.logo'               => 'backendLogo',
-        'maispace.theme.backend.favicon'            => 'backendFavicon',
-        'maispace.theme.backend.loginLogo'          => 'loginLogo',
-        'maispace.theme.backend.loginLogoAlt'       => 'loginLogoAlt',
-        'maispace.theme.backend.loginBackground'    => 'loginBackgroundImage',
+        'maispace.theme.backend.logo'                => 'backendLogo',
+        'maispace.theme.backend.favicon'             => 'backendFavicon',
+        'maispace.theme.backend.loginLogo'           => 'loginLogo',
+        'maispace.theme.backend.loginLogoAlt'        => 'loginLogoAlt',
+        'maispace.theme.backend.loginBackground'     => 'loginBackgroundImage',
         'maispace.theme.backend.loginHighlightColor' => 'loginHighlightColor',
-        'maispace.theme.backend.loginFootnote'      => 'loginFootnote',
+        'maispace.theme.backend.loginFootnote'       => 'loginFootnote',
     ];
 
     public function __construct(
         private readonly SiteFinder $siteFinder,
-    ) {}
+    ) {
+    }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
