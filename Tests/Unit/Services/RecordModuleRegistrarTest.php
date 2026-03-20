@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Maispace\Theme\Tests\Unit\Services;
+namespace Maispace\MaiTheme\Tests\Unit\Services;
 
-use Maispace\Theme\Services\ActiveExtensionConfigurationLoader;
-use Maispace\Theme\Services\RecordModuleRegistrar;
+use Maispace\MaiTheme\Services\ActiveExtensionConfigurationLoader;
+use Maispace\MaiTheme\Services\RecordModuleRegistrar;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Maispace\Theme\Services;
+namespace Maispace\MaiTheme\Services;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

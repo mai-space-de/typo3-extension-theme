@@ -12,7 +12,7 @@ declare(strict_types = 1);
 return [
     'backend' => [
         'maispace/theme/backend-theme-from-site-settings' => [
-            'target' => \Maispace\Theme\Middleware\BackendThemeFromSiteSettings::class,
+            'target' => \Maispace\MaiTheme\Middleware\BackendThemeFromSiteSettings::class,
             'before' => [
                 'typo3/cms-backend/output-compression',
             ],

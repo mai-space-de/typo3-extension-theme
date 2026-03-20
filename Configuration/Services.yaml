@@ -3,7 +3,7 @@ services:
     autowire: true
     autoconfigure: true
     public: false
-  Maispace\Theme\EventListener\FrontendAssetConfigurationsListener:
+  Maispace\MaiTheme\EventListener\FrontendAssetConfigurationsListener:
     tags:
       - name: event.listener
         method: setJavaScriptConfiguration
@@ -11,7 +11,7 @@ services:
       - name: event.listener
         method: setStyleSheetConfiguration
         identifier: 'Maispace/StyleSheetConfigurationsListener'
-  Maispace\Theme\Controller\RecordModuleController:
+  Maispace\MaiTheme\Controller\RecordModuleController:
     public: true
-  Maispace\Theme\Middleware\BackendThemeFromSiteSettings:
+  Maispace\MaiTheme\Middleware\BackendThemeFromSiteSettings:
     public: true

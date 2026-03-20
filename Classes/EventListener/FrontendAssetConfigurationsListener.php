@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Maispace\Theme\EventListener;
+namespace Maispace\MaiTheme\EventListener;
 
-use Maispace\Theme\Services\ActiveExtensionConfigurationLoader;
+use Maispace\MaiTheme\Services\ActiveExtensionConfigurationLoader;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Page\AssetCollector;

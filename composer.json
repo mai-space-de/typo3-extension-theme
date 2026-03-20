@@ -30,6 +30,8 @@
     }
   },
   "require": {
+    "php": "^8.2",
+    "typo3/cms-core": "^13.4",
     "friendsoftypo3/visual-editor": "^1.0",
     "maispace/mai-assets": "^13.0",
     "sitegeist/fluid-components": "^3.0"

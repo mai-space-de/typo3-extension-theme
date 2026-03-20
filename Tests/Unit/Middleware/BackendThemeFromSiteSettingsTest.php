@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Maispace\Theme\Tests\Unit\Middleware;
+namespace Maispace\MaiTheme\Tests\Unit\Middleware;
 
-use Maispace\Theme\Middleware\BackendThemeFromSiteSettings;
+use Maispace\MaiTheme\Middleware\BackendThemeFromSiteSettings;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

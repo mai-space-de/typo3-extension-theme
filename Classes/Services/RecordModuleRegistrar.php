@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Maispace\Theme\Services;
+namespace Maispace\MaiTheme\Services;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -81,7 +81,7 @@ class RecordModuleRegistrar
                 'inheritNavigationComponentFromMainModule' => false,
                 'routes'                                   => [
                     '_default' => [
-                        'target' => \Maispace\Theme\Controller\RecordModuleController::class . '::mainAction',
+                        'target' => \Maispace\MaiTheme\Controller\RecordModuleController::class . '::mainAction',
                     ],
                 ],
                 'moduleData' => [

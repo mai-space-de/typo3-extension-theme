@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Maispace\Theme\Tests\Unit\Services;
+namespace Maispace\MaiTheme\Tests\Unit\Services;
 
-use Maispace\Theme\Services\ActiveExtensionConfigurationLoader;
+use Maispace\MaiTheme\Services\ActiveExtensionConfigurationLoader;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Package\PackageInterface;
 use TYPO3\CMS\Core\Package\PackageManager;
