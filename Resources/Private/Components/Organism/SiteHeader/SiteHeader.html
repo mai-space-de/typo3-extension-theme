@@ -15,10 +15,10 @@
 
     Named slot:
       actions – Content rendered inside .site-header-actions when showActions
-                is enabled. Pass it via <fc:pass slot="actions">…</fc:pass>.
+                is enabled. Pass it via <fc:content slot="actions">…</fc:content>.
 
     Usage:
-      {namespace theme=Maispace\Theme\Components}
+      {namespace theme=Maispace\MaiTheme\Components}
       <theme:organism.siteHeader
           siteName="{settings.site.name}"
           rootPageUid="{settings.rootPageUid}"
@@ -27,7 +27,7 @@
           showActions="{settings.header.showActions}"
       />
 -->
-{namespace theme=Maispace\Theme\Components}
+{namespace theme=Maispace\MaiTheme\Components}
 <fc:component>
     <fc:param name="siteName" type="string" />
     <fc:param name="rootPageUid" type="integer" />

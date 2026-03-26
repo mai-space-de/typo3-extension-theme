@@ -1,2 +1,4 @@
 name: maispace/theme-base
 label: 'maispace Theme Base'
+dependencies:
+  - maispace/base

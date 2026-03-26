@@ -1,0 +1,8 @@
+pids {
+    default {
+        home = 1
+        mainMenu = 2
+        metaMenu = 3
+        privacy = 6
+    }
+}

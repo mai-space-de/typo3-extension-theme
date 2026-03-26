@@ -1,0 +1,5 @@
+module {
+    tx_base {
+        settings < plugin.tx_maibase.settings
+    }
+}

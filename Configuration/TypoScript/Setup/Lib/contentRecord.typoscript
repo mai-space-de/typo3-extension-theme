@@ -1,0 +1,9 @@
+lib.contentRecord = RECORDS
+lib.contentRecord {
+    source {
+        data = current:1
+        intval = 1
+    }
+    dontCheckPid = 1
+    tables = tt_content
+}

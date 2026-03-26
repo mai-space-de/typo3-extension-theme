@@ -4,24 +4,22 @@
 # This file is automatically included as TypoScript setup for every TYPO3 site
 # that lists maispace/theme-base as a dependency in its site configuration.
 #
-# It maps site settings (configured in the TYPO3 backend under
-# "Site Management > Sites > <your site> > Settings") to:
-#
-#   1. page.10.settings.*  — Fluid template variables accessible as {settings.*}
-#   2. page.headerData.100 — Inline <style> block injecting CSS custom property
-#                            overrides, so that theme colors and spacing tokens
-#                            reflect the configured values without recompiling
-#                            the SCSS bundle.
+# It provides:
+#   1. @import of the full theme TypoScript (page renderer, lib, plugin settings)
+#   2. page.10.settings.* — overrides from site settings.yaml
+#   3. page.headerData.100 — inline <style> injecting CSS custom property overrides
 #
 # All {$maispace.theme.*} constants below are substituted at TypoScript parse
 # time with the values from the site's settings.yaml (or the defaults from
 # settings.definitions.yaml when no override is set).
 # =============================================================================
 
+@import 'EXT:mai_theme/Configuration/TypoScript/setup.typoscript'
+
 # -----------------------------------------------------------------------------
 # 1. Fluid template settings
-#    Passes site settings into Fluid templates as {settings.*}.
-#    These override the hardcoded defaults in the extension's setup.typoscript.
+#    Overrides the hardcoded defaults from setup.typoscript with values from
+#    the site's settings.yaml.
 # -----------------------------------------------------------------------------
 page.10.settings {
     site {

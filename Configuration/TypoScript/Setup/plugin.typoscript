@@ -1,0 +1,12 @@
+plugin {
+    tx_base {
+        settings {
+            pids {
+                home = {$pids.default.home}
+                mainMenu = {$pids.default.mainMenu}
+                metaMenu = {$pids.default.metaMenu}
+                privacy = {$pids.default.privacy}
+            }
+        }
+    }
+}

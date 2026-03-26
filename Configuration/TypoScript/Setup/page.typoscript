@@ -1,0 +1,73 @@
+# -----------------------------------------------------------------------------
+# SCSS compiler configuration
+# -----------------------------------------------------------------------------
+plugin.tx_maispace_assets {
+    scss {
+        defaultImportPaths = EXT:mai_theme/Resources/Private/StyleSheets
+    }
+
+    criticalCss {
+        layer = theme-critical
+    }
+}
+
+# -----------------------------------------------------------------------------
+# Page object
+# -----------------------------------------------------------------------------
+page = PAGE
+page {
+    typeNum = 0
+
+    config < config
+
+    10 = FLUIDTEMPLATE
+    10 {
+        # Template roots — lower numbers have lower priority.
+        # Downstream extensions override by registering a higher numeric key.
+        templateRootPaths {
+            0 = EXT:mai_theme/Resources/Private/Templates/
+        }
+
+        partialRootPaths {
+            0 = EXT:mai_theme/Resources/Private/Partials/
+        }
+
+        layoutRootPaths {
+            0 = EXT:mai_theme/Resources/Private/Layouts/
+        }
+
+        # Default template file (can be overridden per page via page properties).
+        file = EXT:mai_theme/Resources/Private/Templates/Page/Default.html
+
+        # Variables available in all templates.
+        variables {
+            dataPage = TEXT
+            dataPage.data = page:uid
+        }
+
+        # TypoScript settings passed to {settings} in Fluid.
+        settings {
+            site {
+                name = TYPO3 Site
+                logoSrc =
+            }
+
+            rootPageUid = 1
+
+            layout {
+                sidebar = 0
+            }
+
+            header {
+                showActions = 0
+            }
+
+            footer {
+                showNav = 1
+                columns = 0
+            }
+        }
+    }
+}
+
+@import 'EXT:mai_theme/Configuration/TypoScript/Setup/Page/body.typoscript'
