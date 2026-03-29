@@ -4,9 +4,6 @@ categories:
   mai-theme.general:
     label: 'General'
     parent: mai-theme
-  mai-theme.backend:
-    label: 'Backend'
-    parent: mai-theme
   mai-theme.frontend:
     label: 'Frontend'
     parent: mai-theme
@@ -37,67 +34,6 @@ settings:
     default: ''
     type: string
     category: mai-theme.general
-
-  # ===========================================================================
-  # BACKEND
-  # Keys are forwarded to $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['backend']
-  # by BackendTheme::registerBackendTheme() via ActiveExtensionConfigurationLoader.
-  # ===========================================================================
-
-  backend.logo:
-    label: 'Backend Logo'
-    description: 'Replaces the default TYPO3 logo in the backend top bar (EXT: or fileadmin path).'
-    default: ''
-    type: string
-    category: mai-theme.backend
-
-  backend.favicon:
-    label: 'Backend Favicon'
-    description: 'Favicon shown in the browser tab when the TYPO3 backend is open.'
-    default: ''
-    type: string
-    category: mai-theme.backend
-
-  backend.accentColor:
-    label: 'Backend Accent Color'
-    description: 'Primary highlight color for the TYPO3 backend UI. Also sets --icon-color-accent on extension icons.'
-    default: '#FF8700'
-    type: color
-    category: mai-theme.backend
-
-  backend.login.logo:
-    label: 'Login Page Logo'
-    description: 'Logo displayed on the TYPO3 backend login page (EXT: or fileadmin path).'
-    default: ''
-    type: string
-    category: mai-theme.backend
-
-  backend.login.logoAlt:
-    label: 'Login Page Logo Alt Text'
-    default: ''
-    type: string
-    category: mai-theme.backend
-
-  backend.login.backgroundImage:
-    label: 'Login Page Background Image'
-    description: 'Full-page background image on the backend login screen (EXT: or fileadmin path).'
-    default: ''
-    type: string
-    category: mai-theme.backend
-
-  backend.login.highlightColor:
-    label: 'Login Page Highlight Color'
-    description: 'Accent color applied to the login form highlight and call-to-action button.'
-    default: '#FF8700'
-    type: color
-    category: mai-theme.backend
-
-  backend.login.footnote:
-    label: 'Login Page Footnote'
-    description: 'Small text shown at the bottom of the backend login screen.'
-    default: ''
-    type: string
-    category: mai-theme.backend
 
   # ===========================================================================
   # FRONTEND — Colour palette
