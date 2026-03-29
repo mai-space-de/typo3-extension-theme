@@ -2,7 +2,6 @@ lib {
     contentElement {
         settings {
             pids {
-                home = {$pids.default.home}
                 homepage = {$pageUids.homepage}
                 imprint = {$pageUids.imprint}
                 dataProtectionPolicy = {$pageUids.dataProtectionPolicy}

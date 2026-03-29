@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-03-29T20:07:00Z" product-name="mai-theme">
+        <header/>
+        <body>
+            <!-- Categories -->
+            <trans-unit id="categories.mai-theme">
+                <source>Theme</source>
+            </trans-unit>
+            <trans-unit id="categories.mai-theme.general">
+                <source>General</source>
+            </trans-unit>
+            <trans-unit id="categories.mai-theme.frontend">
+                <source>Frontend</source>
+            </trans-unit>
+            <trans-unit id="categories.mai-theme.pageUids">
+                <source>Page Uids</source>
+            </trans-unit>
+
+            <!-- General -->
+            <trans-unit id="settings.general.site.logo">
+                <source>Site Logo</source>
+            </trans-unit>
+            <trans-unit id="settings.description.general.site.logo">
+                <source>Path to the main site logo used in frontend templates (EXT: or fileadmin path).</source>
+            </trans-unit>
+            <trans-unit id="settings.general.site.logoAlt">
+                <source>Site Logo Alt Text</source>
+            </trans-unit>
+            <trans-unit id="settings.description.general.site.logoAlt">
+                <source>Alt attribute for the site logo image.</source>
+            </trans-unit>
+            <trans-unit id="settings.general.site.favicon">
+                <source>Favicon</source>
+            </trans-unit>
+            <trans-unit id="settings.description.general.site.favicon">
+                <source>Path to the public favicon (EXT: or fileadmin path).</source>
+            </trans-unit>
+
+            <!-- Frontend — Colour palette -->
+            <trans-unit id="settings.frontend.color.text">
+                <source>Text Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.text">
+                <source>--color-text</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.surface">
+                <source>Surface Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.surface">
+                <source>--color-surface — card and section backgrounds.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.background">
+                <source>Page Background</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.background">
+                <source>--color-background</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.primary">
+                <source>Primary Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.primary">
+                <source>--color-primary</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.primaryHover">
+                <source>Primary Hover Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.primaryHover">
+                <source>--color-primary-hover</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.secondary">
+                <source>Secondary Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.secondary">
+                <source>--color-secondary</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.secondaryHover">
+                <source>Secondary Hover Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.secondaryHover">
+                <source>--color-secondary-hover</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.accent">
+                <source>Accent Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.accent">
+                <source>--color-accent</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.success">
+                <source>Success Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.success">
+                <source>--color-success</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.warning">
+                <source>Warning Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.warning">
+                <source>--color-warning</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.danger">
+                <source>Danger Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.danger">
+                <source>--color-danger</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.info">
+                <source>Info Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.info">
+                <source>--color-info</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.border">
+                <source>Border Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.border">
+                <source>--color-border</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.disabledBg">
+                <source>Disabled Background</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.disabledBg">
+                <source>--color-disabled-bg</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.color.disabledText">
+                <source>Disabled Text</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.color.disabledText">
+                <source>--color-disabled-text</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.dark.colorText">
+                <source>Dark Mode — Text Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.dark.colorText">
+                <source>--color-text (prefers-color-scheme: dark)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.dark.colorSurface">
+                <source>Dark Mode — Surface Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.dark.colorSurface">
+                <source>--color-surface (prefers-color-scheme: dark)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.dark.colorBackground">
+                <source>Dark Mode — Page Background</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.dark.colorBackground">
+                <source>--color-background (prefers-color-scheme: dark)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.dark.colorBorder">
+                <source>Dark Mode — Border Color</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.dark.colorBorder">
+                <source>--color-border (prefers-color-scheme: dark)</source>
+            </trans-unit>
+
+            <!-- Frontend — Spacing scale -->
+            <trans-unit id="settings.frontend.space.2xs">
+                <source>Space 2xs</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.space.2xs">
+                <source>--space-2xs (2 px)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.space.xs">
+                <source>Space xs</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.space.xs">
+                <source>--space-xs (4 px)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.space.sm">
+                <source>Space sm</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.space.sm">
+                <source>--space-sm (8 px)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.space.md">
+                <source>Space md</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.space.md">
+                <source>--space-md (16 px)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.space.lg">
+                <source>Space lg</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.space.lg">
+                <source>--space-lg (24 px)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.space.xl">
+                <source>Space xl</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.space.xl">
+                <source>--space-xl (32 px)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.space.2xl">
+                <source>Space 2xl</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.space.2xl">
+                <source>--space-2xl (48 px)</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.space.3xl">
+                <source>Space 3xl</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.space.3xl">
+                <source>--space-3xl (64 px)</source>
+            </trans-unit>
+
+            <!-- Frontend — Layout -->
+            <trans-unit id="settings.frontend.layout.widthMin">
+                <source>Min Layout Width</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.widthMin">
+                <source>--layout-width-min</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.widthMax">
+                <source>Max Layout Width</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.widthMax">
+                <source>--layout-width-max — outer wrapper constraint.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.contentWidth">
+                <source>Content Column Width</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.contentWidth">
+                <source>--layout-content-width</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.cardWidth">
+                <source>Card Width</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.cardWidth">
+                <source>--layout-card-width</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.textWidth">
+                <source>Prose Text Width</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.textWidth">
+                <source>--layout-text-width — optimal line length for body copy.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.sidebarMain">
+                <source>Sidebar Main Column</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.sidebarMain">
+                <source>--layout-sidebar-main</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.sidebarAside">
+                <source>Sidebar Aside Column</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.sidebarAside">
+                <source>--layout-sidebar-aside</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.gridGap">
+                <source>Grid Gap</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.gridGap">
+                <source>--layout-grid-gap — supports clamp() for fluid spacing.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.radius">
+                <source>Border Radius</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.radius">
+                <source>--layout-radius</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.layout.radiusLg">
+                <source>Border Radius Large</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.layout.radiusLg">
+                <source>--layout-radius-lg</source>
+            </trans-unit>
+
+            <!-- Frontend — Typography -->
+            <trans-unit id="settings.frontend.font.familyBase">
+                <source>Base Font Family</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.familyBase">
+                <source>--font-family-base — CSS font-family stack for body text.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.familyAccent">
+                <source>Accent Font Family</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.familyAccent">
+                <source>--font-family-accent — leave empty to inherit the base font.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.familyMono">
+                <source>Monospace Font Family</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.familyMono">
+                <source>--font-family-mono</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.weightNormal">
+                <source>Font Weight Normal</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.weightNormal">
+                <source>--font-weight-normal</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.weightMedium">
+                <source>Font Weight Medium</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.weightMedium">
+                <source>--font-weight-medium</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.weightBold">
+                <source>Font Weight Bold</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.weightBold">
+                <source>--font-weight-bold</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.weightBlack">
+                <source>Font Weight Black</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.weightBlack">
+                <source>--font-weight-black</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.sizeSm">
+                <source>Font Size sm</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.sizeSm">
+                <source>--font-size-sm</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.sizeBase">
+                <source>Font Size base</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.sizeBase">
+                <source>--font-size-base</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.sizeLg">
+                <source>Font Size lg</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.sizeLg">
+                <source>--font-size-lg</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.sizeXl">
+                <source>Font Size xl</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.sizeXl">
+                <source>--font-size-xl</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.size2xl">
+                <source>Font Size 2xl</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.size2xl">
+                <source>--font-size-2xl</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.size3xl">
+                <source>Font Size 3xl</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.size3xl">
+                <source>--font-size-3xl</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.size4xl">
+                <source>Font Size 4xl</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.size4xl">
+                <source>--font-size-4xl</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.lineHeightTight">
+                <source>Line Height Tight</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.lineHeightTight">
+                <source>--line-height-tight</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.lineHeightSnug">
+                <source>Line Height Snug</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.lineHeightSnug">
+                <source>--line-height-snug</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.lineHeightBase">
+                <source>Line Height Base</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.lineHeightBase">
+                <source>--line-height-base</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.font.lineHeightRelaxed">
+                <source>Line Height Relaxed</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.font.lineHeightRelaxed">
+                <source>--line-height-relaxed</source>
+            </trans-unit>
+
+            <!-- Frontend — Buttons -->
+            <trans-unit id="settings.frontend.btn.primaryBg">
+                <source>Button Primary Background</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.btn.primaryBg">
+                <source>--btn-primary-bg — defaults to --color-primary when empty.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.btn.primaryText">
+                <source>Button Primary Text</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.btn.primaryText">
+                <source>--btn-primary-text</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.btn.secondaryBg">
+                <source>Button Secondary Background</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.btn.secondaryBg">
+                <source>--btn-secondary-bg — defaults to --color-secondary when empty.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.btn.secondaryText">
+                <source>Button Secondary Text</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.btn.secondaryText">
+                <source>--btn-secondary-text</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.btn.borderRadius">
+                <source>Button Border Radius</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.btn.borderRadius">
+                <source>--btn-border-radius — defaults to --layout-radius when empty.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.btn.borderWidth">
+                <source>Button Border Width</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.btn.borderWidth">
+                <source>--btn-border-width</source>
+            </trans-unit>
+
+            <!-- Frontend — Images -->
+            <trans-unit id="settings.frontend.img.borderRadius">
+                <source>Image Border Radius</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.img.borderRadius">
+                <source>--img-border-radius — defaults to --layout-radius when empty.</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.img.objectFit">
+                <source>Image Object Fit</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.img.objectFit">
+                <source>--img-object-fit</source>
+            </trans-unit>
+
+            <!-- Frontend — Icons -->
+            <trans-unit id="settings.frontend.icon.sizeSm">
+                <source>Icon Size sm</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.icon.sizeSm">
+                <source>--icon-size-sm</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.icon.sizeMd">
+                <source>Icon Size md</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.icon.sizeMd">
+                <source>--icon-size-md</source>
+            </trans-unit>
+            <trans-unit id="settings.frontend.icon.sizeLg">
+                <source>Icon Size lg</source>
+            </trans-unit>
+            <trans-unit id="settings.description.frontend.icon.sizeLg">
+                <source>--icon-size-lg</source>
+            </trans-unit>
+
+            <!-- Page Uids -->
+            <trans-unit id="settings.pageUids.homepage">
+                <source>Homepage</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.homepage">
+                <source>Page UID for the homepage.</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.imprint">
+                <source>Imprint</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.imprint">
+                <source>Page UID for the imprint page.</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.dataProtectionPolicy">
+                <source>Data Protection Policy</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.dataProtectionPolicy">
+                <source>Page UID for the data protection policy page.</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.accessibilityStatement">
+                <source>Accessibility Statement</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.accessibilityStatement">
+                <source>Page UID for the accessibility statement page.</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.contact">
+                <source>Contact</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.contact">
+                <source>Page UID for the contact page.</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.search">
+                <source>Search</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.search">
+                <source>Page UID for the search page.</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.disclaimer">
+                <source>Disclaimer</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.disclaimer">
+                <source>Page UID for the disclaimer page.</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.newsletter">
+                <source>Newsletter</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.newsletter">
+                <source>Page UID for the newsletter page.</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.frontendLogin">
+                <source>Frontend Login</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.frontendLogin">
+                <source>Page UID for the frontend login page.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

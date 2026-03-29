@@ -4,7 +4,127 @@ page {
 
 	config < config
 
-	10 =< lib.templates.base.10
+	10 = FLUIDTEMPLATE
+	10 {
+		templateRootPaths {
+			0 = EXT:mai_theme/Resources/Private/Templates/
+		}
+
+		partialRootPaths {
+			0 = EXT:mai_theme/Resources/Private/Partials/
+		}
+
+		layoutRootPaths {
+			0 = EXT:mai_theme/Resources/Private/Layouts/
+		}
+
+		file = EXT:mai_theme/Resources/Private/Templates/Page/Default.html
+
+		settings {
+			pids {
+				homepage = {$pageUids.homepage}
+				imprint = {$pageUids.imprint}
+				dataProtectionPolicy = {$pageUids.dataProtectionPolicy}
+				accessibilityStatement = {$pageUids.accessibilityStatement}
+				contact = {$pageUids.contact}
+				search = {$pageUids.search}
+				disclaimer = {$pageUids.disclaimer}
+				newsletter = {$pageUids.newsletter}
+				frontendLogin = {$pageUids.frontendLogin}
+			}
+			general {
+				site {
+					logo = {$general.site.logo}
+					logoAlt = {$general.site.logoAlt}
+					favicon = {$general.site.favicon}
+				}
+			}
+			frontend {
+				color {
+					text = {$frontend.color.text}
+					surface = {$frontend.color.surface}
+					background = {$frontend.color.background}
+					primary = {$frontend.color.primary}
+					primaryHover = {$frontend.color.primaryHover}
+					secondary = {$frontend.color.secondary}
+					secondaryHover = {$frontend.color.secondaryHover}
+					accent = {$frontend.color.accent}
+					success = {$frontend.color.success}
+					warning = {$frontend.color.warning}
+					danger = {$frontend.color.danger}
+					info = {$frontend.color.info}
+					border = {$frontend.color.border}
+					disabledBg = {$frontend.color.disabledBg}
+					disabledText = {$frontend.color.disabledText}
+				}
+				dark {
+					colorText = {$frontend.dark.colorText}
+					colorSurface = {$frontend.dark.colorSurface}
+					colorBackground = {$frontend.dark.colorBackground}
+					colorBorder = {$frontend.dark.colorBorder}
+				}
+				space {
+					2xs = {$frontend.space.2xs}
+					xs = {$frontend.space.xs}
+					sm = {$frontend.space.sm}
+					md = {$frontend.space.md}
+					lg = {$frontend.space.lg}
+					xl = {$frontend.space.xl}
+					2xl = {$frontend.space.2xl}
+					3xl = {$frontend.space.3xl}
+				}
+				layout {
+					widthMin = {$frontend.layout.widthMin}
+					widthMax = {$frontend.layout.widthMax}
+					contentWidth = {$frontend.layout.contentWidth}
+					cardWidth = {$frontend.layout.cardWidth}
+					textWidth = {$frontend.layout.textWidth}
+					sidebarMain = {$frontend.layout.sidebarMain}
+					sidebarAside = {$frontend.layout.sidebarAside}
+					gridGap = {$frontend.layout.gridGap}
+					radius = {$frontend.layout.radius}
+					radiusLg = {$frontend.layout.radiusLg}
+				}
+				font {
+					familyBase = {$frontend.font.familyBase}
+					familyAccent = {$frontend.font.familyAccent}
+					familyMono = {$frontend.font.familyMono}
+					weightNormal = {$frontend.font.weightNormal}
+					weightMedium = {$frontend.font.weightMedium}
+					weightBold = {$frontend.font.weightBold}
+					weightBlack = {$frontend.font.weightBlack}
+					sizeSm = {$frontend.font.sizeSm}
+					sizeBase = {$frontend.font.sizeBase}
+					sizeLg = {$frontend.font.sizeLg}
+					sizeXl = {$frontend.font.sizeXl}
+					size2xl = {$frontend.font.size2xl}
+					size3xl = {$frontend.font.size3xl}
+					size4xl = {$frontend.font.size4xl}
+					lineHeightTight = {$frontend.font.lineHeightTight}
+					lineHeightSnug = {$frontend.font.lineHeightSnug}
+					lineHeightBase = {$frontend.font.lineHeightBase}
+					lineHeightRelaxed = {$frontend.font.lineHeightRelaxed}
+				}
+				btn {
+					primaryBg = {$frontend.btn.primaryBg}
+					primaryText = {$frontend.btn.primaryText}
+					secondaryBg = {$frontend.btn.secondaryBg}
+					secondaryText = {$frontend.btn.secondaryText}
+					borderRadius = {$frontend.btn.borderRadius}
+					borderWidth = {$frontend.btn.borderWidth}
+				}
+				img {
+					borderRadius = {$frontend.img.borderRadius}
+					objectFit = {$frontend.img.objectFit}
+				}
+				icon {
+					sizeSm = {$frontend.icon.sizeSm}
+					sizeMd = {$frontend.icon.sizeMd}
+					sizeLg = {$frontend.icon.sizeLg}
+				}
+			}
+		}
+	}
 }
 
-@import 'EXT:mai_theme/Configuration/TypoScript/Setup/Page/body.typoscript'
+@import 'EXT:mai_theme/Configuration/TypoScript/Setup/page/body.typoscript'
