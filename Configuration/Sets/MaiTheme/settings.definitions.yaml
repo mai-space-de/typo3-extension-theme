@@ -1,0 +1,602 @@
+categories:
+  mai-theme:
+    label: 'Theme'
+  mai-theme.general:
+    label: 'General'
+    parent: mai-theme
+  mai-theme.backend:
+    label: 'Backend'
+    parent: mai-theme
+  mai-theme.frontend:
+    label: 'Frontend'
+    parent: mai-theme
+
+settings:
+
+  # ===========================================================================
+  # GENERAL
+  # ===========================================================================
+
+  general.site.logo:
+    label: 'Site Logo'
+    description: 'Path to the main site logo used in frontend templates (EXT: or fileadmin path).'
+    default: ''
+    type: string
+    category: mai-theme.general
+
+  general.site.logoAlt:
+    label: 'Site Logo Alt Text'
+    description: 'Alt attribute for the site logo image.'
+    default: ''
+    type: string
+    category: mai-theme.general
+
+  general.site.favicon:
+    label: 'Favicon'
+    description: 'Path to the public favicon (EXT: or fileadmin path).'
+    default: ''
+    type: string
+    category: mai-theme.general
+
+  # ===========================================================================
+  # BACKEND
+  # Keys are forwarded to $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['backend']
+  # by BackendTheme::registerBackendTheme() via ActiveExtensionConfigurationLoader.
+  # ===========================================================================
+
+  backend.logo:
+    label: 'Backend Logo'
+    description: 'Replaces the default TYPO3 logo in the backend top bar (EXT: or fileadmin path).'
+    default: ''
+    type: string
+    category: mai-theme.backend
+
+  backend.favicon:
+    label: 'Backend Favicon'
+    description: 'Favicon shown in the browser tab when the TYPO3 backend is open.'
+    default: ''
+    type: string
+    category: mai-theme.backend
+
+  backend.accentColor:
+    label: 'Backend Accent Color'
+    description: 'Primary highlight color for the TYPO3 backend UI. Also sets --icon-color-accent on extension icons.'
+    default: '#FF8700'
+    type: color
+    category: mai-theme.backend
+
+  backend.login.logo:
+    label: 'Login Page Logo'
+    description: 'Logo displayed on the TYPO3 backend login page (EXT: or fileadmin path).'
+    default: ''
+    type: string
+    category: mai-theme.backend
+
+  backend.login.logoAlt:
+    label: 'Login Page Logo Alt Text'
+    default: ''
+    type: string
+    category: mai-theme.backend
+
+  backend.login.backgroundImage:
+    label: 'Login Page Background Image'
+    description: 'Full-page background image on the backend login screen (EXT: or fileadmin path).'
+    default: ''
+    type: string
+    category: mai-theme.backend
+
+  backend.login.highlightColor:
+    label: 'Login Page Highlight Color'
+    description: 'Accent color applied to the login form highlight and call-to-action button.'
+    default: '#FF8700'
+    type: color
+    category: mai-theme.backend
+
+  backend.login.footnote:
+    label: 'Login Page Footnote'
+    description: 'Small text shown at the bottom of the backend login screen.'
+    default: ''
+    type: string
+    category: mai-theme.backend
+
+  # ===========================================================================
+  # FRONTEND — Colour palette
+  # Each description names the CSS custom property this setting controls.
+  # ===========================================================================
+
+  # Base semantic
+  frontend.color.text:
+    label: 'Text Color'
+    description: '--color-text'
+    default: '#191919'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.surface:
+    label: 'Surface Color'
+    description: '--color-surface — card and section backgrounds.'
+    default: '#F3F3F3'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.background:
+    label: 'Page Background'
+    description: '--color-background'
+    default: '#FFFFFF'
+    type: color
+    category: mai-theme.frontend
+
+  # Brand
+  frontend.color.primary:
+    label: 'Primary Color'
+    description: '--color-primary'
+    default: '#2563EB'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.primaryHover:
+    label: 'Primary Hover Color'
+    description: '--color-primary-hover'
+    default: '#1D4ED8'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.secondary:
+    label: 'Secondary Color'
+    description: '--color-secondary'
+    default: '#64748B'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.secondaryHover:
+    label: 'Secondary Hover Color'
+    description: '--color-secondary-hover'
+    default: '#475569'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.accent:
+    label: 'Accent Color'
+    description: '--color-accent'
+    default: '#F59E0B'
+    type: color
+    category: mai-theme.frontend
+
+  # Feedback
+  frontend.color.success:
+    label: 'Success Color'
+    description: '--color-success'
+    default: '#16A34A'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.warning:
+    label: 'Warning Color'
+    description: '--color-warning'
+    default: '#D97706'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.danger:
+    label: 'Danger Color'
+    description: '--color-danger'
+    default: '#DC2626'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.info:
+    label: 'Info Color'
+    description: '--color-info'
+    default: '#0891B2'
+    type: color
+    category: mai-theme.frontend
+
+  # Neutral
+  frontend.color.border:
+    label: 'Border Color'
+    description: '--color-border'
+    default: '#D1D5DB'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.disabledBg:
+    label: 'Disabled Background'
+    description: '--color-disabled-bg'
+    default: '#E5E7EB'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.disabledText:
+    label: 'Disabled Text'
+    description: '--color-disabled-text'
+    default: '#9CA3AF'
+    type: color
+    category: mai-theme.frontend
+
+  # Dark-mode overrides
+  frontend.dark.colorText:
+    label: 'Dark Mode — Text Color'
+    description: '--color-text (prefers-color-scheme: dark)'
+    default: '#F3F3F3'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.dark.colorSurface:
+    label: 'Dark Mode — Surface Color'
+    description: '--color-surface (prefers-color-scheme: dark)'
+    default: '#1E293B'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.dark.colorBackground:
+    label: 'Dark Mode — Page Background'
+    description: '--color-background (prefers-color-scheme: dark)'
+    default: '#0F172A'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.dark.colorBorder:
+    label: 'Dark Mode — Border Color'
+    description: '--color-border (prefers-color-scheme: dark)'
+    default: '#334155'
+    type: color
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Spacing scale
+  # ===========================================================================
+
+  frontend.space.2xs:
+    label: 'Space 2xs'
+    description: '--space-2xs (2 px)'
+    default: '0.125rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.xs:
+    label: 'Space xs'
+    description: '--space-xs (4 px)'
+    default: '0.25rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.sm:
+    label: 'Space sm'
+    description: '--space-sm (8 px)'
+    default: '0.5rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.md:
+    label: 'Space md'
+    description: '--space-md (16 px)'
+    default: '1rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.lg:
+    label: 'Space lg'
+    description: '--space-lg (24 px)'
+    default: '1.5rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.xl:
+    label: 'Space xl'
+    description: '--space-xl (32 px)'
+    default: '2rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.2xl:
+    label: 'Space 2xl'
+    description: '--space-2xl (48 px)'
+    default: '3rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.3xl:
+    label: 'Space 3xl'
+    description: '--space-3xl (64 px)'
+    default: '4rem'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Layout
+  # ===========================================================================
+
+  frontend.layout.widthMin:
+    label: 'Min Layout Width'
+    description: '--layout-width-min'
+    default: '320px'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.widthMax:
+    label: 'Max Layout Width'
+    description: '--layout-width-max — outer wrapper constraint.'
+    default: '1400px'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.contentWidth:
+    label: 'Content Column Width'
+    description: '--layout-content-width'
+    default: '75ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.cardWidth:
+    label: 'Card Width'
+    description: '--layout-card-width'
+    default: '32ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.textWidth:
+    label: 'Prose Text Width'
+    description: '--layout-text-width — optimal line length for body copy.'
+    default: '65ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.sidebarMain:
+    label: 'Sidebar Main Column'
+    description: '--layout-sidebar-main'
+    default: '75ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.sidebarAside:
+    label: 'Sidebar Aside Column'
+    description: '--layout-sidebar-aside'
+    default: '45ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.gridGap:
+    label: 'Grid Gap'
+    description: '--layout-grid-gap — supports clamp() for fluid spacing.'
+    default: 'clamp(1rem, 3vw, 2rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.radius:
+    label: 'Border Radius'
+    description: '--layout-radius'
+    default: '0.5rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.radiusLg:
+    label: 'Border Radius Large'
+    description: '--layout-radius-lg'
+    default: '1rem'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Typography
+  # ===========================================================================
+
+  frontend.font.familyBase:
+    label: 'Base Font Family'
+    description: '--font-family-base — CSS font-family stack for body text.'
+    default: 'system-ui, -apple-system, sans-serif'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.familyAccent:
+    label: 'Accent Font Family'
+    description: '--font-family-accent — leave empty to inherit the base font.'
+    default: ''
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.familyMono:
+    label: 'Monospace Font Family'
+    description: '--font-family-mono'
+    default: 'ui-monospace, "Cascadia Code", monospace'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.weightNormal:
+    label: 'Font Weight Normal'
+    description: '--font-weight-normal'
+    default: 400
+    type: int
+    category: mai-theme.frontend
+
+  frontend.font.weightMedium:
+    label: 'Font Weight Medium'
+    description: '--font-weight-medium'
+    default: 500
+    type: int
+    category: mai-theme.frontend
+
+  frontend.font.weightBold:
+    label: 'Font Weight Bold'
+    description: '--font-weight-bold'
+    default: 700
+    type: int
+    category: mai-theme.frontend
+
+  frontend.font.weightBlack:
+    label: 'Font Weight Black'
+    description: '--font-weight-black'
+    default: 800
+    type: int
+    category: mai-theme.frontend
+
+  frontend.font.sizeSm:
+    label: 'Font Size sm'
+    description: '--font-size-sm'
+    default: 'clamp(0.8rem, 0.23vw + 0.75rem, 0.9rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.sizeBase:
+    label: 'Font Size base'
+    description: '--font-size-base'
+    default: 'clamp(1rem, 0.34vw + 0.91rem, 1.125rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.sizeLg:
+    label: 'Font Size lg'
+    description: '--font-size-lg'
+    default: 'clamp(1.25rem, 0.49vw + 1.13rem, 1.4rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.sizeXl:
+    label: 'Font Size xl'
+    description: '--font-size-xl'
+    default: 'clamp(1.563rem, 0.72vw + 1.38rem, 1.76rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.size2xl:
+    label: 'Font Size 2xl'
+    description: '--font-size-2xl'
+    default: 'clamp(1.953rem, 1.03vw + 1.69rem, 2.2rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.size3xl:
+    label: 'Font Size 3xl'
+    description: '--font-size-3xl'
+    default: 'clamp(2.441rem, 1.45vw + 2.07rem, 2.75rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.size4xl:
+    label: 'Font Size 4xl'
+    description: '--font-size-4xl'
+    default: 'clamp(3.052rem, 2.01vw + 2.52rem, 3.44rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.lineHeightTight:
+    label: 'Line Height Tight'
+    description: '--line-height-tight'
+    default: '1.1'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.lineHeightSnug:
+    label: 'Line Height Snug'
+    description: '--line-height-snug'
+    default: '1.3'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.lineHeightBase:
+    label: 'Line Height Base'
+    description: '--line-height-base'
+    default: '1.5'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.lineHeightRelaxed:
+    label: 'Line Height Relaxed'
+    description: '--line-height-relaxed'
+    default: '1.75'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Buttons
+  # ===========================================================================
+
+  frontend.btn.primaryBg:
+    label: 'Button Primary Background'
+    description: '--btn-primary-bg — defaults to --color-primary when empty.'
+    default: '#2563EB'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.btn.primaryText:
+    label: 'Button Primary Text'
+    description: '--btn-primary-text'
+    default: '#FFFFFF'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.btn.secondaryBg:
+    label: 'Button Secondary Background'
+    description: '--btn-secondary-bg — defaults to --color-secondary when empty.'
+    default: '#64748B'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.btn.secondaryText:
+    label: 'Button Secondary Text'
+    description: '--btn-secondary-text'
+    default: '#FFFFFF'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.btn.borderRadius:
+    label: 'Button Border Radius'
+    description: '--btn-border-radius — defaults to --layout-radius when empty.'
+    default: ''
+    type: string
+    category: mai-theme.frontend
+
+  frontend.btn.borderWidth:
+    label: 'Button Border Width'
+    description: '--btn-border-width'
+    default: '2px'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Images
+  # ===========================================================================
+
+  frontend.img.borderRadius:
+    label: 'Image Border Radius'
+    description: '--img-border-radius — defaults to --layout-radius when empty.'
+    default: ''
+    type: string
+    category: mai-theme.frontend
+
+  frontend.img.objectFit:
+    label: 'Image Object Fit'
+    description: '--img-object-fit'
+    default: cover
+    type: string
+    enum:
+      cover: 'Cover'
+      contain: 'Contain'
+      fill: 'Fill'
+      none: 'None'
+      scale-down: 'Scale Down'
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Icons
+  # ===========================================================================
+
+  frontend.icon.sizeSm:
+    label: 'Icon Size sm'
+    description: '--icon-size-sm'
+    default: '1rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.icon.sizeMd:
+    label: 'Icon Size md'
+    description: '--icon-size-md'
+    default: '1.25rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.icon.sizeLg:
+    label: 'Icon Size lg'
+    description: '--icon-size-lg'
+    default: '1.5rem'
+    type: string
+    category: mai-theme.frontend

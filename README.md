@@ -5,7 +5,7 @@
 
 The **frontend component layer** for the entire extension set. All Fluid templates in feature extensions reference components defined here via `sitegeist/fluid-components`. `sitegeist/fluid-components` is never declared outside this extension. `mai_theme` is a practical runtime requirement for every extension that renders frontend output.
 
-**Requires:** TYPO3 13.4 LTS / 14.0 · PHP 8.2+
+**Requires:** TYPO3 13.4 LTS / 14.1 · PHP 8.2+
 
 ---
 
