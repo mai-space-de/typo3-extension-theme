@@ -1,5 +1,4 @@
 {namespace theme=Maispace\MaiTheme\Components}
-{namespace ve=TYPO3\CMS\VisualEditor\ViewHelpers}
 <f:layout name="Page/Default" />
 
 <!--
@@ -16,14 +15,6 @@
     Copy this file into your own extension and register the path via
     TypoScript (templateRootPaths) to override the default layout.
 
-    Visual Editor (friendsoftypo3/visual-editor):
-      ve:mark.contentArea  – Marks a colPos area as editable; enables drag-and-drop
-                             and inline WYSIWYG editing for content elements.
-      ve:render.text       – Renders a TCA text/RTE field with inline editing support.
-                             Usage: <ve:render.text record="{data}" field="bodytext" />
-      ve:editMode          – Conditional ViewHelper; renders "then" branch when the
-                             frontend is in backend edit mode, "else" otherwise.
-
     See: EXT:theme/Configuration/TypoScript/setup.typoscript
 -->
 
@@ -36,11 +27,7 @@
 
 <f:section name="Body">
     <!-- ── Site Header ──────────────────────────────────────────────────── -->
-    <!--
-        In edit mode the header loses its sticky positioning so the
-        visual-editor toolbar remains accessible at the top of the viewport.
-    -->
-    <div class="site-header-wrapper{ve:editMode(then: ' site-header-wrapper--edit-mode')}">
+    <div class="site-header-wrapper">
         <theme:organism.siteHeader
             siteName="{settings.site.name}"
             rootPageUid="{settings.rootPageUid}"
@@ -56,27 +43,16 @@
             <f:then>
                 <div class="sidebar-layout">
                     <div class="main-grid">
-                        <!--
-                            ve:mark.contentArea marks colPos 0 as a visual-editor
-                            drop zone. Editors can add, reorder, and delete content
-                            elements directly in the frontend when logged in.
-                        -->
-                        <ve:mark.contentArea colPos="0">
-                            <f:cObject typoscriptObjectPath="lib.content" />
-                        </ve:mark.contentArea>
+                        <f:cObject typoscriptObjectPath="lib.content" />
                     </div>
                     <aside class="sidebar">
-                        <ve:mark.contentArea colPos="1">
-                            <f:cObject typoscriptObjectPath="lib.sidebar" />
-                        </ve:mark.contentArea>
+                        <f:cObject typoscriptObjectPath="lib.sidebar" />
                     </aside>
                 </div>
             </f:then>
             <f:else>
                 <div class="main-grid">
-                    <ve:mark.contentArea colPos="0">
-                        <f:cObject typoscriptObjectPath="lib.content" />
-                    </ve:mark.contentArea>
+                    <f:cObject typoscriptObjectPath="lib.content" />
                 </div>
             </f:else>
         </f:if>
