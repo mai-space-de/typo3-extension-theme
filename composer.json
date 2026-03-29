@@ -1,78 +1,76 @@
 {
-  "name": "maispace/mai-theme",
-  "type": "typo3-cms-extension",
-  "description": "Theme extension for TYPO3 CMS",
-  "license": "GPL-2.0-or-later",
-  "homepage": "https://www.maispace.de",
-  "authors": [
-    {
-      "name": "Joel Maximilian Mai",
-      "email": "joel@maispace.de",
-      "role": "Lead Developer"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Maispace\\MaiTheme\\": "Classes"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Maispace\\MaiTheme\\Tests\\": "Tests"
-    }
-  },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "mai_theme"
-    },
-    "branch-alias": {
-      "dev-main": "13.0.x-dev"
-    }
-  },
-  "require": {
-    "php": "^8.2",
-    "typo3/cms-core": "^13.4",
-    "maispace/mai-assets": "^13.0",
-    "sitegeist/fluid-components": "^3.0"
-  },
-  "require-dev": {
-    "armin/editorconfig-cli": "^2.1",
-    "friendsofphp/php-cs-fixer": "^3.0",
-    "helmich/typo3-typoscript-lint": "^3.1",
-    "phpstan/phpstan": "^2.0",
-    "phpunit/phpunit": "^11.0",
-    "saschaegerer/phpstan-typo3": "^2.0",
-    "typo3/testing-framework": "^8.0"
-  },
-  "scripts": {
-    "lint:check": [
-      "@check:editorconfig",
-      "@check:phpcs",
-      "@check:phpstan",
-      "@check:typoscript",
-      "@composer validate --strict --no-check-version --no-check-all --no-check-publish"
+    "name": "maispace/mai-theme",
+    "description": "The **frontend component layer** for the entire extension set. All Fluid templates in feature extensions reference components defined here via `sitegeist/fluid-components`. `sitegeist/fluid-components` is never declared outside this extension. `mai_theme` is a practical runtime requirement for every extension that renders frontend output.",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Maispace",
+            "role": "Developer"
+        }
     ],
-    "lint:fix": [
-      "@fix:editorconfig",
-      "@fix:phpcs",
-      "@check:phpstan",
-      "@check:typoscript"
-    ],
-    "check:editorconfig": "ec -unv -e vendor/ -e public/",
-    "fix:editorconfig": "ec -unvf -e vendor/ -e public/",
-    "check:phpcs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer check --config .php-cs-fixer.php --ansi --verbose --diff",
-    "fix:phpcs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config .php-cs-fixer.php --ansi",
-    "check:phpstan": "phpstan analyse --no-progress",
-    "check:phpstan:baseline": "phpstan analyse --no-progress --generate-baseline=phpstan-baseline.neon",
-    "check:typoscript": "typoscript-lint --fail-on-warnings -c typoscript-lint.yml Configuration/TypoScript/ Configuration/Sets/",
-    "test": "phpunit --configuration phpunit.xml.dist",
-    "test:unit": "phpunit --configuration phpunit.xml.dist --testsuite Unit"
-  },
-  "config": {
-    "allow-plugins": {
-      "typo3/class-alias-loader": true,
-      "typo3/cms-composer-installers": true
+    "require": {
+        "php": "^8.2",
+        "typo3/cms-core": "^13.4 || ^14.0",
+        "maispace/mai-assets": "^13.0",
+        "sitegeist/fluid-components": "^3.0"
     },
-    "sort-packages": true
-  }
+    "require-dev": {
+        "armin/editorconfig-cli": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "helmich/typo3-typoscript-lint": "^3.1",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^10.5 || ^11.0",
+        "saschaegerer/phpstan-typo3": "^2.0",
+        "typo3/testing-framework": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Maispace\\MaiTheme\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Maispace\\MaiTheme\\Tests\\": "Tests"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "mai_theme"
+        },
+        "branch-alias": {
+            "dev-main": "13.0.x-dev"
+        }
+    },
+    "scripts": {
+        "lint:check": [
+            "@check:editorconfig",
+            "@check:phpcs",
+            "@check:phpstan",
+            "@check:typoscript",
+            "@composer validate --strict --no-check-version --no-check-all --no-check-publish"
+        ],
+        "lint:fix": [
+            "@fix:editorconfig",
+            "@fix:phpcs",
+            "@check:phpstan",
+            "@check:typoscript"
+        ],
+        "check:editorconfig": "ec -unv -e vendor/ -e public/",
+        "fix:editorconfig": "ec -unvf -e vendor/ -e public/",
+        "check:phpcs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer check --config .php-cs-fixer.php --ansi --verbose --diff",
+        "fix:phpcs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config .php-cs-fixer.php --ansi",
+        "check:phpstan": "phpstan analyse --no-progress",
+        "check:phpstan:baseline": "phpstan analyse --no-progress --generate-baseline=phpstan-baseline.neon",
+        "check:typoscript": "typoscript-lint --fail-on-warnings -c typoscript-lint.yml Configuration/",
+        "test": "phpunit --configuration phpunit.xml.dist",
+        "test:unit": "phpunit --configuration phpunit.xml.dist --testsuite Unit"
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/cms-composer-installers": true,
+            "typo3/class-alias-loader": true
+        },
+        "sort-packages": true
+    }
 }

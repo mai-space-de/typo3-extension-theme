@@ -1,8 +1,0 @@
-lib {
-    contentElement {
-        settings {
-            baseUrl < plugin.tx_maibase.settings.baseUrl
-            pids < plugin.tx_maibase.settings.pids
-        }
-    }
-}
