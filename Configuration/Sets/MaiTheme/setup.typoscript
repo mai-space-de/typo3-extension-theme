@@ -1,0 +1,2 @@
+@import 'EXT:mai_theme/Configuration/TypoScript/Setup/lib.typoscript'
+@import 'EXT:mai_theme/Configuration/TypoScript/Setup/page.typoscript'

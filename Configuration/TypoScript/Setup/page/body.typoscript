@@ -1,0 +1,16 @@
+page {
+    bodyTagCObject = COA
+    bodyTagCObject {
+        stdWrap {
+            trim = 1
+            wrap = <body class="|">
+        }
+
+        # Add uid
+        20 = TEXT
+        20 {
+            data = page:uid
+            noTrimWrap = |" id=page-| |
+        }
+    }
+}

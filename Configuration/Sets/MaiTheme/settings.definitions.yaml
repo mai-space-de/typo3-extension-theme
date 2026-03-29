@@ -7,6 +7,9 @@ categories:
   mai-theme.frontend:
     label: 'Frontend'
     parent: mai-theme
+  mai-theme.pageUids:
+    label: 'Page Uids'
+    parent: mai-theme
 
 settings:
 
@@ -536,3 +539,70 @@ settings:
     default: '1.5rem'
     type: string
     category: mai-theme.frontend
+
+  # ===========================================================================
+  # PAGE UIDS
+  # ===========================================================================
+
+  pageUids.homepage:
+    label: 'Homepage'
+    description: 'Page UID for the homepage.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.imprint:
+    label: 'Imprint'
+    description: 'Page UID for the imprint page.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.dataProtectionPolicy:
+    label: 'Data Protection Policy'
+    description: 'Page UID for the data protection policy page.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.accessibilityStatement:
+    label: 'Accessibility Statement'
+    description: 'Page UID for the accessibility statement page.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.contact:
+    label: 'Contact'
+    description: 'Page UID for the contact page.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.search:
+    label: 'Search'
+    description: 'Page UID for the search page.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.disclaimer:
+    label: 'Disclaimer'
+    description: 'Page UID for the disclaimer page.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.newsletter:
+    label: 'Newsletter'
+    description: 'Page UID for the newsletter page.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.frontendLogin:
+    label: 'Frontend Login'
+    description: 'Page UID for the frontend login page.'
+    default: 0
+    type: page
+    category: mai-theme.pageUids

@@ -1,0 +1,10 @@
+page = PAGE
+page {
+	typeNum = 0
+
+	config < config
+
+	10 =< lib.templates.base.10
+}
+
+@import 'EXT:mai_theme/Configuration/TypoScript/Setup/Page/body.typoscript'

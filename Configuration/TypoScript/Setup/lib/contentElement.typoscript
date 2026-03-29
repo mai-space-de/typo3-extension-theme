@@ -1,0 +1,18 @@
+lib {
+    contentElement {
+        settings {
+            pids {
+                home = {$pids.default.home}
+                homepage = {$pageUids.homepage}
+                imprint = {$pageUids.imprint}
+                dataProtectionPolicy = {$pageUids.dataProtectionPolicy}
+                accessibilityStatement = {$pageUids.accessibilityStatement}
+                contact = {$pageUids.contact}
+                search = {$pageUids.search}
+                disclaimer = {$pageUids.disclaimer}
+                newsletter = {$pageUids.newsletter}
+                frontendLogin = {$pageUids.frontendLogin}
+            }
+        }
+    }
+}
