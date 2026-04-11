@@ -1,16 +1,18 @@
 page {
     bodyTagCObject = COA
     bodyTagCObject {
-        stdWrap {
-            trim = 1
-            wrap = <body class="|">
+        # Opening tag with id attribute
+        10 = TEXT
+        10 {
+            data = page:uid
+            wrap = <body id="page-|" class="
         }
 
-        # Add uid
-        20 = TEXT
-        20 {
-            data = page:uid
-            noTrimWrap = |" id=page-| |
+        # Close class attribute and tag
+        # (class content is appended by other extensions via stdWrap or COA items between 10 and 90)
+        90 = TEXT
+        90 {
+            value = ">
         }
     }
 }

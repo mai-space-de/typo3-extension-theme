@@ -151,9 +151,11 @@
                  WIZARD GROUP HEADERS
             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="wizard.basic"><source>Basic Elements</source></trans-unit>
-            <trans-unit id="wizard.content"><source>Content Elements</source></trans-unit>
-            <trans-unit id="wizard.interactive"><source>Interactive Elements</source></trans-unit>
-            <trans-unit id="wizard.data"><source>Data &amp; Structured</source></trans-unit>
+            <trans-unit id="wizard.page"><source>Page Sections</source></trans-unit>
+            <trans-unit id="wizard.components"><source>Cards &amp; Components</source></trans-unit>
+            <trans-unit id="wizard.widgets"><source>UI Widgets</source></trans-unit>
+            <trans-unit id="wizard.forms"><source>Forms &amp; Engagement</source></trans-unit>
+            <trans-unit id="wizard.data"><source>Data &amp; Media</source></trans-unit>
             <trans-unit id="wizard.feedback"><source>Feedback &amp; State</source></trans-unit>
             <trans-unit id="wizard.sections"><source>Sections &amp; Layouts</source></trans-unit>
 
@@ -172,15 +174,19 @@
             <trans-unit id="ctype.divider"><source>Divider</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
-                 CTYPE LABELS — CONTENT
+                 CTYPE LABELS — PAGE SECTIONS
+            ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.hero"><source>Hero</source></trans-unit>
+            <trans-unit id="ctype.banner"><source>Banner</source></trans-unit>
+            <trans-unit id="ctype.cta"><source>Call to Action</source></trans-unit>
+            <trans-unit id="ctype.mediatext"><source>Media &amp; Text</source></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — CARDS & COMPONENTS
             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="ctype.card"><source>Card</source></trans-unit>
             <trans-unit id="ctype.teaser"><source>Teaser</source></trans-unit>
-            <trans-unit id="ctype.hero"><source>Hero</source></trans-unit>
-            <trans-unit id="ctype.banner"><source>Banner</source></trans-unit>
             <trans-unit id="ctype.featurebox"><source>Feature Box</source></trans-unit>
-            <trans-unit id="ctype.cta"><source>Call to Action</source></trans-unit>
-            <trans-unit id="ctype.mediatext"><source>Media &amp; Text</source></trans-unit>
             <trans-unit id="ctype.profile"><source>Profile</source></trans-unit>
             <trans-unit id="ctype.testimonial"><source>Testimonial</source></trans-unit>
             <trans-unit id="ctype.quote"><source>Quote</source></trans-unit>
@@ -189,34 +195,38 @@
             <trans-unit id="ctype.statistic"><source>Statistic</source></trans-unit>
             <trans-unit id="ctype.pricebox"><source>Price Box</source></trans-unit>
             <trans-unit id="ctype.badge"><source>Badge</source></trans-unit>
+            <trans-unit id="ctype.event"><source>Event</source></trans-unit>
+            <trans-unit id="ctype.jobposting"><source>Job Posting</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
-                 CTYPE LABELS — INTERACTIVE
+                 CTYPE LABELS — UI WIDGETS
             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="ctype.slider"><source>Slider</source></trans-unit>
             <trans-unit id="ctype.accordion"><source>Accordion</source></trans-unit>
             <trans-unit id="ctype.tabs"><source>Tabs</source></trans-unit>
             <trans-unit id="ctype.modal"><source>Modal</source></trans-unit>
-            <trans-unit id="ctype.form"><source>Form</source></trans-unit>
-            <trans-unit id="ctype.search"><source>Search</source></trans-unit>
-            <trans-unit id="ctype.newsletter"><source>Newsletter</source></trans-unit>
-            <trans-unit id="ctype.map"><source>Map</source></trans-unit>
             <trans-unit id="ctype.timeline"><source>Timeline</source></trans-unit>
             <trans-unit id="ctype.faq"><source>FAQ</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
-                 CTYPE LABELS — DATA & STRUCTURED
+                 CTYPE LABELS — FORMS & ENGAGEMENT
+            ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.form"><source>Form</source></trans-unit>
+            <trans-unit id="ctype.search"><source>Search</source></trans-unit>
+            <trans-unit id="ctype.newsletter"><source>Newsletter</source></trans-unit>
+            <trans-unit id="ctype.map"><source>Map</source></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — DATA & MEDIA
             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="ctype.table"><source>Table</source></trans-unit>
             <trans-unit id="ctype.datalist"><source>Data List</source></trans-unit>
             <trans-unit id="ctype.gallery"><source>Gallery</source></trans-unit>
             <trans-unit id="ctype.filelist"><source>File List</source></trans-unit>
-            <trans-unit id="ctype.codeblock"><source>Code Block</source></trans-unit>
             <trans-unit id="ctype.chart"><source>Chart</source></trans-unit>
+            <trans-unit id="ctype.codeblock"><source>Code Block</source></trans-unit>
             <trans-unit id="ctype.progressbar"><source>Progress Bar</source></trans-unit>
             <trans-unit id="ctype.rating"><source>Rating</source></trans-unit>
-            <trans-unit id="ctype.event"><source>Event</source></trans-unit>
-            <trans-unit id="ctype.jobposting"><source>Job Posting</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — FEEDBACK & STATE

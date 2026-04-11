@@ -11,9 +11,13 @@ categories:
     parent: elements
   elements.basic:
     parent: elements
-  elements.content:
+  elements.page:
     parent: elements
-  elements.interactive:
+  elements.components:
+    parent: elements
+  elements.widgets:
+    parent: elements
+  elements.forms:
     parent: elements
   elements.data:
     parent: elements
@@ -526,140 +530,158 @@ settings:
     category: elements.basic
 
   # ===========================================================================
-  # ELEMENTS — Content
+  # ELEMENTS — Page Sections
   # ===========================================================================
 
-  elements.content.card:
+  elements.page.hero:
     default: true
     type: bool
-    category: elements.content
+    category: elements.page
 
-  elements.content.teaser:
+  elements.page.banner:
     default: true
     type: bool
-    category: elements.content
+    category: elements.page
 
-  elements.content.hero:
+  elements.page.cta:
     default: true
     type: bool
-    category: elements.content
+    category: elements.page
 
-  elements.content.banner:
+  elements.page.mediatext:
     default: true
     type: bool
-    category: elements.content
-
-  elements.content.featurebox:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.cta:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.mediatext:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.profile:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.testimonial:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.quote:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.logo:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.logoshowcase:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.statistic:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.pricebox:
-    default: true
-    type: bool
-    category: elements.content
-
-  elements.content.badge:
-    default: true
-    type: bool
-    category: elements.content
+    category: elements.page
 
   # ===========================================================================
-  # ELEMENTS — Interactive
+  # ELEMENTS — Cards & Components
   # ===========================================================================
 
-  elements.interactive.slider:
+  elements.components.card:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.accordion:
+  elements.components.teaser:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.tabs:
+  elements.components.featurebox:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.modal:
+  elements.components.profile:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.form:
+  elements.components.testimonial:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.search:
+  elements.components.quote:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.newsletter:
+  elements.components.logo:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.map:
+  elements.components.logoshowcase:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.timeline:
+  elements.components.statistic:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
 
-  elements.interactive.faq:
+  elements.components.pricebox:
     default: true
     type: bool
-    category: elements.interactive
+    category: elements.components
+
+  elements.components.badge:
+    default: true
+    type: bool
+    category: elements.components
+
+  elements.components.event:
+    default: true
+    type: bool
+    category: elements.components
+
+  elements.components.jobposting:
+    default: true
+    type: bool
+    category: elements.components
 
   # ===========================================================================
-  # ELEMENTS — Data & Structured
+  # ELEMENTS — UI Widgets
+  # ===========================================================================
+
+  elements.widgets.slider:
+    default: true
+    type: bool
+    category: elements.widgets
+
+  elements.widgets.accordion:
+    default: true
+    type: bool
+    category: elements.widgets
+
+  elements.widgets.tabs:
+    default: true
+    type: bool
+    category: elements.widgets
+
+  elements.widgets.modal:
+    default: true
+    type: bool
+    category: elements.widgets
+
+  elements.widgets.timeline:
+    default: true
+    type: bool
+    category: elements.widgets
+
+  elements.widgets.faq:
+    default: true
+    type: bool
+    category: elements.widgets
+
+  # ===========================================================================
+  # ELEMENTS — Forms & Engagement
+  # ===========================================================================
+
+  elements.forms.form:
+    default: true
+    type: bool
+    category: elements.forms
+
+  elements.forms.search:
+    default: true
+    type: bool
+    category: elements.forms
+
+  elements.forms.newsletter:
+    default: true
+    type: bool
+    category: elements.forms
+
+  elements.forms.map:
+    default: true
+    type: bool
+    category: elements.forms
+
+  # ===========================================================================
+  # ELEMENTS — Data & Media
   # ===========================================================================
 
   elements.data.table:
@@ -698,16 +720,6 @@ settings:
     category: elements.data
 
   elements.data.rating:
-    default: true
-    type: bool
-    category: elements.data
-
-  elements.data.event:
-    default: true
-    type: bool
-    category: elements.data
-
-  elements.data.jobposting:
     default: true
     type: bool
     category: elements.data
