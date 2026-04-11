@@ -118,12 +118,15 @@
 | # | Suggested CType | Group | Description | Status | Rationale |
 |---|-----------------|-------|-------------|--------|-----------|
 | 59 | `maispace_breadcrumb` | basic | Breadcrumb navigation trail | 🆕 Missing | Standard navigational aid expected in most themes |
-| 60 | `maispace_socialmedia` | basic | Social media icon links | 🆕 Missing | Very common footer / header element |
+| 60 | `maispace_socialmedia` | basic | Social media icon links | 🆕 Missing | Very common footer / header element for linking to social profiles |
 | 61 | `maispace_embed` | basic | Generic oEmbed / iframe wrapper (YouTube, Vimeo, etc.) | 🆕 Missing | Covers third-party embeds with privacy-consent wrapper |
 | 62 | `maispace_spacer` | basic | Vertical whitespace / spacing block | 🆕 Missing | Simple layout helper complementing `maispace_divider` |
-| 63 | `maispace_steps` | widgets | Step indicator / wizard progress | 🆕 Missing | Useful for multi-step processes and how-to guides |
-| 64 | `maispace_tooltip` | widgets | Tooltip / popover component | 🆕 Missing | Common UI micro-interaction for explanatory text |
-| 65 | `maispace_cookieconsent` | page | Cookie / privacy consent banner | 🆕 Missing | GDPR-required on nearly every European website |
+| 63 | `maispace_callout` | basic | Editorial callout / notice box (note, tip, important) | 🆕 Missing | Common content-aside pattern for highlighting key information in articles |
+| 64 | `maispace_iconlist` | basic | List with a custom icon per item | 🆕 Missing | Very common pattern for feature lists, checklists, and benefit summaries |
+| 65 | `maispace_textcolumns` | basic | Multi-column text flow (CSS columns) | 🆕 Missing | Purely presentational layout for long-form text without needing section containers |
+| 66 | `maispace_contactinfo` | components | Structured contact block (address, phone, email, hours) | 🆕 Missing | Nearly every business website needs a static contact details component |
+| 67 | `maispace_beforeafter` | widgets | Before / after image comparison slider | 🆕 Missing | Purely presentational comparison widget — common in portfolios, case studies |
+| 68 | `maispace_steps` | widgets | Step indicator / process visualisation | 🆕 Missing | Useful for how-to guides, onboarding flows, and process explanations |
 
 ---
 
@@ -134,4 +137,4 @@
 | ✅ Theme | 45 | text, heading, richtext, image, video, audio, button, linklist, icon, divider, hero, banner, cta, mediatext, card, teaser, featurebox, profile, testimonial, quote, logo, logoshowcase, statistic, badge, slider, accordion, tabs, modal, timeline, faq, form, table, datalist, gallery, filelist, codeblock, alert, section_full, section_50_50, section_66_33, section_33_66, section_3col, section_4col, section_sidebar_r, section_sidebar_l |
 | ⚠️ Extension | 8 | pricebox, event, jobposting, search, newsletter, map, chart, rating |
 | ❌ Controller | 5 | progressbar, notification, spinner, emptystate, confirmation |
-| 🆕 Missing | 7 | breadcrumb, socialmedia, embed, spacer, steps, tooltip, cookieconsent |
+| 🆕 Missing | 10 | breadcrumb, socialmedia, embed, spacer, callout, iconlist, textcolumns, contactinfo, beforeafter, steps |
