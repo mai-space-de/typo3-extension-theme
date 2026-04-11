@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:mai_theme/Resources/Private/Language/locallang.xlf" date="2026-03-29T20:26:00Z" product-name="mai_theme">
+		<header/>
+		<body>
+			<trans-unit id="theme.custom" resname="theme.custom">
+				<source>Custom Theme</source>
+				<target>Benutzerdefiniertes Theme</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

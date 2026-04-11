@@ -1,0 +1,786 @@
+categories:
+  mai-theme:
+  mai-theme.general:
+    parent: mai-theme
+  mai-theme.frontend:
+    parent: mai-theme
+  mai-theme.pageUids:
+    parent: mai-theme
+  elements:
+  elements.core:
+    parent: elements
+  elements.basic:
+    parent: elements
+  elements.content:
+    parent: elements
+  elements.interactive:
+    parent: elements
+  elements.data:
+    parent: elements
+  elements.feedback:
+    parent: elements
+  elements.sections:
+    parent: elements
+
+settings:
+
+  # ===========================================================================
+  # GENERAL
+  # ===========================================================================
+
+  general.site.logo:
+    default: ''
+    type: string
+    category: mai-theme.general
+
+  general.site.logoAlt:
+    default: ''
+    type: string
+    category: mai-theme.general
+
+  general.site.favicon:
+    default: ''
+    type: string
+    category: mai-theme.general
+
+  # ===========================================================================
+  # FRONTEND — Colour palette
+  # Each description names the CSS custom property this setting controls.
+  # ===========================================================================
+
+  # Base semantic
+  frontend.color.text:
+    default: '#191919'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.surface:
+    default: '#F3F3F3'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.background:
+    default: '#FFFFFF'
+    type: color
+    category: mai-theme.frontend
+
+  # Brand
+  frontend.color.primary:
+    default: '#2563EB'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.primaryHover:
+    default: '#1D4ED8'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.secondary:
+    default: '#64748B'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.secondaryHover:
+    default: '#475569'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.accent:
+    default: '#F59E0B'
+    type: color
+    category: mai-theme.frontend
+
+  # Feedback
+  frontend.color.success:
+    default: '#16A34A'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.warning:
+    default: '#D97706'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.danger:
+    default: '#DC2626'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.info:
+    default: '#0891B2'
+    type: color
+    category: mai-theme.frontend
+
+  # Neutral
+  frontend.color.border:
+    default: '#D1D5DB'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.disabledBg:
+    default: '#E5E7EB'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.color.disabledText:
+    default: '#9CA3AF'
+    type: color
+    category: mai-theme.frontend
+
+  # Dark-mode overrides
+  frontend.dark.colorText:
+    default: '#F3F3F3'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.dark.colorSurface:
+    default: '#1E293B'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.dark.colorBackground:
+    default: '#0F172A'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.dark.colorBorder:
+    default: '#334155'
+    type: color
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Spacing scale
+  # ===========================================================================
+
+  frontend.space.2xs:
+    default: '0.125rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.xs:
+    default: '0.25rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.sm:
+    default: '0.5rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.md:
+    default: '1rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.lg:
+    default: '1.5rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.xl:
+    default: '2rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.2xl:
+    default: '3rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.space.3xl:
+    default: '4rem'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Layout
+  # ===========================================================================
+
+  frontend.layout.widthMin:
+    default: '320px'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.widthMax:
+    default: '1400px'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.contentWidth:
+    default: '75ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.cardWidth:
+    default: '32ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.textWidth:
+    default: '65ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.sidebarMain:
+    default: '75ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.sidebarAside:
+    default: '45ch'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.gridGap:
+    default: 'clamp(1rem, 3vw, 2rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.radius:
+    default: '0.5rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.layout.radiusLg:
+    default: '1rem'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Typography
+  # ===========================================================================
+
+  frontend.font.familyBase:
+    default: 'system-ui, -apple-system, sans-serif'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.familyAccent:
+    default: ''
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.familyMono:
+    default: 'ui-monospace, "Cascadia Code", monospace'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.weightNormal:
+    default: 400
+    type: int
+    category: mai-theme.frontend
+
+  frontend.font.weightMedium:
+    default: 500
+    type: int
+    category: mai-theme.frontend
+
+  frontend.font.weightBold:
+    default: 700
+    type: int
+    category: mai-theme.frontend
+
+  frontend.font.weightBlack:
+    default: 800
+    type: int
+    category: mai-theme.frontend
+
+  frontend.font.sizeSm:
+    default: 'clamp(0.8rem, 0.23vw + 0.75rem, 0.9rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.sizeBase:
+    default: 'clamp(1rem, 0.34vw + 0.91rem, 1.125rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.sizeLg:
+    default: 'clamp(1.25rem, 0.49vw + 1.13rem, 1.4rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.sizeXl:
+    default: 'clamp(1.563rem, 0.72vw + 1.38rem, 1.76rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.size2xl:
+    default: 'clamp(1.953rem, 1.03vw + 1.69rem, 2.2rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.size3xl:
+    default: 'clamp(2.441rem, 1.45vw + 2.07rem, 2.75rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.size4xl:
+    default: 'clamp(3.052rem, 2.01vw + 2.52rem, 3.44rem)'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.lineHeightTight:
+    default: '1.1'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.lineHeightSnug:
+    default: '1.3'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.lineHeightBase:
+    default: '1.5'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.font.lineHeightRelaxed:
+    default: '1.75'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Buttons
+  # ===========================================================================
+
+  frontend.btn.primaryBg:
+    default: '#2563EB'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.btn.primaryText:
+    default: '#FFFFFF'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.btn.secondaryBg:
+    default: '#64748B'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.btn.secondaryText:
+    default: '#FFFFFF'
+    type: color
+    category: mai-theme.frontend
+
+  frontend.btn.borderRadius:
+    default: ''
+    type: string
+    category: mai-theme.frontend
+
+  frontend.btn.borderWidth:
+    default: '2px'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Images
+  # ===========================================================================
+
+  frontend.img.borderRadius:
+    default: ''
+    type: string
+    category: mai-theme.frontend
+
+  frontend.img.objectFit:
+    default: cover
+    type: string
+    enum:
+      cover: 'Cover'
+      contain: 'Contain'
+      fill: 'Fill'
+      none: 'None'
+      scale-down: 'Scale Down'
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # FRONTEND — Icons
+  # ===========================================================================
+
+  frontend.icon.sizeSm:
+    default: '1rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.icon.sizeMd:
+    default: '1.25rem'
+    type: string
+    category: mai-theme.frontend
+
+  frontend.icon.sizeLg:
+    default: '1.5rem'
+    type: string
+    category: mai-theme.frontend
+
+  # ===========================================================================
+  # PAGE UIDS
+  # ===========================================================================
+
+  pageUids.homepage:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.imprint:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.dataProtectionPolicy:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.accessibilityStatement:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.contact:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.search:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.disclaimer:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.newsletter:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.frontendLogin:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  # ===========================================================================
+  # ELEMENTS — Core: disable all TYPO3 built-in content elements
+  # ===========================================================================
+
+  elements.core.disableAll:
+    default: true
+    type: bool
+    category: elements.core
+
+  # ===========================================================================
+  # ELEMENTS — Basic
+  # ===========================================================================
+
+  elements.basic.text:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.heading:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.richtext:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.image:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.video:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.audio:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.button:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.linklist:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.icon:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.divider:
+    default: true
+    type: bool
+    category: elements.basic
+
+  # ===========================================================================
+  # ELEMENTS — Content
+  # ===========================================================================
+
+  elements.content.card:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.teaser:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.hero:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.banner:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.featurebox:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.cta:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.mediatext:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.profile:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.testimonial:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.quote:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.logo:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.logoshowcase:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.statistic:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.pricebox:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.badge:
+    default: true
+    type: bool
+    category: elements.content
+
+  # ===========================================================================
+  # ELEMENTS — Interactive
+  # ===========================================================================
+
+  elements.interactive.slider:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.accordion:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.tabs:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.modal:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.form:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.search:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.newsletter:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.map:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.timeline:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.faq:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  # ===========================================================================
+  # ELEMENTS — Data & Structured
+  # ===========================================================================
+
+  elements.data.table:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.datalist:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.gallery:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.filelist:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.codeblock:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.chart:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.progressbar:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.rating:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.event:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.jobposting:
+    default: true
+    type: bool
+    category: elements.data
+
+  # ===========================================================================
+  # ELEMENTS — Feedback & State
+  # ===========================================================================
+
+  elements.feedback.alert:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  elements.feedback.notification:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  elements.feedback.spinner:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  elements.feedback.emptystate:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  elements.feedback.confirmation:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  # ===========================================================================
+  # ELEMENTS — Sections & Layouts (b13/container)
+  # ===========================================================================
+
+  elements.sections.full:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.fiftyFifty:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.twoThirdOneThird:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.oneThirdTwoThird:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.threeColumn:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.fourColumn:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.sidebarRight:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.sidebarLeft:
+    default: true
+    type: bool
+    category: elements.sections

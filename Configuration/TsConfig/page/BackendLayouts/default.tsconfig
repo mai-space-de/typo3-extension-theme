@@ -1,0 +1,82 @@
+mod.web_layout.BackendLayouts {
+	default {
+		title = Standard
+		icon = mimetypes-x-backend_layout
+		config {
+			backend_layout {
+				colCount = 1
+				rowCount = 7
+				rows {
+					1 {
+						columns {
+							1 {
+								name = Pop Overs
+								colPos = 1
+								identifier = popovers
+								slideMode = slide
+							}
+						}
+					}
+					2 {
+						columns {
+							1 {
+								name = Hauptnavigation
+								colPos = 2
+								identifier = navbar
+								slideMode = slide
+							}
+						}
+					}
+					3 {
+						columns {
+							1 {
+								name = Vor Inhalt
+								colPos = 3
+								identifier = beforeContent
+								slideMode = slide
+							}
+						}
+					}
+					4 {
+						columns {
+							1 {
+								name = Inhalt
+								colPos = 0
+								identifier = content
+							}
+						}
+					}
+					5 {
+						columns {
+							1 {
+								name = Nach Inhalt
+								colPos = 4
+								identifier = afterContent
+								slideMode = slide
+							}
+						}
+					}
+					6 {
+						columns {
+							1 {
+								name = Footer
+								colPos = 5
+								identifier = footer
+								slideMode = slide
+							}
+						}
+					}
+					7 {
+						columns {
+							1 {
+								name = Versteckt
+								colPos = 6
+								identifier = hidden
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

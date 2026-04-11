@@ -1,0 +1,272 @@
+@import 'EXT:mai_theme/Configuration/TsConfig/page/*'
+
+# ===========================================================================
+# DISABLE ALL TYPO3 CORE CONTENT ELEMENTS
+# ===========================================================================
+
+[{settings.elements.core.disableAll} == 1]
+TCEFORM.tt_content.CType.removeItems := addToList(
+    text,textpic,textmedia,image,bullets,table,uploads,
+    multimedia,media,html,header,shortcut,list,div,
+    menu_abstract,menu_categorized_content,menu_categorized_pages,
+    menu_pages,menu_recently_updated,menu_related_pages,
+    menu_section,menu_section_pages,menu_sitemap,
+    menu_sitemap_pages,menu_subpages
+)
+[END]
+
+# ===========================================================================
+# BASIC ELEMENTS — per-element wizard toggles
+# ===========================================================================
+
+[{settings.elements.basic.text} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_text.disabled = 1
+[END]
+
+[{settings.elements.basic.heading} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_heading.disabled = 1
+[END]
+
+[{settings.elements.basic.richtext} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_richtext.disabled = 1
+[END]
+
+[{settings.elements.basic.image} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_image.disabled = 1
+[END]
+
+[{settings.elements.basic.video} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_video.disabled = 1
+[END]
+
+[{settings.elements.basic.audio} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_audio.disabled = 1
+[END]
+
+[{settings.elements.basic.button} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_button.disabled = 1
+[END]
+
+[{settings.elements.basic.linklist} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_linklist.disabled = 1
+[END]
+
+[{settings.elements.basic.icon} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_icon.disabled = 1
+[END]
+
+[{settings.elements.basic.divider} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_divider.disabled = 1
+[END]
+
+# ===========================================================================
+# CONTENT ELEMENTS — per-element wizard toggles
+# ===========================================================================
+
+[{settings.elements.content.card} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_card.disabled = 1
+[END]
+
+[{settings.elements.content.teaser} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_teaser.disabled = 1
+[END]
+
+[{settings.elements.content.hero} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_hero.disabled = 1
+[END]
+
+[{settings.elements.content.banner} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_banner.disabled = 1
+[END]
+
+[{settings.elements.content.featurebox} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_featurebox.disabled = 1
+[END]
+
+[{settings.elements.content.cta} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_cta.disabled = 1
+[END]
+
+[{settings.elements.content.mediatext} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_mediatext.disabled = 1
+[END]
+
+[{settings.elements.content.profile} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_profile.disabled = 1
+[END]
+
+[{settings.elements.content.testimonial} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_testimonial.disabled = 1
+[END]
+
+[{settings.elements.content.quote} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_quote.disabled = 1
+[END]
+
+[{settings.elements.content.logo} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_logo.disabled = 1
+[END]
+
+[{settings.elements.content.logoshowcase} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_logoshowcase.disabled = 1
+[END]
+
+[{settings.elements.content.statistic} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_statistic.disabled = 1
+[END]
+
+[{settings.elements.content.pricebox} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_pricebox.disabled = 1
+[END]
+
+[{settings.elements.content.badge} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_content.elements.maispace_badge.disabled = 1
+[END]
+
+# ===========================================================================
+# INTERACTIVE ELEMENTS — per-element wizard toggles
+# ===========================================================================
+
+[{settings.elements.interactive.slider} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_slider.disabled = 1
+[END]
+
+[{settings.elements.interactive.accordion} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_accordion.disabled = 1
+[END]
+
+[{settings.elements.interactive.tabs} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_tabs.disabled = 1
+[END]
+
+[{settings.elements.interactive.modal} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_modal.disabled = 1
+[END]
+
+[{settings.elements.interactive.form} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_form.disabled = 1
+[END]
+
+[{settings.elements.interactive.search} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_search.disabled = 1
+[END]
+
+[{settings.elements.interactive.newsletter} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_newsletter.disabled = 1
+[END]
+
+[{settings.elements.interactive.map} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_map.disabled = 1
+[END]
+
+[{settings.elements.interactive.timeline} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_timeline.disabled = 1
+[END]
+
+[{settings.elements.interactive.faq} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_interactive.elements.maispace_faq.disabled = 1
+[END]
+
+# ===========================================================================
+# DATA & STRUCTURED — per-element wizard toggles
+# ===========================================================================
+
+[{settings.elements.data.table} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_table.disabled = 1
+[END]
+
+[{settings.elements.data.datalist} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_datalist.disabled = 1
+[END]
+
+[{settings.elements.data.gallery} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_gallery.disabled = 1
+[END]
+
+[{settings.elements.data.filelist} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_filelist.disabled = 1
+[END]
+
+[{settings.elements.data.codeblock} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_codeblock.disabled = 1
+[END]
+
+[{settings.elements.data.chart} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_chart.disabled = 1
+[END]
+
+[{settings.elements.data.progressbar} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_progressbar.disabled = 1
+[END]
+
+[{settings.elements.data.rating} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_rating.disabled = 1
+[END]
+
+[{settings.elements.data.event} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_event.disabled = 1
+[END]
+
+[{settings.elements.data.jobposting} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_jobposting.disabled = 1
+[END]
+
+# ===========================================================================
+# FEEDBACK & STATE — per-element wizard toggles
+# ===========================================================================
+
+[{settings.elements.feedback.alert} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_alert.disabled = 1
+[END]
+
+[{settings.elements.feedback.notification} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_notification.disabled = 1
+[END]
+
+[{settings.elements.feedback.spinner} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_spinner.disabled = 1
+[END]
+
+[{settings.elements.feedback.emptystate} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_emptystate.disabled = 1
+[END]
+
+[{settings.elements.feedback.confirmation} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_confirmation.disabled = 1
+[END]
+
+# ===========================================================================
+# SECTIONS & LAYOUTS — per-element wizard toggles
+# ===========================================================================
+
+[{settings.elements.sections.full} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_sections.elements.maispace_section_full.disabled = 1
+[END]
+
+[{settings.elements.sections.fiftyFifty} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_sections.elements.maispace_section_50_50.disabled = 1
+[END]
+
+[{settings.elements.sections.twoThirdOneThird} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_sections.elements.maispace_section_66_33.disabled = 1
+[END]
+
+[{settings.elements.sections.oneThirdTwoThird} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_sections.elements.maispace_section_33_66.disabled = 1
+[END]
+
+[{settings.elements.sections.threeColumn} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_sections.elements.maispace_section_3col.disabled = 1
+[END]
+
+[{settings.elements.sections.fourColumn} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_sections.elements.maispace_section_4col.disabled = 1
+[END]
+
+[{settings.elements.sections.sidebarRight} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_sections.elements.maispace_section_sidebar_r.disabled = 1
+[END]
+
+[{settings.elements.sections.sidebarLeft} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_sections.elements.maispace_section_sidebar_l.disabled = 1
+[END]

@@ -3,15 +3,7 @@ services:
     autowire: true
     autoconfigure: true
     public: false
-  Maispace\MaiTheme\EventListener\FrontendAssetConfigurationsListener:
-    tags:
-      - name: event.listener
-        method: setJavaScriptConfiguration
-        identifier: 'Maispace/JavaScriptConfigurationsListener'
-      - name: event.listener
-        method: setStyleSheetConfiguration
-        identifier: 'Maispace/StyleSheetConfigurationsListener'
-  Maispace\MaiTheme\Controller\RecordModuleController:
-    public: true
-  Maispace\MaiTheme\Middleware\BackendThemeFromSiteSettings:
-    public: true
+
+  Maispace\MaiTheme\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'

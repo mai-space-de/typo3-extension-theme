@@ -1,27 +1,17 @@
 <?php
-
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Theme',
-    'description' => 'Theme extension',
-    'version' => '13.0.0',
+    'title' => 'Mai Theme',
+    'description' => 'The **frontend component layer** for the entire extension set. All Fluid templates in feature extensions reference components defined here via `sitegeist/fluid-components`. `sitegeist/fluid-components` is never declared outside this extension. `mai_theme` is a practical runtime requirement for every extension that renders frontend output.',
+    'category' => 'module',
+    'author' => 'Maispace',
+    'author_email' => '',
     'state' => 'stable',
-    'category' => 'templates',
-    'author' => 'Joel Maximilian Mai',
-    'author_email' => 'joel@maispace.de',
-    'author_company' => 'Maispace',
+    'version' => '1.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '13.4.0-13.4.99',
+            'typo3' => '13.4.0-14.99.99',
         ],
-        'conflicts' => [
-        ],
-    ],
-    'uploadfolder' => 0,
-    'createDirs' => '',
-    'clearCacheOnLoad' => 1,
-    'autoload' => [
-        'psr-4' => [
-            'Maispace\\MaiTheme\\' => 'Classes',
-        ],
+        'conflicts' => [],
+        'suggests' => [],
     ],
 ];
