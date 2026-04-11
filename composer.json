@@ -9,6 +9,10 @@
       "role": "Developer"
     }
   ],
+  "require": {
+    "b13/container": "^3.0",
+    "maispace/mai-base": "@dev"
+  },
   "autoload": {
     "psr-4": {
       "Maispace\\MaiTheme\\": "Classes"

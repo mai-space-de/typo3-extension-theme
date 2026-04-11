@@ -6,6 +6,21 @@ categories:
     parent: mai-theme
   mai-theme.pageUids:
     parent: mai-theme
+  elements:
+  elements.core:
+    parent: elements
+  elements.basic:
+    parent: elements
+  elements.content:
+    parent: elements
+  elements.interactive:
+    parent: elements
+  elements.data:
+    parent: elements
+  elements.feedback:
+    parent: elements
+  elements.sections:
+    parent: elements
 
 settings:
 
@@ -446,3 +461,326 @@ settings:
     default: 0
     type: page
     category: mai-theme.pageUids
+
+  # ===========================================================================
+  # ELEMENTS — Core: disable all TYPO3 built-in content elements
+  # ===========================================================================
+
+  elements.core.disableAll:
+    default: true
+    type: bool
+    category: elements.core
+
+  # ===========================================================================
+  # ELEMENTS — Basic
+  # ===========================================================================
+
+  elements.basic.text:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.heading:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.richtext:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.image:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.video:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.audio:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.button:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.linklist:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.icon:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.divider:
+    default: true
+    type: bool
+    category: elements.basic
+
+  # ===========================================================================
+  # ELEMENTS — Content
+  # ===========================================================================
+
+  elements.content.card:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.teaser:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.hero:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.banner:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.featurebox:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.cta:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.mediatext:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.profile:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.testimonial:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.quote:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.logo:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.logoshowcase:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.statistic:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.pricebox:
+    default: true
+    type: bool
+    category: elements.content
+
+  elements.content.badge:
+    default: true
+    type: bool
+    category: elements.content
+
+  # ===========================================================================
+  # ELEMENTS — Interactive
+  # ===========================================================================
+
+  elements.interactive.slider:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.accordion:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.tabs:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.modal:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.form:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.search:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.newsletter:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.map:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.timeline:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  elements.interactive.faq:
+    default: true
+    type: bool
+    category: elements.interactive
+
+  # ===========================================================================
+  # ELEMENTS — Data & Structured
+  # ===========================================================================
+
+  elements.data.table:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.datalist:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.gallery:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.filelist:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.codeblock:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.chart:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.progressbar:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.rating:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.event:
+    default: true
+    type: bool
+    category: elements.data
+
+  elements.data.jobposting:
+    default: true
+    type: bool
+    category: elements.data
+
+  # ===========================================================================
+  # ELEMENTS — Feedback & State
+  # ===========================================================================
+
+  elements.feedback.alert:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  elements.feedback.notification:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  elements.feedback.spinner:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  elements.feedback.emptystate:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  elements.feedback.confirmation:
+    default: true
+    type: bool
+    category: elements.feedback
+
+  # ===========================================================================
+  # ELEMENTS — Sections & Layouts (b13/container)
+  # ===========================================================================
+
+  elements.sections.full:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.fiftyFifty:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.twoThirdOneThird:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.oneThirdTwoThird:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.threeColumn:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.fourColumn:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.sidebarRight:
+    default: true
+    type: bool
+    category: elements.sections
+
+  elements.sections.sidebarLeft:
+    default: true
+    type: bool
+    category: elements.sections
