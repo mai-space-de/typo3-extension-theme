@@ -25,11 +25,17 @@
             <trans-unit id="categories.elements.basic">
                 <source>Basic Elements</source>
             </trans-unit>
-            <trans-unit id="categories.elements.content">
-                <source>Content Elements</source>
+            <trans-unit id="categories.elements.page">
+                <source>Page Section Elements</source>
             </trans-unit>
-            <trans-unit id="categories.elements.interactive">
-                <source>Interactive Elements</source>
+            <trans-unit id="categories.elements.components">
+                <source>Cards &amp; Component Elements</source>
+            </trans-unit>
+            <trans-unit id="categories.elements.widgets">
+                <source>UI Widget Elements</source>
+            </trans-unit>
+            <trans-unit id="categories.elements.forms">
+                <source>Forms &amp; Engagement Elements</source>
             </trans-unit>
             <trans-unit id="categories.elements.data">
                 <source>Data &amp; Structured Elements</source>
@@ -597,158 +603,174 @@
                 <source>Enable the horizontal rule / divider element (maispace_divider).</source>
             </trans-unit>
 
-            <!-- Elements — Content -->
-            <trans-unit id="settings.elements.content.card">
-                <source>Card</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.content.card">
-                <source>Enable the card element (maispace_card).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.content.teaser">
-                <source>Teaser</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.content.teaser">
-                <source>Enable the teaser element (maispace_teaser).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.content.hero">
+            <!-- Elements — Page Sections -->
+            <trans-unit id="settings.elements.page.hero">
                 <source>Hero</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.hero">
+            <trans-unit id="settings.description.elements.page.hero">
                 <source>Enable the hero banner element (maispace_hero).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.banner">
+            <trans-unit id="settings.elements.page.banner">
                 <source>Banner</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.banner">
+            <trans-unit id="settings.description.elements.page.banner">
                 <source>Enable the banner element (maispace_banner).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.featurebox">
-                <source>Feature Box</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.content.featurebox">
-                <source>Enable the feature box element (maispace_featurebox).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.content.cta">
+            <trans-unit id="settings.elements.page.cta">
                 <source>Call to Action</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.cta">
+            <trans-unit id="settings.description.elements.page.cta">
                 <source>Enable the call-to-action element (maispace_cta).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.mediatext">
+            <trans-unit id="settings.elements.page.mediatext">
                 <source>Media &amp; Text</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.mediatext">
+            <trans-unit id="settings.description.elements.page.mediatext">
                 <source>Enable the media + text side-by-side element (maispace_mediatext).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.profile">
+
+            <!-- Elements — Cards & Components -->
+            <trans-unit id="settings.elements.components.card">
+                <source>Card</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.components.card">
+                <source>Enable the card element (maispace_card).</source>
+            </trans-unit>
+            <trans-unit id="settings.elements.components.teaser">
+                <source>Teaser</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.components.teaser">
+                <source>Enable the teaser element (maispace_teaser).</source>
+            </trans-unit>
+            <trans-unit id="settings.elements.components.featurebox">
+                <source>Feature Box</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.components.featurebox">
+                <source>Enable the feature box element (maispace_featurebox).</source>
+            </trans-unit>
+            <trans-unit id="settings.elements.components.profile">
                 <source>Profile</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.profile">
+            <trans-unit id="settings.description.elements.components.profile">
                 <source>Enable the person / profile card element (maispace_profile).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.testimonial">
+            <trans-unit id="settings.elements.components.testimonial">
                 <source>Testimonial</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.testimonial">
+            <trans-unit id="settings.description.elements.components.testimonial">
                 <source>Enable the testimonial / review element (maispace_testimonial).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.quote">
+            <trans-unit id="settings.elements.components.quote">
                 <source>Quote</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.quote">
+            <trans-unit id="settings.description.elements.components.quote">
                 <source>Enable the blockquote element (maispace_quote).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.logo">
+            <trans-unit id="settings.elements.components.logo">
                 <source>Logo</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.logo">
+            <trans-unit id="settings.description.elements.components.logo">
                 <source>Enable the single logo element (maispace_logo).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.logoshowcase">
+            <trans-unit id="settings.elements.components.logoshowcase">
                 <source>Logo Showcase</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.logoshowcase">
+            <trans-unit id="settings.description.elements.components.logoshowcase">
                 <source>Enable the logo grid / partner logos element (maispace_logoshowcase).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.statistic">
+            <trans-unit id="settings.elements.components.statistic">
                 <source>Statistic</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.statistic">
+            <trans-unit id="settings.description.elements.components.statistic">
                 <source>Enable the statistic / counter element (maispace_statistic).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.pricebox">
+            <trans-unit id="settings.elements.components.pricebox">
                 <source>Price Box</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.pricebox">
+            <trans-unit id="settings.description.elements.components.pricebox">
                 <source>Enable the pricing card element (maispace_pricebox).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.content.badge">
+            <trans-unit id="settings.elements.components.badge">
                 <source>Badge</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.content.badge">
+            <trans-unit id="settings.description.elements.components.badge">
                 <source>Enable the label / tag badge element (maispace_badge).</source>
             </trans-unit>
+            <trans-unit id="settings.elements.components.event">
+                <source>Event</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.components.event">
+                <source>Enable the event listing element (maispace_event).</source>
+            </trans-unit>
+            <trans-unit id="settings.elements.components.jobposting">
+                <source>Job Posting</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.components.jobposting">
+                <source>Enable the job posting element (maispace_jobposting).</source>
+            </trans-unit>
 
-            <!-- Elements — Interactive -->
-            <trans-unit id="settings.elements.interactive.slider">
+            <!-- Elements — UI Widgets -->
+            <trans-unit id="settings.elements.widgets.slider">
                 <source>Slider</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.slider">
+            <trans-unit id="settings.description.elements.widgets.slider">
                 <source>Enable the image / content slider element (maispace_slider).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.interactive.accordion">
+            <trans-unit id="settings.elements.widgets.accordion">
                 <source>Accordion</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.accordion">
+            <trans-unit id="settings.description.elements.widgets.accordion">
                 <source>Enable the accordion / collapsible element (maispace_accordion).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.interactive.tabs">
+            <trans-unit id="settings.elements.widgets.tabs">
                 <source>Tabs</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.tabs">
+            <trans-unit id="settings.description.elements.widgets.tabs">
                 <source>Enable the tabbed content element (maispace_tabs).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.interactive.modal">
+            <trans-unit id="settings.elements.widgets.modal">
                 <source>Modal</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.modal">
+            <trans-unit id="settings.description.elements.widgets.modal">
                 <source>Enable the modal / dialog element (maispace_modal).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.interactive.form">
-                <source>Form</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.form">
-                <source>Enable the form element (maispace_form).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.interactive.search">
-                <source>Search</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.search">
-                <source>Enable the search box element (maispace_search).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.interactive.newsletter">
-                <source>Newsletter</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.newsletter">
-                <source>Enable the newsletter sign-up element (maispace_newsletter).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.interactive.map">
-                <source>Map</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.map">
-                <source>Enable the embedded map element (maispace_map).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.interactive.timeline">
+            <trans-unit id="settings.elements.widgets.timeline">
                 <source>Timeline</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.timeline">
+            <trans-unit id="settings.description.elements.widgets.timeline">
                 <source>Enable the timeline element (maispace_timeline).</source>
             </trans-unit>
-            <trans-unit id="settings.elements.interactive.faq">
+            <trans-unit id="settings.elements.widgets.faq">
                 <source>FAQ</source>
             </trans-unit>
-            <trans-unit id="settings.description.elements.interactive.faq">
+            <trans-unit id="settings.description.elements.widgets.faq">
                 <source>Enable the FAQ element (maispace_faq).</source>
+            </trans-unit>
+
+            <!-- Elements — Forms & Engagement -->
+            <trans-unit id="settings.elements.forms.form">
+                <source>Form</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.forms.form">
+                <source>Enable the form element (maispace_form).</source>
+            </trans-unit>
+            <trans-unit id="settings.elements.forms.search">
+                <source>Search</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.forms.search">
+                <source>Enable the search box element (maispace_search).</source>
+            </trans-unit>
+            <trans-unit id="settings.elements.forms.newsletter">
+                <source>Newsletter</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.forms.newsletter">
+                <source>Enable the newsletter sign-up element (maispace_newsletter).</source>
+            </trans-unit>
+            <trans-unit id="settings.elements.forms.map">
+                <source>Map</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.forms.map">
+                <source>Enable the embedded map element (maispace_map).</source>
             </trans-unit>
 
             <!-- Elements — Data & Structured -->
@@ -799,18 +821,6 @@
             </trans-unit>
             <trans-unit id="settings.description.elements.data.rating">
                 <source>Enable the star rating element (maispace_rating).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.data.event">
-                <source>Event</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.data.event">
-                <source>Enable the event listing element (maispace_event).</source>
-            </trans-unit>
-            <trans-unit id="settings.elements.data.jobposting">
-                <source>Job Posting</source>
-            </trans-unit>
-            <trans-unit id="settings.description.elements.data.jobposting">
-                <source>Enable the job posting element (maispace_jobposting).</source>
             </trans-unit>
 
             <!-- Elements — Feedback & State -->
