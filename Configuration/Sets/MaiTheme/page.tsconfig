@@ -52,6 +52,34 @@ mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_icon.
 mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_divider.disabled = 1
 [END]
 
+[{settings.elements.basic.breadcrumb} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_breadcrumb.disabled = 1
+[END]
+
+[{settings.elements.basic.socialmedia} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_socialmedia.disabled = 1
+[END]
+
+[{settings.elements.basic.embed} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_embed.disabled = 1
+[END]
+
+[{settings.elements.basic.spacer} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_spacer.disabled = 1
+[END]
+
+[{settings.elements.basic.callout} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_callout.disabled = 1
+[END]
+
+[{settings.elements.basic.iconlist} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_iconlist.disabled = 1
+[END]
+
+[{settings.elements.basic.textcolumns} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_basic.elements.maispace_textcolumns.disabled = 1
+[END]
+
 # ===========================================================================
 # PAGE SECTIONS — per-element wizard toggles
 # ===========================================================================
@@ -112,20 +140,12 @@ mod.wizards.newContentElement.wizardItems.maispace_components.elements.maispace_
 mod.wizards.newContentElement.wizardItems.maispace_components.elements.maispace_statistic.disabled = 1
 [END]
 
-[{settings.elements.components.pricebox} == 0]
-mod.wizards.newContentElement.wizardItems.maispace_components.elements.maispace_pricebox.disabled = 1
-[END]
-
 [{settings.elements.components.badge} == 0]
 mod.wizards.newContentElement.wizardItems.maispace_components.elements.maispace_badge.disabled = 1
 [END]
 
-[{settings.elements.components.event} == 0]
-mod.wizards.newContentElement.wizardItems.maispace_components.elements.maispace_event.disabled = 1
-[END]
-
-[{settings.elements.components.jobposting} == 0]
-mod.wizards.newContentElement.wizardItems.maispace_components.elements.maispace_jobposting.disabled = 1
+[{settings.elements.components.contactinfo} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_components.elements.maispace_contactinfo.disabled = 1
 [END]
 
 # ===========================================================================
@@ -156,16 +176,20 @@ mod.wizards.newContentElement.wizardItems.maispace_widgets.elements.maispace_tim
 mod.wizards.newContentElement.wizardItems.maispace_widgets.elements.maispace_faq.disabled = 1
 [END]
 
+[{settings.elements.widgets.beforeafter} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_widgets.elements.maispace_beforeafter.disabled = 1
+[END]
+
+[{settings.elements.widgets.steps} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_widgets.elements.maispace_steps.disabled = 1
+[END]
+
 # ===========================================================================
 # FORMS & ENGAGEMENT — per-element wizard toggles
 # ===========================================================================
 
 [{settings.elements.forms.form} == 0]
 mod.wizards.newContentElement.wizardItems.maispace_forms.elements.maispace_form.disabled = 1
-[END]
-
-[{settings.elements.forms.search} == 0]
-mod.wizards.newContentElement.wizardItems.maispace_forms.elements.maispace_search.disabled = 1
 [END]
 
 [{settings.elements.forms.newsletter} == 0]
@@ -218,22 +242,6 @@ mod.wizards.newContentElement.wizardItems.maispace_data.elements.maispace_rating
 
 [{settings.elements.feedback.alert} == 0]
 mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_alert.disabled = 1
-[END]
-
-[{settings.elements.feedback.notification} == 0]
-mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_notification.disabled = 1
-[END]
-
-[{settings.elements.feedback.spinner} == 0]
-mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_spinner.disabled = 1
-[END]
-
-[{settings.elements.feedback.emptystate} == 0]
-mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_emptystate.disabled = 1
-[END]
-
-[{settings.elements.feedback.confirmation} == 0]
-mod.wizards.newContentElement.wizardItems.maispace_feedback.elements.maispace_confirmation.disabled = 1
 [END]
 
 # ===========================================================================

@@ -74,6 +74,55 @@ mod.wizards.newContentElement.wizardItems {
                     CType = maispace_divider
                 }
             }
+            maispace_breadcrumb {
+                iconIdentifier = content-bullets
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.breadcrumb
+                tt_content_defValues {
+                    CType = maispace_breadcrumb
+                }
+            }
+            maispace_socialmedia {
+                iconIdentifier = content-bullets
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.socialmedia
+                tt_content_defValues {
+                    CType = maispace_socialmedia
+                }
+            }
+            maispace_embed {
+                iconIdentifier = content-special-html
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.embed
+                tt_content_defValues {
+                    CType = maispace_embed
+                }
+            }
+            maispace_spacer {
+                iconIdentifier = content-special-div
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.spacer
+                tt_content_defValues {
+                    CType = maispace_spacer
+                }
+            }
+            maispace_callout {
+                iconIdentifier = content-special-html
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.callout
+                tt_content_defValues {
+                    CType = maispace_callout
+                }
+            }
+            maispace_iconlist {
+                iconIdentifier = content-bullets
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.iconlist
+                tt_content_defValues {
+                    CType = maispace_iconlist
+                }
+            }
+            maispace_textcolumns {
+                iconIdentifier = content-container-columns-2
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.textcolumns
+                tt_content_defValues {
+                    CType = maispace_textcolumns
+                }
+            }
         }
     }
 
@@ -179,13 +228,6 @@ mod.wizards.newContentElement.wizardItems {
                     CType = maispace_statistic
                 }
             }
-            maispace_pricebox {
-                iconIdentifier = content-table
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.pricebox
-                tt_content_defValues {
-                    CType = maispace_pricebox
-                }
-            }
             maispace_badge {
                 iconIdentifier = content-special-html
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.badge
@@ -193,18 +235,11 @@ mod.wizards.newContentElement.wizardItems {
                     CType = maispace_badge
                 }
             }
-            maispace_event {
-                iconIdentifier = content-table
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.event
+            maispace_contactinfo {
+                iconIdentifier = content-special-html
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.contactinfo
                 tt_content_defValues {
-                    CType = maispace_event
-                }
-            }
-            maispace_jobposting {
-                iconIdentifier = content-table
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.jobposting
-                tt_content_defValues {
-                    CType = maispace_jobposting
+                    CType = maispace_contactinfo
                 }
             }
         }
@@ -256,6 +291,20 @@ mod.wizards.newContentElement.wizardItems {
                     CType = maispace_faq
                 }
             }
+            maispace_beforeafter {
+                iconIdentifier = content-image
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.beforeafter
+                tt_content_defValues {
+                    CType = maispace_beforeafter
+                }
+            }
+            maispace_steps {
+                iconIdentifier = content-list-bullet
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.steps
+                tt_content_defValues {
+                    CType = maispace_steps
+                }
+            }
         }
     }
 
@@ -268,13 +317,6 @@ mod.wizards.newContentElement.wizardItems {
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.form
                 tt_content_defValues {
                     CType = maispace_form
-                }
-            }
-            maispace_search {
-                iconIdentifier = content-special-html
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.search
-                tt_content_defValues {
-                    CType = maispace_search
                 }
             }
             maispace_newsletter {
@@ -366,34 +408,6 @@ mod.wizards.newContentElement.wizardItems {
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.alert
                 tt_content_defValues {
                     CType = maispace_alert
-                }
-            }
-            maispace_notification {
-                iconIdentifier = content-special-html
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.notification
-                tt_content_defValues {
-                    CType = maispace_notification
-                }
-            }
-            maispace_spinner {
-                iconIdentifier = content-special-html
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.spinner
-                tt_content_defValues {
-                    CType = maispace_spinner
-                }
-            }
-            maispace_emptystate {
-                iconIdentifier = content-special-html
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.emptystate
-                tt_content_defValues {
-                    CType = maispace_emptystate
-                }
-            }
-            maispace_confirmation {
-                iconIdentifier = content-special-html
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.confirmation
-                tt_content_defValues {
-                    CType = maispace_confirmation
                 }
             }
         }

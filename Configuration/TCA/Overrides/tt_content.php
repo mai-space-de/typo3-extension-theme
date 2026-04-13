@@ -18,10 +18,30 @@ $lang = Helper::localLangHelperFactory(
 // SHARED FIELDS ON tt_content
 // ============================================================================
 
-// ── Appearance ────────────────────────────────────────────────────────────────
+// ── Design (formerly Appearance) ─────────────────────────────────────────────
+
+$colorTokenItems = [
+    ["label" => $lang("color.inherit"), "value" => ""],
+    ["label" => $lang("color.primary"), "value" => "primary"],
+    ["label" => $lang("color.secondary"), "value" => "secondary"],
+    ["label" => $lang("color.surface"), "value" => "surface"],
+    ["label" => $lang("color.surface_alt"), "value" => "surface-alt"],
+    ["label" => $lang("color.accent"), "value" => "accent"],
+    ["label" => $lang("color.muted"), "value" => "muted"],
+    ["label" => $lang("color.dark"), "value" => "dark"],
+    ["label" => $lang("color.light"), "value" => "light"],
+    ["label" => $lang("color.danger"), "value" => "danger"],
+    ["label" => $lang("color.success"), "value" => "success"],
+    ["label" => $lang("color.warning"), "value" => "warning"],
+    ["label" => $lang("color.info"), "value" => "info"],
+];
 
 new Field("tt_content", "tx_maitheme_bg_color", $lang("field.bg_color"))
-    ->setConfig(["type" => "input", "size" => 12, "eval" => "trim"])
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => $colorTokenItems,
+    ])
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_bg_image", $lang("field.bg_image"))
@@ -36,7 +56,11 @@ new Field("tt_content", "tx_maitheme_bg_image", $lang("field.bg_image"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_text_color", $lang("field.text_color"))
-    ->setConfig(["type" => "input", "size" => 12, "eval" => "trim"])
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => $colorTokenItems,
+    ])
     ->registerField();
 
 new Field(
@@ -44,7 +68,18 @@ new Field(
     "tx_maitheme_border_radius",
     $lang("field.border_radius"),
 )
-    ->setConfig(["type" => "input", "size" => 12, "eval" => "trim"])
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("radius.inherit"), "value" => ""],
+            ["label" => $lang("radius.none"), "value" => "none"],
+            ["label" => $lang("radius.sm"), "value" => "sm"],
+            ["label" => $lang("radius.md"), "value" => "md"],
+            ["label" => $lang("radius.lg"), "value" => "lg"],
+            ["label" => $lang("radius.full"), "value" => "full"],
+        ],
+    ])
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_shadow", $lang("field.shadow"))
@@ -152,49 +187,6 @@ new Field("tt_content", "tx_maitheme_alignment", $lang("field.alignment"))
     ])
     ->registerField();
 
-// ── Animation ─────────────────────────────────────────────────────────────────
-
-new Field("tt_content", "tx_maitheme_animation", $lang("field.animation"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
-            ["label" => $lang("animation.none"), "value" => ""],
-            ["label" => $lang("animation.fade"), "value" => "fade"],
-            ["label" => $lang("animation.slide"), "value" => "slide"],
-            ["label" => $lang("animation.zoom"), "value" => "zoom"],
-        ],
-    ])
-    ->registerField();
-
-new Field(
-    "tt_content",
-    "tx_maitheme_animation_delay",
-    $lang("field.animation_delay"),
-)
-    ->setConfig([
-        "type" => "number",
-        "format" => "integer",
-        "range" => ["lower" => 0, "upper" => 2000],
-        "default" => 0,
-        "size" => 6,
-    ])
-    ->registerField();
-
-// ── Linking ───────────────────────────────────────────────────────────────────
-
-new Field("tt_content", "tx_maitheme_link", $lang("field.link"))
-    ->setConfig(["type" => "link"])
-    ->registerField();
-
-new Field("tt_content", "tx_maitheme_anchor_id", $lang("field.anchor_id"))
-    ->setConfig(["type" => "input", "size" => 30, "eval" => "trim"])
-    ->registerField();
-
-new Field("tt_content", "tx_maitheme_aria_label", $lang("field.aria_label"))
-    ->setConfig(["type" => "input", "size" => 50, "eval" => "trim"])
-    ->registerField();
-
 // ── Responsive ────────────────────────────────────────────────────────────────
 
 new Field("tt_content", "tx_maitheme_hide_desktop", $lang("field.hide_desktop"))
@@ -227,6 +219,49 @@ new Field("tt_content", "tx_maitheme_col_span", $lang("field.col_span"))
     ])
     ->registerField();
 
+// ── Animation ─────────────────────────────────────────────────────────────────
+
+new Field("tt_content", "tx_maitheme_animation", $lang("field.animation"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("animation.none"), "value" => ""],
+            ["label" => $lang("animation.fade"), "value" => "fade"],
+            ["label" => $lang("animation.slide"), "value" => "slide"],
+            ["label" => $lang("animation.zoom"), "value" => "zoom"],
+        ],
+    ])
+    ->registerField();
+
+new Field(
+    "tt_content",
+    "tx_maitheme_animation_delay",
+    $lang("field.animation_delay"),
+)
+    ->setConfig([
+        "type" => "number",
+        "format" => "integer",
+        "range" => ["lower" => 0, "upper" => 2000],
+        "default" => 0,
+        "size" => 6,
+    ])
+    ->registerField();
+
+// ── Linking (anchor / accessibility only — tx_maitheme_link goes per-CType) ──
+
+new Field("tt_content", "tx_maitheme_link", $lang("field.link"))
+    ->setConfig(["type" => "link"])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_anchor_id", $lang("field.anchor_id"))
+    ->setConfig(["type" => "input", "size" => 30, "eval" => "trim"])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_aria_label", $lang("field.aria_label"))
+    ->setConfig(["type" => "input", "size" => 50, "eval" => "trim"])
+    ->registerField();
+
 // ── Advanced ──────────────────────────────────────────────────────────────────
 
 new Field("tt_content", "tx_maitheme_custom_class", $lang("field.custom_class"))
@@ -241,15 +276,250 @@ new Field("tt_content", "tx_maitheme_data_attrs", $lang("field.data_attrs"))
     ->setConfig(["type" => "text", "rows" => 3, "cols" => 60])
     ->registerField();
 
+// ── Shared variant (alert style for alert, notification, badge) ───────────────
+
+new Field("tt_content", "tx_maitheme_variant", $lang("field.variant"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("variant.default"), "value" => ""],
+            ["label" => $lang("variant.info"), "value" => "info"],
+            ["label" => $lang("variant.success"), "value" => "success"],
+            ["label" => $lang("variant.warning"), "value" => "warning"],
+            ["label" => $lang("variant.danger"), "value" => "danger"],
+        ],
+    ])
+    ->registerField();
+
+// ── Per-CType specific fields ─────────────────────────────────────────────────
+
+// Icon element
+new Field("tt_content", "tx_maitheme_icon_identifier", $lang("field.icon_identifier"))
+    ->setConfig(["type" => "input", "size" => 40, "eval" => "trim"])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_icon_size", $lang("field.icon_size"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("iconsize.md"), "value" => ""],
+            ["label" => $lang("iconsize.sm"), "value" => "sm"],
+            ["label" => $lang("iconsize.lg"), "value" => "lg"],
+            ["label" => $lang("iconsize.xl"), "value" => "xl"],
+            ["label" => $lang("iconsize.2xl"), "value" => "2xl"],
+        ],
+    ])
+    ->registerField();
+
+// Divider element
+new Field("tt_content", "tx_maitheme_divider_style", $lang("field.divider_style"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("dividerstyle.line"), "value" => ""],
+            ["label" => $lang("dividerstyle.dashed"), "value" => "dashed"],
+            ["label" => $lang("dividerstyle.dotted"), "value" => "dotted"],
+            ["label" => $lang("dividerstyle.gradient"), "value" => "gradient"],
+            ["label" => $lang("dividerstyle.blank"), "value" => "blank"],
+        ],
+    ])
+    ->registerField();
+
+// Button element
+new Field("tt_content", "tx_maitheme_button_style", $lang("field.button_style"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("buttonstyle.primary"), "value" => ""],
+            ["label" => $lang("buttonstyle.secondary"), "value" => "secondary"],
+            ["label" => $lang("buttonstyle.ghost"), "value" => "ghost"],
+            ["label" => $lang("buttonstyle.outline"), "value" => "outline"],
+            ["label" => $lang("buttonstyle.link"), "value" => "link"],
+        ],
+    ])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_button_size", $lang("field.button_size"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("buttonsize.md"), "value" => ""],
+            ["label" => $lang("buttonsize.sm"), "value" => "sm"],
+            ["label" => $lang("buttonsize.lg"), "value" => "lg"],
+        ],
+    ])
+    ->registerField();
+
+// Hero / Banner element
+new Field("tt_content", "tx_maitheme_content_position", $lang("field.content_position"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("contentposition.left"), "value" => ""],
+            ["label" => $lang("contentposition.center"), "value" => "center"],
+            ["label" => $lang("contentposition.right"), "value" => "right"],
+        ],
+    ])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_overlay_style", $lang("field.overlay_style"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("overlay.none"), "value" => ""],
+            ["label" => $lang("overlay.light"), "value" => "light"],
+            ["label" => $lang("overlay.dark"), "value" => "dark"],
+            ["label" => $lang("overlay.gradient"), "value" => "gradient"],
+        ],
+    ])
+    ->registerField();
+
+// Media & Text element
+new Field("tt_content", "tx_maitheme_media_position", $lang("field.media_position"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("mediaposition.left"), "value" => ""],
+            ["label" => $lang("mediaposition.right"), "value" => "right"],
+        ],
+    ])
+    ->registerField();
+
+// Statistic element
+new Field("tt_content", "tx_maitheme_unit", $lang("field.unit"))
+    ->setConfig(["type" => "input", "size" => 10, "eval" => "trim"])
+    ->registerField();
+
+// Progressbar element
+new Field("tt_content", "tx_maitheme_value", $lang("field.value"))
+    ->setConfig([
+        "type" => "number",
+        "format" => "integer",
+        "range" => ["lower" => 0, "upper" => 100],
+        "default" => 0,
+        "size" => 4,
+    ])
+    ->registerField();
+
+// Map element
+new Field("tt_content", "tx_maitheme_lat", $lang("field.lat"))
+    ->setConfig(["type" => "input", "size" => 20, "eval" => "trim"])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_lng", $lang("field.lng"))
+    ->setConfig(["type" => "input", "size" => 20, "eval" => "trim"])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_zoom", $lang("field.zoom"))
+    ->setConfig([
+        "type" => "number",
+        "format" => "integer",
+        "range" => ["lower" => 1, "upper" => 20],
+        "default" => 14,
+        "size" => 3,
+    ])
+    ->registerField();
+
+// Code Block element
+new Field("tt_content", "tx_maitheme_language", $lang("field.language"))
+    ->setConfig([
+        "type" => "select",
+        "renderType" => "selectSingle",
+        "items" => [
+            ["label" => $lang("codelang.auto"), "value" => ""],
+            ["label" => "HTML", "value" => "html"],
+            ["label" => "CSS", "value" => "css"],
+            ["label" => "JavaScript", "value" => "js"],
+            ["label" => "TypeScript", "value" => "ts"],
+            ["label" => "PHP", "value" => "php"],
+            ["label" => "JSON", "value" => "json"],
+            ["label" => "Bash / Shell", "value" => "bash"],
+            ["label" => "SQL", "value" => "sql"],
+            ["label" => "YAML", "value" => "yaml"],
+            ["label" => "Markdown", "value" => "markdown"],
+        ],
+    ])
+    ->registerField();
+
+// Rating element
+new Field("tt_content", "tx_maitheme_rating_max", $lang("field.rating_max"))
+    ->setConfig([
+        "type" => "number",
+        "format" => "integer",
+        "range" => ["lower" => 1, "upper" => 10],
+        "default" => 5,
+        "size" => 3,
+    ])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_rating_value", $lang("field.rating_value"))
+    ->setConfig([
+        "type" => "number",
+        "format" => "decimal",
+        "range" => ["lower" => 0, "upper" => 10],
+        "default" => 0,
+        "size" => 4,
+    ])
+    ->registerField();
+
+// ── Before/After Slider element ───────────────────────────────────────────────
+new Field("tt_content", "tx_maitheme_image_before", $lang("field.image_before"))
+    ->setConfig([
+        "type" => "file",
+        "allowed" => "common-image-types",
+        "maxitems" => 1,
+        "appearance" => [
+            "createNewRelationLinkTitle" => "Add before image",
+        ],
+    ])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_image_after", $lang("field.image_after"))
+    ->setConfig([
+        "type" => "file",
+        "allowed" => "common-image-types",
+        "maxitems" => 1,
+        "appearance" => [
+            "createNewRelationLinkTitle" => "Add after image",
+        ],
+    ])
+    ->registerField();
+
+// ── Contact Info element ──────────────────────────────────────────────────────
+new Field("tt_content", "tx_maitheme_address", $lang("field.address"))
+    ->setConfig(["type" => "text", "rows" => 3, "cols" => 40])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_phone", $lang("field.phone"))
+    ->setConfig(["type" => "input", "size" => 30, "eval" => "trim"])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_email", $lang("field.email"))
+    ->setConfig(["type" => "input", "size" => 40, "eval" => "trim,email"])
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_opening_hours", $lang("field.opening_hours"))
+    ->setConfig(["type" => "text", "rows" => 4, "cols" => 40])
+    ->registerField();
+
 // ============================================================================
 // SHARED PALETTES (registered once, referenced by all CTypes)
 // ============================================================================
 
 ExtensionManagementUtility::addFieldsToPalette(
     "tt_content",
-    "maispace_appearance",
-    'tx_maitheme_bg_color, tx_maitheme_bg_image, --linebreak--,
-     tx_maitheme_text_color, tx_maitheme_border_radius, tx_maitheme_shadow, tx_maitheme_opacity',
+    "maispace_design",
+    'tx_maitheme_bg_color, tx_maitheme_text_color, --linebreak--,
+     tx_maitheme_bg_image, --linebreak--,
+     tx_maitheme_border_radius, tx_maitheme_shadow, tx_maitheme_opacity',
 );
 
 ExtensionManagementUtility::addFieldsToPalette(
@@ -262,21 +532,22 @@ ExtensionManagementUtility::addFieldsToPalette(
 
 ExtensionManagementUtility::addFieldsToPalette(
     "tt_content",
+    "maispace_responsive",
+    'tx_maitheme_hide_desktop, tx_maitheme_hide_tablet, tx_maitheme_hide_mobile,
+     --linebreak--, tx_maitheme_col_span',
+);
+
+ExtensionManagementUtility::addFieldsToPalette(
+    "tt_content",
     "maispace_animation",
     "tx_maitheme_animation, tx_maitheme_animation_delay",
 );
 
+// anchor_id and aria_label only — tx_maitheme_link is placed per-CType in Tab 1
 ExtensionManagementUtility::addFieldsToPalette(
     "tt_content",
     "maispace_linking",
-    "tx_maitheme_link, tx_maitheme_anchor_id, tx_maitheme_aria_label",
-);
-
-ExtensionManagementUtility::addFieldsToPalette(
-    "tt_content",
-    "maispace_responsive",
-    'tx_maitheme_hide_desktop, tx_maitheme_hide_tablet, tx_maitheme_hide_mobile,
-     --linebreak--, tx_maitheme_col_span',
+    "tx_maitheme_anchor_id, tx_maitheme_aria_label",
 );
 
 ExtensionManagementUtility::addFieldsToPalette(
@@ -287,30 +558,29 @@ ExtensionManagementUtility::addFieldsToPalette(
 
 // ============================================================================
 // SHARED TABS STRING (appended to every CType after element-specific fields)
+// Tab 1 "General" is the TYPO3 core tab (element content lives there).
+// Tab 2 "Appearance & Layout" — design tokens + spacing + responsive.
+// Tab 3 "Advanced"            — animation + anchor/aria + developer fields.
+// Tabs 4–5 "Language" / "Access" are added by addDefaultLanguageTab /
+//           addDefaultAccessTab at the end of each CType definition.
 // ============================================================================
 
 $sharedTabs =
     "--div--;" .
-    $lang("tab.appearance") .
+    $lang("tab.appearance_layout") .
     "," .
-    "--palette--;;maispace_appearance," .
+    "--palette--;;maispace_design," .
     "--palette--;;maispace_spacing," .
-    "--div--;" .
-    $lang("tab.animation") .
-    "," .
-    "--palette--;;maispace_animation," .
-    "--palette--;;maispace_linking," .
     "--palette--;;maispace_responsive," .
     "--div--;" .
     $lang("tab.advanced") .
     "," .
+    "--palette--;;maispace_animation," .
+    "--palette--;;maispace_linking," .
     "--palette--;;maispace_advanced";
 
 // ============================================================================
 // CTYPE ITEM GROUPS
-// Declares the group labels for the CType selector in the record editing mask.
-// Each maispace_* group key must match the 'group' value passed when
-// registering CTypes via Helper::addCType() / CType::setGroup().
 // ============================================================================
 
 $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['itemGroups'] = array_merge(
@@ -328,8 +598,9 @@ $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['itemGroups'] = arra
 );
 
 // ============================================================================
-// BASIC ELEMENTS (10)
-// text, heading, richtext, image, video, audio, button, linklist, icon, divider
+// BASIC ELEMENTS (12)
+// text, heading, richtext, image, video, audio, button, linklist, icon,
+// divider, spacer, embed
 // ============================================================================
 
 new CType("maispace_text", $lang("ctype.text"), "content-text")
@@ -390,7 +661,9 @@ new CType("maispace_audio", $lang("ctype.audio"), "content-media")
 
 new CType("maispace_button", $lang("ctype.button"), "content-special-html")
     ->addDefaultHeaderPalette()
-    ->addCustomFields("tx_maitheme_link")
+    ->addCustomFields(
+        "tx_maitheme_link, tx_maitheme_button_style, tx_maitheme_button_size",
+    )
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -408,6 +681,7 @@ new CType("maispace_linklist", $lang("ctype.linklist"), "content-bullets")
 
 new CType("maispace_icon", $lang("ctype.icon"), "content-special-html")
     ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_icon_identifier, tx_maitheme_icon_size")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -416,6 +690,25 @@ new CType("maispace_icon", $lang("ctype.icon"), "content-special-html")
 
 new CType("maispace_divider", $lang("ctype.divider"), "content-special-div")
     ->disableGeneralPalette()
+    ->addCustomFields("tx_maitheme_divider_style")
+    ->addCustomFields($sharedTabs)
+    ->addDefaultLanguageTab()
+    ->addDefaultAccessTab()
+    ->setGroup('maispace_basic')
+    ->register();
+
+new CType("maispace_spacer", $lang("ctype.spacer"), "content-special-div")
+    ->disableGeneralPalette()
+    ->addCustomFields($sharedTabs)
+    ->addDefaultLanguageTab()
+    ->addDefaultAccessTab()
+    ->setGroup('maispace_basic')
+    ->register();
+
+new CType("maispace_embed", $lang("ctype.embed"), "content-media")
+    ->addDefaultHeaderPalette()
+    ->addCustomFields("bodytext")
+    ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 0]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -432,6 +725,12 @@ new CType("maispace_hero", $lang("ctype.hero"), "content-textmedia")
     ->addSubheaderField()
     ->addCustomFields("bodytext, image, tx_maitheme_link")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
+    ->addCustomFields(
+        "--div--;" .
+        $lang("tab.layout") .
+        "," .
+        "tx_maitheme_content_position, tx_maitheme_overlay_style",
+    )
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -442,6 +741,12 @@ new CType("maispace_banner", $lang("ctype.banner"), "content-image")
     ->addDefaultHeaderPalette()
     ->addCustomFields("bodytext, image, tx_maitheme_link")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
+    ->addCustomFields(
+        "--div--;" .
+        $lang("tab.layout") .
+        "," .
+        "tx_maitheme_content_position, tx_maitheme_overlay_style",
+    )
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -461,7 +766,7 @@ new CType("maispace_cta", $lang("ctype.cta"), "content-special-html")
 
 new CType("maispace_mediatext", $lang("ctype.mediatext"), "content-textmedia")
     ->addDefaultHeaderPalette()
-    ->addCustomFields("bodytext")
+    ->addCustomFields("bodytext, tx_maitheme_media_position")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
     ->addDefaultImageTab()
     ->addCustomFields($sharedTabs)
@@ -471,9 +776,10 @@ new CType("maispace_mediatext", $lang("ctype.mediatext"), "content-textmedia")
     ->register();
 
 // ============================================================================
-// CARDS & COMPONENTS (13)
+// CARDS & COMPONENTS (11)
 // card, teaser, featurebox, profile, testimonial, quote, logo, logoshowcase,
-// statistic, pricebox, badge, event, jobposting
+// statistic, badge, contactinfo
+// (pricebox, event, jobposting removed — belong in dedicated extensions)
 // ============================================================================
 
 new CType("maispace_card", $lang("ctype.card"), "content-textmedia")
@@ -501,7 +807,7 @@ new CType("maispace_teaser", $lang("ctype.teaser"), "content-textmedia")
 new CType("maispace_featurebox", $lang("ctype.featurebox"), "content-textmedia")
     ->addDefaultHeaderPalette()
     ->addSubheaderField()
-    ->addCustomFields("bodytext, tx_maitheme_link")
+    ->addCustomFields("tx_maitheme_icon_identifier, bodytext, tx_maitheme_link")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
@@ -562,18 +868,7 @@ new CType("maispace_logoshowcase", $lang("ctype.logoshowcase"), "content-image")
 new CType("maispace_statistic", $lang("ctype.statistic"), "content-table")
     ->addDefaultHeaderPalette()
     ->addSubheaderField()
-    ->addCustomFields("bodytext")
-    ->addCustomFields($sharedTabs)
-    ->addDefaultLanguageTab()
-    ->addDefaultAccessTab()
-    ->setGroup('maispace_components')
-    ->register();
-
-new CType("maispace_pricebox", $lang("ctype.pricebox"), "content-table")
-    ->addDefaultHeaderPalette()
-    ->addSubheaderField()
-    ->addCustomFields("bodytext, tx_maitheme_link")
-    ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
+    ->addCustomFields("tx_maitheme_value, tx_maitheme_unit")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -582,22 +877,19 @@ new CType("maispace_pricebox", $lang("ctype.pricebox"), "content-table")
 
 new CType("maispace_badge", $lang("ctype.badge"), "content-special-html")
     ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_variant")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
     ->setGroup('maispace_components')
     ->register();
 
-new CType("maispace_event", $lang("ctype.event"), "content-table")
+new CType("maispace_contactinfo", $lang("ctype.contactinfo"), "content-special-html")
     ->addDefaultHeaderPalette()
-    ->addCustomFields($sharedTabs)
-    ->addDefaultLanguageTab()
-    ->addDefaultAccessTab()
-    ->setGroup('maispace_components')
-    ->register();
-
-new CType("maispace_jobposting", $lang("ctype.jobposting"), "content-table")
-    ->addDefaultHeaderPalette()
+    ->addCustomFields(
+        "tx_maitheme_address, tx_maitheme_phone, tx_maitheme_email, " .
+        "tx_maitheme_opening_hours, tx_maitheme_link",
+    )
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -605,12 +897,15 @@ new CType("maispace_jobposting", $lang("ctype.jobposting"), "content-table")
     ->register();
 
 // ============================================================================
-// UI WIDGETS (6)
-// slider, accordion, tabs, modal, timeline, faq
+// UI WIDGETS (8)
+// slider, accordion, tabs, modal, timeline, faq, beforeafter, steps
 // ============================================================================
 
 new CType("maispace_slider", $lang("ctype.slider"), "content-carousel")
     ->addDefaultHeaderPalette()
+    ->addCustomFields(
+        "tx_maitheme_slider_items",
+    )
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -619,6 +914,7 @@ new CType("maispace_slider", $lang("ctype.slider"), "content-carousel")
 
 new CType("maispace_accordion", $lang("ctype.accordion"), "content-accordion")
     ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_accordion_items")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -627,6 +923,7 @@ new CType("maispace_accordion", $lang("ctype.accordion"), "content-accordion")
 
 new CType("maispace_tabs", $lang("ctype.tabs"), "content-tab")
     ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_tab_items")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -645,6 +942,7 @@ new CType("maispace_modal", $lang("ctype.modal"), "content-special-html")
 
 new CType("maispace_timeline", $lang("ctype.timeline"), "content-list-bullet")
     ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_timeline_items")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -653,6 +951,25 @@ new CType("maispace_timeline", $lang("ctype.timeline"), "content-list-bullet")
 
 new CType("maispace_faq", $lang("ctype.faq"), "content-accordion")
     ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_accordion_items")
+    ->addCustomFields($sharedTabs)
+    ->addDefaultLanguageTab()
+    ->addDefaultAccessTab()
+    ->setGroup('maispace_widgets')
+    ->register();
+
+new CType("maispace_beforeafter", $lang("ctype.beforeafter"), "content-image")
+    ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_image_before, tx_maitheme_image_after")
+    ->addCustomFields($sharedTabs)
+    ->addDefaultLanguageTab()
+    ->addDefaultAccessTab()
+    ->setGroup('maispace_widgets')
+    ->register();
+
+new CType("maispace_steps", $lang("ctype.steps"), "content-list-bullet")
+    ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_accordion_items")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -660,19 +977,12 @@ new CType("maispace_faq", $lang("ctype.faq"), "content-accordion")
     ->register();
 
 // ============================================================================
-// FORMS & ENGAGEMENT (4)
-// form, search, newsletter, map
+// FORMS & ENGAGEMENT (3)
+// form, newsletter, map
+// (search removed — belongs in a search extension)
 // ============================================================================
 
 new CType("maispace_form", $lang("ctype.form"), "content-form")
-    ->addDefaultHeaderPalette()
-    ->addCustomFields($sharedTabs)
-    ->addDefaultLanguageTab()
-    ->addDefaultAccessTab()
-    ->setGroup('maispace_forms')
-    ->register();
-
-new CType("maispace_search", $lang("ctype.search"), "content-special-html")
     ->addDefaultHeaderPalette()
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
@@ -692,7 +1002,7 @@ new CType("maispace_newsletter", $lang("ctype.newsletter"), "content-form")
 
 new CType("maispace_map", $lang("ctype.map"), "content-special-html")
     ->addDefaultHeaderPalette()
-    ->addCustomFields("bodytext")
+    ->addCustomFields("bodytext, tx_maitheme_lat, tx_maitheme_lng, tx_maitheme_zoom")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 0]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
@@ -701,8 +1011,9 @@ new CType("maispace_map", $lang("ctype.map"), "content-special-html")
     ->register();
 
 // ============================================================================
-// DATA & MEDIA (8)
-// table, datalist, gallery, filelist, chart, codeblock, progressbar, rating
+// DATA & MEDIA (9)
+// table, datalist, gallery, filelist, codeblock, chart, progressbar, rating,
+// breadcrumb
 // ============================================================================
 
 new CType("maispace_table", $lang("ctype.table"), "content-table")
@@ -738,6 +1049,7 @@ new CType("maispace_gallery", $lang("ctype.gallery"), "content-image-gallery")
 
 new CType("maispace_filelist", $lang("ctype.filelist"), "content-filelinks")
     ->addDefaultHeaderPalette()
+    ->addDefaultMediaTab()
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -749,7 +1061,7 @@ new CType(
     $lang("ctype.codeblock"),
     "content-special-html",
 )
-    ->addCustomFields("bodytext")
+    ->addCustomFields("tx_maitheme_language, bodytext")
     ->addColumnOverride("bodytext", [
         "config" => [
             "format" => "html",
@@ -779,6 +1091,7 @@ new CType(
     "content-special-html",
 )
     ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_value, tx_maitheme_variant")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -787,6 +1100,7 @@ new CType(
 
 new CType("maispace_rating", $lang("ctype.rating"), "content-special-html")
     ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_rating_value, tx_maitheme_rating_max")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -794,13 +1108,38 @@ new CType("maispace_rating", $lang("ctype.rating"), "content-special-html")
     ->register();
 
 // ============================================================================
-// FEEDBACK & STATE (5)
-// alert, notification, spinner, emptystate, confirmation
+// NAVIGATION & UTILITY (3)
+// breadcrumb, socialmedia, alert
+// (callout, iconlist, textcolumns put in basic group below)
+// ============================================================================
+
+new CType("maispace_breadcrumb", $lang("ctype.breadcrumb"), "content-special-html")
+    ->addDefaultHeaderPalette()
+    ->addCustomFields($sharedTabs)
+    ->addDefaultLanguageTab()
+    ->addDefaultAccessTab()
+    ->setGroup('maispace_basic')
+    ->register();
+
+new CType("maispace_socialmedia", $lang("ctype.socialmedia"), "content-bullets")
+    ->addDefaultHeaderPalette()
+    ->addCustomFields("bodytext")
+    ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 0]])
+    ->addCustomFields($sharedTabs)
+    ->addDefaultLanguageTab()
+    ->addDefaultAccessTab()
+    ->setGroup('maispace_basic')
+    ->register();
+
+// ============================================================================
+// FEEDBACK (1 — editorial notices only)
+// alert
+// (notification, spinner, emptystate, confirmation removed — controller concerns)
 // ============================================================================
 
 new CType("maispace_alert", $lang("ctype.alert"), "content-special-html")
     ->addDefaultHeaderPalette()
-    ->addCustomFields("bodytext")
+    ->addCustomFields("tx_maitheme_variant, bodytext")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 0]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
@@ -808,55 +1147,127 @@ new CType("maispace_alert", $lang("ctype.alert"), "content-special-html")
     ->setGroup('maispace_feedback')
     ->register();
 
-new CType(
-    "maispace_notification",
-    $lang("ctype.notification"),
-    "content-special-html",
-)
+// ============================================================================
+// ADDITIONAL BASIC ELEMENTS (missing from original list)
+// callout, iconlist, textcolumns
+// ============================================================================
+
+new CType("maispace_callout", $lang("ctype.callout"), "content-special-html")
+    ->addDefaultHeaderPalette()
+    ->addCustomFields("tx_maitheme_variant, bodytext")
+    ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
+    ->addCustomFields($sharedTabs)
+    ->addDefaultLanguageTab()
+    ->addDefaultAccessTab()
+    ->setGroup('maispace_basic')
+    ->register();
+
+new CType("maispace_iconlist", $lang("ctype.iconlist"), "content-bullets")
     ->addDefaultHeaderPalette()
     ->addCustomFields("bodytext")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 0]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
-    ->setGroup('maispace_feedback')
+    ->setGroup('maispace_basic')
     ->register();
 
-new CType("maispace_spinner", $lang("ctype.spinner"), "content-special-html")
-    ->addDefaultHeaderPalette()
-    ->addCustomFields($sharedTabs)
-    ->addDefaultLanguageTab()
-    ->addDefaultAccessTab()
-    ->setGroup('maispace_feedback')
-    ->register();
-
-new CType(
-    "maispace_emptystate",
-    $lang("ctype.emptystate"),
-    "content-special-html",
-)
+new CType("maispace_textcolumns", $lang("ctype.textcolumns"), "content-text-mixed")
     ->addDefaultHeaderPalette()
     ->addCustomFields("bodytext")
-    ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 0]])
+    ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
-    ->setGroup('maispace_feedback')
+    ->setGroup('maispace_basic')
     ->register();
 
-new CType(
-    "maispace_confirmation",
-    $lang("ctype.confirmation"),
-    "content-special-html",
-)
-    ->addDefaultHeaderPalette()
-    ->addCustomFields("bodytext")
-    ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 0]])
-    ->addCustomFields($sharedTabs)
-    ->addDefaultLanguageTab()
-    ->addDefaultAccessTab()
-    ->setGroup('maispace_feedback')
-    ->register();
+// ============================================================================
+// INLINE CHILD-RECORD FIELD REGISTRATIONS ON tt_content
+// These inline fields bind child record tables to their parent CTypes.
+// ============================================================================
+
+// Shared accordion/FAQ/steps items (tx_maitheme_accordion_item table)
+$GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_accordion_items'] = [
+    'label' => $lang('field.items'),
+    'config' => [
+        'type' => 'inline',
+        'foreign_table' => 'tx_maitheme_accordion_item',
+        'foreign_field' => 'parent_uid',
+        'foreign_sortby' => 'sort',
+        'appearance' => [
+            'collapseAll' => true,
+            'expandSingle' => true,
+            'newRecordLinkAddTitle' => true,
+            'showSynchronizationLink' => true,
+            'showAllLocalizationLink' => true,
+            'showPossibleLocalizationRecords' => true,
+        ],
+    ],
+];
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    'tx_maitheme_accordion_items',
+    '',
+    '',
+);
+
+// Tab items
+$GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_tab_items'] = [
+    'label' => $lang('field.items'),
+    'config' => [
+        'type' => 'inline',
+        'foreign_table' => 'tx_maitheme_tab_item',
+        'foreign_field' => 'parent_uid',
+        'foreign_sortby' => 'sort',
+        'appearance' => [
+            'collapseAll' => true,
+            'expandSingle' => true,
+            'newRecordLinkAddTitle' => true,
+            'showSynchronizationLink' => true,
+            'showAllLocalizationLink' => true,
+            'showPossibleLocalizationRecords' => true,
+        ],
+    ],
+];
+
+// Slider items
+$GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_slider_items'] = [
+    'label' => $lang('field.slides'),
+    'config' => [
+        'type' => 'inline',
+        'foreign_table' => 'tx_maitheme_slider_item',
+        'foreign_field' => 'parent_uid',
+        'foreign_sortby' => 'sort',
+        'appearance' => [
+            'collapseAll' => true,
+            'expandSingle' => true,
+            'newRecordLinkAddTitle' => true,
+            'showSynchronizationLink' => true,
+            'showAllLocalizationLink' => true,
+            'showPossibleLocalizationRecords' => true,
+        ],
+    ],
+];
+
+// Timeline items
+$GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_timeline_items'] = [
+    'label' => $lang('field.items'),
+    'config' => [
+        'type' => 'inline',
+        'foreign_table' => 'tx_maitheme_timeline_item',
+        'foreign_field' => 'parent_uid',
+        'foreign_sortby' => 'sort',
+        'appearance' => [
+            'collapseAll' => true,
+            'expandSingle' => true,
+            'newRecordLinkAddTitle' => true,
+            'showSynchronizationLink' => true,
+            'showAllLocalizationLink' => true,
+            'showPossibleLocalizationRecords' => true,
+        ],
+    ],
+];
 
 // ============================================================================
 // SECTION CONTAINERS (b13/container)
@@ -1058,8 +1469,6 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded("container")) {
     );
 
     // Assign maispace_sections group to all section container CType items.
-    // configureContainer() does not support a 'group' key, so we patch the
-    // TCA items array directly after all containers have been registered.
     foreach ($GLOBALS['TCA']['tt_content']['columns']['CType']['config']['items'] as &$item) {
         if (isset($item['value']) && str_starts_with($item['value'], 'maispace_section_')) {
             $item['group'] = 'maispace_sections';

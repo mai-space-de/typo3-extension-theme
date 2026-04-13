@@ -529,6 +529,41 @@ settings:
     type: bool
     category: elements.basic
 
+  elements.basic.breadcrumb:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.socialmedia:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.embed:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.spacer:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.callout:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.iconlist:
+    default: true
+    type: bool
+    category: elements.basic
+
+  elements.basic.textcolumns:
+    default: true
+    type: bool
+    category: elements.basic
+
   # ===========================================================================
   # ELEMENTS — Page Sections
   # ===========================================================================
@@ -602,22 +637,12 @@ settings:
     type: bool
     category: elements.components
 
-  elements.components.pricebox:
-    default: true
-    type: bool
-    category: elements.components
-
   elements.components.badge:
     default: true
     type: bool
     category: elements.components
 
-  elements.components.event:
-    default: true
-    type: bool
-    category: elements.components
-
-  elements.components.jobposting:
+  elements.components.contactinfo:
     default: true
     type: bool
     category: elements.components
@@ -656,16 +681,21 @@ settings:
     type: bool
     category: elements.widgets
 
+  elements.widgets.beforeafter:
+    default: true
+    type: bool
+    category: elements.widgets
+
+  elements.widgets.steps:
+    default: true
+    type: bool
+    category: elements.widgets
+
   # ===========================================================================
   # ELEMENTS — Forms & Engagement
   # ===========================================================================
 
   elements.forms.form:
-    default: true
-    type: bool
-    category: elements.forms
-
-  elements.forms.search:
     default: true
     type: bool
     category: elements.forms
@@ -729,26 +759,6 @@ settings:
   # ===========================================================================
 
   elements.feedback.alert:
-    default: true
-    type: bool
-    category: elements.feedback
-
-  elements.feedback.notification:
-    default: true
-    type: bool
-    category: elements.feedback
-
-  elements.feedback.spinner:
-    default: true
-    type: bool
-    category: elements.feedback
-
-  elements.feedback.emptystate:
-    default: true
-    type: bool
-    category: elements.feedback
-
-  elements.feedback.confirmation:
     default: true
     type: bool
     category: elements.feedback

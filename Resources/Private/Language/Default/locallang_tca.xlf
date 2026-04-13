@@ -6,9 +6,18 @@
 
             <!-- ═══════════════════════════════════════════════════════════
                  TABS
-            ═══════════════════════════════════════════════════════════ -->
+             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="tab.appearance">
                 <source>Appearance &amp; Spacing</source>
+            </trans-unit>
+            <trans-unit id="tab.appearance_layout">
+                <source>Appearance &amp; Layout</source>
+            </trans-unit>
+            <trans-unit id="tab.layout">
+                <source>Layout</source>
+            </trans-unit>
+            <trans-unit id="tab.content">
+                <source>Content</source>
             </trans-unit>
             <trans-unit id="tab.animation">
                 <source>Animation &amp; Linking</source>
@@ -94,6 +103,83 @@
                 <source>Column Width</source>
             </trans-unit>
 
+            <!-- Per-CType fields -->
+            <trans-unit id="field.variant">
+                <source>Variant</source>
+            </trans-unit>
+            <trans-unit id="field.button_style">
+                <source>Button Style</source>
+            </trans-unit>
+            <trans-unit id="field.button_size">
+                <source>Button Size</source>
+            </trans-unit>
+            <trans-unit id="field.icon_identifier">
+                <source>Icon</source>
+            </trans-unit>
+            <trans-unit id="field.icon_size">
+                <source>Icon Size</source>
+            </trans-unit>
+            <trans-unit id="field.divider_style">
+                <source>Divider Style</source>
+            </trans-unit>
+            <trans-unit id="field.language">
+                <source>Language / Syntax</source>
+            </trans-unit>
+            <trans-unit id="field.media_position">
+                <source>Media Position</source>
+            </trans-unit>
+            <trans-unit id="field.content_position">
+                <source>Content Position</source>
+            </trans-unit>
+            <trans-unit id="field.overlay_style">
+                <source>Overlay Style</source>
+            </trans-unit>
+            <trans-unit id="field.unit">
+                <source>Unit</source>
+            </trans-unit>
+            <trans-unit id="field.value">
+                <source>Value</source>
+            </trans-unit>
+            <trans-unit id="field.lat">
+                <source>Latitude</source>
+            </trans-unit>
+            <trans-unit id="field.lng">
+                <source>Longitude</source>
+            </trans-unit>
+            <trans-unit id="field.zoom">
+                <source>Zoom Level</source>
+            </trans-unit>
+            <trans-unit id="field.rating_max">
+                <source>Max Stars</source>
+            </trans-unit>
+            <trans-unit id="field.rating_value">
+                <source>Rating Value</source>
+            </trans-unit>
+            <trans-unit id="field.image_before">
+                <source>Before Image</source>
+            </trans-unit>
+            <trans-unit id="field.image_after">
+                <source>After Image</source>
+            </trans-unit>
+            <trans-unit id="field.address">
+                <source>Address</source>
+            </trans-unit>
+            <trans-unit id="field.phone">
+                <source>Phone</source>
+            </trans-unit>
+            <trans-unit id="field.email">
+                <source>E-Mail</source>
+            </trans-unit>
+            <trans-unit id="field.opening_hours">
+                <source>Opening Hours</source>
+            </trans-unit>
+            <trans-unit id="field.items">
+                <source>Items</source>
+            </trans-unit>
+            <trans-unit id="field.slides">
+                <source>Slides</source>
+            </trans-unit>
+
             <!-- Advanced -->
             <trans-unit id="field.custom_class">
                 <source>Custom CSS Class</source>
@@ -147,6 +233,101 @@
             <trans-unit id="maxwidth.text"><source>Text Width</source></trans-unit>
             <trans-unit id="maxwidth.card"><source>Card Width</source></trans-unit>
 
+            <!-- Color tokens -->
+            <trans-unit id="color.inherit"><source>Inherit</source></trans-unit>
+            <trans-unit id="color.primary"><source>Primary</source></trans-unit>
+            <trans-unit id="color.secondary"><source>Secondary</source></trans-unit>
+            <trans-unit id="color.surface"><source>Surface</source></trans-unit>
+            <trans-unit id="color.surface-alt"><source>Surface Alt</source></trans-unit>
+            <trans-unit id="color.accent"><source>Accent</source></trans-unit>
+            <trans-unit id="color.muted"><source>Muted</source></trans-unit>
+            <trans-unit id="color.dark"><source>Dark</source></trans-unit>
+            <trans-unit id="color.light"><source>Light</source></trans-unit>
+            <trans-unit id="color.danger"><source>Danger</source></trans-unit>
+            <trans-unit id="color.success"><source>Success</source></trans-unit>
+            <trans-unit id="color.warning"><source>Warning</source></trans-unit>
+            <trans-unit id="color.info"><source>Info</source></trans-unit>
+
+            <!-- Border radius tokens -->
+            <trans-unit id="radius.inherit"><source>Inherit</source></trans-unit>
+            <trans-unit id="radius.none"><source>None</source></trans-unit>
+            <trans-unit id="radius.sm"><source>Small</source></trans-unit>
+            <trans-unit id="radius.md"><source>Medium</source></trans-unit>
+            <trans-unit id="radius.lg"><source>Large</source></trans-unit>
+            <trans-unit id="radius.full"><source>Full / Pill</source></trans-unit>
+
+            <!-- Variant (alert / callout / badge) -->
+            <trans-unit id="variant.default"><source>Default</source></trans-unit>
+            <trans-unit id="variant.info"><source>Info</source></trans-unit>
+            <trans-unit id="variant.success"><source>Success</source></trans-unit>
+            <trans-unit id="variant.warning"><source>Warning</source></trans-unit>
+            <trans-unit id="variant.danger"><source>Danger</source></trans-unit>
+            <trans-unit id="variant.primary"><source>Primary</source></trans-unit>
+            <trans-unit id="variant.secondary"><source>Secondary</source></trans-unit>
+            <trans-unit id="variant.accent"><source>Accent</source></trans-unit>
+
+            <!-- Button style -->
+            <trans-unit id="buttonstyle.solid"><source>Solid</source></trans-unit>
+            <trans-unit id="buttonstyle.outline"><source>Outline</source></trans-unit>
+            <trans-unit id="buttonstyle.ghost"><source>Ghost</source></trans-unit>
+            <trans-unit id="buttonstyle.link"><source>Link</source></trans-unit>
+
+            <!-- Button size -->
+            <trans-unit id="buttonsize.sm"><source>Small</source></trans-unit>
+            <trans-unit id="buttonsize.md"><source>Medium</source></trans-unit>
+            <trans-unit id="buttonsize.lg"><source>Large</source></trans-unit>
+
+            <!-- Icon size -->
+            <trans-unit id="iconsize.sm"><source>Small</source></trans-unit>
+            <trans-unit id="iconsize.md"><source>Medium</source></trans-unit>
+            <trans-unit id="iconsize.lg"><source>Large</source></trans-unit>
+            <trans-unit id="iconsize.xl"><source>Extra Large</source></trans-unit>
+
+            <!-- Divider style -->
+            <trans-unit id="dividerstyle.solid"><source>Solid</source></trans-unit>
+            <trans-unit id="dividerstyle.dashed"><source>Dashed</source></trans-unit>
+            <trans-unit id="dividerstyle.dotted"><source>Dotted</source></trans-unit>
+            <trans-unit id="dividerstyle.gradient"><source>Gradient</source></trans-unit>
+
+            <!-- Content position (hero / banner) -->
+            <trans-unit id="contentposition.top-left"><source>Top Left</source></trans-unit>
+            <trans-unit id="contentposition.top-center"><source>Top Center</source></trans-unit>
+            <trans-unit id="contentposition.top-right"><source>Top Right</source></trans-unit>
+            <trans-unit id="contentposition.center-left"><source>Center Left</source></trans-unit>
+            <trans-unit id="contentposition.center"><source>Center</source></trans-unit>
+            <trans-unit id="contentposition.center-right"><source>Center Right</source></trans-unit>
+            <trans-unit id="contentposition.bottom-left"><source>Bottom Left</source></trans-unit>
+            <trans-unit id="contentposition.bottom-center"><source>Bottom Center</source></trans-unit>
+            <trans-unit id="contentposition.bottom-right"><source>Bottom Right</source></trans-unit>
+
+            <!-- Overlay style (hero / banner) -->
+            <trans-unit id="overlay.none"><source>None</source></trans-unit>
+            <trans-unit id="overlay.dark"><source>Dark</source></trans-unit>
+            <trans-unit id="overlay.light"><source>Light</source></trans-unit>
+            <trans-unit id="overlay.gradient-bottom"><source>Gradient (Bottom)</source></trans-unit>
+            <trans-unit id="overlay.gradient-top"><source>Gradient (Top)</source></trans-unit>
+
+            <!-- Media position (media &amp; text) -->
+            <trans-unit id="mediaposition.left"><source>Left</source></trans-unit>
+            <trans-unit id="mediaposition.right"><source>Right</source></trans-unit>
+            <trans-unit id="mediaposition.top"><source>Top</source></trans-unit>
+            <trans-unit id="mediaposition.bottom"><source>Bottom</source></trans-unit>
+
+            <!-- Code language -->
+            <trans-unit id="codelang.plaintext"><source>Plain Text</source></trans-unit>
+            <trans-unit id="codelang.html"><source>HTML</source></trans-unit>
+            <trans-unit id="codelang.css"><source>CSS</source></trans-unit>
+            <trans-unit id="codelang.javascript"><source>JavaScript</source></trans-unit>
+            <trans-unit id="codelang.typescript"><source>TypeScript</source></trans-unit>
+            <trans-unit id="codelang.php"><source>PHP</source></trans-unit>
+            <trans-unit id="codelang.python"><source>Python</source></trans-unit>
+            <trans-unit id="codelang.bash"><source>Bash / Shell</source></trans-unit>
+            <trans-unit id="codelang.sql"><source>SQL</source></trans-unit>
+            <trans-unit id="codelang.json"><source>JSON</source></trans-unit>
+            <trans-unit id="codelang.yaml"><source>YAML</source></trans-unit>
+            <trans-unit id="codelang.xml"><source>XML</source></trans-unit>
+            <trans-unit id="codelang.typoscript"><source>TypoScript</source></trans-unit>
+
             <!-- ═══════════════════════════════════════════════════════════
                  WIZARD GROUP HEADERS
             ═══════════════════════════════════════════════════════════ -->
@@ -161,7 +342,7 @@
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — BASIC
-            ═══════════════════════════════════════════════════════════ -->
+             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="ctype.text"><source>Text</source></trans-unit>
             <trans-unit id="ctype.heading"><source>Heading</source></trans-unit>
             <trans-unit id="ctype.richtext"><source>Rich Text</source></trans-unit>
@@ -172,6 +353,13 @@
             <trans-unit id="ctype.linklist"><source>Link List</source></trans-unit>
             <trans-unit id="ctype.icon"><source>Icon</source></trans-unit>
             <trans-unit id="ctype.divider"><source>Divider</source></trans-unit>
+            <trans-unit id="ctype.breadcrumb"><source>Breadcrumb</source></trans-unit>
+            <trans-unit id="ctype.socialmedia"><source>Social Media Links</source></trans-unit>
+            <trans-unit id="ctype.embed"><source>Embed</source></trans-unit>
+            <trans-unit id="ctype.spacer"><source>Spacer</source></trans-unit>
+            <trans-unit id="ctype.callout"><source>Callout</source></trans-unit>
+            <trans-unit id="ctype.iconlist"><source>Icon List</source></trans-unit>
+            <trans-unit id="ctype.textcolumns"><source>Text Columns</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — PAGE SECTIONS
@@ -183,7 +371,7 @@
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — CARDS & COMPONENTS
-            ═══════════════════════════════════════════════════════════ -->
+             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="ctype.card"><source>Card</source></trans-unit>
             <trans-unit id="ctype.teaser"><source>Teaser</source></trans-unit>
             <trans-unit id="ctype.featurebox"><source>Feature Box</source></trans-unit>
@@ -193,26 +381,25 @@
             <trans-unit id="ctype.logo"><source>Logo</source></trans-unit>
             <trans-unit id="ctype.logoshowcase"><source>Logo Showcase</source></trans-unit>
             <trans-unit id="ctype.statistic"><source>Statistic</source></trans-unit>
-            <trans-unit id="ctype.pricebox"><source>Price Box</source></trans-unit>
             <trans-unit id="ctype.badge"><source>Badge</source></trans-unit>
-            <trans-unit id="ctype.event"><source>Event</source></trans-unit>
-            <trans-unit id="ctype.jobposting"><source>Job Posting</source></trans-unit>
+            <trans-unit id="ctype.contactinfo"><source>Contact Info</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — UI WIDGETS
-            ═══════════════════════════════════════════════════════════ -->
+             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="ctype.slider"><source>Slider</source></trans-unit>
             <trans-unit id="ctype.accordion"><source>Accordion</source></trans-unit>
             <trans-unit id="ctype.tabs"><source>Tabs</source></trans-unit>
             <trans-unit id="ctype.modal"><source>Modal</source></trans-unit>
             <trans-unit id="ctype.timeline"><source>Timeline</source></trans-unit>
             <trans-unit id="ctype.faq"><source>FAQ</source></trans-unit>
+            <trans-unit id="ctype.beforeafter"><source>Before / After</source></trans-unit>
+            <trans-unit id="ctype.steps"><source>Steps</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — FORMS & ENGAGEMENT
-            ═══════════════════════════════════════════════════════════ -->
+             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="ctype.form"><source>Form</source></trans-unit>
-            <trans-unit id="ctype.search"><source>Search</source></trans-unit>
             <trans-unit id="ctype.newsletter"><source>Newsletter</source></trans-unit>
             <trans-unit id="ctype.map"><source>Map</source></trans-unit>
 
@@ -230,12 +417,8 @@
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — FEEDBACK & STATE
-            ═══════════════════════════════════════════════════════════ -->
+             ═══════════════════════════════════════════════════════════ -->
             <trans-unit id="ctype.alert"><source>Alert</source></trans-unit>
-            <trans-unit id="ctype.notification"><source>Notification</source></trans-unit>
-            <trans-unit id="ctype.spinner"><source>Spinner</source></trans-unit>
-            <trans-unit id="ctype.emptystate"><source>Empty State</source></trans-unit>
-            <trans-unit id="ctype.confirmation"><source>Confirmation</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — SECTIONS & LAYOUTS
@@ -263,6 +446,33 @@
             <trans-unit id="col.col4"><source>Column 4</source></trans-unit>
             <trans-unit id="col.wide"><source>Wide Column</source></trans-unit>
             <trans-unit id="col.narrow"><source>Narrow Column</source></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 INLINE CHILD RECORD LABELS
+             ═══════════════════════════════════════════════════════════ -->
+
+            <!-- Accordion / FAQ / Steps item -->
+            <trans-unit id="item.accordion"><source>Accordion Item</source></trans-unit>
+            <trans-unit id="item.question"><source>Question</source></trans-unit>
+            <trans-unit id="item.answer"><source>Answer</source></trans-unit>
+
+            <!-- Tab item -->
+            <trans-unit id="item.tab"><source>Tab</source></trans-unit>
+            <trans-unit id="item.tab_title"><source>Tab Title</source></trans-unit>
+            <trans-unit id="item.content"><source>Content</source></trans-unit>
+
+            <!-- Slider item -->
+            <trans-unit id="item.slide"><source>Slide</source></trans-unit>
+            <trans-unit id="item.headline"><source>Headline</source></trans-unit>
+            <trans-unit id="item.bodytext"><source>Body Text</source></trans-unit>
+            <trans-unit id="item.link"><source>Link</source></trans-unit>
+            <trans-unit id="item.image"><source>Image</source></trans-unit>
+
+            <!-- Timeline item -->
+            <trans-unit id="item.timeline"><source>Timeline Entry</source></trans-unit>
+            <trans-unit id="item.event_date"><source>Date</source></trans-unit>
+            <trans-unit id="item.title"><source>Title</source></trans-unit>
+            <trans-unit id="item.description"><source>Description</source></trans-unit>
 
         </body>
     </file>
