@@ -1,0 +1,78 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    Menubar item — renders a single menu entry at any nesting depth.
+    Called recursively: sub-menus call this partial for their own children.
+
+    Arguments:
+      item  {array}   — single MenuProcessor item with keys:
+                          title, link, target, active, current,
+                          hasSubpages (bool), children (array)
+      depth {integer} — current nesting depth (0 = menubar level,
+                          1 = first dropdown, 2 = fly-out)
+
+    ARIA roles per depth:
+      depth 0  →  role="menuitem" on <a>  (direct child of menubar)
+      depth ≥1 →  role="menuitem" on <a>  (child of role="menu")
+    The wrapping <li> always carries role="none" (presentational).
+
+    Sub-menu trigger arrows:
+      depth 0  →  SVG pointing down  (class="down")
+      depth ≥1 →  SVG pointing right (class="right")
+</f:comment>
+
+<li role="none"
+    class="mai-menubar__item{f:if(condition: item.active, then: ' is-active')}{f:if(condition: item.hasSubpages, then: ' has-submenu')}">
+
+    <f:comment>── Link / trigger ─────────────────────────────────────────────────</f:comment>
+    <a role="menuitem"
+       href="{item.link}"
+       class="mai-menubar__link{f:if(condition: item.current, then: ' mai-menubar__link--current')}"
+       {f:if(condition: item.target, then: 'target="{item.target}" rel="noopener noreferrer"')}
+       {f:if(condition: item.current, then: 'aria-current="page"')}
+       {f:if(condition: item.hasSubpages, then: 'aria-haspopup="true" aria-expanded="false"')}>
+
+        {item.title}
+
+        <f:comment>── Sub-menu indicator arrow ──────────────────────────────────</f:comment>
+        <f:if condition="{item.hasSubpages}">
+            <f:if condition="{depth} == 0">
+                <f:then>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="mai-menubar__arrow mai-menubar__arrow--down"
+                         aria-hidden="true"
+                         focusable="false"
+                         width="12" height="9" viewBox="0 0 12 9">
+                        <polygon points="1 0, 11 0, 6 8"/>
+                    </svg>
+                </f:then>
+                <f:else>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="mai-menubar__arrow mai-menubar__arrow--right"
+                         aria-hidden="true"
+                         focusable="false"
+                         width="9" height="12" viewBox="0 0 9 12">
+                        <polygon points="0 1, 0 11, 8 6"/>
+                    </svg>
+                </f:else>
+            </f:if>
+        </f:if>
+
+    </a>
+
+    <f:comment>── Sub-menu (recursive) ───────────────────────────────────────────</f:comment>
+    <f:if condition="{item.hasSubpages}">
+        <f:variable name="nextDepth" value="{depth + 1}"/>
+        <ul role="menu"
+            aria-label="{item.title}"
+            class="mai-menubar__submenu mai-menubar__submenu--depth-{nextDepth}">
+
+            <f:for each="{item.children}" as="child">
+                <f:render partial="Organism/Navigation/MenubarItem"
+                          arguments="{item: child, depth: nextDepth}"/>
+            </f:for>
+
+        </ul>
+    </f:if>
+
+</li>
+</html>

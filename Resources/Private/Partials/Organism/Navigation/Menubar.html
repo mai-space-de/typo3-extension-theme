@@ -1,0 +1,53 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Menubar navigation organism — WAI-ARIA APG "Navigation Menubar" pattern.
+    https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+
+    Arguments:
+      menuItems  {array}   — MenuProcessor result (multi-level, processed via
+                             dataProcessing.10 in page.typoscript / lib.templates.base).
+                             Each item has: title, link, target, active, current,
+                             hasSubpages, children[].
+      label      {string}  — Accessible aria-label for the <nav> landmark.
+                             Defaults to site name. Pass via {settings.general.site.name}
+                             or hardcode per-template.
+      mobileLabel {string} — Visible label for mobile toggle button (default "Menü").
+
+    Asset injection:
+      CSS and JS are injected here so this partial is self-contained.
+      The mai:asset.* ViewHelpers deduplicate by identifier — safe to include
+      this partial multiple times on a page without double-loading.
+</f:comment>
+
+<f:comment>── Assets (injected once, deduplicated by identifier) ──────────────────</f:comment>
+<mai:asset.css identifier="mai-menubar-nav"
+               src="EXT:mai_theme/Resources/Public/Scss/menubar-navigation.scss"
+               priority="0"/>
+<mai:asset.js  identifier="mai-menubar-nav-js"
+               src="EXT:mai_theme/Resources/Public/JavaScript/menubar-navigation.js"
+               defer="1"
+               priority="0"/>
+
+<f:comment>── Mobile toggle ─────────────────────────────────────────────────────</f:comment>
+<f:render partial="Organism/Navigation/MobileToggle"
+          arguments="{label: mobileLabel}"/>
+
+<f:comment>── Nav landmark ──────────────────────────────────────────────────────</f:comment>
+<nav class="mai-menubar-nav"
+     aria-label="{f:if(condition: label, then: label, else: 'Hauptnavigation')}">
+
+    <ul class="mai-menubar"
+        role="menubar"
+        aria-label="{f:if(condition: label, then: label, else: 'Hauptnavigation')}"
+        aria-hidden="false">
+
+        <f:for each="{menuItems}" as="item">
+            <f:render partial="Organism/Navigation/MenubarItem"
+                      arguments="{item: item, depth: 0}"/>
+        </f:for>
+
+    </ul>
+</nav>
+</html>

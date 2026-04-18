@@ -1,0 +1,30 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    Mobile navigation toggle button.
+    Shown only on narrow viewports (CSS hides it on wide screens).
+    JavaScript sets aria-expanded="true" when the mobile menu is open
+    and toggles aria-hidden on the .mai-menubar ul.
+
+    Arguments:
+      label {string} — Visible button label text. Defaults to "Menü".
+</f:comment>
+
+<button class="mai-menubar-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mai-menubar-list"
+        aria-label="{f:if(condition: label, then: label, else: 'Menü')}">
+
+    <f:comment>── Hamburger / close icon (CSS-driven via aria-expanded) ──────────</f:comment>
+    <span class="mai-menubar-toggle__icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+
+    <span class="mai-menubar-toggle__label">
+        {f:if(condition: label, then: label, else: 'Menü')}
+    </span>
+
+</button>
+</html>

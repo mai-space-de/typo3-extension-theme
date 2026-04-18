@@ -1,0 +1,278 @@
+// =============================================================================
+// menubar-navigation.scss
+//
+// WAI-ARIA APG Navigation Menubar — ext:mai_theme implementation.
+// Adapted from the W3C WAI-ARIA APG example styles.
+// https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+//
+// Licence: W3C Software and Document License
+// https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+//
+// All colours and spacing are driven by --mai-* / --color-* / --space-*
+// custom properties defined in the theme token layer, so no hardcoded values.
+// =============================================================================
+
+@import "tokens/breakpoints";
+
+// ---------------------------------------------------------------------------
+// Custom properties (override per site in :root {} of your own stylesheet)
+// ---------------------------------------------------------------------------
+:root {
+    --menubar-bg:              var(--color-surface, #eee);
+    --menubar-border:          var(--color-border, #ccc);
+    --menubar-focus-ring:      var(--color-primary, #034575);
+    --menubar-link-color:      var(--color-text, #000);
+    --menubar-link-hover-bg:   color-mix(in srgb, var(--color-primary, #034575) 12%, transparent);
+    --menubar-link-active-bg:  var(--color-primary, #034575);
+    --menubar-link-active-color: #fff;
+    --menubar-dropdown-bg:     var(--color-background, #fff);
+    --menubar-dropdown-border: var(--color-primary, #034575);
+    --menubar-dropdown-shadow: 0 4px 12px -2px rgb(0 0 0 / 0.15);
+    --menubar-dropdown-width:  14rem;
+    --menubar-arrow-size:      0.5em;
+    --menubar-toggle-size:     2.5rem;
+}
+
+// ---------------------------------------------------------------------------
+// Mobile toggle button
+// Hidden on wide viewports; visible below the md breakpoint.
+// ---------------------------------------------------------------------------
+.mai-menubar-toggle {
+    display:      none;
+    align-items:  center;
+    gap:          var(--space-xs, 0.5rem);
+    background:   none;
+    border:       2px solid transparent;
+    border-radius: var(--layout-radius, 4px);
+    cursor:       pointer;
+    padding:      var(--space-xs, 0.5rem) var(--space-sm, 0.75rem);
+    color:        var(--menubar-link-color);
+    font-weight:  var(--font-weight-medium, 500);
+    font-size:    1rem;
+    line-height:  1;
+
+    &:focus-visible {
+        outline:        2px solid var(--menubar-focus-ring);
+        outline-offset: 2px;
+    }
+
+    @include media-down($bp-md) {
+        display: flex;
+    }
+}
+
+.mai-menubar-toggle__icon {
+    display:        flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:          var(--menubar-toggle-size);
+    height:         calc(var(--menubar-toggle-size) * 0.6);
+
+    span {
+        display:       block;
+        width:         100%;
+        height:        2px;
+        background:    currentcolor;
+        border-radius: 2px;
+        transition:    transform 250ms ease, opacity 250ms ease;
+        transform-origin: center;
+    }
+}
+
+.mai-menubar-toggle[aria-expanded="true"] .mai-menubar-toggle__icon {
+    span:nth-child(1) { transform: translateY(calc(var(--menubar-toggle-size) * 0.3 - 1px)) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    span:nth-child(3) { transform: translateY(calc((var(--menubar-toggle-size) * 0.3 - 1px) * -1)) rotate(-45deg); }
+}
+
+// ---------------------------------------------------------------------------
+// Nav landmark wrapper
+// ---------------------------------------------------------------------------
+.mai-menubar-nav {
+    margin:  0;
+    padding: 0;
+
+    @include media-down($bp-md) {
+        position: relative;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Menubar — top-level list (role="menubar")
+// ---------------------------------------------------------------------------
+.mai-menubar {
+    display:          flex;
+    flex-direction:   row;
+    flex-wrap:        wrap;
+    align-items:      center;
+    gap:              0;
+    margin:           0;
+    padding:          2px;
+    list-style:       none;
+    background-color: var(--menubar-bg);
+    border:           1px solid var(--menubar-border);
+    font-size:        1.1em;
+
+    &.focus {
+        padding: 0;
+        border:  3px solid var(--menubar-focus-ring);
+    }
+
+    // On mobile: collapse to vertical, hidden until toggle opens it
+    @include media-down($bp-md) {
+        flex-direction:  column;
+        align-items:     stretch;
+        position:        absolute;
+        inset-inline-start: 0;
+        inset-block-start:  100%;
+        width:           100%;
+        z-index:         200;
+        background:      var(--menubar-dropdown-bg);
+        border:          2px solid var(--menubar-dropdown-border);
+        box-shadow:      var(--menubar-dropdown-shadow);
+
+        &[aria-hidden="true"] {
+            display: none;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// All menu items (role="none" li wrappers)
+// ---------------------------------------------------------------------------
+.mai-menubar__item {
+    margin:     0;
+    padding:    0;
+    list-style: none;
+    position:   relative;
+
+    @include media-down($bp-md) {
+        display: block;
+        width:   100%;
+    }
+}
+
+// Top-level items are inline on desktop
+.mai-menubar > .mai-menubar__item {
+    display: inline-block;
+
+    @include media-down($bp-md) {
+        display: block;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Menu links (role="menuitem")
+// ---------------------------------------------------------------------------
+.mai-menubar__link {
+    display:         inline-flex;
+    align-items:     center;
+    gap:             0.25em;
+    margin:          2px;
+    padding:         4px 8px 8px;
+    background-color: var(--menubar-bg);
+    color:           var(--menubar-link-color);
+    text-decoration: none;
+    white-space:     nowrap;
+    border:          2px solid transparent;
+    border-radius:   var(--layout-radius, 4px);
+
+    &:hover,
+    &:focus-visible {
+        outline:          none;
+        background-color: var(--menubar-link-hover-bg);
+        border-color:     var(--menubar-focus-ring);
+        padding:          2px 6px 4px;
+        color:            var(--color-primary, #034575);
+    }
+
+    &[aria-expanded="true"] {
+        background-color: color-mix(in srgb, var(--color-primary, #034575) 18%, transparent);
+    }
+
+    &[aria-current="page"],
+    &.mai-menubar__link--current {
+        padding-bottom:  4px;
+        border-bottom:   3px solid var(--menubar-focus-ring);
+        font-weight:     var(--font-weight-bold, 700);
+    }
+}
+
+// Sub-menu links are block-level and full-width
+[role="menu"] .mai-menubar__link {
+    display:      flex;
+    width:        100%;
+    padding:      6px 12px 6px 10px;
+    white-space:  normal;
+    border-radius: 0;
+    margin:       2px 0;
+
+    &:hover,
+    &:focus-visible {
+        padding-left: 8px;
+        border-left:  2px solid var(--menubar-focus-ring);
+        border-bottom: 2px solid transparent;
+    }
+
+    &[aria-current="page"],
+    &.mai-menubar__link--current {
+        padding-left:  6px;
+        border-left:   4px solid var(--menubar-focus-ring);
+        border-bottom: none;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Arrow SVGs inside links
+// ---------------------------------------------------------------------------
+.mai-menubar__arrow {
+    fill:   currentcolor;
+    stroke: currentcolor;
+    flex-shrink: 0;
+}
+
+.mai-menubar__arrow--down {
+    margin-inline-start: 0.125em;
+    transition: transform 200ms ease;
+}
+
+.mai-menubar__arrow--right {
+    position: absolute;
+    inset-inline-end: 0.75em;
+    padding-block-start: 0.35em;
+    transition: transform 200ms ease;
+}
+
+.mai-menubar__link[aria-expanded="true"] {
+    .mai-menubar__arrow--down  { transform: rotate(180deg); }
+    .mai-menubar__arrow--right { transform: rotate(90deg) translate(5px, -5px); }
+}
+
+// ---------------------------------------------------------------------------
+// Sub-menu panels (role="menu")
+// Hidden by default; JS sets display:block + positions them.
+// ---------------------------------------------------------------------------
+.mai-menubar__submenu {
+    display:          none;
+    position:         absolute;
+    margin:           0;
+    padding:          6px 4px;
+    min-width:        var(--menubar-dropdown-width);
+    background-color: var(--menubar-dropdown-bg);
+    border:           2px solid var(--menubar-dropdown-border);
+    border-radius:    var(--layout-radius, 4px);
+    box-shadow:       var(--menubar-dropdown-shadow);
+    list-style:       none;
+    z-index:          100;
+
+    // On mobile: static, full-width, no box-shadow
+    @include media-down($bp-md) {
+        position:   static;
+        box-shadow: none;
+        border:     none;
+        border-left: 3px solid var(--menubar-dropdown-border);
+        padding:    0 0 0 var(--space-sm, 0.75rem);
+        min-width:  0;
+        width:      100%;
+    }
+}
