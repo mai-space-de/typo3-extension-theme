@@ -1,0 +1,32 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Single slide inside a carousel.
+    item columns: headline, bodytext, link, image (FAL via images[0])
+    Arguments: item, index, total, parentUid
+</f:comment>
+<li class="mai-slider__item"
+    role="group"
+    aria-roledescription="slide"
+    aria-label="{index} of {total}"
+    id="slide-{parentUid}-{index}"
+    data-index="{index}">
+    <f:if condition="{item.images.0}">
+        <mai:image.picture image="{item.images.0}"
+                           alt="{item.headline}"
+                           class="mai-slider__image"/>
+    </f:if>
+    <div class="mai-slider__body">
+        <f:if condition="{item.headline}">
+            <f:render partial="Atom/Heading" arguments="{level: 3, text: item.headline, class: 'mai-slider__headline'}"/>
+        </f:if>
+        <f:if condition="{item.bodytext}">
+            <div class="mai-slider__text">{item.bodytext -> f:format.html()}</div>
+        </f:if>
+        <f:if condition="{item.link}">
+            <f:render partial="Atom/Link" arguments="{link: item.link, label: item.headline, class: 'mai-slider__link'}"/>
+        </f:if>
+    </div>
+</li>
+</html>

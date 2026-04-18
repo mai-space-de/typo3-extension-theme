@@ -1,0 +1,9 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    Decorative horizontal rule. Passes style tokens through --local-divider-*.
+    Arguments: style (solid/dashed/dotted), color, class
+</f:comment>
+<hr class="mai-divider mai-divider--{f:if(condition: style, then: style, else: 'solid')} {class}"
+    role="presentation"
+    style="{f:if(condition: color, then: '--local-divider-color: {color};')}"/>
+</html>

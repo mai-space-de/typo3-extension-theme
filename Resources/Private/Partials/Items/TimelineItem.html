@@ -1,0 +1,28 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Single timeline entry.
+    item columns: event_date, title, description, image (FAL via images[0])
+    Arguments: item, index, total, parentUid
+</f:comment>
+<li class="mai-timeline__item"
+    aria-posinset="{index}"
+    aria-setsize="{total}"
+    id="timeline-{parentUid}-{index}">
+    <article class="mai-timeline__entry">
+        <f:if condition="{item.event_date}">
+            <time class="mai-timeline__date" datetime="{item.event_date}">{item.event_date}</time>
+        </f:if>
+        <f:render partial="Atom/Heading" arguments="{level: 3, text: item.title, class: 'mai-timeline__title'}"/>
+        <f:if condition="{item.images.0}">
+            <mai:image.figure caption="" class="mai-timeline__media">
+                <mai:image.picture image="{item.images.0}" alt="{item.title}"/>
+            </mai:image.figure>
+        </f:if>
+        <f:if condition="{item.description}">
+            <div class="mai-timeline__description">{item.description -> f:format.html()}</div>
+        </f:if>
+    </article>
+</li>
+</html>

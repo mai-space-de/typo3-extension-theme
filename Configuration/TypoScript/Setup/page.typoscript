@@ -9,11 +9,6 @@ page {
 
 	config < config
 
-	# Register the theme's main SCSS entry via mai_assets pipeline.
-	includeCSS {
-		mai_theme_main = EXT:mai_theme/Resources/Public/Scss/main.scss
-	}
-
 	10 = FLUIDTEMPLATE
 	10 {
 		templateRootPaths {
@@ -136,5 +131,8 @@ page {
 		}
 	}
 }
+
+# Enable mai_assets HTML output minification for the frontend.
+plugin.tx_maispace_assets.settings.htmlMinification.enable = 1
 
 @import 'EXT:mai_theme/Configuration/TypoScript/Setup/page/body.typoscript'

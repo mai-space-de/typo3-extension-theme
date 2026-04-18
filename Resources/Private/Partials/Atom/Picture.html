@@ -1,0 +1,13 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Thin wrapper around mai:image.picture for art-direction image rendering.
+    Arguments: image (FAL, required), alt, class, lazyloading, fetchPriority
+</f:comment>
+<mai:image.picture image="{image}"
+                   alt="{alt}"
+                   class="mai-picture {class}"
+                   lazyloading="{f:if(condition: '{lazyloading}', then: lazyloading, else: 1)}"
+                   fetchPriority="{fetchPriority}"/>
+</html>

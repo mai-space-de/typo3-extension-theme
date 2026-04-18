@@ -17,21 +17,89 @@ tt_content.maispace_text {
 tt_content.maispace_textmedia < tt_content.maispace_text
 tt_content.maispace_textmedia.templateName = TextMedia
 
+## Accordion / FAQ / Steps — shared tx_maitheme_accordion_item table.
 tt_content.maispace_accordion = FLUIDTEMPLATE
 tt_content.maispace_accordion {
     templateName = Accordion
     templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
     partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
+    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+    dataProcessing.10 {
+        table = tx_maitheme_accordion_item
+        pidInList.field = pid
+        where.data = field:uid
+        where.wrap = parent_uid=|
+        orderBy = sort
+        as = items
+    }
 }
 
-tt_content.maispace_slider < tt_content.maispace_accordion
-tt_content.maispace_slider.templateName = Slider
+tt_content.maispace_faq < tt_content.maispace_accordion
+tt_content.maispace_steps < tt_content.maispace_accordion
 
-tt_content.maispace_tab < tt_content.maispace_accordion
-tt_content.maispace_tab.templateName = Tab
+## Slider — tx_maitheme_slider_item table (with FilesProcessor per item).
+tt_content.maispace_slider = FLUIDTEMPLATE
+tt_content.maispace_slider {
+    templateName = Slider
+    templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
+    partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
+    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+    dataProcessing.10 {
+        table = tx_maitheme_slider_item
+        pidInList.field = pid
+        where.data = field:uid
+        where.wrap = parent_uid=|
+        orderBy = sort
+        as = items
+        dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        dataProcessing.10 {
+            references.fieldName = image
+            as = images
+        }
+    }
+}
 
-tt_content.maispace_timeline < tt_content.maispace_accordion
-tt_content.maispace_timeline.templateName = Timeline
+## Tabs — tx_maitheme_tab_item table.
+## NOTE: the parent CType registered in TCA is `maispace_tabs` (plural);
+## the historical singular mapping is kept as an alias.
+tt_content.maispace_tabs = FLUIDTEMPLATE
+tt_content.maispace_tabs {
+    templateName = Tab
+    templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
+    partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
+    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+    dataProcessing.10 {
+        table = tx_maitheme_tab_item
+        pidInList.field = pid
+        where.data = field:uid
+        where.wrap = parent_uid=|
+        orderBy = sort
+        as = items
+    }
+}
+tt_content.maispace_tab < tt_content.maispace_tabs
+
+## Timeline — tx_maitheme_timeline_item table (with FilesProcessor per item).
+tt_content.maispace_timeline = FLUIDTEMPLATE
+tt_content.maispace_timeline {
+    templateName = Timeline
+    templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
+    partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
+    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+    dataProcessing.10 {
+        table = tx_maitheme_timeline_item
+        pidInList.field = pid
+        where.data = field:uid
+        where.wrap = parent_uid=|
+        orderBy = sort
+        as = items
+        dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        dataProcessing.10 {
+            references.fieldName = image
+            as = images
+        }
+    }
+}
 
 ## Section containers (b13/container CTypes)
 tt_content.maispace_section_light        = FLUIDTEMPLATE

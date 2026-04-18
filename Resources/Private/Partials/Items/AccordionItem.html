@@ -1,0 +1,17 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    Single accordion row. Renders as <details>/<summary> for progressive
+    enhancement (works without JS, announces expanded state to AT).
+    Arguments: item (tx_maitheme_accordion_item), index, parentUid
+</f:comment>
+<details class="mai-accordion__item"
+         id="accordion-{parentUid}-{index}"
+         data-index="{index}">
+    <summary class="mai-accordion__header">
+        <span class="mai-accordion__question">{item.question}</span>
+    </summary>
+    <div class="mai-accordion__panel" role="region" aria-labelledby="accordion-{parentUid}-{index}">
+        {item.answer -> f:format.html()}
+    </div>
+</details>
+</html>

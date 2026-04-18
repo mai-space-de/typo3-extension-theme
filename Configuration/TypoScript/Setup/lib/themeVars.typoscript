@@ -1,0 +1,173 @@
+## ------------------------------------------------------------------
+## lib.themeVars
+##
+## Emits a `:root { --mai-* }` CSS custom-properties block built from
+## every exposed `settings.frontend.*` key in:
+##   EXT:mai_theme/Configuration/Sets/MaiTheme/settings.definitions.yaml
+##
+## Consumed from Fluid via:
+##   <mai:asset.criticalStyle identifier="mai-theme-vars" isCritical="1">
+##       <f:cObject typoscriptObjectPath="lib.themeVars"/>
+##   </mai:asset.criticalStyle>
+##
+## Naming convention (deterministic 1:1 with YAML):
+##   frontend.color.primary        → --mai-color-primary
+##   frontend.color.primaryHover   → --mai-color-primary-hover
+##   frontend.layout.widthMax      → --mai-layout-width-max
+##   frontend.font.lineHeightTight → --mai-font-line-height-tight
+## ------------------------------------------------------------------
+
+lib.themeVars = TEXT
+lib.themeVars {
+    wrap = :root{|}
+    stdWrap.cObject = COA
+    stdWrap.cObject {
+        # --- color -----------------------------------------------------
+        10  = TEXT
+        10.value  = --mai-color-text:{$frontend.color.text};
+        20  = TEXT
+        20.value  = --mai-color-surface:{$frontend.color.surface};
+        30  = TEXT
+        30.value  = --mai-color-background:{$frontend.color.background};
+        40  = TEXT
+        40.value  = --mai-color-primary:{$frontend.color.primary};
+        50  = TEXT
+        50.value  = --mai-color-primary-hover:{$frontend.color.primaryHover};
+        60  = TEXT
+        60.value  = --mai-color-secondary:{$frontend.color.secondary};
+        70  = TEXT
+        70.value  = --mai-color-secondary-hover:{$frontend.color.secondaryHover};
+        80  = TEXT
+        80.value  = --mai-color-accent:{$frontend.color.accent};
+        90  = TEXT
+        90.value  = --mai-color-success:{$frontend.color.success};
+        100 = TEXT
+        100.value = --mai-color-warning:{$frontend.color.warning};
+        110 = TEXT
+        110.value = --mai-color-danger:{$frontend.color.danger};
+        120 = TEXT
+        120.value = --mai-color-info:{$frontend.color.info};
+        130 = TEXT
+        130.value = --mai-color-border:{$frontend.color.border};
+        140 = TEXT
+        140.value = --mai-color-disabled-bg:{$frontend.color.disabledBg};
+        150 = TEXT
+        150.value = --mai-color-disabled-text:{$frontend.color.disabledText};
+
+        # --- dark mode palette -----------------------------------------
+        160 = TEXT
+        160.value = --mai-color-dark-text:{$frontend.dark.colorText};
+        170 = TEXT
+        170.value = --mai-color-dark-surface:{$frontend.dark.colorSurface};
+        180 = TEXT
+        180.value = --mai-color-dark-background:{$frontend.dark.colorBackground};
+        190 = TEXT
+        190.value = --mai-color-dark-border:{$frontend.dark.colorBorder};
+
+        # --- spacing scale --------------------------------------------
+        200 = TEXT
+        200.value = --mai-space-2xs:{$frontend.space.2xs};
+        210 = TEXT
+        210.value = --mai-space-xs:{$frontend.space.xs};
+        220 = TEXT
+        220.value = --mai-space-sm:{$frontend.space.sm};
+        230 = TEXT
+        230.value = --mai-space-md:{$frontend.space.md};
+        240 = TEXT
+        240.value = --mai-space-lg:{$frontend.space.lg};
+        250 = TEXT
+        250.value = --mai-space-xl:{$frontend.space.xl};
+        260 = TEXT
+        260.value = --mai-space-2xl:{$frontend.space.2xl};
+        270 = TEXT
+        270.value = --mai-space-3xl:{$frontend.space.3xl};
+
+        # --- layout ---------------------------------------------------
+        300 = TEXT
+        300.value = --mai-layout-width-min:{$frontend.layout.widthMin};
+        310 = TEXT
+        310.value = --mai-layout-width-max:{$frontend.layout.widthMax};
+        320 = TEXT
+        320.value = --mai-layout-content-width:{$frontend.layout.contentWidth};
+        330 = TEXT
+        330.value = --mai-layout-card-width:{$frontend.layout.cardWidth};
+        340 = TEXT
+        340.value = --mai-layout-text-width:{$frontend.layout.textWidth};
+        350 = TEXT
+        350.value = --mai-layout-sidebar-main:{$frontend.layout.sidebarMain};
+        360 = TEXT
+        360.value = --mai-layout-sidebar-aside:{$frontend.layout.sidebarAside};
+        370 = TEXT
+        370.value = --mai-layout-grid-gap:{$frontend.layout.gridGap};
+        380 = TEXT
+        380.value = --mai-layout-radius:{$frontend.layout.radius};
+        390 = TEXT
+        390.value = --mai-layout-radius-lg:{$frontend.layout.radiusLg};
+
+        # --- typography ------------------------------------------------
+        400 = TEXT
+        400.value = --mai-font-family-base:{$frontend.font.familyBase};
+        410 = TEXT
+        410.value = --mai-font-family-accent:{$frontend.font.familyAccent};
+        420 = TEXT
+        420.value = --mai-font-family-mono:{$frontend.font.familyMono};
+        430 = TEXT
+        430.value = --mai-font-weight-normal:{$frontend.font.weightNormal};
+        440 = TEXT
+        440.value = --mai-font-weight-medium:{$frontend.font.weightMedium};
+        450 = TEXT
+        450.value = --mai-font-weight-bold:{$frontend.font.weightBold};
+        460 = TEXT
+        460.value = --mai-font-weight-black:{$frontend.font.weightBlack};
+        470 = TEXT
+        470.value = --mai-font-size-sm:{$frontend.font.sizeSm};
+        480 = TEXT
+        480.value = --mai-font-size-base:{$frontend.font.sizeBase};
+        490 = TEXT
+        490.value = --mai-font-size-lg:{$frontend.font.sizeLg};
+        500 = TEXT
+        500.value = --mai-font-size-xl:{$frontend.font.sizeXl};
+        510 = TEXT
+        510.value = --mai-font-size-2xl:{$frontend.font.size2xl};
+        520 = TEXT
+        520.value = --mai-font-size-3xl:{$frontend.font.size3xl};
+        530 = TEXT
+        530.value = --mai-font-size-4xl:{$frontend.font.size4xl};
+        540 = TEXT
+        540.value = --mai-font-line-height-tight:{$frontend.font.lineHeightTight};
+        550 = TEXT
+        550.value = --mai-font-line-height-snug:{$frontend.font.lineHeightSnug};
+        560 = TEXT
+        560.value = --mai-font-line-height-base:{$frontend.font.lineHeightBase};
+        570 = TEXT
+        570.value = --mai-font-line-height-relaxed:{$frontend.font.lineHeightRelaxed};
+
+        # --- button tokens --------------------------------------------
+        600 = TEXT
+        600.value = --mai-btn-primary-bg:{$frontend.btn.primaryBg};
+        610 = TEXT
+        610.value = --mai-btn-primary-text:{$frontend.btn.primaryText};
+        620 = TEXT
+        620.value = --mai-btn-secondary-bg:{$frontend.btn.secondaryBg};
+        630 = TEXT
+        630.value = --mai-btn-secondary-text:{$frontend.btn.secondaryText};
+        640 = TEXT
+        640.value = --mai-btn-border-radius:{$frontend.btn.borderRadius};
+        650 = TEXT
+        650.value = --mai-btn-border-width:{$frontend.btn.borderWidth};
+
+        # --- image ----------------------------------------------------
+        700 = TEXT
+        700.value = --mai-img-border-radius:{$frontend.img.borderRadius};
+        710 = TEXT
+        710.value = --mai-img-object-fit:{$frontend.img.objectFit};
+
+        # --- icon sizes -----------------------------------------------
+        720 = TEXT
+        720.value = --mai-icon-size-sm:{$frontend.icon.sizeSm};
+        730 = TEXT
+        730.value = --mai-icon-size-md:{$frontend.icon.sizeMd};
+        740 = TEXT
+        740.value = --mai-icon-size-lg:{$frontend.icon.sizeLg};
+    }
+}

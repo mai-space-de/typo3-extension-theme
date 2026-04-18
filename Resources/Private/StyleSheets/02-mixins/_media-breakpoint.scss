@@ -1,0 +1,68 @@
+// =============================================================================
+// 02-mixins/_media-breakpoint.scss
+//
+// Responsive breakpoint mixins.
+// Usage:  @include bp-up(md)  { … }   // applies above the md breakpoint
+//         @include bp-down(lg) { … }   // applies below the lg breakpoint
+//         @include bp-only(sm)  { … }   // applies only within the sm range
+//
+// Breakpoints mirror the CSS custom properties defined in 01-settings:
+//   xs: 0      sm: 36rem   md: 48rem   lg: 62rem   xl: 75rem   2xl: 87.5rem
+// =============================================================================
+
+$breakpoints: (
+    "xs":  0,
+    "sm":  36rem,
+    "md":  48rem,
+    "lg":  62rem,
+    "xl":  75rem,
+    "2xl": 87.5rem,
+) !default;
+
+// Returns the pixel value of a named breakpoint.
+@function bp($name) {
+    @if not map-has-key($breakpoints, $name) {
+        @error "Unknown breakpoint `#{$name}`. Available: #{map-keys($breakpoints)}.";
+    }
+
+    @return map-get($breakpoints, $name);
+}
+
+// Applies styles from the given breakpoint upward (mobile-first).
+@mixin bp-up($name) {
+    $value: bp($name);
+
+    @if $value == 0 {
+        @content;
+    } @else {
+        @media (min-width: #{$value}) {
+            @content;
+        }
+    }
+}
+
+// Applies styles below the given breakpoint.
+@mixin bp-down($name) {
+    $value: bp($name);
+
+    @media (max-width: calc(#{$value} - 0.02rem)) {
+        @content;
+    }
+}
+
+// Applies styles only within the given breakpoint range.
+@mixin bp-only($name) {
+    $names: map-keys($breakpoints);
+    $index: index($names, $name);
+    $next: if($index < length($names), nth($names, $index + 1), null);
+
+    @if $next {
+        @media (min-width: #{bp($name)}) and (max-width: calc(#{bp($next)} - 0.02rem)) {
+            @content;
+        }
+    } @else {
+        @include bp-up($name) {
+            @content;
+        }
+    }
+}

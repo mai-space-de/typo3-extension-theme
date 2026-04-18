@@ -1,9 +1,42 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:layout name="Default"/>
 
-<f:debug>{_all}</f:debug>
-<f:cObject typoscriptObjectPath="lib.templates.columns.popovers" />
-<f:cObject typoscriptObjectPath="lib.templates.columns.navbar" />
-<f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent" />
-<f:cObject typoscriptObjectPath="lib.templates.columns.content" />
-<f:cObject typoscriptObjectPath="lib.templates.columns.afterContent" />
-<f:cObject typoscriptObjectPath="lib.templates.columns.footer" />
-<f:cObject typoscriptObjectPath="lib.templates.columns.hidden" />
+<f:comment>
+    Main page template.
+    - `HeadAssets` emits :root { --mai-* } CSS variables + font preload hints.
+    - `Main` renders the semantic page shell with colPos landmarks.
+</f:comment>
+
+<f:section name="HeadAssets">
+    <f:comment>
+        Critical CSS — inline :root custom properties generated from
+        EXT:mai_theme/Configuration/Sets/MaiTheme/settings.definitions.yaml
+        and piped through `lib.themeVars` in setup.typoscript.
+    </f:comment>
+    <mai:asset.criticalStyle identifier="mai-theme-vars" isCritical="1">
+        <f:cObject typoscriptObjectPath="lib.themeVars"/>
+    </mai:asset.criticalStyle>
+
+    <mai:asset.css identifier="mai-theme-main"
+                   src="EXT:mai_theme/Resources/Public/Scss/main.scss"
+                   priority="1"/>
+</f:section>
+
+<f:section name="Main">
+    <f:cObject typoscriptObjectPath="lib.templates.columns.popovers"/>
+    <header role="banner">
+        <f:cObject typoscriptObjectPath="lib.templates.columns.navbar"/>
+        <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
+    </header>
+    <main id="main" role="main">
+        <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
+    </main>
+    <footer role="contentinfo">
+        <f:cObject typoscriptObjectPath="lib.templates.columns.afterContent"/>
+        <f:cObject typoscriptObjectPath="lib.templates.columns.footer"/>
+    </footer>
+    <f:cObject typoscriptObjectPath="lib.templates.columns.hidden"/>
+</f:section>
+</html>

@@ -14,7 +14,3 @@ services:
   Maispace\MaiTheme\Service\BackendThemeService:
     public: true
     shared: true
-
-  Maispace\MaiTheme\Service\AssetRegistrationService:
-    public: true
-    shared: true

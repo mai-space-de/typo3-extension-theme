@@ -1,12 +1,20 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<div class="mai-timeline" data-ce-uid="{data.uid}">
-    <f:for each="{items}" as="item" iteration="it">
-        <div class="mai-timeline__item" data-index="{it.index}">
-            <f:if condition="{item.header}">
-                <f:render partial="Atom/Heading" arguments="{level: 3, text: item.header}"/>
-            </f:if>
-            <f:if condition="{item.bodytext}">{item.bodytext -> f:format.html()}</f:if>
-        </div>
-    </f:for>
-</div>
+<f:comment>
+    Timeline organism — ordered list with time/article semantics per entry.
+    Arguments: items (tx_maitheme_timeline_item, each with `images` FAL
+    array processed via FilesProcessor), data (parent tt_content)
+</f:comment>
+<section class="mai-timeline"
+         data-ce-uid="{data.uid}"
+         aria-label="{f:if(condition: data.header, then: data.header, else: 'Timeline')}">
+    <f:if condition="{data.header}">
+        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-timeline__title'}"/>
+    </f:if>
+    <ol class="mai-timeline__list">
+        <f:for each="{items}" as="item" iteration="it">
+            <f:render partial="Items/TimelineItem"
+                      arguments="{item: item, index: it.cycle, total: it.total, parentUid: data.uid}"/>
+        </f:for>
+    </ol>
+</section>
 </html>

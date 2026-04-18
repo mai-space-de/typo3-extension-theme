@@ -1,0 +1,66 @@
+// =============================================================================
+// 05-molecules/_button-group.scss
+//
+// Groups multiple buttons into a single horizontal row.
+// Two variants are provided:
+//
+//   .button-group         — loose group with gap (buttons retain border-radius)
+//   .button-group-attached — fused group, sharing edges (border-radius merged)
+//
+// Wrap any combination of <button>, <a class="button">, or input buttons.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Default button group — uses Flexbox, keeps per-button border-radius.
+// ---------------------------------------------------------------------------
+@layer theme-molecules {
+.button-group {
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         var(--space-sm);
+    align-items: center;
+
+    // Collapsed variant: no gap, no wrap.
+    &.button-group-nowrap {
+        flex-wrap: nowrap;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Attached button group — fused borders, shared rounding on outer edges only.
+// ---------------------------------------------------------------------------
+.button-group-attached {
+    display:     inline-flex;
+    align-items: stretch;
+
+    > button,
+    > .button,
+    > input[type="submit"],
+    > input[type="reset"],
+    > input[type="button"] {
+        border-radius: 0;
+        // Collapse adjacent borders into a single 1px line.
+        margin-inline-start: calc(-1 * var(--btn-border-width));
+
+        // Re-apply rounded corners to the first and last children only.
+        &:first-child {
+            border-start-start-radius: var(--btn-border-radius);
+            border-end-start-radius:   var(--btn-border-radius);
+            margin-inline-start: 0;
+        }
+
+        &:last-child {
+            border-start-end-radius: var(--btn-border-radius);
+            border-end-end-radius:   var(--btn-border-radius);
+        }
+
+        // Raise z-index on hover/focus so borders overlap cleanly.
+        &:hover,
+        &:focus-visible {
+            z-index: 1;
+            position: relative;
+        }
+    }
+}
+
+}

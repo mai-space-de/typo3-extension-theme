@@ -1,0 +1,12 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    MediaBox molecule — figure/picture + optional caption + optional overlay.
+    Arguments: image (FAL), alt, caption, overlay (slot markup), class
+</f:comment>
+<div class="mai-media-box {class}">
+    <f:render partial="Atom/Figure" arguments="{image: image, alt: alt, caption: caption}"/>
+    <f:if condition="{overlay}">
+        <div class="mai-media-box__overlay">{overlay -> f:format.raw()}</div>
+    </f:if>
+</div>
+</html>

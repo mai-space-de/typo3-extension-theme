@@ -2,3 +2,4 @@
 @import 'EXT:mai_theme/Configuration/TypoScript/Setup/lib/dynamicContent.typoscript'
 @import 'EXT:mai_theme/Configuration/TypoScript/Setup/lib/columns.typoscript'
 @import 'EXT:mai_theme/Configuration/TypoScript/Setup/lib/contentElement.typoscript'
+@import 'EXT:mai_theme/Configuration/TypoScript/Setup/lib/themeVars.typoscript'

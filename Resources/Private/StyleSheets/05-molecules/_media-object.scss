@@ -1,0 +1,70 @@
+// =============================================================================
+// 05-molecules/_media-object.scss
+//
+// Media object — pairs a constrained image or icon with arbitrary body content.
+// Flips to a stacked column layout below the sm breakpoint (or when
+// .media-object-stacked is added explicitly).
+//
+// Markup pattern:
+//   <div class="media-object">
+//     <div class="media-object-figure">
+//       <img src="…" alt="…" />
+//     </div>
+//     <div class="media-object-body">
+//       <h3>Title</h3>
+//       <p>Body content…</p>
+//     </div>
+//   </div>
+//
+// Override --media-object-* properties to customise spacing and figure width.
+// =============================================================================
+
+@use "../02-mixins/media-breakpoint" as *;
+
+@layer theme-molecules {
+:root {
+    --media-object-gap:          var(--space-md);
+    --media-object-figure-width: 4rem;
+}
+
+.media-object {
+    display:     flex;
+    gap:         var(--media-object-gap);
+    align-items: flex-start;
+
+    // Stack on small viewports.
+    @include bp-down(sm) {
+        flex-direction: column;
+    }
+}
+
+// The figure side (image, icon, avatar…).
+.media-object-figure {
+    flex:      0 0 var(--media-object-figure-width);
+    max-width: var(--media-object-figure-width);
+
+    img {
+        width:         100%;
+        border-radius: var(--img-border-radius, var(--layout-radius));
+    }
+}
+
+// The body side — fills remaining space.
+.media-object-body {
+    flex: 1 1 auto;
+    min-width: 0; // prevent text overflow in flex children
+}
+
+// ---------------------------------------------------------------------------
+// Explicit stack modifier — force column layout at any viewport width.
+// ---------------------------------------------------------------------------
+.media-object-stacked {
+    flex-direction: column;
+
+    .media-object-figure {
+        max-width: 100%;
+        flex-basis: auto;
+    }
+}
+
+}

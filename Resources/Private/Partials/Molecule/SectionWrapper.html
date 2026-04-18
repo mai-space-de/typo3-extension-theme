@@ -1,0 +1,24 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    Generic <section> wrapper for section-like content elements
+    (hero, banner, cta, featurebox, section containers).
+
+    Projects shared tt_content layout/appearance fields onto scoped CSS
+    custom properties: --local-bg, --local-fg, --local-py, --local-px.
+
+    Arguments:
+        data             — tt_content record (required)
+        class            — extra CSS class(es)
+        ariaLabelledBy   — id of heading that labels this section
+        body             — inline content
+</f:comment>
+<section class="mai-section {class}"
+         id="{f:if(condition: data.tx_maitheme_anchor, then: data.tx_maitheme_anchor)}"
+         aria-labelledby="{ariaLabelledBy}"
+         style="<f:if condition="{data.tx_maitheme_bg_color}">--local-bg: var(--mai-color-{data.tx_maitheme_bg_color});</f:if><f:if condition="{data.tx_maitheme_text_color}">--local-fg: var(--mai-color-{data.tx_maitheme_text_color});</f:if><f:if condition="{data.tx_maitheme_padding_top}">--local-py-start: var(--mai-space-{data.tx_maitheme_padding_top});</f:if><f:if condition="{data.tx_maitheme_padding_bottom}">--local-py-end: var(--mai-space-{data.tx_maitheme_padding_bottom});</f:if><f:if condition="{data.tx_maitheme_margin_top}">--local-my-start: var(--mai-space-{data.tx_maitheme_margin_top});</f:if><f:if condition="{data.tx_maitheme_margin_bottom}">--local-my-end: var(--mai-space-{data.tx_maitheme_margin_bottom});</f:if>">
+    <div class="mai-section__inner">
+        <f:render section="body"/>
+        <f:if condition="{body}">{body -> f:format.raw()}</f:if>
+    </div>
+</section>
+</html>
