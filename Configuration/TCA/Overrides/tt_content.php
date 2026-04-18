@@ -6,6 +6,13 @@ defined("TYPO3") or die();
 
 use Maispace\MaiBase\TableConfigurationArray\CType;
 use Maispace\MaiBase\TableConfigurationArray\Field;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\CheckboxConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\FileConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\InputConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\LinkConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\NumberConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\SelectSingleConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\TextConfig;
 use Maispace\MaiBase\TableConfigurationArray\Helper;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
@@ -37,30 +44,20 @@ $colorTokenItems = [
 ];
 
 new Field("tt_content", "tx_maitheme_bg_color", $lang("field.bg_color"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => $colorTokenItems,
-    ])
+    ->setConfig((new SelectSingleConfig())->setItems($colorTokenItems))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_bg_image", $lang("field.bg_image"))
-    ->setConfig([
-        "type" => "file",
-        "allowed" => "common-image-types",
-        "maxitems" => 1,
-        "appearance" => [
-            "createNewRelationLinkTitle" => "Add background image",
-        ],
-    ])
+    ->setConfig(
+        (new FileConfig())
+            ->setAllowed("common-image-types")
+            ->setMaxItems(1)
+            ->setAppearance(["createNewRelationLinkTitle" => "Add background image"])
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_text_color", $lang("field.text_color"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => $colorTokenItems,
-    ])
+    ->setConfig((new SelectSingleConfig())->setItems($colorTokenItems))
     ->registerField();
 
 new Field(
@@ -68,41 +65,32 @@ new Field(
     "tx_maitheme_border_radius",
     $lang("field.border_radius"),
 )
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("radius.inherit"), "value" => ""],
             ["label" => $lang("radius.none"), "value" => "none"],
             ["label" => $lang("radius.sm"), "value" => "sm"],
             ["label" => $lang("radius.md"), "value" => "md"],
             ["label" => $lang("radius.lg"), "value" => "lg"],
             ["label" => $lang("radius.full"), "value" => "full"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_shadow", $lang("field.shadow"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => "", "value" => ""],
             ["label" => $lang("shadow.sm"), "value" => "sm"],
             ["label" => $lang("shadow.md"), "value" => "md"],
             ["label" => $lang("shadow.lg"), "value" => "lg"],
             ["label" => $lang("shadow.none"), "value" => "none"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_opacity", $lang("field.opacity"))
-    ->setConfig([
-        "type" => "number",
-        "format" => "decimal",
-        "range" => ["lower" => 0, "upper" => 1],
-        "default" => 1,
-    ])
+    ->setConfig((new NumberConfig())->setFormat("decimal")->setRange(0, 1)->setDefault(1))
     ->registerField();
 
 // ── Spacing ───────────────────────────────────────────────────────────────────
@@ -121,11 +109,7 @@ $spacingItems = [
 ];
 
 new Field("tt_content", "tx_maitheme_margin_top", $lang("field.margin_top"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => $spacingItems,
-    ])
+    ->setConfig((new SelectSingleConfig())->setItems($spacingItems))
     ->registerField();
 
 new Field(
@@ -133,19 +117,11 @@ new Field(
     "tx_maitheme_margin_bottom",
     $lang("field.margin_bottom"),
 )
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => $spacingItems,
-    ])
+    ->setConfig((new SelectSingleConfig())->setItems($spacingItems))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_padding_top", $lang("field.padding_top"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => $spacingItems,
-    ])
+    ->setConfig((new SelectSingleConfig())->setItems($spacingItems))
     ->registerField();
 
 new Field(
@@ -153,59 +129,49 @@ new Field(
     "tx_maitheme_padding_bottom",
     $lang("field.padding_bottom"),
 )
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => $spacingItems,
-    ])
+    ->setConfig((new SelectSingleConfig())->setItems($spacingItems))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_max_width", $lang("field.max_width"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => "", "value" => ""],
             ["label" => $lang("maxwidth.full"), "value" => "full"],
             ["label" => $lang("maxwidth.content"), "value" => "content"],
             ["label" => $lang("maxwidth.text"), "value" => "text"],
             ["label" => $lang("maxwidth.card"), "value" => "card"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_alignment", $lang("field.alignment"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => "", "value" => ""],
             ["label" => $lang("alignment.left"), "value" => "left"],
             ["label" => $lang("alignment.center"), "value" => "center"],
             ["label" => $lang("alignment.right"), "value" => "right"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // ── Responsive ────────────────────────────────────────────────────────────────
 
 new Field("tt_content", "tx_maitheme_hide_desktop", $lang("field.hide_desktop"))
-    ->setConfig(["type" => "check", "default" => 0])
+    ->setConfig((new CheckboxConfig())->setDefault(0))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_hide_tablet", $lang("field.hide_tablet"))
-    ->setConfig(["type" => "check", "default" => 0])
+    ->setConfig((new CheckboxConfig())->setDefault(0))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_hide_mobile", $lang("field.hide_mobile"))
-    ->setConfig(["type" => "check", "default" => 0])
+    ->setConfig((new CheckboxConfig())->setDefault(0))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_col_span", $lang("field.col_span"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("colspan.auto"), "value" => ""],
             ["label" => "1/4  (3/12)", "value" => "3"],
             ["label" => "1/3  (4/12)", "value" => "4"],
@@ -215,23 +181,21 @@ new Field("tt_content", "tx_maitheme_col_span", $lang("field.col_span"))
             ["label" => "2/3  (8/12)", "value" => "8"],
             ["label" => "3/4  (9/12)", "value" => "9"],
             ["label" => "Full (12/12)", "value" => "12"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // ── Animation ─────────────────────────────────────────────────────────────────
 
 new Field("tt_content", "tx_maitheme_animation", $lang("field.animation"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("animation.none"), "value" => ""],
             ["label" => $lang("animation.fade"), "value" => "fade"],
             ["label" => $lang("animation.slide"), "value" => "slide"],
             ["label" => $lang("animation.zoom"), "value" => "zoom"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 new Field(
@@ -239,201 +203,171 @@ new Field(
     "tx_maitheme_animation_delay",
     $lang("field.animation_delay"),
 )
-    ->setConfig([
-        "type" => "number",
-        "format" => "integer",
-        "range" => ["lower" => 0, "upper" => 2000],
-        "default" => 0,
-        "size" => 6,
-    ])
+    ->setConfig(
+        (new NumberConfig())->setFormat("integer")->setRange(0, 2000)->setDefault(0)->setSize(6)
+    )
     ->registerField();
 
 // ── Linking (anchor / accessibility only — tx_maitheme_link goes per-CType) ──
 
 new Field("tt_content", "tx_maitheme_link", $lang("field.link"))
-    ->setConfig(["type" => "link"])
+    ->setConfig(new LinkConfig())
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_anchor_id", $lang("field.anchor_id"))
-    ->setConfig(["type" => "input", "size" => 30, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(30)->setEval("trim"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_aria_label", $lang("field.aria_label"))
-    ->setConfig(["type" => "input", "size" => 50, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(50)->setEval("trim"))
     ->registerField();
 
 // ── Advanced ──────────────────────────────────────────────────────────────────
 
 new Field("tt_content", "tx_maitheme_custom_class", $lang("field.custom_class"))
-    ->setConfig(["type" => "input", "size" => 60, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(60)->setEval("trim"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_custom_id", $lang("field.custom_id"))
-    ->setConfig(["type" => "input", "size" => 30, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(30)->setEval("trim"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_data_attrs", $lang("field.data_attrs"))
-    ->setConfig(["type" => "text", "rows" => 3, "cols" => 60])
+    ->setConfig((new TextConfig())->setRows(3)->setCols(60))
     ->registerField();
 
 // ── Shared variant (alert style for alert, notification, badge) ───────────────
 
 new Field("tt_content", "tx_maitheme_variant", $lang("field.variant"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("variant.default"), "value" => ""],
             ["label" => $lang("variant.info"), "value" => "info"],
             ["label" => $lang("variant.success"), "value" => "success"],
             ["label" => $lang("variant.warning"), "value" => "warning"],
             ["label" => $lang("variant.danger"), "value" => "danger"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // ── Per-CType specific fields ─────────────────────────────────────────────────
 
 // Icon element
 new Field("tt_content", "tx_maitheme_icon_identifier", $lang("field.icon_identifier"))
-    ->setConfig(["type" => "input", "size" => 40, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(40)->setEval("trim"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_icon_size", $lang("field.icon_size"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("iconsize.md"), "value" => ""],
             ["label" => $lang("iconsize.sm"), "value" => "sm"],
             ["label" => $lang("iconsize.lg"), "value" => "lg"],
             ["label" => $lang("iconsize.xl"), "value" => "xl"],
             ["label" => $lang("iconsize.2xl"), "value" => "2xl"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // Divider element
 new Field("tt_content", "tx_maitheme_divider_style", $lang("field.divider_style"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("dividerstyle.line"), "value" => ""],
             ["label" => $lang("dividerstyle.dashed"), "value" => "dashed"],
             ["label" => $lang("dividerstyle.dotted"), "value" => "dotted"],
             ["label" => $lang("dividerstyle.gradient"), "value" => "gradient"],
             ["label" => $lang("dividerstyle.blank"), "value" => "blank"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // Button element
 new Field("tt_content", "tx_maitheme_button_style", $lang("field.button_style"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("buttonstyle.primary"), "value" => ""],
             ["label" => $lang("buttonstyle.secondary"), "value" => "secondary"],
             ["label" => $lang("buttonstyle.ghost"), "value" => "ghost"],
             ["label" => $lang("buttonstyle.outline"), "value" => "outline"],
             ["label" => $lang("buttonstyle.link"), "value" => "link"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_button_size", $lang("field.button_size"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("buttonsize.md"), "value" => ""],
             ["label" => $lang("buttonsize.sm"), "value" => "sm"],
             ["label" => $lang("buttonsize.lg"), "value" => "lg"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // Hero / Banner element
 new Field("tt_content", "tx_maitheme_content_position", $lang("field.content_position"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("contentposition.left"), "value" => ""],
             ["label" => $lang("contentposition.center"), "value" => "center"],
             ["label" => $lang("contentposition.right"), "value" => "right"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_overlay_style", $lang("field.overlay_style"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("overlay.none"), "value" => ""],
             ["label" => $lang("overlay.light"), "value" => "light"],
             ["label" => $lang("overlay.dark"), "value" => "dark"],
             ["label" => $lang("overlay.gradient"), "value" => "gradient"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // Media & Text element
 new Field("tt_content", "tx_maitheme_media_position", $lang("field.media_position"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("mediaposition.left"), "value" => ""],
             ["label" => $lang("mediaposition.right"), "value" => "right"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // Statistic element
 new Field("tt_content", "tx_maitheme_unit", $lang("field.unit"))
-    ->setConfig(["type" => "input", "size" => 10, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(10)->setEval("trim"))
     ->registerField();
 
 // Progressbar element
 new Field("tt_content", "tx_maitheme_value", $lang("field.value"))
-    ->setConfig([
-        "type" => "number",
-        "format" => "integer",
-        "range" => ["lower" => 0, "upper" => 100],
-        "default" => 0,
-        "size" => 4,
-    ])
+    ->setConfig(
+        (new NumberConfig())->setFormat("integer")->setRange(0, 100)->setDefault(0)->setSize(4)
+    )
     ->registerField();
 
 // Map element
 new Field("tt_content", "tx_maitheme_lat", $lang("field.lat"))
-    ->setConfig(["type" => "input", "size" => 20, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(20)->setEval("trim"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_lng", $lang("field.lng"))
-    ->setConfig(["type" => "input", "size" => 20, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(20)->setEval("trim"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_zoom", $lang("field.zoom"))
-    ->setConfig([
-        "type" => "number",
-        "format" => "integer",
-        "range" => ["lower" => 1, "upper" => 20],
-        "default" => 14,
-        "size" => 3,
-    ])
+    ->setConfig(
+        (new NumberConfig())->setFormat("integer")->setRange(1, 20)->setDefault(14)->setSize(3)
+    )
     ->registerField();
 
 // Code Block element
 new Field("tt_content", "tx_maitheme_language", $lang("field.language"))
-    ->setConfig([
-        "type" => "select",
-        "renderType" => "selectSingle",
-        "items" => [
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
             ["label" => $lang("codelang.auto"), "value" => ""],
             ["label" => "HTML", "value" => "html"],
             ["label" => "CSS", "value" => "css"],
@@ -445,69 +379,57 @@ new Field("tt_content", "tx_maitheme_language", $lang("field.language"))
             ["label" => "SQL", "value" => "sql"],
             ["label" => "YAML", "value" => "yaml"],
             ["label" => "Markdown", "value" => "markdown"],
-        ],
-    ])
+        ])
+    )
     ->registerField();
 
 // Rating element
 new Field("tt_content", "tx_maitheme_rating_max", $lang("field.rating_max"))
-    ->setConfig([
-        "type" => "number",
-        "format" => "integer",
-        "range" => ["lower" => 1, "upper" => 10],
-        "default" => 5,
-        "size" => 3,
-    ])
+    ->setConfig(
+        (new NumberConfig())->setFormat("integer")->setRange(1, 10)->setDefault(5)->setSize(3)
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_rating_value", $lang("field.rating_value"))
-    ->setConfig([
-        "type" => "number",
-        "format" => "decimal",
-        "range" => ["lower" => 0, "upper" => 10],
-        "default" => 0,
-        "size" => 4,
-    ])
+    ->setConfig(
+        (new NumberConfig())->setFormat("decimal")->setRange(0, 10)->setDefault(0)->setSize(4)
+    )
     ->registerField();
 
 // ── Before/After Slider element ───────────────────────────────────────────────
 new Field("tt_content", "tx_maitheme_image_before", $lang("field.image_before"))
-    ->setConfig([
-        "type" => "file",
-        "allowed" => "common-image-types",
-        "maxitems" => 1,
-        "appearance" => [
-            "createNewRelationLinkTitle" => "Add before image",
-        ],
-    ])
+    ->setConfig(
+        (new FileConfig())
+            ->setAllowed("common-image-types")
+            ->setMaxItems(1)
+            ->setAppearance(["createNewRelationLinkTitle" => "Add before image"])
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_image_after", $lang("field.image_after"))
-    ->setConfig([
-        "type" => "file",
-        "allowed" => "common-image-types",
-        "maxitems" => 1,
-        "appearance" => [
-            "createNewRelationLinkTitle" => "Add after image",
-        ],
-    ])
+    ->setConfig(
+        (new FileConfig())
+            ->setAllowed("common-image-types")
+            ->setMaxItems(1)
+            ->setAppearance(["createNewRelationLinkTitle" => "Add after image"])
+    )
     ->registerField();
 
 // ── Contact Info element ──────────────────────────────────────────────────────
 new Field("tt_content", "tx_maitheme_address", $lang("field.address"))
-    ->setConfig(["type" => "text", "rows" => 3, "cols" => 40])
+    ->setConfig((new TextConfig())->setRows(3)->setCols(40))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_phone", $lang("field.phone"))
-    ->setConfig(["type" => "input", "size" => 30, "eval" => "trim"])
+    ->setConfig((new InputConfig())->setSize(30)->setEval("trim"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_email", $lang("field.email"))
-    ->setConfig(["type" => "input", "size" => 40, "eval" => "trim,email"])
+    ->setConfig((new InputConfig())->setSize(40)->setEval("trim,email"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_opening_hours", $lang("field.opening_hours"))
-    ->setConfig(["type" => "text", "rows" => 4, "cols" => 40])
+    ->setConfig((new TextConfig())->setRows(4)->setCols(40))
     ->registerField();
 
 // ============================================================================
