@@ -172,6 +172,100 @@ Don't read the AboveFold cache from a ViewHelper directly. Don't pass
 `data.uid` to a ViewHelper so it can re-ask `CriticalDetectionService` — the
 data processor already did that work once per CE on every request.
 
+## 7. FAL / media fields → mai_assets ViewHelpers
+
+`lib.contentElement` runs `FilesProcessor` for each known file-carrying field so
+every CE template has the resolved `FileReference` array ready:
+
+| TCA column | Fluid variable | Used by |
+|------------|----------------|---------|
+| `image` | `images` | `mai:image.responsiveImage` / `mai:image.picture` / `mai:image.figure` |
+| `assets` | `assets` | `mai:video.video` (self-hosted `file`) |
+| `tx_maitheme_bg_image` | `bgImage` | CSS `background-image` or `<picture>` backdrop |
+| `tx_maitheme_video_poster` | `videoPoster` | `mai:video.video` (YouTube/Vimeo/self-hosted poster) |
+| `tx_maitheme_image_before` / `_image_after` | `imageBefore` / `imageAfter` | `maispace_beforeafter` |
+
+A CType that doesn't register a given field just gets an empty array — the
+processor runs on all elements but is cheap when the column is absent. CTypes
+that need `dataProcessing.10` for something else (Accordion, Slider, Tabs,
+Timeline, Section containers, Bento) override it in their own block; they lose
+the `images` auto-resolution but don't need it at the top level anyway
+(slider/timeline resolve files per-item inside their nested processor).
+
+### Image (foreground)
+
+TCA `image` is a standard FAL column (added via `addDefaultImageTab()` or as a
+custom field). Combined with the **`maispace_image_display` palette** (fields
+`tx_maitheme_image_ratio` + `tx_maitheme_image_fit`) which maps to
+`--local-img-ratio` / `--local-img-fit` CSS vars the theme CSS consumes.
+
+Template pattern:
+
+```html
+<f:if condition="{images.0}">
+    <mai:image.responsiveImage image="{images.0}"
+                               alt="{images.0.properties.alternative}"
+                               breakpoints="{settings.image.breakpoints}"
+                               sizes="{settings.image.sizes}"
+                               isCritical="{isCritical}"
+                               class="mai-image mai-image--ratio-{data.tx_maitheme_image_ratio} mai-image--fit-{data.tx_maitheme_image_fit}"/>
+</f:if>
+```
+
+`{settings.image.breakpoints}` and `{settings.image.sizes}` come from a
+theme-level TypoScript setting (standard viewport buckets, shared across all
+image-carrying CEs — avoids per-element micromanagement).
+
+### Video
+
+`maispace_video`, `maispace_hero`, `maispace_banner` carry the **`maispace_video_providers`
+palette** alongside the core `assets` field:
+
+| Field | Purpose |
+|-------|---------|
+| `assets` (core) | Self-hosted video file (FAL) — resolves to `{assets.0}` |
+| `tx_maitheme_video_youtube_id` | YouTube ID for the privacy-friendly facade |
+| `tx_maitheme_video_vimeo_id` | Vimeo ID, same pattern |
+| `tx_maitheme_video_poster` | Poster image (FAL) — resolves to `{videoPoster.0}` |
+| `tx_maitheme_video_type` | `content` (inline player) or `background` (silent loop) |
+
+Template pattern — pass the editor input straight through; the VH internally
+prefers `youtubeId` > `vimeoId` > self-hosted `file`:
+
+```html
+<mai:video.video file="{assets.0}"
+                 youtubeId="{data.tx_maitheme_video_youtube_id}"
+                 vimeoId="{data.tx_maitheme_video_vimeo_id}"
+                 poster="{videoPoster.0}"
+                 type="{data.tx_maitheme_video_type}"
+                 title="{data.header}"
+                 isCritical="{isCritical}"
+                 class="mai-video mai-video--{data.tx_maitheme_video_type}"/>
+```
+
+Background mode (`type=background`) automatically emits a silent looped
+`<video>`. Facade modes (YouTube/Vimeo) emit a poster image + play button and
+only load the iframe on click — the recommended performance pattern.
+
+### SVG icon (not yet wired — needs your call)
+
+`mai:svg.icon` requires both `identifier` AND a `source` EXT: path. The current
+`tx_maitheme_icon_identifier` text field doesn't carry the source path. Pick a
+convention before fleshing out the Icon CE template:
+
+1. **Theme-owned sprite** — editor picks from a dropdown; theme ships
+   `EXT:mai_theme/Resources/Public/Icons/*.svg`; template derives
+   `source="EXT:mai_theme/Resources/Public/Icons/{identifier}.svg"`. Needs an
+   `itemsProcFunc` on the TCA select to auto-populate from the directory.
+2. **Editor-uploaded** — swap the identifier field for a FAL `svg` file upload;
+   template passes the uploaded file's path as `source`. Needs a VH tweak or
+   a helper that extracts the filesystem path from the FAL reference.
+3. **Free text + known convention** — keep the current text field; document
+   that `identifier` is a filename stem under `Resources/Public/Icons/`; same
+   template derivation as (1) but editors type the name manually.
+
+Option (1) is the best UX; (3) is the smallest change.
+
 ### Known gaps to fix when this pattern gets exercised for real
 
 - `CriticalStyleViewHelper` emits `<style>` at its call site. Inline `<style>`
