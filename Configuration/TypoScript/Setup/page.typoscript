@@ -25,6 +25,20 @@ page {
 
 		file = EXT:mai_theme/Resources/Private/Templates/Page/Default.html
 
+		dataProcessing {
+			10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+			10 {
+				levels = 3
+				expandAll = 1
+				includeSpacer = 1
+				titleField = nav_title // title
+				as = menuMain
+
+				special = directory
+				special.value = {$pageUids.mainMenu}
+			}
+		}
+
 		settings {
 			pids {
 				homepage = {$pageUids.homepage}

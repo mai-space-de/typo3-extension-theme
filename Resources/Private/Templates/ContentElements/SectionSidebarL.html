@@ -1,0 +1,12 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<section class="mai-section mai-section--sidebar-l" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+    <div class="mai-section__inner">
+        <div class="mai-section__col">
+            <f:for each="{children_270}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+        </div>
+        <div class="mai-section__col">
+            <f:for each="{children_271}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+        </div>
+    </div>
+</section>
+</html>

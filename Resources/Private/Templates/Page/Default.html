@@ -27,7 +27,12 @@
 <f:section name="Main">
     <f:cObject typoscriptObjectPath="lib.templates.columns.popovers"/>
     <header role="banner">
-        <f:cObject typoscriptObjectPath="lib.templates.columns.navbar"/>
+        <f:render partial="Organism/Navigation/Menubar"
+                  arguments="{
+                      menuItems:   menuMain,
+                      label:       settings.general.site.name,
+                      mobileLabel: 'Menü'
+                  }"/>
         <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
     </header>
     <main id="main" role="main">

@@ -1,0 +1,11 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>STUB — replace with the real Form template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
+<section class="mai-form" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+    <f:if condition="{data.header}">
+        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-form__title'}"/>
+    </f:if>
+    <f:if condition="{data.bodytext}">
+        <div class="mai-form__body">{data.bodytext -> f:format.html()}</div>
+    </f:if>
+</section>
+</html>
