@@ -1,38 +1,208 @@
 /**
  * menubar-navigation.js
  *
- * Accessible menubar navigation — adapted from the W3C WAI-ARIA APG
- * "Navigation Menubar" example.
- * https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+ * Accessible disclosure navigation for ext:mai_theme.
  *
- * Licence: W3C Software and Document License
- * https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+ * The markup rendered by Resources/Private/Partials/Organism/Navigation/
+ * MenubarItem.html follows the W3C WAI-ARIA APG "Disclosure Navigation Menu"
+ * pattern:
+ *   https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/
  *
- * Adaptations for ext:mai_theme:
- *   - BEM class names (.mai-menubar, .mai-menubar__*, .mai-menubar-toggle)
- *   - Mobile toggle integrated (aria-expanded on button, aria-hidden on list)
- *   - No content-generator demo code
- *   - ES module style ('use strict' + DOMContentLoaded bootstrap)
+ * Every menu entry is a plain <a href> link. When the entry has children,
+ * a sibling <button class="mai-menubar__toggle"> carries the chevron and
+ * toggles the adjacent <ul class="mai-menubar__submenu"> via aria-expanded
+ * and the hidden attribute.
+ *
+ * This module wires up:
+ *   - Click to open/close each disclosure button
+ *   - Escape closes the current submenu and returns focus to its button
+ *   - Click outside the nav closes all open submenus
+ *   - Hover on desktop opens a top-level submenu (and closes siblings)
+ *   - Mobile hamburger toggle (.mai-menubar-toggle) opens/closes the whole nav
  */
 
 'use strict';
 
 // ---------------------------------------------------------------------------
-// MobileToggle — controls the hamburger button on narrow viewports
+// Single disclosure button controller
+// ---------------------------------------------------------------------------
+class DisclosureToggle {
+  /**
+   * @param {HTMLButtonElement} button
+   * @param {DisclosureNavigation} nav
+   */
+  constructor(button, nav) {
+    this.button = button;
+    this.nav    = nav;
+
+    const controlledId = button.getAttribute('aria-controls');
+    this.submenu = controlledId ? document.getElementById(controlledId) : null;
+
+    // Depth is encoded in a BEM modifier, e.g. mai-menubar__toggle--depth-0
+    this.depth = Number((button.className.match(/--depth-(\d+)/) || [])[1] || 0);
+
+    button.addEventListener('click', this.onClick.bind(this));
+    button.addEventListener('keydown', this.onKeydown.bind(this));
+  }
+
+  isOpen() {
+    return this.button.getAttribute('aria-expanded') === 'true';
+  }
+
+  open() {
+    if (!this.submenu) return;
+    this.button.setAttribute('aria-expanded', 'true');
+    this.submenu.hidden = false;
+  }
+
+  close() {
+    if (!this.submenu) return;
+    this.button.setAttribute('aria-expanded', 'false');
+    this.submenu.hidden = true;
+  }
+
+  toggle() {
+    this.isOpen() ? this.close() : this.open();
+  }
+
+  onClick(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.isOpen()) {
+      this.close();
+      return;
+    }
+
+    // Close sibling disclosures at the same depth within the same parent scope
+    this.nav.closeSiblings(this);
+    this.open();
+  }
+
+  onKeydown(event) {
+    switch (event.key) {
+      case 'Escape':
+      case 'Esc':
+        if (this.isOpen()) {
+          this.close();
+          this.button.focus();
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        break;
+      case 'ArrowDown':
+      case 'Down':
+        if (!this.isOpen()) this.open();
+        this.focusFirstItemInSubmenu();
+        event.preventDefault();
+        break;
+      default:
+        break;
+    }
+  }
+
+  focusFirstItemInSubmenu() {
+    if (!this.submenu) return;
+    const first = this.submenu.querySelector('a, button');
+    if (first) first.focus();
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Navigation root — collects all toggles and handles global behaviour
+// ---------------------------------------------------------------------------
+class DisclosureNavigation {
+  /**
+   * @param {HTMLElement} root - .mai-menubar-nav
+   */
+  constructor(root) {
+    this.root    = root;
+    this.toggles = [];
+
+    root.querySelectorAll('.mai-menubar__toggle').forEach(btn => {
+      this.toggles.push(new DisclosureToggle(btn, this));
+    });
+
+    // Close everything on Escape anywhere inside the nav
+    root.addEventListener('keydown', this.onRootKeydown.bind(this));
+
+    // Close on outside click
+    document.addEventListener('pointerdown', this.onDocumentPointerdown.bind(this), true);
+
+    // Hover behaviour for top-level items on pointer-capable devices
+    const supportsHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+    if (supportsHover) {
+      root.querySelectorAll('.mai-menubar > .mai-menubar__item.has-submenu').forEach(li => {
+        li.addEventListener('pointerenter', this.onTopItemPointerenter.bind(this));
+        li.addEventListener('pointerleave', this.onTopItemPointerleave.bind(this));
+      });
+    }
+  }
+
+  closeAll() {
+    this.toggles.forEach(t => t.close());
+  }
+
+  closeSiblings(activeToggle) {
+    // Close any other open toggle whose submenu does NOT contain this button
+    this.toggles.forEach(t => {
+      if (t === activeToggle) return;
+      if (!t.isOpen()) return;
+      if (t.submenu && t.submenu.contains(activeToggle.button)) return;
+      t.close();
+    });
+  }
+
+  toggleFor(button) {
+    return this.toggles.find(t => t.button === button) || null;
+  }
+
+  onRootKeydown(event) {
+    if (event.key !== 'Escape' && event.key !== 'Esc') return;
+    // Find the closest open toggle and close it
+    const openToggles = this.toggles.filter(t => t.isOpen());
+    if (openToggles.length === 0) return;
+    const last = openToggles[openToggles.length - 1];
+    last.close();
+    last.button.focus();
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onDocumentPointerdown(event) {
+    if (!this.root.contains(event.target)) this.closeAll();
+  }
+
+  onTopItemPointerenter(event) {
+    const li = event.currentTarget;
+    const btn = li.querySelector(':scope > .mai-menubar__toggle');
+    const toggle = btn ? this.toggleFor(btn) : null;
+    if (!toggle) return;
+    this.closeSiblings(toggle);
+    toggle.open();
+  }
+
+  onTopItemPointerleave(event) {
+    const li = event.currentTarget;
+    const btn = li.querySelector(':scope > .mai-menubar__toggle');
+    const toggle = btn ? this.toggleFor(btn) : null;
+    if (toggle) toggle.close();
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Mobile hamburger toggle (unchanged behaviour, adapted to disclosure nav)
 // ---------------------------------------------------------------------------
 class MobileToggle {
   /**
    * @param {HTMLButtonElement} button  - .mai-menubar-toggle
-   * @param {HTMLElement}       menubar - .mai-menubar (the <nav> element)
+   * @param {HTMLElement}       nav     - .mai-menubar-nav
    */
-  constructor(button, menubar) {
-    this.button  = button;
-    this.menubar = menubar;
-    this.list    = menubar.querySelector('[role="menubar"]');
+  constructor(button, nav) {
+    this.button = button;
+    this.nav    = nav;
 
-    this.button.addEventListener('click', this.onToggleClick.bind(this));
-
-    // Close on outside click / tap
+    button.addEventListener('click', this.onClick.bind(this));
     document.addEventListener('pointerdown', this.onDocumentPointerdown.bind(this), true);
   }
 
@@ -41,534 +211,35 @@ class MobileToggle {
   }
 
   open() {
+    // Mobile only: CSS hides .mai-menubar-nav by default below the md breakpoint
+    // and shows it when the hamburger button has aria-expanded="true"
+    // (sibling selector in menubar-navigation.scss).
     this.button.setAttribute('aria-expanded', 'true');
-    if (this.list) {
-      this.list.removeAttribute('aria-hidden');
-    }
   }
 
   close() {
     this.button.setAttribute('aria-expanded', 'false');
-    if (this.list) {
-      this.list.setAttribute('aria-hidden', 'true');
-    }
   }
 
-  onToggleClick() {
+  onClick() {
     this.isOpen() ? this.close() : this.open();
   }
 
   onDocumentPointerdown(event) {
-    if (this.isOpen() && !this.menubar.contains(event.target) && !this.button.contains(event.target)) {
-      this.close();
-    }
+    if (!this.isOpen()) return;
+    if (this.button.contains(event.target) || this.nav.contains(event.target)) return;
+    this.close();
   }
 }
 
 // ---------------------------------------------------------------------------
-// MenubarNavigation — keyboard interaction per WAI-ARIA APG menubar pattern
-// ---------------------------------------------------------------------------
-class MenubarNavigation {
-  /**
-   * @param {HTMLElement} domNode - .mai-menubar (the <nav> element)
-   */
-  constructor(domNode) {
-    this.domNode = domNode;
-
-    this.menuitems      = [];
-    this.popups         = [];
-    this.menuitemGroups = {};
-    this.menuOrientation = {};
-    this.isPopup        = {};
-    this.isPopout       = {};
-    this.openPopups     = false;
-
-    this.firstChars    = {};
-    this.firstMenuitem = {};
-    this.lastMenuitem  = {};
-
-    // Bootstrap menu tree
-    const menubarList = domNode.querySelector('[role="menubar"]');
-    if (!menubarList) return;
-    this.initMenu(menubarList, 0);
-
-    domNode.addEventListener('focusin',  this.onMenubarFocusin.bind(this));
-    domNode.addEventListener('focusout', this.onMenubarFocusout.bind(this));
-
-    window.addEventListener('pointerdown', this.onBackgroundPointerdown.bind(this), true);
-
-    // Set first top-level item as tab stop
-    const first = menubarList.querySelector('[role="menuitem"]');
-    if (first) first.tabIndex = 0;
-  }
-
-  // ── Tree initialisation ─────────────────────────────────────────────────
-
-  getMenuitems(domNode, depth) {
-    const nodes   = [];
-    const initMenu = this.initMenu.bind(this);
-    const popups   = this.popups;
-
-    function findMenuitems(node) {
-      while (node) {
-        const role = (node.getAttribute('role') || '').trim().toLowerCase();
-
-        if (role === 'menu') {
-          node.tabIndex = -1;
-          initMenu(node, depth + 1);
-          node = node.nextElementSibling;
-          continue;
-        }
-
-        if (role === 'menuitem') {
-          if (node.getAttribute('aria-haspopup') === 'true') {
-            popups.push(node);
-          }
-          nodes.push(node);
-        }
-
-        // Recurse into children, but skip SVG subtrees
-        if (node.firstElementChild && node.firstElementChild.tagName !== 'svg') {
-          findMenuitems(node.firstElementChild);
-        }
-
-        node = node.nextElementSibling;
-      }
-    }
-
-    findMenuitems(domNode.firstElementChild);
-    return nodes;
-  }
-
-  initMenu(menu, depth) {
-    const menuId = this.getMenuId(menu);
-
-    this.menuOrientation[menuId] = this.getMenuOrientation(menu);
-    this.isPopup[menuId]  = menu.getAttribute('role') === 'menu' && depth === 1;
-    this.isPopout[menuId] = menu.getAttribute('role') === 'menu' && depth > 1;
-
-    this.menuitemGroups[menuId] = [];
-    this.firstChars[menuId]     = [];
-    this.firstMenuitem[menuId]  = null;
-    this.lastMenuitem[menuId]   = null;
-
-    const menuitems = this.getMenuitems(menu, depth);
-
-    for (const menuitem of menuitems) {
-      const role = (menuitem.getAttribute('role') || '');
-      if (!role.includes('menuitem')) continue;
-
-      menuitem.tabIndex = -1;
-      this.menuitems.push(menuitem);
-      this.menuitemGroups[menuId].push(menuitem);
-      this.firstChars[menuId].push(menuitem.textContent.trim().toLowerCase()[0]);
-
-      menuitem.addEventListener('keydown',      this.onKeydown.bind(this));
-      menuitem.addEventListener('click',        this.onMenuitemClick.bind(this), { capture: true });
-      menuitem.addEventListener('pointerover',  this.onMenuitemPointerover.bind(this));
-
-      if (!this.firstMenuitem[menuId]) {
-        if (this.hasPopup(menuitem)) menuitem.tabIndex = 0;
-        this.firstMenuitem[menuId] = menuitem;
-      }
-      this.lastMenuitem[menuId] = menuitem;
-    }
-  }
-
-  // ── Focus management ────────────────────────────────────────────────────
-
-  setFocusToMenuitem(menuId, newMenuitem) {
-    this.closePopupAll(newMenuitem);
-    (this.menuitemGroups[menuId] || []).forEach(item => {
-      item.tabIndex = item === newMenuitem ? 0 : -1;
-    });
-    newMenuitem.focus();
-  }
-
-  setFocusToFirstMenuitem(menuId) {
-    this.setFocusToMenuitem(menuId, this.firstMenuitem[menuId]);
-  }
-
-  setFocusToLastMenuitem(menuId) {
-    this.setFocusToMenuitem(menuId, this.lastMenuitem[menuId]);
-  }
-
-  setFocusToPreviousMenuitem(menuId, current) {
-    const group = this.menuitemGroups[menuId];
-    const idx   = group.indexOf(current);
-    const prev  = idx === 0 ? this.lastMenuitem[menuId] : group[idx - 1];
-    this.setFocusToMenuitem(menuId, prev);
-    return prev;
-  }
-
-  setFocusToNextMenuitem(menuId, current) {
-    const group = this.menuitemGroups[menuId];
-    const idx   = group.indexOf(current);
-    const next  = idx === group.length - 1 ? this.firstMenuitem[menuId] : group[idx + 1];
-    this.setFocusToMenuitem(menuId, next);
-    return next;
-  }
-
-  setFocusByFirstCharacter(menuId, current, char) {
-    const chars = this.firstChars[menuId];
-    const group = this.menuitemGroups[menuId];
-    let start   = group.indexOf(current) + 1;
-    if (start >= group.length) start = 0;
-
-    let idx = this.getIndexFirstChars(menuId, start, char.toLowerCase());
-    if (idx === -1) idx = this.getIndexFirstChars(menuId, 0, char.toLowerCase());
-    if (idx > -1)   this.setFocusToMenuitem(menuId, group[idx]);
-  }
-
-  // ── Popup management ────────────────────────────────────────────────────
-
-  openPopup(menuId, menuitem) {
-    const popupMenu = menuitem.nextElementSibling;
-    if (!popupMenu) return false;
-
-    const rect = menuitem.getBoundingClientRect();
-
-    if (this.isPopup[menuId]) {
-      // Fly-out: position to the right of the parent item
-      popupMenu.parentNode.style.position = 'relative';
-      popupMenu.style.display  = 'block';
-      popupMenu.style.position = 'absolute';
-      popupMenu.style.left     = rect.width + 10 + 'px';
-      popupMenu.style.top      = '0px';
-      popupMenu.style.zIndex   = '100';
-    } else {
-      // Dropdown: position below the top-level item
-      popupMenu.style.display  = 'block';
-      popupMenu.style.position = 'absolute';
-      popupMenu.style.left     = '0px';
-      popupMenu.style.top      = rect.height + 8 + 'px';
-      popupMenu.style.zIndex   = '100';
-    }
-
-    menuitem.setAttribute('aria-expanded', 'true');
-    this.setMenubarDataExpanded('true');
-    return this.getMenuId(popupMenu);
-  }
-
-  closePopup(menuitem) {
-    const menuId = this.getMenuId(menuitem);
-
-    if (this.isMenubar(menuId)) {
-      if (this.isOpen(menuitem)) {
-        menuitem.setAttribute('aria-expanded', 'false');
-        menuitem.nextElementSibling.style.display = 'none';
-      }
-      return menuitem;
-    }
-
-    const menu = this.getMenu(menuitem);
-    const cmi  = menu.previousElementSibling;
-    cmi.setAttribute('aria-expanded', 'false');
-    cmi.focus();
-    menu.style.display = 'none';
-    return cmi;
-  }
-
-  closePopout(menuitem) {
-    let menuId = this.getMenuId(menuitem);
-    let cmi    = menuitem;
-
-    while (this.isPopup[menuId] || this.isPopout[menuId]) {
-      const menu = this.getMenu(cmi);
-      cmi    = menu.previousElementSibling;
-      menuId = this.getMenuId(cmi);
-      menu.style.display = 'none';
-    }
-    cmi.focus();
-    return cmi;
-  }
-
-  closePopupAll(menuitem) {
-    if (typeof menuitem !== 'object') menuitem = false;
-    for (const popup of this.popups) {
-      if (this.doesNotContain(popup, menuitem) && this.isOpen(popup)) {
-        const cmi = popup.nextElementSibling;
-        if (cmi) {
-          popup.setAttribute('aria-expanded', 'false');
-          cmi.style.display = 'none';
-        }
-      }
-    }
-  }
-
-  doesNotContain(popup, menuitem) {
-    return !menuitem || !popup.nextElementSibling.contains(menuitem);
-  }
-
-  // ── Utilities ───────────────────────────────────────────────────────────
-
-  getIndexFirstChars(menuId, startIndex, char) {
-    const chars = this.firstChars[menuId];
-    for (let i = startIndex; i < chars.length; i++) {
-      if (chars[i] === char) return i;
-    }
-    return -1;
-  }
-
-  isPrintableCharacter(str) {
-    return str.length === 1 && /\S/.test(str);
-  }
-
-  getIdFromAriaLabel(node) {
-    const label = node.getAttribute('aria-label') || '';
-    return label.trim().toLowerCase().replace(/[\s/]+/g, '-');
-  }
-
-  getMenuOrientation(node) {
-    const orientation = node.getAttribute('aria-orientation');
-    if (orientation) return orientation;
-    const role = node.getAttribute('role');
-    if (role === 'menubar') return 'horizontal';
-    if (role === 'menu')    return 'vertical';
-    return null;
-  }
-
-  getMenuId(node) {
-    let current = node;
-    let role    = current ? current.getAttribute('role') : null;
-    while (current && role !== 'menu' && role !== 'menubar') {
-      current = current.parentNode;
-      role    = current ? current.getAttribute('role') : null;
-    }
-    return current ? role + '-' + this.getIdFromAriaLabel(current) : false;
-  }
-
-  getMenu(menuitem) {
-    let node = menuitem;
-    let role = node ? node.getAttribute('role') : null;
-    while (node && role !== 'menu' && role !== 'menubar') {
-      node = node.parentNode;
-      role = node ? node.getAttribute('role') : null;
-    }
-    return node;
-  }
-
-  isAnyPopupOpen() {
-    return this.popups.some(p => p.getAttribute('aria-expanded') === 'true');
-  }
-
-  setMenubarDataExpanded(value) {
-    this.domNode.setAttribute('data-menubar-item-expanded', value);
-  }
-
-  isMenubarDataExpandedTrue() {
-    return this.domNode.getAttribute('data-menubar-item-expanded') === 'true';
-  }
-
-  hasPopup(menuitem) {
-    return menuitem.getAttribute('aria-haspopup') === 'true';
-  }
-
-  isOpen(menuitem) {
-    return menuitem.getAttribute('aria-expanded') === 'true';
-  }
-
-  isMenubar(menuId) {
-    return !this.isPopup[menuId] && !this.isPopout[menuId];
-  }
-
-  isMenuHorizontal(menuId) {
-    return this.menuOrientation[menuId] === 'horizontal';
-  }
-
-  hasFocus() {
-    return this.domNode.classList.contains('focus');
-  }
-
-  // ── Event handlers ──────────────────────────────────────────────────────
-
-  onMenubarFocusin() {
-    this.domNode.classList.add('focus');
-  }
-
-  onMenubarFocusout() {
-    this.domNode.classList.remove('focus');
-  }
-
-  onKeydown(event) {
-    const tgt    = event.currentTarget;
-    const key    = event.key;
-    const menuId = this.getMenuId(tgt);
-    let flag = false;
-    let mi, id, popupMenuId;
-
-    switch (key) {
-      case ' ':
-      case 'Enter':
-        if (this.hasPopup(tgt)) {
-          this.openPopups = true;
-          popupMenuId = this.openPopup(menuId, tgt);
-          this.setFocusToFirstMenuitem(popupMenuId);
-        } else {
-          this.closePopupAll();
-          this.setMenubarDataExpanded('false');
-        }
-        flag = true;
-        break;
-
-      case 'Esc':
-      case 'Escape':
-        this.openPopups = false;
-        this.closePopup(tgt);
-        this.setMenubarDataExpanded('false');
-        flag = true;
-        break;
-
-      case 'Up':
-      case 'ArrowUp':
-        if (this.isMenuHorizontal(menuId)) {
-          if (this.hasPopup(tgt)) {
-            this.openPopups  = true;
-            popupMenuId      = this.openPopup(menuId, tgt);
-            this.setFocusToLastMenuitem(popupMenuId);
-          }
-        } else {
-          this.setFocusToPreviousMenuitem(menuId, tgt);
-        }
-        flag = true;
-        break;
-
-      case 'Down':
-      case 'ArrowDown':
-        if (this.isMenuHorizontal(menuId)) {
-          if (this.hasPopup(tgt)) {
-            this.openPopups  = true;
-            popupMenuId      = this.openPopup(menuId, tgt);
-            this.setFocusToFirstMenuitem(popupMenuId);
-          }
-        } else {
-          this.setFocusToNextMenuitem(menuId, tgt);
-        }
-        flag = true;
-        break;
-
-      case 'Left':
-      case 'ArrowLeft':
-        if (this.isMenuHorizontal(menuId)) {
-          mi = this.setFocusToPreviousMenuitem(menuId, tgt);
-          if (this.isAnyPopupOpen() || this.isMenubarDataExpandedTrue()) {
-            this.openPopup(menuId, mi);
-          }
-        } else {
-          if (this.isPopout[menuId]) {
-            mi = this.closePopup(tgt);
-            id = this.getMenuId(mi);
-            this.setFocusToMenuitem(id, mi);
-          } else {
-            mi = this.closePopup(tgt);
-            id = this.getMenuId(mi);
-            mi = this.setFocusToPreviousMenuitem(id, mi);
-            this.openPopup(id, mi);
-          }
-        }
-        flag = true;
-        break;
-
-      case 'Right':
-      case 'ArrowRight':
-        if (this.isMenuHorizontal(menuId)) {
-          mi = this.setFocusToNextMenuitem(menuId, tgt);
-          if (this.isAnyPopupOpen() || this.isMenubarDataExpandedTrue()) {
-            this.openPopup(menuId, mi);
-          }
-        } else {
-          if (this.hasPopup(tgt)) {
-            popupMenuId = this.openPopup(menuId, tgt);
-            this.setFocusToFirstMenuitem(popupMenuId);
-          } else {
-            mi = this.closePopout(tgt);
-            id = this.getMenuId(mi);
-            mi = this.setFocusToNextMenuitem(id, mi);
-            this.openPopup(id, mi);
-          }
-        }
-        flag = true;
-        break;
-
-      case 'Home':
-      case 'PageUp':
-        this.setFocusToFirstMenuitem(menuId);
-        flag = true;
-        break;
-
-      case 'End':
-      case 'PageDown':
-        this.setFocusToLastMenuitem(menuId);
-        flag = true;
-        break;
-
-      case 'Tab':
-        this.openPopups = false;
-        this.setMenubarDataExpanded('false');
-        this.closePopup(tgt);
-        break;
-
-      default:
-        if (this.isPrintableCharacter(key)) {
-          this.setFocusByFirstCharacter(menuId, tgt, key);
-          flag = true;
-        }
-        break;
-    }
-
-    if (flag) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
-  }
-
-  onMenuitemClick(event) {
-    const tgt    = event.currentTarget;
-    const menuId = this.getMenuId(tgt);
-
-    if (this.hasPopup(tgt)) {
-      this.isOpen(tgt) ? this.closePopup(tgt) : (this.closePopupAll(tgt), this.openPopup(menuId, tgt));
-    } else {
-      this.closePopupAll();
-    }
-
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-  onMenuitemPointerover(event) {
-    const tgt    = event.currentTarget;
-    const menuId = this.getMenuId(tgt);
-
-    if (this.hasFocus()) {
-      this.setFocusToMenuitem(menuId, tgt);
-    }
-
-    if (this.isAnyPopupOpen() || this.hasFocus()) {
-      this.closePopupAll(tgt);
-      if (this.hasPopup(tgt)) {
-        this.openPopup(menuId, tgt);
-      }
-    }
-  }
-
-  onBackgroundPointerdown(event) {
-    if (!this.domNode.contains(event.target)) {
-      this.closePopupAll();
-    }
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Bootstrap — runs after DOM is ready
+// Bootstrap
 // ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-  // Keyboard menubar on all .mai-menubar-nav elements
   document.querySelectorAll('.mai-menubar-nav').forEach(nav => {
-    new MenubarNavigation(nav);
+    new DisclosureNavigation(nav);
   });
 
-  // Mobile toggle buttons
   document.querySelectorAll('.mai-menubar-toggle').forEach(toggle => {
     const nav = toggle.nextElementSibling;
     if (nav && nav.classList.contains('mai-menubar-nav')) {
