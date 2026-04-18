@@ -397,6 +397,58 @@ new Field("tt_content", "tx_maitheme_rating_value", $lang("field.rating_value"))
     )
     ->registerField();
 
+// ── Video provider fields (mai:video.video — YouTube / Vimeo facade + background) ──
+new Field("tt_content", "tx_maitheme_video_youtube_id", $lang("field.video_youtube_id"))
+    ->setConfig((new InputConfig())->setSize(20)->setEval("trim"))
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_video_vimeo_id", $lang("field.video_vimeo_id"))
+    ->setConfig((new InputConfig())->setSize(20)->setEval("trim"))
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_video_poster", $lang("field.video_poster"))
+    ->setConfig(
+        (new FileConfig())
+            ->setAllowed("common-image-types")
+            ->setMaxItems(1)
+            ->setAppearance(["createNewRelationLinkTitle" => "Add poster image"])
+    )
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_video_type", $lang("field.video_type"))
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
+            ["label" => $lang("videotype.content"), "value" => "content"],
+            ["label" => $lang("videotype.background"), "value" => "background"],
+        ])
+    )
+    ->registerField();
+
+// ── Image display fields (mai:image.responsiveImage / .picture / .figure) ────
+new Field("tt_content", "tx_maitheme_image_ratio", $lang("field.image_ratio"))
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
+            ["label" => $lang("imageratio.auto"), "value" => ""],
+            ["label" => $lang("imageratio.square"), "value" => "1-1"],
+            ["label" => $lang("imageratio.16_9"), "value" => "16-9"],
+            ["label" => $lang("imageratio.4_3"), "value" => "4-3"],
+            ["label" => $lang("imageratio.3_4"), "value" => "3-4"],
+            ["label" => $lang("imageratio.21_9"), "value" => "21-9"],
+        ])
+    )
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_image_fit", $lang("field.image_fit"))
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
+            ["label" => $lang("imagefit.cover"), "value" => ""],
+            ["label" => $lang("imagefit.contain"), "value" => "contain"],
+            ["label" => $lang("imagefit.fill"), "value" => "fill"],
+            ["label" => $lang("imagefit.scaledown"), "value" => "scale-down"],
+        ])
+    )
+    ->registerField();
+
 // ── Before/After Slider element ───────────────────────────────────────────────
 new Field("tt_content", "tx_maitheme_image_before", $lang("field.image_before"))
     ->setConfig(
@@ -479,6 +531,23 @@ ExtensionManagementUtility::addFieldsToPalette(
     "tx_maitheme_custom_class, tx_maitheme_custom_id, --linebreak--, tx_maitheme_data_attrs",
 );
 
+// Video provider palette — consumed by mai:video.video ViewHelper
+// (self-hosted file lives in core `assets`; this palette adds YouTube/Vimeo/poster/type).
+ExtensionManagementUtility::addFieldsToPalette(
+    "tt_content",
+    "maispace_video_providers",
+    "tx_maitheme_video_type, --linebreak--,
+     tx_maitheme_video_youtube_id, tx_maitheme_video_vimeo_id, --linebreak--,
+     tx_maitheme_video_poster",
+);
+
+// Image display palette — consumed by mai:image.* ViewHelpers via --local-img-* CSS vars
+ExtensionManagementUtility::addFieldsToPalette(
+    "tt_content",
+    "maispace_image_display",
+    "tx_maitheme_image_ratio, tx_maitheme_image_fit",
+);
+
 // ============================================================================
 // SHARED TABS STRING (appended to every CType after element-specific fields)
 // Tab 1 "General" is the TYPO3 core tab (element content lives there).
@@ -558,6 +627,7 @@ new CType("maispace_richtext", $lang("ctype.richtext"), "content-text-mixed")
 new CType("maispace_image", $lang("ctype.image"), "content-image")
     ->addDefaultHeaderPalette()
     ->addDefaultImageTab()
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -567,6 +637,7 @@ new CType("maispace_image", $lang("ctype.image"), "content-image")
 new CType("maispace_video", $lang("ctype.video"), "content-media")
     ->addDefaultHeaderPalette()
     ->addDefaultMediaTab()
+    ->addCustomFields("--palette--;;maispace_video_providers")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -652,7 +723,9 @@ new CType("maispace_hero", $lang("ctype.hero"), "content-textmedia")
         "--div--;" .
         $lang("tab.layout") .
         "," .
-        "tx_maitheme_content_position, tx_maitheme_overlay_style",
+        "tx_maitheme_content_position, tx_maitheme_overlay_style," .
+        "--palette--;;maispace_image_display," .
+        "--palette--;;maispace_video_providers",
     )
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
@@ -668,7 +741,9 @@ new CType("maispace_banner", $lang("ctype.banner"), "content-image")
         "--div--;" .
         $lang("tab.layout") .
         "," .
-        "tx_maitheme_content_position, tx_maitheme_overlay_style",
+        "tx_maitheme_content_position, tx_maitheme_overlay_style," .
+        "--palette--;;maispace_image_display," .
+        "--palette--;;maispace_video_providers",
     )
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
@@ -692,6 +767,7 @@ new CType("maispace_mediatext", $lang("ctype.mediatext"), "content-textmedia")
     ->addCustomFields("bodytext, tx_maitheme_media_position")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
     ->addDefaultImageTab()
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -710,6 +786,7 @@ new CType("maispace_card", $lang("ctype.card"), "content-textmedia")
     ->addSubheaderField()
     ->addCustomFields("bodytext, image, tx_maitheme_link")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -721,6 +798,7 @@ new CType("maispace_teaser", $lang("ctype.teaser"), "content-textmedia")
     ->addSubheaderField()
     ->addCustomFields("bodytext, image, tx_maitheme_link")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -743,6 +821,7 @@ new CType("maispace_profile", $lang("ctype.profile"), "content-image")
     ->addSubheaderField()
     ->addCustomFields("bodytext, image")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -754,6 +833,7 @@ new CType("maispace_testimonial", $lang("ctype.testimonial"), "content-quote")
     ->addSubheaderField()
     ->addCustomFields("bodytext, image")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 0]])
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -773,6 +853,7 @@ new CType("maispace_quote", $lang("ctype.quote"), "content-quote")
 
 new CType("maispace_logo", $lang("ctype.logo"), "content-image")
     ->addCustomFields("image, tx_maitheme_link")
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -782,6 +863,7 @@ new CType("maispace_logo", $lang("ctype.logo"), "content-image")
 new CType("maispace_logoshowcase", $lang("ctype.logoshowcase"), "content-image")
     ->addDefaultHeaderPalette()
     ->addDefaultImageTab()
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()
@@ -964,6 +1046,7 @@ new CType("maispace_datalist", $lang("ctype.datalist"), "content-table")
 new CType("maispace_gallery", $lang("ctype.gallery"), "content-image-gallery")
     ->addDefaultHeaderPalette()
     ->addDefaultImageTab()
+    ->addCustomFields("--palette--;;maispace_image_display")
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
     ->addDefaultAccessTab()

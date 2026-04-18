@@ -180,6 +180,28 @@
                 <source>Slides</source>
             </trans-unit>
 
+            <!-- Video provider fields -->
+            <trans-unit id="field.video_youtube_id">
+                <source>YouTube Video ID</source>
+            </trans-unit>
+            <trans-unit id="field.video_vimeo_id">
+                <source>Vimeo Video ID</source>
+            </trans-unit>
+            <trans-unit id="field.video_poster">
+                <source>Poster Image</source>
+            </trans-unit>
+            <trans-unit id="field.video_type">
+                <source>Display Mode</source>
+            </trans-unit>
+
+            <!-- Image display fields -->
+            <trans-unit id="field.image_ratio">
+                <source>Aspect Ratio</source>
+            </trans-unit>
+            <trans-unit id="field.image_fit">
+                <source>Object Fit</source>
+            </trans-unit>
+
             <!-- Advanced -->
             <trans-unit id="field.custom_class">
                 <source>Custom CSS Class</source>
@@ -282,6 +304,24 @@
             <trans-unit id="iconsize.md"><source>Medium</source></trans-unit>
             <trans-unit id="iconsize.lg"><source>Large</source></trans-unit>
             <trans-unit id="iconsize.xl"><source>Extra Large</source></trans-unit>
+
+            <!-- Video display type -->
+            <trans-unit id="videotype.content"><source>Content (inline player)</source></trans-unit>
+            <trans-unit id="videotype.background"><source>Background (silent loop)</source></trans-unit>
+
+            <!-- Image aspect ratio -->
+            <trans-unit id="imageratio.auto"><source>Auto (original)</source></trans-unit>
+            <trans-unit id="imageratio.square"><source>Square (1:1)</source></trans-unit>
+            <trans-unit id="imageratio.16_9"><source>Widescreen (16:9)</source></trans-unit>
+            <trans-unit id="imageratio.4_3"><source>Classic (4:3)</source></trans-unit>
+            <trans-unit id="imageratio.3_4"><source>Portrait (3:4)</source></trans-unit>
+            <trans-unit id="imageratio.21_9"><source>Cinematic (21:9)</source></trans-unit>
+
+            <!-- Image object-fit -->
+            <trans-unit id="imagefit.cover"><source>Cover (crop to fill)</source></trans-unit>
+            <trans-unit id="imagefit.contain"><source>Contain (fit inside)</source></trans-unit>
+            <trans-unit id="imagefit.fill"><source>Fill (stretch)</source></trans-unit>
+            <trans-unit id="imagefit.scaledown"><source>Scale down</source></trans-unit>
 
             <!-- Divider style -->
             <trans-unit id="dividerstyle.solid"><source>Solid</source></trans-unit>

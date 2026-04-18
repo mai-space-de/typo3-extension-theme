@@ -17,6 +17,41 @@ lib.contentElement {
     templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/ContentElements/
     partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
     layoutRootPaths.100   = EXT:mai_theme/Resources/Private/Layouts/
+
+    # Shared FAL resolution. Fields that don't exist on a given CType simply
+    # yield an empty array — safe to run on every element.
+    # CTypes that need a different .10 (Accordion/Slider/Tabs/Timeline/Sections/Bento)
+    # override it in their own block.
+    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    dataProcessing.10 {
+        references.fieldName = image
+        as = images
+    }
+    dataProcessing.11 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    dataProcessing.11 {
+        references.fieldName = assets
+        as = assets
+    }
+    dataProcessing.12 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    dataProcessing.12 {
+        references.fieldName = tx_maitheme_bg_image
+        as = bgImage
+    }
+    dataProcessing.13 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    dataProcessing.13 {
+        references.fieldName = tx_maitheme_video_poster
+        as = videoPoster
+    }
+    dataProcessing.14 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    dataProcessing.14 {
+        references.fieldName = tx_maitheme_image_before
+        as = imageBefore
+    }
+    dataProcessing.15 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    dataProcessing.15 {
+        references.fieldName = tx_maitheme_image_after
+        as = imageAfter
+    }
 }
 
 ## ----------------------------------------------------------------------------
