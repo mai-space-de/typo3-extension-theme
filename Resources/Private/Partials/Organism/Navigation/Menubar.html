@@ -35,19 +35,21 @@
           arguments="{label: mobileLabel}"/>
 
 <f:comment>── Nav landmark ──────────────────────────────────────────────────────</f:comment>
-<nav class="mai-menubar-nav"
-     aria-label="{f:if(condition: label, then: label, else: 'Hauptnavigation')}">
+<nav id="main-nav"
+     class="mai-menubar-nav"
+     aria-label="{f:if(condition: label, then: label, else: 'Hauptnavigation')}"
+     tabindex="-1">
 
-    <ul class="mai-menubar"
-        role="menubar"
-        aria-label="{f:if(condition: label, then: label, else: 'Hauptnavigation')}"
-        aria-hidden="false">
-
+    <f:comment>
+        Disclosure navigation: plain <ul> list. Links are always links;
+        a sibling <button> inside each item with children toggles its submenu.
+        No role="menubar"/"menu"/"menuitem" — standard landmark + list semantics.
+    </f:comment>
+    <ul class="mai-menubar">
         <f:for each="{menuItems}" as="item">
             <f:render partial="Organism/Navigation/MenubarItem"
                       arguments="{item: item, depth: 0}"/>
         </f:for>
-
     </ul>
 </nav>
 </html>

@@ -3,38 +3,49 @@
     Menubar item — renders a single menu entry at any nesting depth.
     Called recursively: sub-menus call this partial for their own children.
 
+    Accessibility model (disclosure navigation pattern):
+      - The link is ALWAYS a plain link (<a href>). It navigates — nothing else.
+      - When the item has children, a SEPARATE sibling <button> renders the
+        chevron and toggles the submenu. Only the button carries
+        aria-expanded / aria-controls / aria-label.
+      - Activating the link navigates; activating the button opens/closes the
+        submenu. This is predictable for keyboard and screen-reader users and
+        avoids an <a> element masquerading as a button.
+      - Reference: W3C WAI-ARIA APG "Disclosure Navigation Menu"
+        https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/
+
     Arguments:
       item  {array}   — single MenuProcessor item with keys:
                           title, link, target, active, current,
-                          hasSubpages (bool), children (array)
+                          hasSubpages (bool), children (array),
+                          data.uid (page uid, used to derive the submenu id).
       depth {integer} — current nesting depth (0 = menubar level,
                           1 = first dropdown, 2 = fly-out)
-
-    ARIA roles per depth:
-      depth 0  →  role="menuitem" on <a>  (direct child of menubar)
-      depth ≥1 →  role="menuitem" on <a>  (child of role="menu")
-    The wrapping <li> always carries role="none" (presentational).
 
     Sub-menu trigger arrows:
       depth 0  →  SVG pointing down  (class="down")
       depth ≥1 →  SVG pointing right (class="right")
 </f:comment>
 
-<li role="none"
-    class="mai-menubar__item{f:if(condition: item.active, then: ' is-active')}{f:if(condition: item.hasSubpages, then: ' has-submenu')}">
+<f:variable name="submenuId" value="mai-submenu-{item.data.uid}-{depth}"/>
 
-    <f:comment>── Link / trigger ─────────────────────────────────────────────────</f:comment>
-    <a role="menuitem"
-       href="{item.link}"
+<li class="mai-menubar__item{f:if(condition: item.active, then: ' is-active')}{f:if(condition: item.hasSubpages, then: ' has-submenu')}">
+
+    <f:comment>── Plain navigation link (never a toggle) ───────────────────────</f:comment>
+    <a href="{item.link}"
        class="mai-menubar__link{f:if(condition: item.current, then: ' mai-menubar__link--current')}"
        {f:if(condition: item.target, then: 'target="{item.target}" rel="noopener noreferrer"')}
-       {f:if(condition: item.current, then: 'aria-current="page"')}
-       {f:if(condition: item.hasSubpages, then: 'aria-haspopup="true" aria-expanded="false"')}>
+       {f:if(condition: item.current, then: 'aria-current="page"')}>
+        <span class="mai-menubar__link-label">{item.title}</span>
+    </a>
 
-        {item.title}
-
-        <f:comment>── Sub-menu indicator arrow ──────────────────────────────────</f:comment>
-        <f:if condition="{item.hasSubpages}">
+    <f:comment>── Sub-menu disclosure button (only when children exist) ────────</f:comment>
+    <f:if condition="{item.hasSubpages}">
+        <button type="button"
+                class="mai-menubar__toggle mai-menubar__toggle--depth-{depth}"
+                aria-expanded="false"
+                aria-controls="{submenuId}"
+                aria-label="Untermenü von {item.title} anzeigen">
             <f:if condition="{depth} == 0">
                 <f:then>
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -55,22 +66,17 @@
                     </svg>
                 </f:else>
             </f:if>
-        </f:if>
+        </button>
 
-    </a>
-
-    <f:comment>── Sub-menu (recursive) ───────────────────────────────────────────</f:comment>
-    <f:if condition="{item.hasSubpages}">
+        <f:comment>── Sub-menu (recursive) ─────────────────────────────────</f:comment>
         <f:variable name="nextDepth" value="{depth + 1}"/>
-        <ul role="menu"
-            aria-label="{item.title}"
-            class="mai-menubar__submenu mai-menubar__submenu--depth-{nextDepth}">
-
+        <ul id="{submenuId}"
+            class="mai-menubar__submenu mai-menubar__submenu--depth-{nextDepth}"
+            hidden>
             <f:for each="{item.children}" as="child">
                 <f:render partial="Organism/Navigation/MenubarItem"
                           arguments="{item: child, depth: nextDepth}"/>
             </f:for>
-
         </ul>
     </f:if>
 
