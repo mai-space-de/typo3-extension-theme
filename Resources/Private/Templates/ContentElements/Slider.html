@@ -1,5 +1,3 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components"
-      data-namespace-typo3-fluid="true">
-<theme:organism.slider items="{data.tx_maitheme_slider_items}" data="{data}"/>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:render partial="Organism/Slider" arguments="{items: data.tx_maitheme_slider_items, data: data}"/>
 </html>

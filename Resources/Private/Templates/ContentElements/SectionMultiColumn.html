@@ -1,9 +1,8 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components"
       xmlns:b13="http://typo3.org/ns/B13/Container/ViewHelpers"
       data-namespace-typo3-fluid="true">
-<theme:organism.sectionContainer variant="{data.tx_maitheme_section_variant}" anchor="{data.tx_maitheme_anchor}">
-    <f:slot name="children">
+<section class="mai-section mai-section--{data.tx_maitheme_section_variant}"{f:if(condition: data.tx_maitheme_anchor, then: ' id="{data.tx_maitheme_anchor}"')}>
+    <div class="mai-section__inner">
         <div class="mai-columns mai-columns--{data.tx_maitheme_columns}">
             <f:for each="{0:101, 1:102, 2:103, 3:104}" as="colPos" iteration="it">
                 <f:if condition="{it.index} < {data.tx_maitheme_columns}">
@@ -11,6 +10,6 @@
                 </f:if>
             </f:for>
         </div>
-    </f:slot>
-</theme:organism.sectionContainer>
+    </div>
+</section>
 </html>

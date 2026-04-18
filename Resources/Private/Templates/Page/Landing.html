@@ -1,12 +1,8 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components"
-      data-namespace-typo3-fluid="true">
-<theme:template.landingPage>
-    <f:slot name="hero">
-        <f:cObject typoscriptObjectPath="lib.templates.columns.hero"/>
-    </f:slot>
-    <f:slot name="content">
-        <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
-    </f:slot>
-</theme:template.landingPage>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<main class="mai-page mai-page--landing">
+    <f:if condition="{hero}">
+        <div class="mai-page__hero"><f:cObject typoscriptObjectPath="lib.templates.columns.hero"/></div>
+    </f:if>
+    <div class="mai-page__content"><f:cObject typoscriptObjectPath="lib.templates.columns.content"/></div>
+</main>
 </html>

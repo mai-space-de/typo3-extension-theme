@@ -7,6 +7,7 @@ defined("TYPO3") or die();
 use Maispace\MaiBase\TableConfigurationArray\CType;
 use Maispace\MaiBase\TableConfigurationArray\Field;
 use Maispace\MaiBase\TableConfigurationArray\FieldConfig\CheckboxConfig;
+use Maispace\MaiBase\TableConfigurationArray\FieldConfig\EmailConfig;
 use Maispace\MaiBase\TableConfigurationArray\FieldConfig\FileConfig;
 use Maispace\MaiBase\TableConfigurationArray\FieldConfig\InputConfig;
 use Maispace\MaiBase\TableConfigurationArray\FieldConfig\LinkConfig;
@@ -425,7 +426,7 @@ new Field("tt_content", "tx_maitheme_phone", $lang("field.phone"))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_email", $lang("field.email"))
-    ->setConfig((new InputConfig())->setSize(40)->setEval("trim,email"))
+    ->setConfig((new EmailConfig())->setSize(40))
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_opening_hours", $lang("field.opening_hours"))

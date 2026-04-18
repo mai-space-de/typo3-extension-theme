@@ -4,13 +4,6 @@ declare(strict_types=1);
 
 defined('TYPO3') or die();
 
-/**
- * Bento-Box grid — container CType registered via b13/container plus its
- * child "bento cell" CType carrying col/row span and visual variant.
- *
- * Child placement restriction is enforced via
- * `Configuration/ContentElements/bento.php` (content-defender).
- */
 if (class_exists(\B13\Container\Tca\Registry::class)) {
     $registry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\B13\Container\Tca\Registry::class);
     $lll = 'LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:';
@@ -32,7 +25,6 @@ if (class_exists(\B13\Container\Tca\Registry::class)) {
     );
 }
 
-// Bento cell — a normal CType carrying col/row span + visual variant fields.
 $GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_bento_colspan'] = [
     'label' => 'LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:bento.colspan',
     'config' => [
@@ -77,12 +69,8 @@ $GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_bento_variant'] = [
     ],
 ];
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
-    'tt_content',
-    []
-);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', []);
 
-// Expose bento fields on every CType placed in bento grid
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
     '--palette--;;bentoOptions',

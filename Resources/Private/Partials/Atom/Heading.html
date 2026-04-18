@@ -1,0 +1,9 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:switch expression="{level}">
+    <f:case value="1"><h1 class="mai-heading mai-heading--1 {class}">{text}</h1></f:case>
+    <f:case value="2"><h2 class="mai-heading mai-heading--2 {class}">{text}</h2></f:case>
+    <f:case value="3"><h3 class="mai-heading mai-heading--3 {class}">{text}</h3></f:case>
+    <f:case value="4"><h4 class="mai-heading mai-heading--4 {class}">{text}</h4></f:case>
+    <f:defaultCase><p class="mai-heading {class}">{text}</p></f:defaultCase>
+</f:switch>
+</html>

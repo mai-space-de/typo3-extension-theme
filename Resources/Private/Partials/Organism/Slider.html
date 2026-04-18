@@ -1,0 +1,12 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="mai-slider" data-ce-uid="{data.uid}">
+    <f:for each="{items}" as="item" iteration="it">
+        <div class="mai-slider__item" data-index="{it.index}">
+            <f:if condition="{item.header}">
+                <f:render partial="Atom/Heading" arguments="{level: 3, text: item.header}"/>
+            </f:if>
+            <f:if condition="{item.bodytext}">{item.bodytext -> f:format.html()}</f:if>
+        </div>
+    </f:for>
+</div>
+</html>
