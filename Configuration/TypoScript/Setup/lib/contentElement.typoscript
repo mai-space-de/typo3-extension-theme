@@ -1,3 +1,61 @@
+## ------------------------------------------------------------------
+## Custom CType rendering via FLUIDTEMPLATE (components in mai_theme).
+## ------------------------------------------------------------------
+tt_content.maispace_text = FLUIDTEMPLATE
+tt_content.maispace_text {
+    templateName = TextMedia
+    templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
+    partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
+    layoutRootPaths.100   = EXT:mai_theme/Resources/Private/Layouts/
+    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    dataProcessing.10 {
+        references.fieldName = image
+        as = image
+    }
+}
+
+tt_content.maispace_textmedia < tt_content.maispace_text
+tt_content.maispace_textmedia.templateName = TextMedia
+
+tt_content.maispace_accordion = FLUIDTEMPLATE
+tt_content.maispace_accordion {
+    templateName = Accordion
+    templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
+    partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
+}
+
+tt_content.maispace_slider < tt_content.maispace_accordion
+tt_content.maispace_slider.templateName = Slider
+
+tt_content.maispace_tab < tt_content.maispace_accordion
+tt_content.maispace_tab.templateName = Tab
+
+tt_content.maispace_timeline < tt_content.maispace_accordion
+tt_content.maispace_timeline.templateName = Timeline
+
+## Section containers (b13/container CTypes)
+tt_content.maispace_section_light        = FLUIDTEMPLATE
+tt_content.maispace_section_light {
+    templateName = SectionContainer
+    templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
+    partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
+}
+tt_content.maispace_section_muted        < tt_content.maispace_section_light
+tt_content.maispace_section_dark         < tt_content.maispace_section_light
+tt_content.maispace_section_accent       < tt_content.maispace_section_light
+tt_content.maispace_section_transparent  < tt_content.maispace_section_light
+tt_content.maispace_section_sidebar_r    < tt_content.maispace_section_light
+tt_content.maispace_section_sidebar_r.templateName = SectionMultiColumn
+tt_content.maispace_section_sidebar_l    < tt_content.maispace_section_sidebar_r
+
+## Bento grid
+tt_content.maispace_bento = FLUIDTEMPLATE
+tt_content.maispace_bento {
+    templateName = BentoBox
+    templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
+    partialRootPaths.100  = EXT:mai_theme/Resources/Private/Partials/
+}
+
 lib {
     contentElement {
         settings {

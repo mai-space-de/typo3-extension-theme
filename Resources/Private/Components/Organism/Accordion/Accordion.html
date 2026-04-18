@@ -1,0 +1,15 @@
+<fc:component>
+    <fc:param name="items" type="array" optional="1" default="{f:variable(value: '{}')}"/>
+    <fc:param name="data" type="array" optional="1" default="{f:variable(value: '{}')}"/>
+
+    <fc:renderer>
+        <div class="mai-accordion" data-ce-uid="{data.uid}">
+            <f:for each="{items}" as="item" iteration="it">
+                <div class="mai-accordion__item" data-index="{it.index}">
+                    <f:if condition="{item.header}"><theme:atom.heading level="3" text="{item.header}"/></f:if>
+                    <f:if condition="{item.bodytext}">{item.bodytext -> f:format.html()}</f:if>
+                </div>
+            </f:for>
+        </div>
+    </fc:renderer>
+</fc:component>

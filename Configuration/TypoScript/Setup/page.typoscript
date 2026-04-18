@@ -1,8 +1,18 @@
+# Fluid Components namespace (sitegeist/fluid-components).
+# `<theme:...>` resolves to EXT:mai_theme/Resources/Private/Components.
+config.namespaces.theme = Maispace\MaiTheme\Components
+plugin.tx_fluidcomponents.namespaces.Maispace\MaiTheme\Components = EXT:mai_theme/Resources/Private/Components
+
 page = PAGE
 page {
 	typeNum = 0
 
 	config < config
+
+	# Register the theme's main SCSS entry via mai_assets pipeline.
+	includeCSS {
+		mai_theme_main = EXT:mai_theme/Resources/Public/Scss/main.scss
+	}
 
 	10 = FLUIDTEMPLATE
 	10 {

@@ -1,0 +1,23 @@
+// Design tokens — spacing scale (4px base)
+$space-0: 0 !default;
+$space-1: 0.25rem !default;
+$space-2: 0.5rem !default;
+$space-3: 0.75rem !default;
+$space-4: 1rem !default;
+$space-6: 1.5rem !default;
+$space-8: 2rem !default;
+$space-12: 3rem !default;
+$space-16: 4rem !default;
+$space-24: 6rem !default;
+
+:root {
+  --space-1: #{$space-1};
+  --space-2: #{$space-2};
+  --space-3: #{$space-3};
+  --space-4: #{$space-4};
+  --space-6: #{$space-6};
+  --space-8: #{$space-8};
+  --space-12: #{$space-12};
+  --space-16: #{$space-16};
+  --space-24: #{$space-24};
+}

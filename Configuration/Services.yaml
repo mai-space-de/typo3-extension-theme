@@ -6,4 +6,15 @@ services:
 
   Maispace\MaiTheme\:
     resource: '../Classes/*'
-    exclude: '../Classes/Domain/Model/*'
+    exclude:
+      - '../Classes/Domain/Model/*'
+      - '../Classes/Event/*'
+      - '../Classes/Exception/*'
+
+  Maispace\MaiTheme\Service\BackendThemeService:
+    public: true
+    shared: true
+
+  Maispace\MaiTheme\Service\AssetRegistrationService:
+    public: true
+    shared: true

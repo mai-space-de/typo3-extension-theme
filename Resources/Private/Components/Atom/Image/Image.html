@@ -1,0 +1,9 @@
+<fc:component>
+    <fc:param name="image" type="object"/>
+    <fc:param name="alt" type="string" optional="1" default=""/>
+    <fc:param name="class" type="string" optional="1" default=""/>
+
+    <fc:renderer>
+        <mai:responsiveImage image="{image}" alt="{alt}" class="mai-image {class}"/>
+    </fc:renderer>
+</fc:component>

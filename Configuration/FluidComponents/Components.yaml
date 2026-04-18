@@ -1,0 +1,7 @@
+# Fluid Components namespace registration.
+# Loaded by sitegeist/fluid-components via `FLUIDCOMPONENTS` TypoScript or
+# automatic discovery. Exposes the `<theme:...>` namespace pointing to
+# Resources/Private/Components.
+namespaces:
+  theme:
+    - "EXT:mai_theme/Resources/Private/Components"

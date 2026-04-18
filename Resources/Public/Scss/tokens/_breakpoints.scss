@@ -1,0 +1,13 @@
+// Design tokens — breakpoints
+$bp-sm: 480px !default;
+$bp-md: 768px !default;
+$bp-lg: 1024px !default;
+$bp-xl: 1280px !default;
+$bp-2xl: 1536px !default;
+
+@mixin media-up($bp) {
+  @media (min-width: $bp) { @content; }
+}
+@mixin media-down($bp) {
+  @media (max-width: ($bp - 1)) { @content; }
+}
