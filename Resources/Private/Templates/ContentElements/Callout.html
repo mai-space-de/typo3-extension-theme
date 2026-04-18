@@ -1,11 +1,14 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Callout template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-callout" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+<aside class="mai-callout mai-callout--{f:if(condition: data.tx_maitheme_variant, then: data.tx_maitheme_variant, else: 'default')}"
+       role="note"
+       data-ce-uid="{data.uid}"
+       {f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-callout__title'}"/>
+        <f:render partial="Atom/Heading"
+                  arguments="{level: data.header_layout, text: data.header, class: 'mai-callout__title'}"/>
     </f:if>
     <f:if condition="{data.bodytext}">
         <div class="mai-callout__body">{data.bodytext -> f:format.html()}</div>
     </f:if>
-</section>
+</aside>
 </html>

@@ -1,11 +1,16 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Button template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-button" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-button__title'}"/>
+<div class="mai-button-block" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+    <f:if condition="{data.tx_maitheme_link}">
+        <f:then>
+            <f:link.typolink parameter="{data.tx_maitheme_link}"
+                             class="mai-button mai-button--{f:if(condition: data.tx_maitheme_button_style, then: data.tx_maitheme_button_style, else: 'primary')} mai-button--size-{f:if(condition: data.tx_maitheme_button_size, then: data.tx_maitheme_button_size, else: 'md')}"
+                             aria-label="{data.tx_maitheme_aria_label}">{data.header}</f:link.typolink>
+        </f:then>
+        <f:else>
+            <button type="button"
+                    class="mai-button mai-button--{f:if(condition: data.tx_maitheme_button_style, then: data.tx_maitheme_button_style, else: 'primary')} mai-button--size-{f:if(condition: data.tx_maitheme_button_size, then: data.tx_maitheme_button_size, else: 'md')}"
+                    aria-label="{data.tx_maitheme_aria_label}">{data.header}</button>
+        </f:else>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-button__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+</div>
 </html>
