@@ -1,0 +1,35 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Skip links — first focusable element on the page so keyboard and
+    screen-reader users can bypass the header/navigation and jump straight
+    to the main content (and, when present, to the primary navigation).
+
+    Accessibility notes:
+      - Visually hidden by default; becomes visible on :focus / :focus-visible
+        via the .mai-skip-link styles in menubar-navigation.scss.
+      - Targets must exist on the page:
+          #main      — the <main> landmark in Templates/Page/Default.html
+          #main-nav  — the <nav class="mai-menubar-nav"> in Menubar.html
+
+    Arguments:
+      mainLabel        {string}  — link text for the "skip to content" link
+                                   (default: "Zum Inhalt springen").
+      navLabel         {string}  — link text for the "skip to navigation"
+                                   link (default: "Zur Navigation springen").
+</f:comment>
+
+<mai:asset.css identifier="mai-skip-links"
+               src="EXT:mai_theme/Resources/Public/Scss/skip-links.scss"
+               priority="1"/>
+
+<div class="mai-skip-links">
+    <a class="mai-skip-link" href="#main">
+        {f:if(condition: mainLabel, then: mainLabel, else: 'Zum Inhalt springen')}
+    </a>
+    <a class="mai-skip-link" href="#main-nav">
+        {f:if(condition: navLabel, then: navLabel, else: 'Zur Navigation springen')}
+    </a>
+</div>
+</html>

@@ -26,6 +26,7 @@
 
 <f:section name="Main">
     <f:cObject typoscriptObjectPath="lib.templates.columns.popovers"/>
+    <f:render partial="Organism/Navigation/SkipLinks" arguments="{_all}"/>
     <header role="banner">
         <f:render partial="Organism/Navigation/Menubar"
                   arguments="{
@@ -35,7 +36,7 @@
                   }"/>
         <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
     </header>
-    <main id="main" role="main">
+    <main id="main" role="main" tabindex="-1">
         <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
     </main>
     <footer role="contentinfo">
