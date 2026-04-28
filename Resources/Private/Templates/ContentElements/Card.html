@@ -1,11 +1,31 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Card template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-card" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-card__title'}"/>
+<article class="offer-card {f:if(condition: data.tx_maitheme_card_accent == 'gold', then: 'offer-card--gold')}"
+         data-ce-uid="{data.uid}"
+         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+
+    <f:if condition="{data.tx_maitheme_icon}">
+        <div class="offer-card__badge" aria-hidden="true">
+            <i class="ph-fill ph-{data.tx_maitheme_icon}"
+               style="font-size: var(--icon-size-lg); color: {f:if(condition: data.tx_maitheme_card_accent == 'gold', then: 'var(--bgm-teal-700)', else: 'var(--bgm-gold-500)')}"></i>
+        </div>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-card__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+
+    <div class="offer-card__body">
+        <f:if condition="{data.header}">
+            <h3 class="offer-card__title">{data.header}</h3>
+        </f:if>
+
+        <f:if condition="{data.bodytext}">
+            <div class="offer-card__text">{data.bodytext -> f:format.html()}</div>
+        </f:if>
+
+        <f:if condition="{data.tx_maitheme_link}">
+            <f:link.typolink parameter="{data.tx_maitheme_link}"
+                             class="button {f:if(condition: data.tx_maitheme_card_accent == 'gold', then: 'button-secondary')}">
+                {f:if(condition: data.tx_maitheme_link_text, then: data.tx_maitheme_link_text, else: 'Mehr erfahren')}
+            </f:link.typolink>
+        </f:if>
+    </div>
+
+</article>
 </html>

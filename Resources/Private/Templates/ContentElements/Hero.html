@@ -1,11 +1,51 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Hero template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-hero" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-hero__title'}"/>
-    </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-hero__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
+<section class="hero full-width"
+         data-ce-uid="{data.uid}"
+         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+    <div class="hero__inner">
+
+        <div class="hero__content">
+            <f:if condition="{data.tx_maitheme_eyebrow}">
+                <p class="eyebrow">{data.tx_maitheme_eyebrow}</p>
+            </f:if>
+
+            <f:if condition="{data.header}">
+                <h1 class="hero__title">{data.header}</h1>
+            </f:if>
+
+            <f:if condition="{data.bodytext}">
+                <div class="hero__body">{data.bodytext -> f:format.html()}</div>
+            </f:if>
+
+            <f:if condition="{data.tx_maitheme_link}">
+                <div class="hero__actions">
+                    <f:link.typolink parameter="{data.tx_maitheme_link}" class="button">
+                        {f:if(condition: data.tx_maitheme_link_text, then: data.tx_maitheme_link_text, else: 'Mehr erfahren')}
+                    </f:link.typolink>
+                    <f:if condition="{data.tx_maitheme_link_secondary}">
+                        <f:link.typolink parameter="{data.tx_maitheme_link_secondary}" class="button button-secondary">
+                            {f:if(condition: data.tx_maitheme_link_secondary_text, then: data.tx_maitheme_link_secondary_text, else: 'Jetzt mithelfen')}
+                        </f:link.typolink>
+                    </f:if>
+                </div>
+            </f:if>
+        </div>
+
+        <f:if condition="{data.assets -> f:count()} > 0">
+            <div class="hero__logo-frame">
+                <f:for each="{data.assets}" as="file" iteration="i">
+                    <f:if condition="{i.isFirst}">
+                        <f:image image="{file}"
+                                 alt="{file.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'BGM Pulheim')}"
+                                 loading="eager"/>
+                    </f:if>
+                </f:for>
+                <f:if condition="{data.tx_maitheme_badge_text}">
+                    <span class="hero__badge">{data.tx_maitheme_badge_text}</span>
+                </f:if>
+            </div>
+        </f:if>
+
+    </div>
 </section>
 </html>
