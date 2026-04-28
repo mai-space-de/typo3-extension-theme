@@ -25,8 +25,8 @@
     --field-border-color:       var(--color-border);
     --field-border-radius:      var(--layout-radius);
     --field-padding:            var(--space-sm) var(--space-md);
-    --field-focus-border-color: var(--color-primary);
-    --field-focus-shadow:       0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+    --field-focus-border-color: var(--bgm-teal-700);
+    --field-focus-shadow:       0 0 0 3px rgba(31, 110, 110, 0.2);
     --field-error-border-color: var(--color-danger);
     --field-disabled-bg:        var(--color-disabled-bg);
     --field-disabled-color:     var(--color-disabled-text);

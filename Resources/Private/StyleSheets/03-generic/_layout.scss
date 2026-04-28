@@ -156,10 +156,10 @@
 }
 
 // ---------------------------------------------------------------------------
-// Section spacing — consistent vertical rhythm between page sections.
+// Section spacing — 48 px mobile → 96 px desktop (--layout-section-pad-y).
 // ---------------------------------------------------------------------------
 .section {
-    padding-block: var(--space-3xl);
+    padding-block: var(--layout-section-pad-y);
 }
 
 // ---------------------------------------------------------------------------

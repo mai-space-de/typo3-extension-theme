@@ -22,7 +22,7 @@
 // Declare support for both colour schemes — TYPO3-served sites often need
 // dark-mode handling baked in from the start.
 html {
-    color-scheme: light dark;
+    color-scheme: light;   // BGM brand is light-only
     // Prevent font-size adjustments in landscape on mobile devices.
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;

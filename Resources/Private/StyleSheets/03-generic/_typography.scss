@@ -1,13 +1,14 @@
 // =============================================================================
 // 03-generic/_typography.scss
 //
-// Base typographic styles using the fluid type scale and design tokens from
-// 01-settings/_variables.scss.
-// Headings, body copy, blockquotes, code, and inline text elements are covered.
+// Base typographic styles using BGM Pulheim design tokens.
+// Headings are tinted deep teal rather than pure black — softer authority.
+// Body line-height 1.55–1.7 for German compound-word legibility.
 // =============================================================================
 
-// Body & root text
 @layer theme-generic {
+
+// Body & root text
 body {
     font-family:  var(--font-family-base);
     font-size:    var(--font-size-base);
@@ -15,55 +16,103 @@ body {
     line-height:  var(--line-height-base);
     color:        var(--color-text);
     background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-// Paragraphs — flow margin creates vertical rhythm between consecutive paragraphs.
+// Paragraphs — vertical rhythm between consecutive paragraphs
 p {
+    line-height: var(--line-height-relaxed);
+    text-wrap: pretty;
+
     & + p {
-        margin-block-start: 1.5em;
+        margin-block-start: var(--space-md);
     }
 }
 
 // ---------------------------------------------------------------------------
-// Headings
+// Headings — bold, deep teal, generous size
 // ---------------------------------------------------------------------------
 
 h1, h2, h3, h4, h5, h6 {
-    font-family:   var(--font-family-accent);
-    font-weight:   var(--font-weight-black);
-    line-height:   var(--line-height-tight);
-    color:         var(--color-text);
-    text-wrap:     balance;
+    font-family:        var(--font-family-base);
+    font-weight:        var(--font-weight-bold);
+    line-height:        var(--line-height-snug);
+    text-wrap:          balance;
     margin-block-start: 1.2em;
+    margin-block-end:   0;
 }
 
 h1 {
-    font-size:      var(--font-size-4xl);
-    letter-spacing: -0.02em;
+    font-size:       var(--font-size-3xl);
+    line-height:     var(--line-height-tight);
+    letter-spacing:  var(--tracking-tight);
+    color:           var(--bgm-teal-900);
 }
 
 h2 {
-    font-size:      var(--font-size-3xl);
-    letter-spacing: -0.02em;
+    font-size:       var(--font-size-2xl);
+    letter-spacing:  var(--tracking-tight);
+    color:           var(--bgm-teal-800);
 }
 
 h3 {
-    font-size:      var(--font-size-2xl);
-    letter-spacing: -0.02em;
+    font-size:       var(--font-size-xl);
+    color:           var(--bgm-teal-800);
 }
 
 h4 {
-    font-size:      var(--font-size-xl);
-    letter-spacing: -0.01em;
+    font-size:       var(--font-size-lg);
+    color:           var(--bgm-teal-700);
 }
 
 h5 {
-    font-size:      var(--font-size-lg);
-    letter-spacing: -0.01em;
+    font-size:       var(--font-size-md);
+    font-weight:     var(--font-weight-semibold);
+    color:           var(--color-text);
 }
 
 h6 {
-    font-size:      var(--font-size-base);
+    font-size:       var(--font-size-base);
+    font-weight:     var(--font-weight-semibold);
+    text-transform:  uppercase;
+    letter-spacing:  var(--tracking-caps);
+    color:           var(--bgm-ink-3);
+}
+
+// ---------------------------------------------------------------------------
+// Typographic role classes
+// ---------------------------------------------------------------------------
+
+// Eyebrow label — sits above a heading to provide context
+.eyebrow {
+    font-family:     var(--font-family-base);
+    font-weight:     var(--font-weight-semibold);
+    font-size:       var(--font-size-sm);
+    text-transform:  uppercase;
+    letter-spacing:  var(--tracking-caps);
+    color:           var(--bgm-teal-700);
+}
+
+// Lead paragraph — larger intro sentence below a heading
+.lead {
+    font-size:   var(--font-size-md);
+    line-height: var(--line-height-relaxed);
+    color:       var(--bgm-ink-2);
+}
+
+// Caption / meta — dates, categories, small supplementary text
+.caption,
+small {
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+// Legal / micro copy
+.legal {
+    font-size:      var(--font-size-xs);
+    color:          var(--bgm-ink-3);
+    letter-spacing: 0.01em;
 }
 
 // ---------------------------------------------------------------------------
@@ -82,30 +131,33 @@ cite {
     font-style: italic;
 }
 
-small {
-    font-size: var(--font-size-sm);
-}
-
 mark {
-    background-color: var(--color-accent);
-    color:            var(--color-text);
+    background-color: var(--bgm-gold-300);
+    color:            var(--bgm-teal-900);
     padding-inline:   var(--space-2xs);
-    border-radius:    var(--layout-radius);
+    border-radius:    var(--layout-radius-sm);
 }
 
+::selection {
+    background: var(--bgm-gold-300);
+    color:      var(--bgm-teal-900);
+}
+
+// ---------------------------------------------------------------------------
 // Inline code
+// ---------------------------------------------------------------------------
+
 code,
 kbd,
 samp {
-    font-family: var(--font-family-mono);
-    font-size:   0.875em;
-    background:  var(--color-surface);
-    padding:     var(--space-2xs) var(--space-xs);
-    border-radius: calc(var(--layout-radius) / 2);
-    border:      1px solid var(--color-border);
+    font-family:   var(--font-family-mono);
+    font-size:     0.875em;
+    background:    var(--bgm-teal-050);
+    padding:       var(--space-2xs) var(--space-xs);
+    border-radius: var(--layout-radius-sm);
+    border:        1px solid var(--bgm-teal-100);
 }
 
-// Code blocks
 pre {
     font-family:   var(--font-family-mono);
     font-size:     var(--font-size-sm);
@@ -125,28 +177,31 @@ pre {
 }
 
 // ---------------------------------------------------------------------------
-// Quotations
+// Quotations — optional serif accent for pull-quotes and testimonials
 // ---------------------------------------------------------------------------
 
 blockquote {
-    font-style:    italic;
-    border-inline-start: 4px solid var(--color-primary);
-    padding-inline-start: var(--space-md);
-    margin-block:  var(--space-md);
-    color:         var(--color-secondary);
-    text-wrap:     balance;
+    font-family:         var(--font-family-serif);
+    font-style:          italic;
+    border-inline-start: 3px solid var(--bgm-teal-700);
+    padding-inline-start: var(--space-lg);
+    margin-block:        var(--space-lg);
+    color:               var(--bgm-ink-2);
+    text-wrap:           balance;
 
     cite {
-        display:        block;
-        font-size:      var(--font-size-sm);
+        display:            block;
+        font-family:        var(--font-family-base);
+        font-size:          var(--font-size-sm);
+        font-style:         normal;
+        font-weight:        var(--font-weight-semibold);
         margin-block-start: var(--space-sm);
-        font-style:     normal;
-        color:          var(--color-disabled-text);
+        color:              var(--bgm-teal-700);
     }
 }
 
 q {
-    quotes: "\201C" "\201D" "\2018" "\2019";
+    quotes: "\201E" "\201C";   // German typographic quotes
     font-style: italic;
 }
 
@@ -168,4 +223,5 @@ abbr[title] {
     cursor:          help;
     text-decoration: underline dotted;
 }
+
 }

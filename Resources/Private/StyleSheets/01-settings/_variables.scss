@@ -1,145 +1,213 @@
 // =============================================================================
 // 01-settings/_variables.scss
 //
-// Design tokens exposed as CSS custom properties.
-// All values can be overridden downstream by re-declaring the property
-// on :root or any scoping selector before this stylesheet is imported.
+// BGM Pulheim design tokens as CSS custom properties.
+// All values can be overridden by re-declaring the property on :root (or any
+// scoping selector) OUTSIDE any @layer — those unlayered declarations beat
+// every layered one and are the intended hook for site settings / TypoScript.
 // =============================================================================
 
 @layer theme-settings {
 :root {
     // -------------------------------------------------------------------------
-    // Colour palette
+    // BGM Pulheim brand palette
+    // Two-colour brand: petrol teal + warm gold on off-white.
     // -------------------------------------------------------------------------
 
-    // Base semantic colours
-    --color-text:             #191919;
-    --color-surface:          #f3f3f3;
+    // Teal — organisation identity, headings, primary actions
+    --bgm-teal-900: #0e3f3f;
+    --bgm-teal-800: #16575a;
+    --bgm-teal-700: #1f6e6e;
+    --bgm-teal-600: #277171;
+    --bgm-teal-500: #3c8a89;
+    --bgm-teal-300: #9bbbbb;
+    --bgm-teal-100: #d8e6e6;
+    --bgm-teal-050: #eef4f4;
+
+    // Gold — volunteer, donate, action accent
+    --bgm-gold-900: #8a7414;
+    --bgm-gold-700: #b69312;
+    --bgm-gold-600: #ccb629;
+    --bgm-gold-500: #d8b222;
+    --bgm-gold-300: #ead687;
+    --bgm-gold-100: #f5e9b8;
+    --bgm-gold-050: #fbf6e2;
+
+    // Neutrals
+    --bgm-ink:    #1a1a1a;
+    --bgm-ink-2:  #3a3a3a;
+    --bgm-ink-3:  #6b6b6b;
+    --bgm-line:   #d6d6d6;
+    --bgm-line-2: #ebebeb;
+
+    // -------------------------------------------------------------------------
+    // Semantic colours
+    // -------------------------------------------------------------------------
+
+    --color-text:             var(--bgm-ink);
+    --color-surface:          #f5f5f5;
     --color-background:       #ffffff;
 
-    // Brand colours
-    --color-primary:          #2563eb;
-    --color-primary-hover:    #1d4ed8;
-    --color-secondary:        #64748b;
-    --color-secondary-hover:  #475569;
-    --color-accent:           #f59e0b;
+    --color-primary:          var(--bgm-teal-700);
+    --color-primary-hover:    var(--bgm-teal-800);
+    --color-secondary:        var(--bgm-ink-3);     // muted body text
+    --color-secondary-hover:  var(--bgm-ink-2);
 
-    // Feedback colours
-    --color-success:          #16a34a;
-    --color-warning:          #d97706;
-    --color-danger:           #dc2626;
-    --color-info:             #0891b2;
+    --color-accent:           var(--bgm-gold-500);
+    --color-accent-soft:      var(--bgm-gold-300);
+    --color-fg-on-teal:       #ffffff;
+    --color-fg-on-gold:       var(--bgm-teal-900);
+    --color-fg-muted:         var(--bgm-ink-3);
+    --color-overlay:          rgba(15, 35, 35, 0.55);
 
-    // Neutral palette (borders, shadows, disabled states)
-    --color-border:           #d1d5db;
-    --color-shadow:           rgb(0 0 0 / 10%);
-    --color-disabled-bg:      #e5e7eb;
-    --color-disabled-text:    #9ca3af;
+    --color-success:          #2e7d32;
+    --color-warning:          #c98a14;
+    --color-danger:           #b3261e;
+    --color-info:             var(--bgm-teal-500);
 
-    // Link colours
-    --color-link:             var(--color-primary);
-    --color-link-hover:       var(--color-secondary);
-    --color-link-visited:     var(--color-secondary);
+    --color-border:           var(--bgm-line);
+    --color-border-strong:    var(--bgm-teal-700);
+    --color-border-accent:    var(--bgm-gold-500);
+    --color-shadow:           rgba(14, 63, 63, 0.08);
+    --color-disabled-bg:      var(--bgm-line-2);
+    --color-disabled-text:    var(--bgm-ink-3);
+
+    --color-link:             var(--bgm-teal-700);
+    --color-link-hover:       var(--bgm-teal-900);
+    --color-link-visited:     var(--bgm-teal-800);
+
+    // Gold focus ring — accessibility-critical for older users
+    --color-focus-ring:       var(--bgm-gold-500);
 
     // -------------------------------------------------------------------------
-    // Spacing scale
+    // Spacing — 4 px base unit
     // -------------------------------------------------------------------------
 
-    // Absolute rem scale
-    --space-2xs:  0.125rem;   //  2 px
-    --space-xs:   0.25rem;    //  4 px
-    --space-sm:   0.5rem;     //  8 px
-    --space-md:   1rem;       // 16 px
-    --space-lg:   1.5rem;     // 24 px
-    --space-xl:   2rem;       // 32 px
-    --space-2xl:  3rem;       // 48 px
-    --space-3xl:  4rem;       // 64 px
+    --space-2xs: 0.125rem;   //  2 px
+    --space-xs:  0.25rem;    //  4 px
+    --space-sm:  0.5rem;     //  8 px
+    --space-md:  1rem;       // 16 px
+    --space-lg:  1.5rem;     // 24 px
+    --space-xl:  2rem;       // 32 px
+    --space-2xl: 3rem;       // 48 px
+    --space-3xl: 4rem;       // 64 px
+    --space-4xl: 6rem;       // 96 px
 
-    // Relative em scale (useful inside components)
-    --space-em-xs:  0.25em;
-    --space-em-sm:  0.5em;
-    --space-em-md:  1em;
-    --space-em-lg:  1.5em;
+    --space-em-xs: 0.25em;
+    --space-em-sm: 0.5em;
+    --space-em-md: 1em;
+    --space-em-lg: 1.5em;
 
     // -------------------------------------------------------------------------
     // Layout
     // -------------------------------------------------------------------------
 
-    // Responsive breakpoints (used in @media queries — not as custom props)
-    // xs: 0  |  sm: 36rem  |  md: 48rem  |  lg: 62rem  |  xl: 75rem  |  2xl: 87.5rem
-
     --layout-width-min:      320px;
-    --layout-width-max:      1400px;
-    --layout-content-width:  75ch;
-    --layout-card-width:     32ch;
+    --layout-width-max:      72rem;         // 1152 px — design spec max-content
+    --layout-content-width:  72rem;
+    --layout-prose-width:    42rem;         // reading column ≈ 672 px
+    --layout-card-width:     22rem;
     --layout-text-width:     65ch;
     --layout-sidebar-main:   75ch;
     --layout-sidebar-aside:  45ch;
     --layout-grid-gap:       clamp(var(--space-md), 3vw, var(--space-xl));
     --layout-grid-min-col:   4rem;
-    --layout-radius:         0.5rem;
-    --layout-radius-lg:      1rem;
+
+    // Vertical section rhythm: 48 px mobile → 96 px desktop
+    --layout-section-pad-y:  clamp(var(--space-2xl), 6vw, var(--space-4xl));
+
+    // Radii — civic/institutional: square where possible
+    --layout-radius:         0.25rem;   // 4 px — buttons, inputs, dropdowns
+    --layout-radius-sm:      0.125rem;  // 2 px — card borders, chips
+    --layout-radius-lg:      0.5rem;    // 8 px — modals, news cards
     --layout-radius-full:    9999px;
 
     // -------------------------------------------------------------------------
-    // Typography
+    // Typography — Source Sans 3 (body) + Source Serif 4 (quotes only)
     // -------------------------------------------------------------------------
 
-    --font-family-base:    system-ui, -apple-system, sans-serif;
+    --font-family-base:    "Source Sans 3", "Source Sans Pro", "Open Sans", "Helvetica Neue", Arial, sans-serif;
     --font-family-accent:  var(--font-family-base);
-    --font-family-mono:    ui-monospace, "Cascadia Code", monospace;
+    --font-family-serif:   "Source Serif 4", "Source Serif Pro", Georgia, serif;
+    --font-family-mono:    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-    --font-weight-normal:  400;
-    --font-weight-medium:  500;
-    --font-weight-bold:    700;
-    --font-weight-black:   800;
+    --font-weight-normal:   400;
+    --font-weight-medium:   500;
+    --font-weight-semibold: 600;
+    --font-weight-bold:     700;
+    --font-weight-black:    900;
 
-    // Fluid type scale (clamp: min, preferred, max)
-    --font-size-xs:     clamp(0.64rem,  0.15vw + 0.61rem, 0.72rem);
-    --font-size-sm:     clamp(0.8rem,   0.23vw + 0.75rem, 0.9rem);
-    --font-size-base:   clamp(1rem,     0.34vw + 0.91rem, 1.125rem);
-    --font-size-lg:     clamp(1.25rem,  0.49vw + 1.13rem, 1.4rem);
-    --font-size-xl:     clamp(1.563rem, 0.72vw + 1.38rem, 1.76rem);
-    --font-size-2xl:    clamp(1.953rem, 1.03vw + 1.69rem, 2.2rem);
-    --font-size-3xl:    clamp(2.441rem, 1.45vw + 2.07rem, 2.75rem);
-    --font-size-4xl:    clamp(3.052rem, 2.01vw + 2.52rem, 3.44rem);
+    // Fixed type scale — prefer predictable sizes for a civic/informational site
+    --font-size-xs:    0.75rem;    // 12 px — captions, legal
+    --font-size-sm:    0.875rem;   // 14 px — meta, labels
+    --font-size-base:  1rem;       // 16 px — body
+    --font-size-md:    1.125rem;   // 18 px — large body / lead
+    --font-size-lg:    1.375rem;   // 22 px — h4
+    --font-size-xl:    1.75rem;    // 28 px — h3
+    --font-size-2xl:   2.25rem;    // 36 px — h2
+    --font-size-3xl:   3rem;       // 48 px — h1
+    --font-size-4xl:   4rem;       // 64 px — hero display
 
-    --line-height-tight:   1.1;
+    // Line heights — generous for German text legibility
+    --line-height-tight:   1.15;
     --line-height-snug:    1.3;
-    --line-height-base:    1.5;
-    --line-height-relaxed: 1.75;
+    --line-height-base:    1.55;
+    --line-height-relaxed: 1.7;
+
+    --tracking-tight: -0.01em;
+    --tracking-wide:   0.04em;
+    --tracking-caps:   0.08em;
+
+    // -------------------------------------------------------------------------
+    // Elevation — teal-tinted shadows, low opacity
+    // Signature offer-cards have no shadow; use shadow only on modals/forms.
+    // -------------------------------------------------------------------------
+
+    --shadow-sm: 0 1px 2px rgba(14, 63, 63, 0.06);
+    --shadow-md: 0 4px 14px rgba(14, 63, 63, 0.08);
+    --shadow-lg: 0 16px 40px rgba(14, 63, 63, 0.12);
+
+    --easing-standard: cubic-bezier(0.2, 0.0, 0.2, 1);
+    --duration-fast:   120ms;
+    --duration-base:   200ms;
+    --duration-slow:   320ms;
 
     // -------------------------------------------------------------------------
     // Components — Buttons
+    // Three flavours: solid teal (primary), solid gold (volunteer), outline.
+    // All 4 px radius, no shadows, no scale animation.
     // -------------------------------------------------------------------------
 
     --btn-padding-y:        var(--space-sm);
     --btn-padding-x:        var(--space-lg);
     --btn-font-size:        var(--font-size-base);
-    --btn-font-weight:      var(--font-weight-medium);
+    --btn-font-weight:      var(--font-weight-semibold);
     --btn-border-radius:    var(--layout-radius);
     --btn-border-width:     2px;
-    --btn-transition:       background-color 150ms ease, color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+    --btn-transition:       background-color var(--duration-fast) var(--easing-standard),
+                            color var(--duration-fast) var(--easing-standard),
+                            border-color var(--duration-fast) var(--easing-standard),
+                            opacity var(--duration-fast) var(--easing-standard);
 
-    // Primary variant
-    --btn-primary-bg:         var(--color-primary);
+    // Primary — solid teal (main CTAs: "Mehr erfahren", "Unsere Angebote")
+    --btn-primary-bg:         var(--bgm-teal-700);
     --btn-primary-text:       #ffffff;
-    --btn-primary-border:     var(--color-primary);
-    --btn-primary-bg-hover:   var(--color-primary-hover);
+    --btn-primary-border:     var(--bgm-teal-700);
+    --btn-primary-bg-hover:   var(--bgm-teal-800);
     --btn-primary-text-hover: #ffffff;
 
-    // Secondary variant
-    --btn-secondary-bg:         var(--color-secondary);
-    --btn-secondary-text:       #ffffff;
-    --btn-secondary-border:     var(--color-secondary);
-    --btn-secondary-bg-hover:   var(--color-secondary-hover);
+    // Secondary / gold — volunteer & donate ("Jetzt mithelfen", "Spenden")
+    --btn-secondary-bg:         var(--bgm-gold-300);
+    --btn-secondary-text:       var(--bgm-teal-900);
+    --btn-secondary-border:     var(--bgm-gold-300);
+    --btn-secondary-bg-hover:   var(--bgm-gold-500);
 
-    // Outline variant
-    --btn-outline-bg:         transparent;
-    --btn-outline-text:       var(--color-primary);
-    --btn-outline-border:     var(--color-primary);
-    --btn-outline-bg-hover:   var(--color-primary);
-    --btn-outline-text-hover: #ffffff;
+    // Outline — muted secondary action ("Zu Männer International")
+    --btn-outline-bg:           transparent;
+    --btn-outline-text:         var(--bgm-teal-700);
+    --btn-outline-border:       var(--bgm-teal-700);
+    --btn-outline-bg-hover:     var(--bgm-teal-050);
+    --btn-outline-text-hover:   var(--bgm-teal-900);
 
     // Size modifiers
     --btn-sm-padding-y:   var(--space-xs);
@@ -147,38 +215,23 @@
     --btn-sm-font-size:   var(--font-size-sm);
     --btn-lg-padding-y:   var(--space-md);
     --btn-lg-padding-x:   var(--space-xl);
-    --btn-lg-font-size:   var(--font-size-lg);
+    --btn-lg-font-size:   var(--font-size-md);
 
     // -------------------------------------------------------------------------
     // Components — Images
     // -------------------------------------------------------------------------
 
     --img-border-radius:  var(--layout-radius);
-    --img-shadow:         0 4px 6px -1px var(--color-shadow), 0 2px 4px -2px var(--color-shadow);
+    --img-shadow:         var(--shadow-md);
     --img-object-fit:     cover;
 
     // -------------------------------------------------------------------------
-    // Components — Icons
+    // Components — Icons (Phosphor Icons fill variant)
     // -------------------------------------------------------------------------
 
-    --icon-size-sm:   1rem;
-    --icon-size-md:   1.25rem;
-    --icon-size-lg:   1.5rem;
+    --icon-size-sm:   1.25rem;  // 20 px — inline
+    --icon-size-md:   1.5rem;   // 24 px — UI default
+    --icon-size-lg:   3rem;     // 48 px — offer-card badge
     --icon-color:     currentcolor;
-
-    // -------------------------------------------------------------------------
-    // Dark-mode overrides
-    // -------------------------------------------------------------------------
-
-    @media (prefers-color-scheme: dark) {
-        --color-text:       #f3f3f3;
-        --color-surface:    #1e293b;
-        --color-background: #0f172a;
-        --color-border:     #334155;
-        --color-shadow:     rgb(0 0 0 / 30%);
-
-        --btn-primary-bg-hover:  color-mix(in srgb, var(--color-primary) 80%, white);
-        --btn-outline-bg-hover:  color-mix(in srgb, var(--color-primary) 80%, transparent);
-    }
 }
 }

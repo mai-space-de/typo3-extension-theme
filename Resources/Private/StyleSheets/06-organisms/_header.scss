@@ -1,18 +1,20 @@
 // =============================================================================
 // 06-organisms/_header.scss
 //
-// Site header organism — horizontally distributed logo and navigation bar.
-// Pairs with the .navigation organism (06-organisms/_navigation.scss).
+// Site header — white bar with logo left, nav centre, actions right.
+// Sticky at top; 1 px teal-tinted bottom border.
 //
 // Markup pattern:
 //   <header class="site-header">
-//     <a class="site-header-logo link-unstyled" href="/">Brand</a>
-//     <nav class="navigation navigation-horizontal" aria-label="Main">
-//       …
-//     </nav>
+//     <a class="site-header-logo link-unstyled" href="/">
+//       <img src="…/logo-mark.png" alt="" />
+//       <span>Begleitung geflüchteter Menschen e.V. Pulheim</span>
+//     </a>
+//     <nav class="navigation navigation-horizontal" aria-label="Hauptnavigation">…</nav>
+//     <div class="site-header-actions">…</div>
 //   </header>
 //
-// Override --header-* custom properties to customise colours, height, and spacing.
+// Override --header-* custom properties to customise.
 // =============================================================================
 
 @use "../02-mixins/media-breakpoint" as *;
@@ -20,13 +22,13 @@
 @layer theme-organisms {
 :root {
     --header-bg:           var(--color-background);
-    --header-border-color: var(--color-border);
-    --header-height:       4rem;
+    --header-border-color: var(--bgm-teal-100);
+    --header-height:       5rem;
     --header-padding-x:    var(--layout-grid-gap);
-    --header-shadow:       0 1px 3px 0 var(--color-shadow);
-    --header-logo-size:    var(--font-size-lg);
+    --header-shadow:       var(--shadow-sm);
+    --header-logo-size:    var(--font-size-base);
     --header-logo-weight:  var(--font-weight-bold);
-    --header-logo-color:   var(--color-accent);
+    --header-logo-color:   var(--bgm-teal-900);
     --header-z:            100;
 }
 
@@ -34,20 +36,19 @@
 // Site header
 // ---------------------------------------------------------------------------
 .site-header {
-    display:         flex;
-    align-items:     center;
-    justify-content: space-between;
-    gap:             var(--space-lg);
-    height:          var(--header-height);
-    padding-inline:  var(--header-padding-x);
-    background:      var(--header-bg);
+    display:          flex;
+    align-items:      center;
+    justify-content:  space-between;
+    gap:              var(--space-lg);
+    height:           var(--header-height);
+    padding-inline:   var(--header-padding-x);
+    background:       var(--header-bg);
     border-block-end: 1px solid var(--header-border-color);
-    box-shadow:      var(--header-shadow);
-    position:        sticky;
+    box-shadow:       var(--header-shadow);
+    position:         sticky;
     inset-block-start: 0;
-    z-index:         var(--header-z);
+    z-index:          var(--header-z);
 
-    // Full-width variant (no max-width constraint inside the header)
     &.site-header-full {
         max-width: none;
     }
@@ -57,23 +58,32 @@
 // Logo / site title
 // ---------------------------------------------------------------------------
 .site-header-logo {
+    display:     flex;
+    align-items: center;
+    gap:         var(--space-sm);
     font-size:   var(--header-logo-size);
     font-weight: var(--header-logo-weight);
-    font-family: var(--font-family-accent);
     color:       var(--header-logo-color);
     white-space: nowrap;
     text-decoration: none;
     flex-shrink: 0;
+    line-height: var(--line-height-snug);
+
+    img {
+        height:       2.75rem;   // 44 px — matches design mockup
+        width:        auto;
+        border-radius: 0;
+    }
 
     &:hover,
     &:focus-visible {
-        color: var(--color-primary);
+        color:           var(--bgm-teal-700);
         text-decoration: none;
     }
 }
 
 // ---------------------------------------------------------------------------
-// Actions area (e.g. CTA button, search, language switcher)
+// Actions area (language switcher, login, donate CTA)
 // ---------------------------------------------------------------------------
 .site-header-actions {
     display:     flex;

@@ -50,18 +50,17 @@
 
     &:focus {
         transform: translateY(0);
-        outline: 3px solid var(--color-accent);
+        outline: 3px solid var(--color-focus-ring);
         outline-offset: 2px;
     }
 }
 
 // ---------------------------------------------------------------------------
-// Focus ring
-// TYPO3 backend and custom components often strip :focus styles.
-// Re-establish a visible, theme-coloured ring globally.
+// Focus ring — gold for high contrast visibility (--color-focus-ring).
+// Accessibility-critical: older users rely on a clear visible focus indicator.
 // ---------------------------------------------------------------------------
 :focus-visible {
-    outline:        2px solid var(--color-primary);
+    outline:        2px solid var(--color-focus-ring);
     outline-offset: 2px;
     border-radius:  var(--layout-radius);
 }
@@ -93,13 +92,7 @@
         --color-text:       #000000;
         --color-background: #ffffff;
         --color-border:     #000000;
-    }
-}
-
-@media (prefers-contrast: less) {
-    :root {
-        --color-text:       #191919;
-        --color-background: #f3f3f3;
+        --color-focus-ring: #000000;
     }
 }
 

@@ -1,36 +1,47 @@
 // =============================================================================
 // 05-molecules/_card.scss
 //
-// Card component — a self-contained content container with optional image,
-// header, body, and footer sections.
+// Card components — two patterns:
 //
-// Override --card-* custom properties to customise per-site or per-variant
-// without touching this file.
+// 1. .card  — standard card (news, generic content)
+//    Uses a subtle shadow and rounded corners for non-offer content.
+//
+// 2. .offer-card  — BGM signature "double-frame" offer card
+//    The defining visual: 2 px teal (or gold) solid border, square corners,
+//    no shadow, with a 64×64 px icon badge that half-overlaps the top-left
+//    corner. The badge border matches the card border colour.
+//    Used for Bunter Tisch, Ladies Club, Männer International, Mitwirken, etc.
+//
+// Override --card-* or --offer-card-* custom properties to customise.
 // =============================================================================
 
 @layer theme-molecules {
+
+// ---------------------------------------------------------------------------
+// Standard card — custom properties (override on :root or a scoping element)
+// ---------------------------------------------------------------------------
 :root {
     --card-bg:            var(--color-background);
     --card-border-color:  var(--color-border);
     --card-border-radius: var(--layout-radius);
-    --card-shadow:        0 1px 3px 0 var(--color-shadow), 0 1px 2px -1px var(--color-shadow);
-    --card-shadow-hover:  0 10px 15px -3px var(--color-shadow), 0 4px 6px -4px var(--color-shadow);
-    --card-padding:       var(--space-md);
+    --card-shadow:        var(--shadow-md);
+    --card-shadow-hover:  var(--shadow-lg);
+    --card-padding:       var(--space-lg);
     --card-gap:           var(--space-sm);
-    --card-transition:    box-shadow 200ms ease, transform 200ms ease;
+    --card-transition:    box-shadow var(--duration-base) var(--easing-standard),
+                          transform var(--duration-base) var(--easing-standard);
 }
 
 .card {
-    display:       flex;
+    display:        flex;
     flex-direction: column;
-    background:    var(--card-bg);
-    border:        1px solid var(--card-border-color);
-    border-radius: var(--card-border-radius);
-    box-shadow:    var(--card-shadow);
-    overflow:      hidden;
-    transition:    var(--card-transition);
+    background:     var(--card-bg);
+    border:         1px solid var(--card-border-color);
+    border-radius:  var(--card-border-radius);
+    box-shadow:     var(--card-shadow);
+    overflow:       hidden;
+    transition:     var(--card-transition);
 
-    // Clickable / linked card variant
     &.card-clickable {
         cursor: pointer;
 
@@ -42,48 +53,43 @@
     }
 }
 
-// Card image at the top of the card.
 .card-image {
     img {
-        width:      100%;
-        height:     auto;
-        object-fit: var(--img-object-fit, cover);
+        width:        100%;
+        height:       auto;
+        object-fit:   var(--img-object-fit, cover);
         aspect-ratio: 16 / 9;
-        border-radius: 0; // image sits flush against card edges
+        border-radius: 0;
     }
 }
 
-// Card body — the main text content area.
 .card-body {
     display:        flex;
     flex-direction: column;
     gap:            var(--card-gap);
     padding:        var(--card-padding);
-    flex:           1 1 auto; // stretch to fill remaining card height
+    flex:           1 1 auto;
 }
 
-// Card heading
 .card-title {
     font-size:   var(--font-size-lg);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-snug);
-    color:       var(--color-text);
+    color:       var(--bgm-teal-800);
 }
 
-// Supplementary metadata line (date, category, author…)
 .card-meta {
     font-size: var(--font-size-sm);
     color:     var(--color-secondary);
 }
 
-// Card text content
 .card-text {
-    font-size: var(--font-size-base);
-    color:     var(--color-text);
-    flex:      1 1 auto;
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--color-text);
+    flex:        1 1 auto;
 }
 
-// Card footer — typically holds action buttons.
 .card-footer {
     display:     flex;
     flex-wrap:   wrap;
@@ -92,6 +98,82 @@
     padding:     var(--card-padding);
     border-block-start: 1px solid var(--card-border-color);
     background:  var(--color-surface);
+}
+
+
+// ---------------------------------------------------------------------------
+// Offer card — BGM signature double-frame pattern
+// ---------------------------------------------------------------------------
+:root {
+    // Border colour tokens — override per card instance for teal vs gold
+    --offer-card-border-color:  var(--bgm-teal-700);
+    --offer-card-badge-size:    4rem;      // 64 px
+    --offer-card-badge-offset:  2rem;      // how much badge overlaps the card edge
+}
+
+.offer-card {
+    // Extra margin to give the badge room to bleed outside the card
+    margin-block-start:  var(--offer-card-badge-offset);
+    margin-inline-start: var(--offer-card-badge-offset);
+
+    position:   relative;
+    background: var(--color-background);
+    border:     2px solid var(--offer-card-border-color);
+    border-radius: var(--layout-radius-sm);
+    padding:    var(--space-lg);
+    // Extra top padding so body text doesn't collide with the badge
+    padding-block-start: calc(var(--space-lg) + var(--offer-card-badge-offset));
+
+    transition: border-color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        border-color: var(--bgm-teal-900);
+    }
+
+    // Gold accent variant
+    &.offer-card--gold {
+        --offer-card-border-color: var(--bgm-gold-500);
+
+        &:hover {
+            border-color: var(--bgm-gold-700);
+        }
+    }
+}
+
+// The icon badge — half-overlapping the top-left corner
+.offer-card__badge {
+    position:        absolute;
+    inset-block-start:  calc(var(--offer-card-badge-offset) * -1);
+    inset-inline-start: calc(var(--offer-card-badge-offset) * -1);
+    width:           var(--offer-card-badge-size);
+    height:          var(--offer-card-badge-size);
+    background:      var(--color-background);
+    border:          2px solid var(--offer-card-border-color);
+    border-radius:   var(--layout-radius-sm);
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    flex-shrink:     0;
+}
+
+.offer-card__title {
+    font-size:    var(--font-size-lg);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: var(--space-xs) var(--space-sm);
+}
+
+.offer-card__body {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-md);
+}
+
+.offer-card__text {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--bgm-ink-2);
+    flex:        1 1 auto;
 }
 
 }
