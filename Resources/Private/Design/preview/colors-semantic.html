@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:#fff;}
+  body{padding:24px;font-family:var(--font-sans);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;}
+  .row{display:flex;align-items:center;gap:12px;}
+  .dot{width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.06);flex:0 0 auto;}
+  .label{font-weight:600;font-size:13px;color:var(--bgm-teal-900);}
+  .desc{font-size:12px;color:var(--bgm-ink-3);}
+</style></head>
+<body>
+<div class="grid">
+  <div class="row"><span class="dot" style="background:var(--color-primary)"></span><div><div class="label">primary</div><div class="desc">teal-700 — buttons, headings</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-accent)"></span><div><div class="label">accent</div><div class="desc">gold-500 — icons, highlights</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-accent-soft)"></span><div><div class="label">accent-soft</div><div class="desc">gold-300 — volunteer button</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-fg)"></span><div><div class="label">fg</div><div class="desc">body text</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-fg-muted)"></span><div><div class="label">fg-muted</div><div class="desc">caption / meta</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-bg)"></span><div><div class="label">bg</div><div class="desc">page surface</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-success)"></span><div><div class="label">success</div><div class="desc">#2e7d32</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-warning)"></span><div><div class="label">warning</div><div class="desc">#c98a14</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-danger)"></span><div><div class="label">danger</div><div class="desc">#b3261e</div></div></div>
+  <div class="row"><span class="dot" style="background:var(--color-info)"></span><div><div class="label">info</div><div class="desc">teal-500</div></div></div>
+</div>
+</body></html>

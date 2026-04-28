@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:#fff;}
+  body{padding:24px;font-family:var(--font-sans);}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 18px;border-radius:4px;font-weight:600;font-size:15px;border:0;cursor:pointer;transition:background var(--duration-fast) var(--easing-standard),color var(--duration-fast) var(--easing-standard);text-decoration:none;font-family:inherit;}
+  .btn-primary{background:var(--bgm-teal-700);color:#fff;}
+  .btn-primary:hover{background:var(--bgm-teal-800);}
+  .btn-volunteer{background:var(--bgm-gold-300);color:var(--bgm-teal-900);}
+  .btn-volunteer:hover{background:var(--bgm-gold-500);}
+  .btn-outline{background:transparent;color:var(--bgm-teal-800);border:2px solid var(--bgm-teal-700);padding:8px 16px;}
+  .btn-outline:hover{background:var(--bgm-teal-050);}
+  .btn-ghost{background:transparent;color:var(--bgm-teal-800);}
+  .btn-ghost:hover{color:var(--bgm-teal-900);text-decoration:underline;}
+  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}
+  .lbl{font-family:var(--font-mono);font-size:11px;color:var(--bgm-ink-3);width:100px;}
+</style></head>
+<body>
+<div class="row"><span class="lbl">primary</span><button class="btn btn-primary">Mehr erfahren</button><button class="btn btn-primary">Zum Ladies Club</button></div>
+<div class="row"><span class="lbl">volunteer</span><button class="btn btn-volunteer">Jetzt mithelfen</button><button class="btn btn-volunteer">Spenden</button></div>
+<div class="row"><span class="lbl">outline</span><button class="btn btn-outline">Zu Männer International</button></div>
+<div class="row"><span class="lbl">ghost</span><button class="btn btn-ghost">Mehr lesen →</button></div>
+</body></html>

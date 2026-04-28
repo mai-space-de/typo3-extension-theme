@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:#fff;}
+  body{padding:24px;font-family:var(--font-sans);color:var(--bgm-ink);}
+  label{display:block;font-size:13px;font-weight:600;color:var(--bgm-teal-900);margin-bottom:6px;}
+  .field{margin-bottom:14px;max-width:380px;}
+  input,textarea,select{width:100%;font-family:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--bgm-line);border-radius:4px;background:#fff;color:var(--bgm-ink);box-sizing:border-box;outline:none;transition:border-color var(--duration-fast),box-shadow var(--duration-fast);}
+  input:focus,textarea:focus,select:focus{border-color:var(--bgm-teal-700);box-shadow:0 0 0 3px rgba(216,178,34,.35);}
+  .help{font-size:12px;color:var(--bgm-ink-3);margin-top:4px;}
+  .row{display:flex;gap:16px;}
+  .row .field{flex:1;}
+  .check{display:flex;align-items:flex-start;gap:10px;font-size:13px;}
+  .check input{width:auto;}
+</style></head>
+<body>
+<div class="row">
+  <div class="field"><label>Vorname</label><input value="Doris"></div>
+  <div class="field"><label>Nachname</label><input placeholder="z.B. Müller"></div>
+</div>
+<div class="field"><label>E-Mail</label><input type="email" placeholder="dein.name@beispiel.de"><div class="help">Wir senden eine Bestätigung an diese Adresse.</div></div>
+<div class="field"><label>Sprachen, die Sie sprechen</label><select><option>Deutsch</option><option>Arabisch</option><option>Ukrainisch</option></select></div>
+<div class="check"><input type="checkbox" id="dsg" checked><label for="dsg" style="font-weight:400;color:var(--bgm-ink-2);margin:0;">Ich habe die <a href="#">Datenschutzerklärung</a> gelesen.</label></div>
+</body></html>

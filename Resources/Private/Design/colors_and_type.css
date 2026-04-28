@@ -1,0 +1,244 @@
+/* =========================================================
+   BGM Pulheim — Colors & Type
+   Begleitung geflüchteter Menschen e.V., Pulheim
+   ========================================================= */
+
+/* --- Webfont: Source Sans 3 + Source Serif 4 (Google Fonts substitution) ---
+   The reference materials use a humanist sans (similar to Source Sans / Open
+   Sans) for body and a slightly heavier weight for headings. We substitute
+   Google's Source Sans 3 until the user supplies the exact licensed family.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;900&family=Source+Serif+4:wght@500;700&display=swap');
+
+:root {
+  /* ----- BRAND CORE ---------------------------------------- */
+  --bgm-teal-900: #0e3f3f;   /* deep ink, headings on light */
+  --bgm-teal-800: #16575a;
+  --bgm-teal-700: #1f6e6e;   /* PRIMARY teal — logo flower & text */
+  --bgm-teal-600: #277170;
+  --bgm-teal-500: #3c8a89;
+  --bgm-teal-300: #9bbbbb;   /* muted, decorative */
+  --bgm-teal-100: #d8e6e6;
+  --bgm-teal-050: #eef4f4;
+
+  --bgm-gold-900: #8a7414;
+  --bgm-gold-700: #b69312;
+  --bgm-gold-600: #ccb629;   /* PRIMARY yellow — logo rays */
+  --bgm-gold-500: #d8b222;   /* deeper, used for icons */
+  --bgm-gold-300: #ead687;   /* button-yellow background */
+  --bgm-gold-100: #f5e9b8;
+  --bgm-gold-050: #fbf6e2;
+
+  /* ----- NEUTRALS ----------------------------------------- */
+  --bgm-ink:     #1a1a1a;
+  --bgm-ink-2:   #3a3a3a;
+  --bgm-ink-3:   #6b6b6b;   /* secondary text */
+  --bgm-line:    #d6d6d6;   /* hairlines */
+  --bgm-line-2:  #ebebeb;
+  --bgm-surface: #f5f5f5;   /* page bg */
+  --bgm-card:    #ffffff;
+  --bgm-overlay: rgba(15, 35, 35, 0.55);
+
+  /* ----- SEMANTIC ----------------------------------------- */
+  --color-bg:           var(--bgm-surface);
+  --color-card:         var(--bgm-card);
+  --color-fg:           var(--bgm-ink);
+  --color-fg-muted:     var(--bgm-ink-3);
+  --color-fg-on-teal:   #ffffff;
+  --color-fg-on-gold:   var(--bgm-teal-900);
+  --color-primary:      var(--bgm-teal-700);
+  --color-primary-hover:var(--bgm-teal-800);
+  --color-accent:       var(--bgm-gold-500);
+  --color-accent-soft:  var(--bgm-gold-300);
+  --color-border:       var(--bgm-line);
+  --color-border-strong:var(--bgm-teal-700);
+  --color-border-accent:var(--bgm-gold-500);
+  --color-link:         var(--bgm-teal-700);
+  --color-link-hover:   var(--bgm-teal-900);
+  --color-success:      #2e7d32;
+  --color-warning:      #c98a14;
+  --color-danger:       #b3261e;
+  --color-info:         var(--bgm-teal-500);
+  --color-focus-ring:   var(--bgm-gold-500);
+
+  /* ----- TYPE FAMILIES ------------------------------------ */
+  --font-sans:  "Source Sans 3", "Source Sans Pro", "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --font-mono:  ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ----- TYPE SIZES (base = 16) --------------------------- */
+  --fs-xs:   0.75rem;   /* 12 — captions, legal */
+  --fs-sm:   0.875rem;  /* 14 — meta, labels */
+  --fs-base: 1rem;      /* 16 — body */
+  --fs-md:   1.125rem;  /* 18 — large body / lead */
+  --fs-lg:   1.375rem;  /* 22 — h4 */
+  --fs-xl:   1.75rem;   /* 28 — h3 */
+  --fs-2xl:  2.25rem;   /* 36 — h2 */
+  --fs-3xl:  3rem;      /* 48 — h1 */
+  --fs-4xl:  4rem;      /* 64 — hero */
+
+  --lh-tight:   1.15;
+  --lh-snug:    1.3;
+  --lh-normal:  1.55;
+  --lh-relaxed: 1.7;
+
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    900;
+
+  --tracking-tight: -0.01em;
+  --tracking-wide:  0.04em;
+  --tracking-caps:  0.08em;
+
+  /* ----- SPACE / RADIUS / SHADOW -------------------------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;   /* default — most surfaces */
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+
+  --border-thin:   1px;
+  --border-base:   2px;   /* signature double-card thickness */
+  --border-thick:  3px;
+
+  --shadow-sm: 0 1px 2px rgba(14, 63, 63, 0.06);
+  --shadow-md: 0 4px 14px rgba(14, 63, 63, 0.08);
+  --shadow-lg: 0 16px 40px rgba(14, 63, 63, 0.12);
+
+  --easing-standard: cubic-bezier(0.2, 0.0, 0.2, 1);
+  --duration-fast:   120ms;
+  --duration-base:   200ms;
+  --duration-slow:   320ms;
+
+  --max-content: 72rem;   /* 1152px reading width */
+  --max-prose:   42rem;
+}
+
+/* =========================================================
+   SEMANTIC ELEMENT STYLES
+   ========================================================= */
+html { font-size: 16px; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--bgm-teal-900);
+  margin: 0 0 var(--space-5);
+}
+h2, .h2 {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-snug);
+  color: var(--bgm-teal-800);
+  margin: 0 0 var(--space-4);
+}
+h3, .h3 {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+  color: var(--bgm-teal-800);
+  margin: 0 0 var(--space-3);
+}
+h4, .h4 {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+  color: var(--bgm-teal-700);
+  margin: 0 0 var(--space-3);
+}
+h5, .h5 {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-md);
+  line-height: var(--lh-snug);
+  margin: 0 0 var(--space-2);
+}
+h6, .h6 {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-base);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--bgm-ink-3);
+  margin: 0 0 var(--space-2);
+}
+
+.eyebrow {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--bgm-teal-700);
+}
+
+p, .body {
+  font-size: var(--fs-base);
+  line-height: var(--lh-relaxed);
+  margin: 0 0 var(--space-4);
+  text-wrap: pretty;
+}
+.lead {
+  font-size: var(--fs-md);
+  line-height: var(--lh-relaxed);
+  color: var(--bgm-ink-2);
+}
+small, .caption {
+  font-size: var(--fs-sm);
+  color: var(--bgm-ink-3);
+}
+.legal {
+  font-size: var(--fs-xs);
+  color: var(--bgm-ink-3);
+  letter-spacing: 0.01em;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color var(--duration-fast) var(--easing-standard);
+}
+a:hover { color: var(--color-link-hover); }
+a:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  background: var(--bgm-teal-050);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-6) 0;
+}
+
+::selection { background: var(--bgm-gold-300); color: var(--bgm-teal-900); }

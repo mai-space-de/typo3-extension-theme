@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:#fff;}
+  body{padding:24px;font-family:var(--font-sans);color:var(--bgm-ink);display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.02em;}
+  .b-teal{background:var(--bgm-teal-100);color:var(--bgm-teal-900);}
+  .b-gold{background:var(--bgm-gold-100);color:var(--bgm-gold-900);}
+  .b-success{background:#e6f1e6;color:#1f5d22;}
+  .b-warning{background:#fbe9c4;color:#7a5710;}
+  .b-danger{background:#fbe1df;color:#7a1a16;}
+  .b-out{background:#fff;color:var(--bgm-teal-800);border:1px solid var(--bgm-teal-700);}
+  .dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .tag{display:inline-flex;padding:6px 12px;font-size:13px;background:#fff;border:1px solid var(--bgm-line);border-radius:4px;color:var(--bgm-ink-2);}
+</style></head>
+<body>
+<span class="badge b-teal"><span class="dot"></span>Angebot</span>
+<span class="badge b-gold">Mitmachen</span>
+<span class="badge b-success">Bestätigt</span>
+<span class="badge b-warning">Warteliste</span>
+<span class="badge b-danger">Ausgebucht</span>
+<span class="badge b-out">Neu</span>
+<span class="tag">Deutschkurs</span>
+<span class="tag">Donnerstag</span>
+<span class="tag">Frauen</span>
+</body></html>

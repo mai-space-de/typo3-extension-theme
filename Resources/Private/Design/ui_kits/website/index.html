@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>BGM Pulheim — Website UI Kit</title>
+<link rel="icon" href="../../assets/favicon.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  body { margin: 0; background: var(--bgm-surface); }
+  #app { min-height: 100vh; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script type="text/babel" src="Icon.jsx"></script>
+<script type="text/babel" src="Button.jsx"></script>
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="OfferCard.jsx"></script>
+<script type="text/babel" src="OfferGrid.jsx"></script>
+<script type="text/babel" src="Section.jsx"></script>
+<script type="text/babel" src="NewsCard.jsx"></script>
+<script type="text/babel" src="EventRow.jsx"></script>
+<script type="text/babel" src="MitwirkenForm.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+
+<script type="text/babel">
+function App() {
+  const [route, setRoute] = React.useState('home');
+  const [lang, setLang] = React.useState('de');
+  const [user, setUser] = React.useState(null);
+
+  // Smooth-scroll on route change
+  React.useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, [route]);
+
+  const offerDetails = {
+    'bunter-tisch': {
+      title: 'Bunter Tisch',
+      eyebrow: 'Angebot · Mittwochs',
+      lead: 'Wir kochen für euch mit Vorsuppe oder Salat ein Hauptgericht. Manchmal gibt es noch ein Stück Kuchen als Nachtisch!',
+      body: 'Der Bunte Tisch ist ein offener Mittagstisch für alle — Neubürger, Nachbarn, Freiwillige. Jede Woche kochen wir gemeinsam, decken den langen Tisch und essen miteinander. Wer möchte, hilft beim Vorbereiten oder Aufräumen.',
+      icon: 'map-pin', accent: 'teal',
+      facts: [['Wann', 'Mittwochs · 12:30–14:00 Uhr'], ['Wo', 'Gemeindehaus Pulheim'], ['Kosten', 'Spende willkommen'], ['Sprachen', 'Deutsch, Arabisch, Englisch']],
+    },
+    'maenner': {
+      title: 'Männer International',
+      eyebrow: 'Angebot · Donnerstags',
+      lead: 'Eine offene Runde zum Deutschlernen, Austauschen und gemeinsamen Entdecken des Lebens in Deutschland — praxisnah, hilfsbereit, herzlich.',
+      body: 'Männer aus aller Welt treffen sich, um Deutsch zu üben, Fragen zu klären und gemeinsam etwas zu unternehmen — vom Behördenbesuch bis zum Stadion.',
+      icon: 'user', accent: 'teal',
+      facts: [['Wann', 'Donnerstags · 19:00–21:00 Uhr'], ['Wo', 'Vereinsheim'], ['Sprachen', 'Deutsch, Arabisch, Farsi']],
+    },
+    'ladies': {
+      title: 'Ladies Club',
+      eyebrow: 'Angebot · Dienstags',
+      lead: 'In vertrauensvoller Atmosphäre bieten Doris und Bettina Frauen aus aller Welt Austausch, Ermutigung und ein buntes Programm für Herz und Seele.',
+      body: 'Vom gemeinsamen Frühstück über kleine Ausflüge bis zu Workshops — der Ladies Club ist ein geschützter Raum, in dem Frauen Freundschaften schließen und ihren Weg in Pulheim finden.',
+      icon: 'user-circle', accent: 'teal',
+      facts: [['Wann', 'Dienstags · 15:00–17:00 Uhr'], ['Wo', 'Café Lichtblick'], ['Anmeldung', 'Nicht nötig — einfach kommen']],
+    },
+  };
+
+  return (
+    <>
+      <Header active={route} onNav={setRoute} lang={lang} onLang={setLang}
+              user={user} onLogin={() => setUser('Doris M.')} />
+
+      {route === 'home' && <>
+        <Hero onCta={setRoute} />
+        <Section eyebrow="Unsere Angebote"
+                 title="Vier Wege, ein Verein."
+                 lead="Drei offene Gruppen — und ein Aufruf zum Mitmachen. Kommen Sie vorbei, lernen Sie uns kennen, oder werden Sie Teil unseres Lotsen-Teams.">
+          <OfferGrid onOpen={(id) => setRoute(id)} onMitwirken={() => setRoute('mitwirken')} />
+        </Section>
+        <Section background="var(--bgm-teal-050)" eyebrow="Aus dem Vereinsleben"
+                 title="Neuigkeiten">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            <NewsCard tag="Pressemitteilung" date="14. April 2026"
+                      title="Stadt Pulheim verleiht Integrationspreis"
+                      excerpt="Der Verein wurde für seine Arbeit mit dem Integrationspreis 2026 ausgezeichnet — ein Dankeschön an alle Ehrenamtlichen." />
+            <NewsCard tag="Rückblick" date="2. April 2026"
+                      title="Iftar-Abend mit 80 Gästen"
+                      excerpt="Ein langer Tisch, Speisen aus zehn Ländern, neue Bekanntschaften — der diesjährige Iftar-Abend war ein Höhepunkt." />
+            <NewsCard tag="Aufruf" date="20. März 2026"
+                      title="Wir suchen Lotsen mit Arabisch-Kenntnissen"
+                      excerpt="Vor allem für Behördenbegleitung und Übersetzung in Beratungsgesprächen freuen wir uns über Verstärkung." />
+          </div>
+        </Section>
+        <Section eyebrow="Demnächst" title="Veranstaltungen">
+          <div style={{ background: '#fff', border: '1px solid var(--bgm-line-2)' }}>
+            <EventRow day="04" month="Mai" title="Bunter Tisch — Frühlingsmenü"
+                      time="12:30–14:00" location="Gemeindehaus Pulheim"
+                      onAnmelden={() => setRoute('mitwirken')} />
+            <EventRow day="07" month="Mai" title="Behörden-Sprechstunde"
+                      time="16:00–18:00" location="Vereinsheim" />
+            <EventRow day="11" month="Mai" title="Ausflug nach Köln — Ladies Club"
+                      time="10:00–17:00" location="Treffpunkt: Bahnhof Pulheim" full />
+            <EventRow day="15" month="Mai" title="Männer International — Stammtisch"
+                      time="19:00–21:00" location="Vereinsheim" />
+          </div>
+        </Section>
+        <Section background="var(--bgm-teal-700)" dense>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32, color: '#fff' }}>
+            <div>
+              <h2 style={{ color: '#fff', margin: '0 0 6px' }}>Wo werde ich gebraucht?</h2>
+              <p style={{ color: 'var(--bgm-teal-100)', margin: 0, fontSize: 17 }}>
+                Sagen Sie uns, was Sie können oder wann Sie Zeit haben. Wir finden den passenden Einsatz.
+              </p>
+            </div>
+            <Button variant="volunteer" icon="hand-heart" onClick={() => setRoute('mitwirken')}>
+              Mitmach-Matrix öffnen
+            </Button>
+          </div>
+        </Section>
+      </>}
+
+      {route === 'angebote' && <>
+        <Section eyebrow="Angebote" title="Was wir anbieten."
+                 lead="Drei feste Gruppen, viele Gelegenheiten. Kommen Sie unverbindlich vorbei.">
+          <OfferGrid onOpen={(id) => setRoute(id)} onMitwirken={() => setRoute('mitwirken')} />
+        </Section>
+      </>}
+
+      {offerDetails[route] && (() => {
+        const d = offerDetails[route];
+        return (
+          <Section eyebrow={d.eyebrow} title={d.title} lead={d.lead}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 48 }}>
+              <div>
+                <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--bgm-ink-2)' }}>{d.body}</p>
+                <Button variant="primary" onClick={() => setRoute('angebote')}>← Alle Angebote</Button>
+              </div>
+              <aside style={{ background: '#fff', border: '2px solid var(--bgm-teal-700)', padding: 28 }}>
+                <div className="eyebrow" style={{ marginBottom: 14 }}>Auf einen Blick</div>
+                <dl style={{ margin: 0 }}>
+                  {d.facts.map(([k, v]) => (
+                    <div key={k} style={{ marginBottom: 14 }}>
+                      <dt style={{ fontSize: 12, color: 'var(--bgm-ink-3)', fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase' }}>{k}</dt>
+                      <dd style={{ margin: '4px 0 0', fontSize: 15, color: 'var(--bgm-teal-900)' }}>{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </aside>
+            </div>
+          </Section>
+        );
+      })()}
+
+      {route === 'mitwirken' && <>
+        <Section eyebrow="Mitwirken" title="Werden Sie Lotse."
+                 lead="Sagen Sie uns, was Sie mitbringen — Zeit, Sprachen, Geduld. Wir melden uns bei Ihnen.">
+          <MitwirkenForm />
+        </Section>
+      </>}
+
+      {route === 'veranstaltungen' && (
+        <Section eyebrow="Kalender" title="Alle Veranstaltungen">
+          <div style={{ background: '#fff', border: '1px solid var(--bgm-line-2)' }}>
+            <EventRow day="04" month="Mai" title="Bunter Tisch — Frühlingsmenü" time="12:30–14:00" location="Gemeindehaus Pulheim" />
+            <EventRow day="07" month="Mai" title="Behörden-Sprechstunde" time="16:00–18:00" location="Vereinsheim" />
+            <EventRow day="11" month="Mai" title="Ausflug nach Köln" time="10:00–17:00" location="Bahnhof Pulheim" full />
+            <EventRow day="15" month="Mai" title="Männer International" time="19:00–21:00" location="Vereinsheim" />
+            <EventRow day="22" month="Mai" title="Ratssitzung — Demokratie zum Kennenlernen" time="18:00" location="Rathaus Pulheim" />
+          </div>
+        </Section>
+      )}
+
+      {route === 'neuigkeiten' && (
+        <Section eyebrow="Neuigkeiten" title="Aus dem Verein">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+            <NewsCard tag="Pressemitteilung" date="14. April 2026" title="Stadt Pulheim verleiht Integrationspreis" excerpt="Der Verein wurde für seine Arbeit mit dem Integrationspreis 2026 ausgezeichnet." />
+            <NewsCard tag="Rückblick" date="2. April 2026" title="Iftar-Abend mit 80 Gästen" excerpt="Ein langer Tisch, Speisen aus zehn Ländern, neue Bekanntschaften." />
+            <NewsCard tag="Aufruf" date="20. März 2026" title="Wir suchen Lotsen mit Arabisch-Kenntnissen" excerpt="Für Behördenbegleitung und Übersetzung freuen wir uns über Verstärkung." />
+          </div>
+        </Section>
+      )}
+
+      {route === 'verein' && (
+        <Section eyebrow="Über den Verein" title="Wer wir sind."
+                 lead="Begleitung geflüchteter Menschen e.V. ist ein Pulheimer Verein, der seit 2016 Menschen mit Fluchtgeschichte als Lotse zur Seite steht.">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+            {[
+              ['Aufgaben des Vereins', 'Beratung, Begleitung, Sprachvermittlung, Freizeitgestaltung — und politische Teilhabe.'],
+              ['Aktive Mitglieder', 'Über 60 Ehrenamtliche begleiten regelmäßig Familien und Einzelpersonen.'],
+              ['Vernetzungen', 'Wir arbeiten mit Stadt, Kirchen, Schulen und Vereinen zusammen.'],
+              ['Verliehene Preise', 'Integrationspreis der Stadt Pulheim 2026 · Bürgerpreis 2022.'],
+            ].map(([t, b]) => (
+              <div key={t} style={{ background: '#fff', border: '1px solid var(--bgm-line-2)', padding: 24 }}>
+                <h3 style={{ margin: '0 0 8px', fontSize: 18 }}>{t}</h3>
+                <p style={{ margin: 0, color: 'var(--bgm-ink-2)', fontSize: 14, lineHeight: 1.6 }}>{b}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <Footer />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+</script>
+</body>
+</html>

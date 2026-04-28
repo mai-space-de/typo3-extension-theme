@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+  html,body{margin:0;background:var(--bgm-surface);}
+  body{padding:32px;font-family:var(--font-sans);color:var(--bgm-ink);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .offer{position:relative;background:#fff;border:2px solid var(--bgm-teal-700);padding:28px 24px 22px;}
+  .offer.gold{border-color:var(--bgm-gold-500);}
+  .badge{position:absolute;top:-26px;left:-2px;width:56px;height:56px;background:#fff;border:2px solid var(--bgm-teal-700);display:flex;align-items:center;justify-content:center;}
+  .offer.gold .badge{border-color:var(--bgm-gold-500);}
+  .badge i{font-size:32px;color:var(--bgm-gold-500);}
+  .offer.gold .badge i{color:var(--bgm-teal-700);}
+  h3{margin:18px 0 8px;font-size:18px;color:var(--bgm-teal-900);}
+  p{margin:0 0 12px;font-size:13px;line-height:1.6;color:var(--bgm-ink-2);}
+  .btn{display:inline-block;padding:7px 14px;font-size:13px;font-weight:600;border-radius:4px;background:var(--bgm-teal-700);color:#fff;text-decoration:none;}
+  .offer.gold .btn{background:var(--bgm-gold-300);color:var(--bgm-teal-900);}
+</style></head>
+<body>
+<div class="grid">
+  <div class="offer">
+    <div class="badge"><i class="ph-fill ph-map-pin"></i></div>
+    <h3>Bunter Tisch</h3>
+    <p>Wir kochen für euch mit Vorsuppe oder Salat ein Hauptgericht. Manchmal gibt es noch ein Stück Kuchen als Nachtisch!</p>
+    <a class="btn" href="#">Mehr erfahren</a>
+  </div>
+  <div class="offer gold">
+    <div class="badge"><i class="ph-fill ph-hand-heart"></i></div>
+    <h3>Mitwirken</h3>
+    <p>Begleiten Sie Familien oder Einzelpersonen bei den Fragen des Alltags in der neuen Umgebung von Pulheim.</p>
+    <a class="btn" href="#">Jetzt mithelfen</a>
+  </div>
+</div>
+</body></html>

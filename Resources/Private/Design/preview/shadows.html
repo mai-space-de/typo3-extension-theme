@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:var(--bgm-surface);}
+  body{padding:32px;font-family:var(--font-sans);color:var(--bgm-ink);}
+  .row{display:flex;gap:28px;align-items:center;}
+  .box{width:140px;height:90px;background:#fff;border-radius:4px;display:flex;align-items:flex-end;padding:10px;box-sizing:border-box;}
+  .lbl{font-family:var(--font-mono);font-size:11px;color:var(--bgm-ink-3);}
+  .name{font-weight:700;font-size:12px;color:var(--bgm-teal-900);}
+</style></head>
+<body>
+<div class="row">
+  <div><div class="box" style="box-shadow:var(--shadow-sm)"><div><div class="name">shadow-sm</div><div class="lbl">hairline lift</div></div></div></div>
+  <div><div class="box" style="box-shadow:var(--shadow-md)"><div><div class="name">shadow-md</div><div class="lbl">card hover</div></div></div></div>
+  <div><div class="box" style="box-shadow:var(--shadow-lg)"><div><div class="name">shadow-lg</div><div class="lbl">modal / popover</div></div></div></div>
+</div>
+<div style="margin-top:18px;font-size:12px;color:var(--bgm-ink-3)">Teal-tinted shadows · never default browser-grey</div>
+</body></html>
