@@ -37,6 +37,17 @@ page {
 				special = directory
 				special.value = {$pageUids.mainMenu}
 			}
+			20 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+			20 {
+				levels = 3
+				expandAll = 1
+				includeSpacer = 1
+				titleField = nav_title // title
+				as = footerMain
+
+				special = directory
+				special.value = {$pageUids.footerMenu}
+			}
 		}
 
 		settings {

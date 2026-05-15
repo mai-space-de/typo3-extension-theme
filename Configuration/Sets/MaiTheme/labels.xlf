@@ -532,6 +532,18 @@
             <trans-unit id="settings.description.pageUids.frontendLogin">
                 <source>Page UID for the frontend login page.</source>
             </trans-unit>
+            <trans-unit id="settings.pageUids.mainMenu">
+                <source>Main navigation (directory root)</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.mainMenu">
+                <source>Page UID of the folder whose subpages form the main menu (MenuProcessor special.directory).</source>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.footerMenu">
+                <source>Footer navigation (directory root)</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.footerMenu">
+                <source>Page UID of the folder whose subpages form the footer menu (MenuProcessor special.directory).</source>
+            </trans-unit>
 
             <!-- Elements — Core -->
             <trans-unit id="settings.elements.core.disableAll">

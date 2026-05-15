@@ -1,11 +1,28 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Testimonial template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-testimonial" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-testimonial__title'}"/>
+<figure class="mai-testimonial"
+        data-ce-uid="{data.uid}"
+        {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+    <f:if condition="{assets}">
+        <div class="mai-testimonial__media">
+            <f:image image="{assets.0}"
+                     alt="{assets.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: data.header)}"
+                     class="mai-testimonial__avatar"
+                     width="80"
+                     height="80"/>
+        </div>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-testimonial__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+    <blockquote class="mai-testimonial__blockquote">
+        <f:if condition="{data.bodytext}">
+            <p class="mai-testimonial__text">{data.bodytext}</p>
+        </f:if>
+        <f:if condition="{data.header}">
+            <figcaption class="mai-testimonial__caption">
+                <span class="mai-testimonial__name">{data.header}</span>
+                <f:if condition="{data.subheader}">
+                    <span class="mai-testimonial__role">{data.subheader}</span>
+                </f:if>
+            </figcaption>
+        </f:if>
+    </blockquote>
+</figure>
 </html>

@@ -1,11 +1,30 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Beforeafter template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-beforeafter" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+<div class="mai-beforeafter"
+     data-ce-uid="{data.uid}"
+     {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-beforeafter__title'}"/>
+        <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: data.header, class: 'mai-beforeafter__title'}"/>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-beforeafter__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+    <div class="mai-beforeafter__widget" data-widget="beforeafter">
+        <div class="mai-beforeafter__before" aria-label="Vorher">
+            <f:if condition="{data.tx_maitheme_image_before}">
+                <f:image image="{data.tx_maitheme_image_before.0}"
+                         alt="{data.tx_maitheme_image_before.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'Vorher')}"
+                         class="mai-beforeafter__img"
+                         loading="lazy"/>
+            </f:if>
+            <span class="mai-beforeafter__label" aria-hidden="true">Vorher</span>
+        </div>
+        <div class="mai-beforeafter__after" aria-label="Nachher">
+            <f:if condition="{data.tx_maitheme_image_after}">
+                <f:image image="{data.tx_maitheme_image_after.0}"
+                         alt="{data.tx_maitheme_image_after.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'Nachher')}"
+                         class="mai-beforeafter__img"
+                         loading="lazy"/>
+            </f:if>
+            <span class="mai-beforeafter__label" aria-hidden="true">Nachher</span>
+        </div>
+        <div class="mai-beforeafter__handle" aria-hidden="true"></div>
+    </div>
+</div>
 </html>

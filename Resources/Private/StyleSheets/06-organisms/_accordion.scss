@@ -1,0 +1,87 @@
+// =============================================================================
+// 06-organisms/_accordion.scss
+//
+// Accordion component using <details>/<summary> for progressive enhancement.
+// No JavaScript dependency — open/close is native browser behaviour.
+// BGM Pulheim style: teal border, square corners, gold focus ring.
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+
+@layer theme-organisms {
+
+.mai-accordion {
+    display:        flex;
+    flex-direction: column;
+    max-width:      var(--layout-prose-width);
+}
+
+.mai-accordion__title {
+    font-size:    var(--font-size-xl);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-lg);
+}
+
+// ---------------------------------------------------------------------------
+// Each accordion item is a <details> element
+// ---------------------------------------------------------------------------
+.mai-accordion__item {
+    border-block-end: 1px solid var(--bgm-line);
+
+    &:first-of-type {
+        border-block-start: 1px solid var(--bgm-line);
+    }
+}
+
+.mai-accordion__summary {
+    list-style:       none;
+    display:          flex;
+    align-items:      center;
+    justify-content:  space-between;
+    gap:              var(--space-md);
+    padding:          var(--space-md) 0;
+    font-size:        var(--font-size-base);
+    font-weight:      var(--font-weight-semibold);
+    color:            var(--bgm-teal-900);
+    cursor:           pointer;
+    transition:       color var(--duration-fast) var(--easing-standard);
+    user-select:      none;
+
+    // Remove default marker
+    &::-webkit-details-marker { display: none; }
+    &::marker { display: none; content: ""; }
+
+    &:hover { color: var(--bgm-teal-700); }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+        border-radius:  var(--layout-radius);
+    }
+}
+
+.mai-accordion__icon {
+    flex-shrink:  0;
+    font-size:    var(--icon-size-md);
+    color:        var(--bgm-teal-500);
+    transition:   transform var(--duration-base) var(--easing-standard);
+
+    // Rotate icon when open
+    details[open] & {
+        transform: rotate(180deg);
+        color:     var(--bgm-teal-700);
+    }
+}
+
+.mai-accordion__panel {
+    padding-block:  0 var(--space-lg);
+    font-size:      var(--font-size-base);
+    line-height:    var(--line-height-relaxed);
+    color:          var(--bgm-ink-2);
+
+    p:first-child { margin-block-start: 0; }
+    p:last-child  { margin-block-end: 0; }
+}
+
+} // @layer theme-organisms

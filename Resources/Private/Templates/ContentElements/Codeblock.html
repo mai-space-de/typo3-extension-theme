@@ -1,11 +1,10 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Codeblock template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-codeblock" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+<figure class="mai-codeblock"
+        data-ce-uid="{data.uid}"
+        {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-codeblock__title'}"/>
+        <figcaption class="mai-codeblock__caption">{data.header}</figcaption>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-codeblock__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+    <pre class="mai-codeblock__pre"><code class="mai-codeblock__code{f:if(condition: data.tx_maitheme_language, then: ' language-{data.tx_maitheme_language}')}">{data.bodytext -> f:format.htmlspecialchars()}</code></pre>
+</figure>
 </html>

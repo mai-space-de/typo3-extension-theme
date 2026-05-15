@@ -1,11 +1,15 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Alert template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-alert" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-alert__title'}"/>
-    </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-alert__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+<aside class="mai-alert mai-alert--{f:if(condition: data.tx_maitheme_variant, then: data.tx_maitheme_variant, else: 'info')}"
+       role="alert"
+       data-ce-uid="{data.uid}"
+       {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+    <div class="mai-alert__inner">
+        <f:if condition="{data.header}">
+            <p class="mai-alert__title">{data.header}</p>
+        </f:if>
+        <f:if condition="{data.bodytext}">
+            <div class="mai-alert__body">{data.bodytext}</div>
+        </f:if>
+    </div>
+</aside>
 </html>

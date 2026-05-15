@@ -17,7 +17,7 @@
 // Override --header-* custom properties to customise.
 // =============================================================================
 
-@use "../02-mixins/media-breakpoint" as *;
+@import "../02-mixins/media-breakpoint";
 
 @layer theme-organisms {
 :root {

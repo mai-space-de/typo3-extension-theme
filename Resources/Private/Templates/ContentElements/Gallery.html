@@ -1,11 +1,24 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Gallery template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-gallery" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+<section class="mai-gallery"
+         data-ce-uid="{data.uid}"
+         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-gallery__title'}"/>
+        <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: data.header, class: 'mai-gallery__title'}"/>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-gallery__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
+    <ul class="mai-gallery__grid" role="list">
+        <f:for each="{assets}" as="file">
+            <li class="mai-gallery__item">
+                <a class="mai-gallery__link"
+                   href="{file.publicUrl}"
+                   data-lightbox="gallery-{data.uid}"
+                   aria-label="{file.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: file.name)}">
+                    <f:image image="{file}"
+                             alt="{file.properties.alternative}"
+                             class="mai-gallery__img"
+                             loading="lazy"/>
+                </a>
+            </li>
+        </f:for>
+    </ul>
 </section>
 </html>

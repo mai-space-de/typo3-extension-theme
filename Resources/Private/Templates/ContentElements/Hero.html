@@ -31,9 +31,9 @@
             </f:if>
         </div>
 
-        <f:if condition="{data.assets -> f:count()} > 0">
+        <f:if condition="{assets}">
             <div class="hero__logo-frame">
-                <f:for each="{data.assets}" as="file" iteration="i">
+                <f:for each="{assets}" as="file" iteration="i">
                     <f:if condition="{i.isFirst}">
                         <f:image image="{file}"
                                  alt="{file.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'BGM Pulheim')}"

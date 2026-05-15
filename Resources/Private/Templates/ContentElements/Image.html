@@ -1,11 +1,16 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Image template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-image" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-image__title'}"/>
+<figure class="mai-image{f:if(condition: data.tx_maitheme_alignment, then: ' mai-image--{data.tx_maitheme_alignment}')}"
+        data-ce-uid="{data.uid}"
+        {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+    <f:if condition="{assets}">
+        <f:image image="{assets.0}"
+                 alt="{assets.0.properties.alternative}"
+                 title="{assets.0.properties.title}"
+                 class="mai-image__img"
+                 loading="lazy"/>
+        <f:if condition="{assets.0.properties.description}">
+            <figcaption class="mai-image__caption">{assets.0.properties.description}</figcaption>
+        </f:if>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-image__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+</figure>
 </html>

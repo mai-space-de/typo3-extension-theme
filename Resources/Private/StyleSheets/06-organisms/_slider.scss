@@ -1,0 +1,170 @@
+// =============================================================================
+// 06-organisms/_slider.scss
+//
+// Carousel / slider organism (WAI-ARIA carousel pattern).
+// Uses CSS scroll-snap; JS enhances with prev/next controls.
+// BGM Pulheim style: teal accent, no shadows, square controls.
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+
+@layer theme-organisms {
+
+.mai-slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.mai-slider__title {
+    font-size:    var(--font-size-xl);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-lg);
+    padding-inline: var(--layout-grid-gap);
+}
+
+// ---------------------------------------------------------------------------
+// Track — horizontally scrollable strip
+// ---------------------------------------------------------------------------
+.mai-slider__track {
+    display:                grid;
+    grid-auto-flow:         column;
+    grid-auto-columns:      min(80vw, 22rem);
+    gap:                    var(--layout-grid-gap);
+    overflow-x:             auto;
+    scroll-snap-type:       x mandatory;
+    scroll-behavior:        smooth;
+    overscroll-behavior-x:  contain;
+    padding-inline:         var(--layout-grid-gap);
+    padding-block:          var(--space-md);
+    list-style:             none;
+    margin:                 0;
+
+    // Hide scrollbar on Webkit
+    &::-webkit-scrollbar { display: none; }
+    scrollbar-width: none;
+
+    @include bp-up(md) {
+        grid-auto-columns: min(60vw, 28rem);
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Each slide
+// ---------------------------------------------------------------------------
+.mai-slider__slide {
+    scroll-snap-align: start;
+    flex-shrink:       0;
+}
+
+// Slide inner card
+.mai-slider__slide-inner {
+    background:    var(--color-background);
+    border:        2px solid var(--bgm-teal-700);
+    border-radius: var(--layout-radius-sm);
+    overflow:      hidden;
+    height:        100%;
+    display:       flex;
+    flex-direction: column;
+}
+
+.mai-slider__slide-img {
+    width:        100%;
+    aspect-ratio: 16 / 9;
+    object-fit:   cover;
+    display:      block;
+}
+
+.mai-slider__slide-body {
+    padding:        var(--space-lg);
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-sm);
+    flex:           1 1 auto;
+}
+
+.mai-slider__slide-title {
+    font-size:   var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color:       var(--bgm-teal-900);
+    margin:      0;
+}
+
+.mai-slider__slide-text {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--bgm-ink-2);
+    margin:      0;
+}
+
+// ---------------------------------------------------------------------------
+// Controls (injected by JS)
+// ---------------------------------------------------------------------------
+.mai-slider__controls {
+    display:         flex;
+    gap:             var(--space-sm);
+    justify-content: center;
+    margin-block-start: var(--space-lg);
+    padding-inline:  var(--layout-grid-gap);
+}
+
+.mai-slider__btn {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    width:           2.5rem;
+    height:          2.5rem;
+    background:      transparent;
+    border:          2px solid var(--bgm-teal-700);
+    border-radius:   var(--layout-radius);
+    color:           var(--bgm-teal-700);
+    cursor:          pointer;
+    font-size:       var(--icon-size-md);
+    transition:      background-color var(--duration-fast) var(--easing-standard),
+                     color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        background: var(--bgm-teal-700);
+        color:      #ffffff;
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        opacity:        0.4;
+        pointer-events: none;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Dot indicators (injected by JS)
+// ---------------------------------------------------------------------------
+.mai-slider__dots {
+    display:         flex;
+    gap:             var(--space-xs);
+    justify-content: center;
+    margin-block-start: var(--space-md);
+}
+
+.mai-slider__dot {
+    width:         0.5rem;
+    height:        0.5rem;
+    border-radius: var(--layout-radius-full);
+    background:    var(--bgm-teal-300);
+    border:        0;
+    padding:       0;
+    cursor:        pointer;
+    transition:    background-color var(--duration-fast) var(--easing-standard),
+                   transform var(--duration-fast) var(--easing-standard);
+
+    &[aria-current="true"],
+    &.is-active {
+        background: var(--bgm-teal-700);
+        transform:  scale(1.4);
+    }
+}
+
+} // @layer theme-organisms

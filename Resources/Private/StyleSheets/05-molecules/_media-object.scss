@@ -19,7 +19,7 @@
 // Override --media-object-* properties to customise spacing and figure width.
 // =============================================================================
 
-@use "../02-mixins/media-breakpoint" as *;
+@import "../02-mixins/media-breakpoint";
 
 @layer theme-molecules {
 :root {

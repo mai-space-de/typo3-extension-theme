@@ -662,6 +662,22 @@
                 <source>Page UID for the frontend login page.</source>
                 <target>Seiten-UID für die Frontend-Login-Seite.</target>
             </trans-unit>
+            <trans-unit id="settings.pageUids.mainMenu">
+                <source>Main navigation (directory root)</source>
+                <target>Hauptnavigation (Verzeichnis-Wurzel)</target>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.mainMenu">
+                <source>Page UID of the folder whose subpages form the main menu (MenuProcessor special.directory).</source>
+                <target>Seiten-UID des Ordners, dessen Unterseiten die Hauptnavigation bilden (MenuProcessor special.directory).</target>
+            </trans-unit>
+            <trans-unit id="settings.pageUids.footerMenu">
+                <source>Footer navigation (directory root)</source>
+                <target>Footer-Navigation (Verzeichnis-Wurzel)</target>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.footerMenu">
+                <source>Page UID of the folder whose subpages form the footer menu (MenuProcessor special.directory).</source>
+                <target>Seiten-UID des Ordners, dessen Unterseiten die Footer-Navigation bilden (MenuProcessor special.directory).</target>
+            </trans-unit>
 
             <!-- Elements — Categories -->
             <trans-unit id="categories.elements">

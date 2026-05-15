@@ -466,6 +466,16 @@ settings:
     type: page
     category: mai-theme.pageUids
 
+  pageUids.mainMenu:
+    default: 1
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.footerMenu:
+    default: 1
+    type: page
+    category: mai-theme.pageUids
+
   # ===========================================================================
   # ELEMENTS — Core: disable all TYPO3 built-in content elements
   # ===========================================================================

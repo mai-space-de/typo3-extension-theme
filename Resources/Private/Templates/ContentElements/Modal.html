@@ -1,11 +1,28 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Modal template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-modal" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-modal__title'}"/>
-    </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-modal__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+<div class="mai-modal-trigger"
+     data-ce-uid="{data.uid}"
+     {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+    <button class="button button--outline mai-modal-trigger__btn"
+            type="button"
+            aria-controls="modal-{data.uid}"
+            aria-expanded="false">
+        {f:if(condition: data.header, then: data.header, else: 'Öffnen')}
+    </button>
+
+    <dialog class="mai-modal" id="modal-{data.uid}" aria-labelledby="modal-title-{data.uid}">
+        <div class="mai-modal__inner">
+            <div class="mai-modal__header">
+                <f:if condition="{data.header}">
+                    <h2 class="mai-modal__title" id="modal-title-{data.uid}">{data.header}</h2>
+                </f:if>
+                <button class="mai-modal__close" type="button" aria-label="Schließen">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <f:if condition="{data.bodytext}">
+                <div class="mai-modal__body">{data.bodytext -> f:format.html()}</div>
+            </f:if>
+        </div>
+    </dialog>
+</div>
 </html>

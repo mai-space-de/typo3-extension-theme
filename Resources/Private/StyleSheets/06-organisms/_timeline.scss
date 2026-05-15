@@ -1,0 +1,115 @@
+// =============================================================================
+// 06-organisms/_timeline.scss
+//
+// Vertical timeline organism — ordered <ol> with time + article entries.
+// BGM Pulheim style: teal track line, gold year markers, square connectors.
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+
+@layer theme-organisms {
+
+.mai-timeline {
+    max-width: var(--layout-prose-width);
+}
+
+.mai-timeline__title {
+    font-size:    var(--font-size-2xl);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-2xl);
+}
+
+// ---------------------------------------------------------------------------
+// List — the vertical track
+// ---------------------------------------------------------------------------
+.mai-timeline__list {
+    list-style:    none;
+    margin:        0;
+    padding:       0;
+    position:      relative;
+    padding-inline-start: calc(var(--space-2xl) + var(--space-md));
+
+    // The continuous vertical teal line
+    &::before {
+        content:            "";
+        position:           absolute;
+        inset-block:        0;
+        inset-inline-start: var(--space-xl);
+        width:              2px;
+        background:         var(--bgm-teal-300);
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Each item
+// ---------------------------------------------------------------------------
+.mai-timeline__item {
+    position:      relative;
+    padding-block: var(--space-md) var(--space-2xl);
+
+    &:last-child { padding-block-end: 0; }
+}
+
+// The connector dot on the track
+.mai-timeline__dot {
+    position:           absolute;
+    inset-block-start:  calc(var(--space-md) + 0.2em);
+    inset-inline-start: calc(-1 * (var(--space-2xl) + var(--space-md)) + var(--space-xl) - 0.5rem);
+    width:              1rem;
+    height:             1rem;
+    background:         var(--bgm-teal-700);
+    border:             2px solid var(--color-background);
+    border-radius:      var(--layout-radius-sm);
+    box-shadow:         0 0 0 2px var(--bgm-teal-700);
+}
+
+// Gold dot for featured/highlighted entries
+.mai-timeline__item--featured .mai-timeline__dot {
+    background:  var(--bgm-gold-500);
+    box-shadow:  0 0 0 2px var(--bgm-gold-500);
+}
+
+// ---------------------------------------------------------------------------
+// Item content
+// ---------------------------------------------------------------------------
+.mai-timeline__time {
+    display:      block;
+    font-size:    var(--font-size-sm);
+    font-weight:  var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color:        var(--bgm-teal-700);
+    margin-block-end: var(--space-xs);
+}
+
+.mai-timeline__heading {
+    font-size:    var(--font-size-lg);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-sm);
+}
+
+.mai-timeline__body {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--bgm-ink-2);
+    margin:      0;
+
+    p { margin: 0; }
+}
+
+.mai-timeline__image {
+    margin-block-start: var(--space-md);
+
+    img {
+        width:         100%;
+        max-width:     32rem;
+        height:        auto;
+        border-radius: var(--layout-radius);
+        border:        1px solid var(--bgm-line);
+        display:       block;
+    }
+}
+
+} // @layer theme-organisms

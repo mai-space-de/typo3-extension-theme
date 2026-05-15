@@ -1,11 +1,46 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Video template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-video" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+<section class="mai-video"
+         data-ce-uid="{data.uid}"
+         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-video__title'}"/>
+        <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: data.header, class: 'mai-video__title'}"/>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-video__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
+    <div class="mai-video__container">
+        <f:if condition="{data.tx_maitheme_video_youtube_id}">
+            <f:then>
+                <iframe class="mai-video__frame"
+                        src="https://www.youtube-nocookie.com/embed/{data.tx_maitheme_video_youtube_id}"
+                        title="{f:if(condition: data.header, then: data.header, else: 'YouTube Video')}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy"></iframe>
+            </f:then>
+            <f:else>
+                <f:if condition="{data.tx_maitheme_video_vimeo_id}">
+                    <f:then>
+                        <iframe class="mai-video__frame"
+                                src="https://player.vimeo.com/video/{data.tx_maitheme_video_vimeo_id}"
+                                title="{f:if(condition: data.header, then: data.header, else: 'Vimeo Video')}"
+                                allow="autoplay; fullscreen; picture-in-picture"
+                                allowfullscreen
+                                loading="lazy"></iframe>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{assets}">
+                            <video class="mai-video__player"
+                                   controls
+                                   {f:if(condition: data.tx_maitheme_video_poster, then: 'poster="{data.tx_maitheme_video_poster.0.publicUrl}"')}
+                                   preload="metadata">
+                                <f:for each="{assets}" as="file">
+                                    <source src="{file.publicUrl}" type="{file.mimeType}"/>
+                                </f:for>
+                                <p>Ihr Browser unterstützt kein HTML5-Video.</p>
+                            </video>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </f:else>
+        </f:if>
+    </div>
 </section>
 </html>

@@ -1,11 +1,44 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Contactinfo template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-contactinfo" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+<address class="mai-contactinfo"
+         data-ce-uid="{data.uid}"
+         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-contactinfo__title'}"/>
+        <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: data.header, class: 'mai-contactinfo__title'}"/>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-contactinfo__body">{data.bodytext -> f:format.html()}</div>
+    <dl class="mai-contactinfo__details">
+        <f:if condition="{data.tx_maitheme_address}">
+            <div class="mai-contactinfo__row">
+                <dt class="mai-contactinfo__label">Adresse</dt>
+                <dd class="mai-contactinfo__value">{data.tx_maitheme_address -> f:format.nl2br()}</dd>
+            </div>
+        </f:if>
+        <f:if condition="{data.tx_maitheme_phone}">
+            <div class="mai-contactinfo__row">
+                <dt class="mai-contactinfo__label">Telefon</dt>
+                <dd class="mai-contactinfo__value">
+                    <a href="tel:{data.tx_maitheme_phone}">{data.tx_maitheme_phone}</a>
+                </dd>
+            </div>
+        </f:if>
+        <f:if condition="{data.tx_maitheme_email}">
+            <div class="mai-contactinfo__row">
+                <dt class="mai-contactinfo__label">E-Mail</dt>
+                <dd class="mai-contactinfo__value">
+                    <a href="mailto:{data.tx_maitheme_email}">{data.tx_maitheme_email}</a>
+                </dd>
+            </div>
+        </f:if>
+        <f:if condition="{data.tx_maitheme_opening_hours}">
+            <div class="mai-contactinfo__row">
+                <dt class="mai-contactinfo__label">Öffnungszeiten</dt>
+                <dd class="mai-contactinfo__value">{data.tx_maitheme_opening_hours -> f:format.nl2br()}</dd>
+            </div>
+        </f:if>
+    </dl>
+    <f:if condition="{data.tx_maitheme_link}">
+        <f:link.typolink parameter="{data.tx_maitheme_link}" class="mai-contactinfo__link">
+            Kontakt aufnehmen
+        </f:link.typolink>
     </f:if>
-</section>
+</address>
 </html>

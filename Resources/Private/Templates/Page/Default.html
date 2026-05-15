@@ -25,13 +25,14 @@
         Declarations here are outside any @layer, so they override the
         layered defaults in _variables.scss.
     </f:comment>
-    <mai:asset.criticalStyle identifier="mai-theme-vars" isCritical="1">
-        <f:cObject typoscriptObjectPath="lib.themeVars"/>
-    </mai:asset.criticalStyle>
+    <style><f:cObject typoscriptObjectPath="lib.themeVars"/></style>
 
     <mai:asset.css identifier="mai-theme-main"
                    src="EXT:mai_theme/Resources/Public/Scss/main.scss"
                    priority="1"/>
+    <mai:asset.css identifier="mai-theme-bundle"
+                   src="EXT:mai_theme/Resources/Private/StyleSheets/bundle.scss"
+                   priority="2"/>
 </f:section>
 
 <f:section name="Main">

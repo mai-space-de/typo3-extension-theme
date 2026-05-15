@@ -1,11 +1,27 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Profile template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-profile" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-profile__title'}"/>
+<article class="mai-profile"
+         data-ce-uid="{data.uid}"
+         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+    <f:if condition="{assets}">
+        <div class="mai-profile__media">
+            <f:image image="{assets.0}"
+                     alt="{assets.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: data.header)}"
+                     class="mai-profile__avatar"
+                     width="160"
+                     height="160"
+                     loading="lazy"/>
+        </div>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-profile__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+    <div class="mai-profile__content">
+        <f:if condition="{data.header}">
+            <h3 class="mai-profile__name">{data.header}</h3>
+        </f:if>
+        <f:if condition="{data.subheader}">
+            <p class="mai-profile__role">{data.subheader}</p>
+        </f:if>
+        <f:if condition="{data.bodytext}">
+            <div class="mai-profile__bio">{data.bodytext -> f:format.html()}</div>
+        </f:if>
+    </div>
+</article>
 </html>

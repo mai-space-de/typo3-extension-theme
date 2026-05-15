@@ -2,66 +2,64 @@
 // skip-links.scss
 //
 // Accessible "skip to content" / "skip to navigation" links.
+// Visually hidden until focused — WCAG 2.4.1 "Bypass Blocks".
 //
-// The links live at the very top of the document body (rendered before the
-// <header> in Templates/Page/Default.html). They are visually hidden until
-// they receive keyboard focus, at which point they appear in the top-left
-// corner above all other content. Activating one moves focus to the
-// referenced landmark (#main, #main-nav) — both of which carry tabindex="-1"
-// so the browser will accept programmatic focus on them.
-//
-// Reference: WCAG 2.4.1 "Bypass Blocks"
-// https://www.w3.org/WAI/WCAG21/Understanding/bypass-blocks.html
+// Targets expected on the page:
+//   #main      — <main> landmark in Templates/Page/Default.html
+//   #main-nav  — <nav class="mai-menubar-nav"> in Menubar.html
 // =============================================================================
 
 .mai-skip-links {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    z-index: 1000;
-}
-
-.mai-skip-link {
     position:           absolute;
     inset-block-start:  0;
     inset-inline-start: 0;
-    width:              1px;
-    height:             1px;
-    padding:            0;
-    margin:             0;
-    overflow:           hidden;
-    clip:               rect(0 0 0 0);
-    clip-path:          inset(50%);
-    white-space:        nowrap;
-    border:             0;
+    z-index:            1000;
+}
 
-    // Colours/spacing/radius come from --mai-* tokens emitted by lib.themeVars
-    // (Configuration/TypoScript/Setup/lib/themeVars.typoscript), derived from
-    // settings.definitions.yaml. Fallbacks keep the link usable in isolation.
-    background-color: var(--mai-color-primary, #034575);
-    color:            var(--mai-btn-primary-text, #fff);
-    font-weight:      var(--mai-font-weight-bold, 700);
+.mai-skip-link {
+    // Hidden until focused
+    position:   absolute;
+    width:      1px;
+    height:     1px;
+    padding:    0;
+    margin:     0;
+    overflow:   hidden;
+    clip:       rect(0 0 0 0);
+    clip-path:  inset(50%);
+    white-space: nowrap;
+    border:     0;
+
+    // Style
+    background-color: var(--bgm-teal-700, #1f6e6e);
+    color:            #ffffff;
+    font-weight:      var(--fw-bold, 700);
+    font-size:        var(--fs-base, 1rem);
     text-decoration:  underline;
-    border-radius:    var(--mai-layout-radius, 0.5rem);
+    border-radius:    var(--radius-md, 4px);
+    transition:       background-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
 
     &:focus,
     &:focus-visible {
-        position: fixed;
-        width:    auto;
-        height:   auto;
-        clip:     auto;
-        clip-path: none;
-        overflow: visible;
-        padding:  var(--mai-space-sm, 0.5rem) var(--mai-space-md, 1rem);
-        margin:   var(--mai-space-sm, 0.5rem);
-        outline:  3px solid var(--mai-color-accent, #ffbf00);
+        position:    fixed;
+        inset-block-start: var(--space-2, 8px);
+        inset-inline-start: var(--space-2, 8px);
+        width:       auto;
+        height:      auto;
+        clip:        auto;
+        clip-path:   none;
+        overflow:    visible;
+        padding:     var(--space-2, 8px) var(--space-4, 16px);
+        outline:     2px solid var(--bgm-gold-500, #d8b222);
         outline-offset: 2px;
+
+        &:hover {
+            background-color: var(--bgm-teal-900, #0e3f3f);
+        }
     }
 
+    // Stagger second link so both are visible if focused in quick succession
     & + .mai-skip-link:focus,
     & + .mai-skip-link:focus-visible {
-        // Stagger the second link so the two don't overlap when both focused
-        // in quick succession (browsers paint focus styles momentarily).
         inset-inline-start: 14rem;
     }
 }

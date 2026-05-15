@@ -1,11 +1,16 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Rating template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-rating" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+<div class="mai-rating"
+     data-ce-uid="{data.uid}"
+     {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-rating__title'}"/>
+        <p class="mai-rating__label">{data.header}</p>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-rating__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+    <div class="mai-rating__stars"
+         role="img"
+         aria-label="{data.tx_maitheme_rating_value} von {f:if(condition: data.tx_maitheme_rating_max, then: data.tx_maitheme_rating_max, else: 5)} Sternen"
+         style="--rating: {data.tx_maitheme_rating_value}; --rating-max: {f:if(condition: data.tx_maitheme_rating_max, then: data.tx_maitheme_rating_max, else: 5)}">
+        <span class="mai-rating__fill"></span>
+    </div>
+    <p class="mai-rating__value">{data.tx_maitheme_rating_value} / {f:if(condition: data.tx_maitheme_rating_max, then: data.tx_maitheme_rating_max, else: 5)}</p>
+</div>
 </html>

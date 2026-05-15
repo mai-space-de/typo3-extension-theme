@@ -1,11 +1,18 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Statistic template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-statistic" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
+<div class="mai-statistic"
+     data-ce-uid="{data.uid}"
+     {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+    <div class="mai-statistic__number" aria-label="{data.tx_maitheme_value}{data.tx_maitheme_unit}">
+        <span class="mai-statistic__value">{data.tx_maitheme_value}</span>
+        <f:if condition="{data.tx_maitheme_unit}">
+            <span class="mai-statistic__unit">{data.tx_maitheme_unit}</span>
+        </f:if>
+    </div>
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-statistic__title'}"/>
+        <p class="mai-statistic__label">{data.header}</p>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-statistic__body">{data.bodytext -> f:format.html()}</div>
+    <f:if condition="{data.subheader}">
+        <p class="mai-statistic__description">{data.subheader}</p>
     </f:if>
-</section>
+</div>
 </html>

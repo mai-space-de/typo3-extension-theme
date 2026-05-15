@@ -1,11 +1,27 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:comment>STUB — replace with the real Featurebox template per PLANNED_ELEMENTS_IMPLEMENTATION.md.</f:comment>
-<section class="mai-featurebox" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-featurebox__title'}"/>
+<article class="mai-featurebox"
+         data-ce-uid="{data.uid}"
+         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+    <f:if condition="{data.tx_maitheme_icon_identifier}">
+        <div class="mai-featurebox__icon" aria-hidden="true">
+            <f:be.infobox title="" icon="{data.tx_maitheme_icon_identifier}"/>
+        </div>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-featurebox__body">{data.bodytext -> f:format.html()}</div>
-    </f:if>
-</section>
+    <div class="mai-featurebox__content">
+        <f:if condition="{data.header}">
+            <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: data.header, class: 'mai-featurebox__title'}"/>
+        </f:if>
+        <f:if condition="{data.subheader}">
+            <p class="mai-featurebox__subtitle">{data.subheader}</p>
+        </f:if>
+        <f:if condition="{data.bodytext}">
+            <div class="mai-featurebox__body">{data.bodytext -> f:format.html()}</div>
+        </f:if>
+        <f:if condition="{data.tx_maitheme_link}">
+            <f:link.typolink parameter="{data.tx_maitheme_link}" class="mai-featurebox__link">
+                {f:if(condition: data.tx_maitheme_link_text, then: data.tx_maitheme_link_text, else: 'Mehr erfahren')}
+            </f:link.typolink>
+        </f:if>
+    </div>
+</article>
 </html>

@@ -1,0 +1,87 @@
+// =============================================================================
+// 06-organisms/_tabs.scss
+//
+// Tabs component following WAI-ARIA tablist / tab / tabpanel pattern.
+// BGM Pulheim style: teal active border, square corners, gold focus ring.
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+
+@layer theme-organisms {
+
+.mai-tabs {
+    display:        flex;
+    flex-direction: column;
+}
+
+.mai-tabs__title {
+    font-size:    var(--font-size-xl);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-lg);
+}
+
+// ---------------------------------------------------------------------------
+// Tab list — horizontal scrollable row of tab triggers
+// ---------------------------------------------------------------------------
+.mai-tabs__list {
+    display:           flex;
+    overflow-x:        auto;
+    border-block-end:  2px solid var(--bgm-line);
+    gap:               0;
+    list-style:        none;
+    margin:            0;
+    padding:           0;
+    flex-shrink:       0;
+
+    &::-webkit-scrollbar { display: none; }
+    scrollbar-width: none;
+}
+
+// ---------------------------------------------------------------------------
+// Individual tab trigger
+// ---------------------------------------------------------------------------
+.mai-tabs__tab {
+    flex-shrink:      0;
+    padding:          var(--space-sm) var(--space-lg);
+    font-size:        var(--font-size-base);
+    font-weight:      var(--font-weight-semibold);
+    color:            var(--bgm-ink-3);
+    background:       transparent;
+    border:           0;
+    border-block-end: 3px solid transparent;
+    margin-block-end: -2px;
+    cursor:           pointer;
+    white-space:      nowrap;
+    transition:       color var(--duration-fast) var(--easing-standard),
+                      border-color var(--duration-fast) var(--easing-standard);
+
+    &:hover { color: var(--bgm-teal-700); }
+
+    &[aria-selected="true"] {
+        color:            var(--bgm-teal-900);
+        border-block-end-color: var(--bgm-teal-700);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: -2px;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Tab panel
+// ---------------------------------------------------------------------------
+.mai-tabs__panel {
+    padding-block: var(--space-xl);
+    font-size:     var(--font-size-base);
+    line-height:   var(--line-height-relaxed);
+    color:         var(--color-text);
+
+    &[hidden] { display: none; }
+
+    p:first-child { margin-block-start: 0; }
+    p:last-child  { margin-block-end: 0; }
+}
+
+} // @layer theme-organisms

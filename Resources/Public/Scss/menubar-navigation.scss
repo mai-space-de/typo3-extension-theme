@@ -1,60 +1,77 @@
 // =============================================================================
 // menubar-navigation.scss
 //
-// WAI-ARIA APG Navigation Menubar — ext:mai_theme implementation.
-// Adapted from the W3C WAI-ARIA APG example styles.
-// https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+// WAI-ARIA disclosure navigation — BGM Pulheim brand.
+// Loaded as a standalone compiled stylesheet via mai:asset.css.
 //
-// Licence: W3C Software and Document License
-// https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
-//
-// All colours and spacing are driven by --mai-* custom properties emitted
-// by lib.themeVars (see Configuration/TypoScript/Setup/lib/themeVars.typoscript),
-// which in turn derive from settings.definitions.yaml. Fallbacks are kept
-// so the stylesheet still renders in isolation (e.g. style guide previews).
+// Classes (must not be renamed — JS depends on them):
+//   .mai-menubar-toggle           — hamburger button (mobile)
+//   .mai-menubar-toggle__icon     — 3-line icon wrapper
+//   .mai-menubar-toggle__label    — visible label
+//   .mai-menubar-nav              — <nav> landmark wrapper
+//   .mai-menubar                  — top-level <ul>
+//   .mai-menubar__item            — <li> (any depth)
+//   .mai-menubar__link            — always a plain <a>
+//   .mai-menubar__link--current   — active page
+//   .mai-menubar__toggle          — sibling <button> for submenu
+//   .mai-menubar__arrow           — SVG inside toggle
+//   .mai-menubar__submenu         — dropdown <ul>
 // =============================================================================
 
 @import "tokens/breakpoints";
 
 // ---------------------------------------------------------------------------
-// Custom properties (override per site in :root {} of your own stylesheet)
+// Design tokens — BGM Pulheim
 // ---------------------------------------------------------------------------
 :root {
-    --menubar-bg:                var(--mai-color-surface, #eee);
-    --menubar-border:            var(--mai-color-border, #ccc);
-    --menubar-focus-ring:        var(--mai-color-primary, #034575);
-    --menubar-link-color:        var(--mai-color-text, #000);
-    --menubar-link-hover-bg:     color-mix(in srgb, var(--mai-color-primary, #034575) 12%, transparent);
-    --menubar-link-active-bg:    var(--mai-color-primary, #034575);
-    --menubar-link-active-color: var(--mai-btn-primary-text, #fff);
-    --menubar-dropdown-bg:       var(--mai-color-background, #fff);
-    --menubar-dropdown-border:   var(--mai-color-primary, #034575);
-    --menubar-dropdown-shadow:   0 4px 12px -2px rgb(0 0 0 / 0.15);
-    --menubar-dropdown-width:    14rem;
-    --menubar-arrow-size:        0.5em;
-    --menubar-toggle-size:       2.5rem;
+    // Nav link
+    --nav-link-color:      var(--bgm-teal-800, #16575a);
+    --nav-link-hover-bg:   var(--bgm-teal-050, #eef4f4);
+    --nav-link-hover-color: var(--bgm-teal-900, #0e3f3f);
+    --nav-active-color:    var(--bgm-teal-900, #0e3f3f);
+    --nav-active-border:   var(--bgm-gold-500, #d8b222);
+
+    // Focus
+    --nav-focus-ring:      var(--bgm-gold-500, #d8b222);
+
+    // Dropdown panel — "signature card outline" style
+    --nav-dropdown-bg:     var(--bgm-card, #ffffff);
+    --nav-dropdown-border: var(--bgm-teal-700, #1f6e6e);
+    --nav-dropdown-shadow: var(--shadow-md, 0 4px 14px rgba(14, 63, 63, 0.08));
+    --nav-dropdown-radius: var(--radius-md, 4px);
+    --nav-dropdown-width:  14rem;
+
+    // Hamburger icon dimensions
+    --nav-toggle-size:     2rem;
 }
 
 // ---------------------------------------------------------------------------
-// Mobile toggle button
-// Hidden on wide viewports; visible below the md breakpoint.
+// Mobile toggle (hamburger)
+// Hidden above $bp-md; shown below via flex
 // ---------------------------------------------------------------------------
 .mai-menubar-toggle {
     display:      none;
     align-items:  center;
-    gap:          var(--mai-space-xs, 0.25rem);
+    gap:          var(--space-2, 8px);
     background:   none;
     border:       2px solid transparent;
-    border-radius: var(--mai-layout-radius, 0.5rem);
+    border-radius: var(--radius-md, 4px);
     cursor:       pointer;
-    padding:      var(--mai-space-xs, 0.25rem) var(--mai-space-sm, 0.5rem);
-    color:        var(--menubar-link-color);
-    font-weight:  var(--mai-font-weight-medium, 500);
-    font-size:    1rem;
+    padding:      var(--space-2, 8px) var(--space-3, 12px);
+    color:        var(--bgm-teal-800, #16575a);
+    font-weight:  var(--fw-semibold, 600);
+    font-size:    var(--fs-base, 1rem);
     line-height:  1;
+    transition:   border-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1)),
+                  color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
+
+    &:hover {
+        color:        var(--bgm-teal-900, #0e3f3f);
+        border-color: var(--bgm-teal-300, #9bbbbb);
+    }
 
     &:focus-visible {
-        outline:        2px solid var(--menubar-focus-ring);
+        outline:        2px solid var(--nav-focus-ring);
         outline-offset: 2px;
     }
 
@@ -63,12 +80,14 @@
     }
 }
 
+// 3-bar hamburger icon
 .mai-menubar-toggle__icon {
-    display:        flex;
-    flex-direction: column;
+    display:         flex;
+    flex-direction:  column;
     justify-content: space-between;
-    width:          var(--menubar-toggle-size);
-    height:         calc(var(--menubar-toggle-size) * 0.6);
+    width:           var(--nav-toggle-size, 2rem);
+    height:          calc(var(--nav-toggle-size, 2rem) * 0.55);
+    flex-shrink:     0;
 
     span {
         display:       block;
@@ -76,15 +95,17 @@
         height:        2px;
         background:    currentcolor;
         border-radius: 2px;
-        transition:    transform 250ms ease, opacity 250ms ease;
+        transition:    transform var(--duration-base, 200ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1)),
+                       opacity   var(--duration-base, 200ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
         transform-origin: center;
     }
 }
 
+// Animate to × when open
 .mai-menubar-toggle[aria-expanded="true"] .mai-menubar-toggle__icon {
-    span:nth-child(1) { transform: translateY(calc(var(--menubar-toggle-size) * 0.3 - 1px)) rotate(45deg); }
+    span:nth-child(1) { transform: translateY(calc(var(--nav-toggle-size, 2rem) * 0.275 - 1px)) rotate(45deg); }
     span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    span:nth-child(3) { transform: translateY(calc((var(--menubar-toggle-size) * 0.3 - 1px) * -1)) rotate(-45deg); }
+    span:nth-child(3) { transform: translateY(calc((var(--nav-toggle-size, 2rem) * 0.275 - 1px) * -1)) rotate(-45deg); }
 }
 
 // ---------------------------------------------------------------------------
@@ -99,41 +120,7 @@
     }
 }
 
-// ---------------------------------------------------------------------------
-// Menubar — top-level list (role="menubar")
-// ---------------------------------------------------------------------------
-.mai-menubar {
-    display:          flex;
-    flex-direction:   row;
-    flex-wrap:        wrap;
-    align-items:      center;
-    gap:              0;
-    margin:           0;
-    padding:          2px;
-    list-style:       none;
-    background-color: var(--menubar-bg);
-    border:           1px solid var(--menubar-border);
-    font-size:        1.1em;
-
-    &.focus {
-        padding: 0;
-        border:  3px solid var(--menubar-focus-ring);
-    }
-
-    // On mobile: collapse to vertical, hidden until toggle opens it
-    @include media-down($bp-md) {
-        flex-direction:  column;
-        align-items:     stretch;
-        width:           100%;
-        background:      var(--menubar-dropdown-bg);
-        border:          2px solid var(--menubar-dropdown-border);
-        box-shadow:      var(--menubar-dropdown-shadow);
-    }
-}
-
-// On mobile: the whole nav is hidden until the hamburger toggle is opened.
-// The toggle is rendered as a sibling of .mai-menubar-nav (see Menubar.html),
-// so we can drive visibility from its aria-expanded state.
+// Mobile: hide nav when toggle is collapsed; slide out below header when open
 @include media-down($bp-md) {
     .mai-menubar-toggle[aria-expanded="false"] + .mai-menubar-nav {
         display: none;
@@ -149,7 +136,31 @@
 }
 
 // ---------------------------------------------------------------------------
-// All menu items (role="none" li wrappers)
+// Top-level menubar <ul>
+// ---------------------------------------------------------------------------
+.mai-menubar {
+    display:        flex;
+    flex-direction: row;
+    flex-wrap:      nowrap;
+    align-items:    center;
+    gap:            0;
+    margin:         0;
+    padding:        0;
+    list-style:     none;
+
+    // Mobile: vertical stack with teal card border
+    @include media-down($bp-md) {
+        flex-direction:   column;
+        align-items:      stretch;
+        width:            100%;
+        background-color: var(--bgm-card, #ffffff);
+        border:           2px solid var(--bgm-teal-700, #1f6e6e);
+        box-shadow:       var(--shadow-md, 0 4px 14px rgba(14, 63, 63, 0.08));
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Menu items
 // ---------------------------------------------------------------------------
 .mai-menubar__item {
     margin:     0;
@@ -163,7 +174,6 @@
     }
 }
 
-// Top-level items are inline on desktop
 .mai-menubar > .mai-menubar__item {
     display: inline-block;
 
@@ -173,118 +183,130 @@
 }
 
 // ---------------------------------------------------------------------------
-// Menu links — always plain <a href> elements, never toggles
+// Navigation links — always plain <a> elements
 // ---------------------------------------------------------------------------
 .mai-menubar__link {
     display:         inline-flex;
     align-items:     center;
-    gap:             0.25em;
-    margin:          2px;
-    padding:         4px 8px 8px;
-    background-color: var(--menubar-bg);
-    color:           var(--menubar-link-color);
+    gap:             var(--space-1, 4px);
+    padding:         var(--space-2, 8px) var(--space-3, 12px);
+    color:           var(--nav-link-color);
+    font-size:       var(--fs-base, 1rem);
+    font-weight:     var(--fw-semibold, 600);
     text-decoration: none;
     white-space:     nowrap;
-    border:          2px solid transparent;
-    border-radius:   var(--mai-layout-radius, 0.5rem);
+    border-radius:   var(--radius-md, 4px);
+    // Gold bottom border: transparent by default, gold on active
+    border-block-end: 2px solid transparent;
+    transition:      background-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1)),
+                     color            var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1)),
+                     border-color     var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
 
-    &:hover,
-    &:focus-visible {
-        outline:          none;
-        background-color: var(--menubar-link-hover-bg);
-        border-color:     var(--menubar-focus-ring);
-        padding:          2px 6px 4px;
-        color:            var(--mai-color-primary, #034575);
+    &:hover {
+        background-color: var(--nav-link-hover-bg);
+        color:            var(--nav-link-hover-color);
+        text-decoration:  none;
     }
 
+    &:focus-visible {
+        outline:        2px solid var(--nav-focus-ring);
+        outline-offset: 2px;
+    }
+
+    // Current page: gold underline, deep teal text, bold
     &[aria-current="page"],
     &.mai-menubar__link--current {
-        padding-bottom:  4px;
-        border-bottom:   3px solid var(--menubar-focus-ring);
-        font-weight:     var(--mai-font-weight-bold, 700);
+        color:            var(--nav-active-color);
+        font-weight:      var(--fw-bold, 700);
+        border-block-end-color: var(--nav-active-border);
+        background-color: transparent;
     }
 }
 
 // ---------------------------------------------------------------------------
-// Submenu disclosure button — sibling of the link, holds the chevron
+// Submenu disclosure <button> — sibling of the link, holds the arrow SVG
 // ---------------------------------------------------------------------------
 .mai-menubar__toggle {
     display:         inline-flex;
     align-items:     center;
     justify-content: center;
-    margin:          2px 2px 2px 0;
-    padding:         4px 8px;
+    padding:         var(--space-2, 8px) var(--space-2, 8px);
     background:      transparent;
-    color:           var(--menubar-link-color);
+    color:           var(--nav-link-color);
     border:          2px solid transparent;
-    border-radius:   var(--mai-layout-radius, 0.5rem);
+    border-radius:   var(--radius-md, 4px);
     cursor:          pointer;
     line-height:     1;
+    transition:      background-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1)),
+                     border-color     var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
 
-    &:hover,
+    &:hover {
+        background-color: var(--nav-link-hover-bg);
+        color:            var(--nav-link-hover-color);
+    }
+
     &:focus-visible {
-        outline:          none;
-        background-color: var(--menubar-link-hover-bg);
-        border-color:     var(--menubar-focus-ring);
-        color:            var(--mai-color-primary, #034575);
+        outline:        2px solid var(--nav-focus-ring);
+        outline-offset: 2px;
     }
 
     &[aria-expanded="true"] {
-        background-color: color-mix(in srgb, var(--mai-color-primary, #034575) 18%, transparent);
+        background-color: var(--bgm-teal-100, #d8e6e6);
+        color:            var(--bgm-teal-900, #0e3f3f);
     }
 }
 
-// Sub-menu toggles (depth >= 1) sit at the right edge of the row, like
-// the chevron did before when it was absolutely positioned inside the link.
+// Nested submenu toggles sit at the right edge of the row
 .mai-menubar__submenu .mai-menubar__toggle {
-    position:         absolute;
-    inset-inline-end: 2px;
+    position:          absolute;
+    inset-inline-end:  var(--space-1, 4px);
     inset-block-start: 50%;
-    transform:        translateY(-50%);
-    margin:           0;
-    padding:          2px 6px;
+    transform:         translateY(-50%);
+    margin:            0;
+    padding:           var(--space-1, 4px) var(--space-2, 8px);
 }
 
-// Sub-menu links are block-level and full-width
+// Submenu links: block-level, full-width
 .mai-menubar__submenu .mai-menubar__link {
-    display:      flex;
-    width:        100%;
-    padding:      6px 12px 6px 10px;
-    white-space:  normal;
+    display:       flex;
+    width:         100%;
+    padding:       var(--space-2, 8px) var(--space-4, 16px) var(--space-2, 8px) var(--space-3, 12px);
+    white-space:   normal;
     border-radius: 0;
-    margin:       2px 0;
+    // Swap bottom border for left border at submenu level
+    border-block-end:    none;
+    border-inline-start: 2px solid transparent;
+    transition:    background-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1)),
+                   color            var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1)),
+                   border-color     var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
 
-    &:hover,
-    &:focus-visible {
-        padding-left: 8px;
-        border-left:  2px solid var(--menubar-focus-ring);
-        border-bottom: 2px solid transparent;
+    &:hover {
+        background-color:     var(--nav-link-hover-bg);
+        border-inline-start-color: var(--bgm-teal-300, #9bbbbb);
     }
 
     &[aria-current="page"],
     &.mai-menubar__link--current {
-        padding-left:  6px;
-        border-left:   4px solid var(--menubar-focus-ring);
-        border-bottom: none;
+        border-inline-start-color: var(--nav-active-border);
+        border-block-end:          none;
     }
 }
 
 // ---------------------------------------------------------------------------
-// Arrow SVGs inside links
+// Arrow SVGs
 // ---------------------------------------------------------------------------
 .mai-menubar__arrow {
-    fill:   currentcolor;
-    stroke: currentcolor;
+    fill:        currentcolor;
     flex-shrink: 0;
 }
 
 .mai-menubar__arrow--down {
-    margin-inline-start: 0.125em;
-    transition: transform 200ms ease;
+    margin-inline-start: var(--space-1, 4px);
+    transition: transform var(--duration-base, 200ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
 }
 
 .mai-menubar__arrow--right {
-    transition: transform 200ms ease;
+    transition: transform var(--duration-base, 200ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
 }
 
 .mai-menubar__toggle[aria-expanded="true"] {
@@ -293,35 +315,34 @@
 }
 
 // ---------------------------------------------------------------------------
-// Sub-menu panels
-// Visibility is driven by the [hidden] attribute which the JS toggles in
-// sync with the sibling disclosure button's aria-expanded state.
+// Submenu panels
+// Visibility: JS toggles [hidden]; transition for smooth open/close
 // ---------------------------------------------------------------------------
 .mai-menubar__submenu {
-    position:         absolute;
+    position:          absolute;
     inset-block-start: 100%;
     inset-inline-start: 0;
-    margin:           0;
-    padding:          6px 4px;
-    min-width:        var(--menubar-dropdown-width);
-    background-color: var(--menubar-dropdown-bg);
-    border:           2px solid var(--menubar-dropdown-border);
-    border-radius:    var(--mai-layout-radius, 0.5rem);
-    box-shadow:       var(--menubar-dropdown-shadow);
-    list-style:       none;
-    z-index:          100;
+    margin:            0;
+    padding:           var(--space-2, 8px) var(--space-1, 4px);
+    min-width:         var(--nav-dropdown-width);
+    background-color:  var(--nav-dropdown-bg);
+    border:            2px solid var(--nav-dropdown-border);
+    border-radius:     var(--nav-dropdown-radius);
+    box-shadow:        var(--nav-dropdown-shadow);
+    list-style:        none;
+    z-index:           200;
 
     &[hidden] {
         display: none;
     }
 
-    // On mobile: static, full-width, no box-shadow
+    // Mobile: static, full-width, inset teal left border (accordion-style)
     @include media-down($bp-md) {
         position:   static;
         box-shadow: none;
         border:     none;
-        border-left: 3px solid var(--menubar-dropdown-border);
-        padding:    0 0 0 var(--mai-space-sm, 0.5rem);
+        border-inline-start: 3px solid var(--bgm-teal-700, #1f6e6e);
+        padding:    0 0 0 var(--space-3, 12px);
         min-width:  0;
         width:      100%;
     }
