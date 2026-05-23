@@ -1,2 +1,7 @@
 parameters:
-    ignoreErrors:
+	ignoreErrors:
+		-
+			message: '#^Call to static method getMergedConfigurationByFilename\(\) on an unknown class Maispace\\MaiBase\\Utility\\ActiveExtensionConfigurationLoader\.$#'
+			identifier: class.notFound
+			count: 1
+			path: Classes/Service/BackendThemeService.php

@@ -177,7 +177,7 @@ final class ContentElementCatalogTest extends TestCase
             ));
         }
 
-        $content = (string)file_get_contents($filePath);
+        $content = (string) file_get_contents($filePath);
         self::assertNotEmpty(
             trim($content),
             sprintf(
@@ -210,7 +210,7 @@ final class ContentElementCatalogTest extends TestCase
             ));
         }
 
-        $content = (string)file_get_contents($filePath);
+        $content = (string) file_get_contents($filePath);
         self::assertStringContainsString(
             'data-namespace-typo3-fluid="true"',
             $content,

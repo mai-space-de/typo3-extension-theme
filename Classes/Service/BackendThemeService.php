@@ -56,7 +56,7 @@ class BackendThemeService implements SingletonInterface
         if (!is_array($themeConfiguration)) {
             throw new InvalidThemeConfigurationException(
                 'BackendTheme configuration must be an array.',
-                1_736_000_001
+                1_736_000_001,
             );
         }
 
@@ -66,9 +66,9 @@ class BackendThemeService implements SingletonInterface
                 continue;
             }
 
-            $typo3ConfVars = (array)($GLOBALS['TYPO3_CONF_VARS'] ?? []);
-            $extensions = (array)($typo3ConfVars['EXTENSIONS'] ?? []);
-            $backend = (array)($extensions['backend'] ?? []);
+            $typo3ConfVars = (array) ($GLOBALS['TYPO3_CONF_VARS'] ?? []);
+            $extensions = (array) ($typo3ConfVars['EXTENSIONS'] ?? []);
+            $backend = (array) ($extensions['backend'] ?? []);
             $backend[$settingKey] = $settingValue;
             $extensions['backend'] = $backend;
             $typo3ConfVars['EXTENSIONS'] = $extensions;
