@@ -1,0 +1,78 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Shared list item component for feature extension records.
+    Expects: item (ListableRecordInterface), detailAction, detailPid
+    Optional: showImage (default: true), showDate (default: true), showCategories (default: true)
+</f:comment>
+<article class="mai-list-item" data-uid="{item.uid}">
+    <f:if condition="{showImage} && {item.media.0}">
+        <div class="mai-list-item__media">
+            <f:if condition="{detailPid}">
+                <f:then>
+                    <f:link.page pageUid="{detailPid}"
+                                 additionalParams="{tx_ext_plugin: {action: detailAction, uid: item.uid}}"
+                                 class="mai-list-item__media-link">
+                        <mai:image.picture image="{item.media.0}"
+                                           alt="{item.title}"
+                                           class="mai-list-item__image"/>
+                    </f:link.page>
+                </f:then>
+                <f:else>
+                    <mai:image.picture image="{item.media.0}"
+                                       alt="{item.title}"
+                                       class="mai-list-item__image"/>
+                </f:else>
+            </f:if>
+        </div>
+    </f:if>
+
+    <div class="mai-list-item__content">
+        <f:if condition="{showCategories} && {item.categories -> f:count()}">
+            <div class="mai-list-item__categories">
+                <f:for each="{item.categories}" as="category">
+                    <span class="mai-list-item__category">{category.title}</span>
+                </f:for>
+            </div>
+        </f:if>
+
+        <f:if condition="{item.title}">
+            <h3 class="mai-list-item__title">
+                <f:if condition="{detailPid}">
+                    <f:then>
+                        <f:link.page pageUid="{detailPid}"
+                                     additionalParams="{tx_ext_plugin: {action: detailAction, uid: item.uid}}"
+                                     class="mai-list-item__title-link">
+                            {item.title}
+                        </f:link.page>
+                    </f:then>
+                    <f:else>
+                        {item.title}
+                    </f:else>
+                </f:if>
+            </h3>
+        </f:if>
+
+        <f:if condition="{showDate} && {item.date}">
+            <time class="mai-list-item__date" datetime="{item.date -> f:format.date(format: 'c')}">
+                {item.date -> f:format.date(format: 'd.m.Y')}
+            </time>
+        </f:if>
+
+        <f:if condition="{item.description}">
+            <div class="mai-list-item__description">
+                {item.description -> f:format.crop(maxCharacters: 200) -> f:format.html()}
+            </div>
+        </f:if>
+
+        <f:if condition="{detailPid}">
+            <f:link.page pageUid="{detailPid}"
+                         additionalParams="{tx_ext_plugin: {action: detailAction, uid: item.uid}}"
+                         class="mai-list-item__link">
+                <f:translate key="LLL:EXT:mai_base/Resources/Private/Language/locallang.xlf:list.readMore"/>
+            </f:link.page>
+        </f:if>
+    </div>
+</article>
+</html>
