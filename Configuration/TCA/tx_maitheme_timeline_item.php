@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * TCA definition for tx_maitheme_timeline_item.
+ *
+ * Kept for backward compatibility only — content records that were created
+ * before the timeline CType was extracted to EXT:mai_timeline may still
+ * reference this table. New timeline items are stored in tx_maitimeline_item.
+ */
+
 declare(strict_types=1);
 
 use Maispace\MaiBase\TableConfigurationArray\FieldConfig\FileConfig;

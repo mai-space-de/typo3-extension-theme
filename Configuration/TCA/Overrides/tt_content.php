@@ -902,8 +902,9 @@ new CType("maispace_contactinfo", $lang("ctype.contactinfo"), "content-special-h
     ->register();
 
 // ============================================================================
-// UI WIDGETS (8)
-// slider, accordion, tabs, modal, timeline, faq, beforeafter, steps
+// UI WIDGETS (7)
+// slider, accordion, tabs, modal, faq, beforeafter, steps
+// (maispace_timeline is registered by EXT:mai_timeline)
 // ============================================================================
 
 new CType("maispace_slider", $lang("ctype.slider"), "content-carousel")
@@ -944,8 +945,6 @@ new CType("maispace_modal", $lang("ctype.modal"), "content-special-html")
      ->addDefaultAccessTab()
      ->setGroup('maispace_widgets')
      ->register();
-
-// Timeline CType moved to mai_timeline extension. Keeping TCA table for backward compatibility.
 
 new CType("maispace_faq", $lang("ctype.faq"), "content-accordion")
     ->addDefaultHeaderPalette()
@@ -1248,9 +1247,6 @@ $GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_slider_items'] = [
         ],
     ],
 ];
-
-// Timeline items — field removed (CType moved to mai_timeline extension).
-// Keeping TCA table definition for backward compatibility with existing records.
 
 // ============================================================================
 // SECTION CONTAINERS (b13/container)

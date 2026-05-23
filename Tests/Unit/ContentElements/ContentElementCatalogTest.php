@@ -92,6 +92,7 @@ final class ContentElementCatalogTest extends TestCase
             // maispace_faq and maispace_steps inherit from maispace_accordion
             // and share the Accordion template.
             // maispace_tab inherits from maispace_tabs (templateName = Tab).
+            // maispace_timeline is registered and rendered by EXT:mai_timeline.
             'Accordion'    => ['Accordion'],
             'Beforeafter'  => ['Beforeafter'],
             'Image'        => ['Image'],
@@ -99,7 +100,6 @@ final class ContentElementCatalogTest extends TestCase
             'Slider'       => ['Slider'],
             'Tab'          => ['Tab'],
             'TextMedia'    => ['TextMedia'],
-            'Timeline'     => ['Timeline'],
             'Video'        => ['Video'],
 
             // Forms group ──────────────────────────────────────────────────────

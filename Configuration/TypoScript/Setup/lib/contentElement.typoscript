@@ -20,7 +20,7 @@ lib.contentElement {
 
     # Shared FAL resolution. Fields that don't exist on a given CType simply
     # yield an empty array — safe to run on every element.
-    # CTypes that need a different .10 (Accordion/Slider/Tabs/Timeline/Sections/Bento)
+    # CTypes that need a different .10 (Accordion/Slider/Tabs/Sections/Bento)
     # override it in their own block.
     dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
     dataProcessing.10 {
@@ -203,24 +203,8 @@ tt_content.maispace_tabs {
 }
 tt_content.maispace_tab          < tt_content.maispace_tabs
 
-tt_content.maispace_timeline     < lib.contentElement
-tt_content.maispace_timeline {
-    templateName = Timeline
-    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
-    dataProcessing.10 {
-        table = tx_maitheme_timeline_item
-        pidInList.field = pid
-        where.data = field:uid
-        where.wrap = parent_uid=|
-        orderBy = sort
-        as = items
-        dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-        dataProcessing.10 {
-            references.fieldName = image
-            as = images
-        }
-    }
-}
+# tt_content.maispace_timeline is registered by EXT:mai_timeline and rendered
+# from that extension's own TypoScript. No entry is needed here.
 
 tt_content.maispace_modal        < lib.contentElement
 tt_content.maispace_modal.templateName = Modal
