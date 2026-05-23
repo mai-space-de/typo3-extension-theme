@@ -22,308 +22,310 @@ lib.contentElement {
     # yield an empty array — safe to run on every element.
     # CTypes that need a different .10 (Accordion/Slider/Tabs/Sections/Bento)
     # override it in their own block.
-    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-    dataProcessing.10 {
-        references.fieldName = image
-        as = images
+    dataProcessing {
+        10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        10 {
+            references.fieldName = image
+            as = images
+        }
+        11 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        11 {
+            references.fieldName = assets
+            as = assets
+        }
+        12 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        12 {
+            references.fieldName = tx_maitheme_bg_image
+            as = bgImage
+        }
+        13 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        13 {
+            references.fieldName = tx_maitheme_video_poster
+            as = videoPoster
+        }
+        14 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        14 {
+            references.fieldName = tx_maitheme_image_before
+            as = imageBefore
+        }
+        15 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        15 {
+            references.fieldName = tx_maitheme_image_after
+            as = imageAfter
+        }
     }
-    dataProcessing.11 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-    dataProcessing.11 {
-        references.fieldName = assets
-        as = assets
-    }
-    dataProcessing.12 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-    dataProcessing.12 {
-        references.fieldName = tx_maitheme_bg_image
-        as = bgImage
-    }
-    dataProcessing.13 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-    dataProcessing.13 {
-        references.fieldName = tx_maitheme_video_poster
-        as = videoPoster
-    }
-    dataProcessing.14 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-    dataProcessing.14 {
-        references.fieldName = tx_maitheme_image_before
-        as = imageBefore
-    }
-    dataProcessing.15 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-    dataProcessing.15 {
-        references.fieldName = tx_maitheme_image_after
-        as = imageAfter
+
+    # Shared frontend PIDs — exposed under settings for templates that need them.
+    settings.pids {
+        homepage = {$pageUids.homepage}
+        imprint = {$pageUids.imprint}
+        dataProtectionPolicy = {$pageUids.dataProtectionPolicy}
+        accessibilityStatement = {$pageUids.accessibilityStatement}
+        contact = {$pageUids.contact}
+        search = {$pageUids.search}
+        disclaimer = {$pageUids.disclaimer}
+        newsletter = {$pageUids.newsletter}
+        frontendLogin = {$pageUids.frontendLogin}
     }
 }
 
 ## ----------------------------------------------------------------------------
 ## BASIC GROUP
 ## ----------------------------------------------------------------------------
-tt_content.maispace_text < lib.contentElement
-tt_content.maispace_text.templateName = Text
-tt_content.maispace_heading < lib.contentElement
-tt_content.maispace_heading.templateName = Heading
-tt_content.maispace_richtext < lib.contentElement
-tt_content.maispace_richtext.templateName = Richtext
-tt_content.maispace_image < lib.contentElement
-tt_content.maispace_image.templateName = Image
-tt_content.maispace_video < lib.contentElement
-tt_content.maispace_video.templateName = Video
-tt_content.maispace_audio < lib.contentElement
-tt_content.maispace_audio.templateName = Audio
-tt_content.maispace_button < lib.contentElement
-tt_content.maispace_button.templateName = Button
-tt_content.maispace_linklist < lib.contentElement
-tt_content.maispace_linklist.templateName = Linklist
-tt_content.maispace_icon < lib.contentElement
-tt_content.maispace_icon.templateName = Icon
-tt_content.maispace_divider < lib.contentElement
-tt_content.maispace_divider.templateName = Divider
-tt_content.maispace_spacer < lib.contentElement
-tt_content.maispace_spacer.templateName = Spacer
-tt_content.maispace_embed < lib.contentElement
-tt_content.maispace_embed.templateName = Embed
-tt_content.maispace_breadcrumb < lib.contentElement
-tt_content.maispace_breadcrumb {
-    templateName = Breadcrumb
-    dataProcessing.90 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
-    dataProcessing.90 {
-        special = rootline
-        levels = 20
-        includeNotInMenu = 1
-        as = breadcrumbItems
+tt_content {
+    maispace_text < lib.contentElement
+    maispace_text.templateName = Text
+    maispace_heading < lib.contentElement
+    maispace_heading.templateName = Heading
+    maispace_richtext < lib.contentElement
+    maispace_richtext.templateName = Richtext
+    maispace_image < lib.contentElement
+    maispace_image.templateName = Image
+    maispace_video < lib.contentElement
+    maispace_video.templateName = Video
+    maispace_audio < lib.contentElement
+    maispace_audio.templateName = Audio
+    maispace_button < lib.contentElement
+    maispace_button.templateName = Button
+    maispace_linklist < lib.contentElement
+    maispace_linklist.templateName = Linklist
+    maispace_icon < lib.contentElement
+    maispace_icon.templateName = Icon
+    maispace_divider < lib.contentElement
+    maispace_divider.templateName = Divider
+    maispace_spacer < lib.contentElement
+    maispace_spacer.templateName = Spacer
+    maispace_embed < lib.contentElement
+    maispace_embed.templateName = Embed
+    maispace_breadcrumb < lib.contentElement
+    maispace_breadcrumb {
+        templateName = Breadcrumb
+        dataProcessing.90 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        dataProcessing.90 {
+            special = rootline
+            levels = 20
+            includeNotInMenu = 1
+            as = breadcrumbItems
+        }
     }
-}
-tt_content.maispace_socialmedia < lib.contentElement
-tt_content.maispace_socialmedia.templateName = Socialmedia
-tt_content.maispace_callout < lib.contentElement
-tt_content.maispace_callout.templateName = Callout
-tt_content.maispace_iconlist < lib.contentElement
-tt_content.maispace_iconlist.templateName = Iconlist
-tt_content.maispace_textcolumns < lib.contentElement
-tt_content.maispace_textcolumns.templateName = Textcolumns
+    maispace_socialmedia < lib.contentElement
+    maispace_socialmedia.templateName = Socialmedia
+    maispace_callout < lib.contentElement
+    maispace_callout.templateName = Callout
+    maispace_iconlist < lib.contentElement
+    maispace_iconlist.templateName = Iconlist
+    maispace_textcolumns < lib.contentElement
+    maispace_textcolumns.templateName = Textcolumns
 
-## ----------------------------------------------------------------------------
-## PAGE GROUP
-## ----------------------------------------------------------------------------
-tt_content.maispace_hero < lib.contentElement
-tt_content.maispace_hero.templateName = Hero
-tt_content.maispace_banner < lib.contentElement
-tt_content.maispace_banner.templateName = Banner
-tt_content.maispace_cta < lib.contentElement
-tt_content.maispace_cta.templateName = Cta
-tt_content.maispace_mediatext < lib.contentElement
-tt_content.maispace_mediatext.templateName = Mediatext
+    ## ----------------------------------------------------------------------------
+    ## PAGE GROUP
+    ## ----------------------------------------------------------------------------
+    maispace_hero < lib.contentElement
+    maispace_hero.templateName = Hero
+    maispace_banner < lib.contentElement
+    maispace_banner.templateName = Banner
+    maispace_cta < lib.contentElement
+    maispace_cta.templateName = Cta
+    maispace_mediatext < lib.contentElement
+    maispace_mediatext.templateName = Mediatext
 
-## ----------------------------------------------------------------------------
-## COMPONENTS GROUP
-## ----------------------------------------------------------------------------
-tt_content.maispace_card < lib.contentElement
-tt_content.maispace_card.templateName = Card
-tt_content.maispace_teaser < lib.contentElement
-tt_content.maispace_teaser.templateName = Teaser
-tt_content.maispace_featurebox < lib.contentElement
-tt_content.maispace_featurebox.templateName = Featurebox
-tt_content.maispace_profile < lib.contentElement
-tt_content.maispace_profile.templateName = Profile
-tt_content.maispace_testimonial < lib.contentElement
-tt_content.maispace_testimonial.templateName = Testimonial
-tt_content.maispace_quote < lib.contentElement
-tt_content.maispace_quote.templateName = Quote
-tt_content.maispace_logo < lib.contentElement
-tt_content.maispace_logo.templateName = Logo
-tt_content.maispace_logoshowcase < lib.contentElement
-tt_content.maispace_logoshowcase.templateName = Logoshowcase
-tt_content.maispace_statistic < lib.contentElement
-tt_content.maispace_statistic.templateName = Statistic
-tt_content.maispace_badge < lib.contentElement
-tt_content.maispace_badge.templateName = Badge
-tt_content.maispace_contactinfo < lib.contentElement
-tt_content.maispace_contactinfo.templateName = Contactinfo
+    ## ----------------------------------------------------------------------------
+    ## COMPONENTS GROUP
+    ## ----------------------------------------------------------------------------
+    maispace_card < lib.contentElement
+    maispace_card.templateName = Card
+    maispace_teaser < lib.contentElement
+    maispace_teaser.templateName = Teaser
+    maispace_featurebox < lib.contentElement
+    maispace_featurebox.templateName = Featurebox
+    maispace_profile < lib.contentElement
+    maispace_profile.templateName = Profile
+    maispace_testimonial < lib.contentElement
+    maispace_testimonial.templateName = Testimonial
+    maispace_quote < lib.contentElement
+    maispace_quote.templateName = Quote
+    maispace_logo < lib.contentElement
+    maispace_logo.templateName = Logo
+    maispace_logoshowcase < lib.contentElement
+    maispace_logoshowcase.templateName = Logoshowcase
+    maispace_statistic < lib.contentElement
+    maispace_statistic.templateName = Statistic
+    maispace_badge < lib.contentElement
+    maispace_badge.templateName = Badge
+    maispace_contactinfo < lib.contentElement
+    maispace_contactinfo.templateName = Contactinfo
 
-## ----------------------------------------------------------------------------
-## WIDGETS GROUP
-## Note: maispace_textmedia keeps its existing TextMedia template — the
-## TCA-registered `maispace_text` now points to its own Text.html stub.
-## ----------------------------------------------------------------------------
-tt_content.maispace_textmedia < lib.contentElement
-tt_content.maispace_textmedia.templateName = TextMedia
-tt_content.maispace_textmedia.dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-tt_content.maispace_textmedia.dataProcessing.10 {
-    references.fieldName = image
-    as = image
-}
-
-## Accordion / FAQ / Steps share `tx_maitheme_accordion_item`.
-tt_content.maispace_accordion < lib.contentElement
-tt_content.maispace_accordion {
-    templateName = Accordion
-    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
-    dataProcessing.10 {
-        table = tx_maitheme_accordion_item
-        pidInList.field = pid
-        where.data = field:uid
-        where.wrap = parent_uid=|
-        orderBy = sort
-        as = items
-    }
-}
-tt_content.maispace_faq < tt_content.maispace_accordion
-tt_content.maispace_steps < tt_content.maispace_accordion
-
-tt_content.maispace_slider < lib.contentElement
-tt_content.maispace_slider {
-    templateName = Slider
-    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
-    dataProcessing.10 {
-        table = tx_maitheme_slider_item
-        pidInList.field = pid
-        where.data = field:uid
-        where.wrap = parent_uid=|
-        orderBy = sort
-        as = items
+    ## ----------------------------------------------------------------------------
+    ## WIDGETS GROUP
+    ## ----------------------------------------------------------------------------
+    maispace_textmedia < lib.contentElement
+    maispace_textmedia {
+        templateName = TextMedia
         dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
         dataProcessing.10 {
             references.fieldName = image
-            as = images
+            as = image
         }
     }
-}
 
-tt_content.maispace_tabs < lib.contentElement
-tt_content.maispace_tabs {
-    templateName = Tab
-    dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
-    dataProcessing.10 {
-        table = tx_maitheme_tab_item
-        pidInList.field = pid
-        where.data = field:uid
-        where.wrap = parent_uid=|
-        orderBy = sort
-        as = items
+    ## Accordion / FAQ / Steps share `tx_maitheme_accordion_item`.
+    maispace_accordion < lib.contentElement
+    maispace_accordion {
+        templateName = Accordion
+        dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+        dataProcessing.10 {
+            table = tx_maitheme_accordion_item
+            pidInList.field = pid
+            where {
+                data = field:uid
+                wrap = parent_uid=|
+            }
+            orderBy = sort
+            as = items
+        }
     }
-}
-tt_content.maispace_tab < tt_content.maispace_tabs
+    maispace_faq < tt_content.maispace_accordion
+    maispace_steps < tt_content.maispace_accordion
 
-# tt_content.maispace_timeline is registered by EXT:mai_timeline and rendered
-# from that extension's own TypoScript. No entry is needed here.
+    maispace_slider < lib.contentElement
+    maispace_slider {
+        templateName = Slider
+        dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+        dataProcessing.10 {
+            table = tx_maitheme_slider_item
+            pidInList.field = pid
+            where {
+                data = field:uid
+                wrap = parent_uid=|
+            }
+            orderBy = sort
+            as = items
+            dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            dataProcessing.10 {
+                references.fieldName = image
+                as = images
+            }
+        }
+    }
 
-tt_content.maispace_modal < lib.contentElement
-tt_content.maispace_modal.templateName = Modal
-tt_content.maispace_beforeafter < lib.contentElement
-tt_content.maispace_beforeafter.templateName = Beforeafter
+    maispace_tabs < lib.contentElement
+    maispace_tabs {
+        templateName = Tab
+        dataProcessing.10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+        dataProcessing.10 {
+            table = tx_maitheme_tab_item
+            pidInList.field = pid
+            where {
+                data = field:uid
+                wrap = parent_uid=|
+            }
+            orderBy = sort
+            as = items
+        }
+    }
+    maispace_tab < tt_content.maispace_tabs
 
-## ----------------------------------------------------------------------------
-## FORMS GROUP
-## ----------------------------------------------------------------------------
-tt_content.maispace_form < lib.contentElement
-tt_content.maispace_form.templateName = Form
-tt_content.maispace_newsletter < lib.contentElement
-tt_content.maispace_newsletter.templateName = Newsletter
-tt_content.maispace_map < lib.contentElement
-tt_content.maispace_map.templateName = Map
+    # maispace_timeline is registered by EXT:mai_timeline and rendered
+    # from that extension's own TypoScript. No entry is needed here.
 
-## ----------------------------------------------------------------------------
-## DATA GROUP
-## ----------------------------------------------------------------------------
-tt_content.maispace_table < lib.contentElement
-tt_content.maispace_table.templateName = Table
-tt_content.maispace_datalist < lib.contentElement
-tt_content.maispace_datalist.templateName = Datalist
-tt_content.maispace_gallery < lib.contentElement
-tt_content.maispace_gallery.templateName = Gallery
-tt_content.maispace_filelist < lib.contentElement
-tt_content.maispace_filelist.templateName = Filelist
-tt_content.maispace_codeblock < lib.contentElement
-tt_content.maispace_codeblock.templateName = Codeblock
-tt_content.maispace_chart < lib.contentElement
-tt_content.maispace_chart.templateName = Chart
-tt_content.maispace_progressbar < lib.contentElement
-tt_content.maispace_progressbar.templateName = Progressbar
-tt_content.maispace_rating < lib.contentElement
-tt_content.maispace_rating.templateName = Rating
+    maispace_modal < lib.contentElement
+    maispace_modal.templateName = Modal
+    maispace_beforeafter < lib.contentElement
+    maispace_beforeafter.templateName = Beforeafter
 
-## ----------------------------------------------------------------------------
-## FEEDBACK GROUP
-## ----------------------------------------------------------------------------
-tt_content.maispace_alert < lib.contentElement
-tt_content.maispace_alert.templateName = Alert
+    ## ----------------------------------------------------------------------------
+    ## FORMS GROUP
+    ## ----------------------------------------------------------------------------
+    maispace_form < lib.contentElement
+    maispace_form.templateName = Form
+    maispace_newsletter < lib.contentElement
+    maispace_newsletter.templateName = Newsletter
+    maispace_map < lib.contentElement
+    maispace_map.templateName = Map
 
-## ----------------------------------------------------------------------------
-## SECTION CONTAINERS (b13/container)
-##
-## b13/container has no Fluid ViewHelper — children are exposed by
-## `B13\Container\DataProcessing\ContainerProcessor`. Without an explicit
-## `colPos`, it populates one Fluid variable per registered colPos as
-## `children_<colPos>`. Each variant has its own template that hardcodes the
-## matching column iteration.
-## ----------------------------------------------------------------------------
-tt_content.maispace_section_full < lib.contentElement
-tt_content.maispace_section_full {
-    templateName = SectionFull
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    ## ----------------------------------------------------------------------------
+    ## DATA GROUP
+    ## ----------------------------------------------------------------------------
+    maispace_table < lib.contentElement
+    maispace_table.templateName = Table
+    maispace_datalist < lib.contentElement
+    maispace_datalist.templateName = Datalist
+    maispace_gallery < lib.contentElement
+    maispace_gallery.templateName = Gallery
+    maispace_filelist < lib.contentElement
+    maispace_filelist.templateName = Filelist
+    maispace_codeblock < lib.contentElement
+    maispace_codeblock.templateName = Codeblock
+    maispace_chart < lib.contentElement
+    maispace_chart.templateName = Chart
+    maispace_progressbar < lib.contentElement
+    maispace_progressbar.templateName = Progressbar
+    maispace_rating < lib.contentElement
+    maispace_rating.templateName = Rating
 
-tt_content.maispace_section_50_50 < lib.contentElement
-tt_content.maispace_section_50_50 {
-    templateName = Section5050
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    ## ----------------------------------------------------------------------------
+    ## FEEDBACK GROUP
+    ## ----------------------------------------------------------------------------
+    maispace_alert < lib.contentElement
+    maispace_alert.templateName = Alert
 
-tt_content.maispace_section_66_33 < lib.contentElement
-tt_content.maispace_section_66_33 {
-    templateName = Section6633
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    ## ----------------------------------------------------------------------------
+    ## SECTION CONTAINERS (b13/container)
+    ## ----------------------------------------------------------------------------
+    maispace_section_full < lib.contentElement
+    maispace_section_full {
+        templateName = SectionFull
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
 
-tt_content.maispace_section_33_66 < lib.contentElement
-tt_content.maispace_section_33_66 {
-    templateName = Section3366
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    maispace_section_50_50 < lib.contentElement
+    maispace_section_50_50 {
+        templateName = Section5050
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
 
-tt_content.maispace_section_3col < lib.contentElement
-tt_content.maispace_section_3col {
-    templateName = Section3Col
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    maispace_section_66_33 < lib.contentElement
+    maispace_section_66_33 {
+        templateName = Section6633
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
 
-tt_content.maispace_section_4col < lib.contentElement
-tt_content.maispace_section_4col {
-    templateName = Section4Col
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    maispace_section_33_66 < lib.contentElement
+    maispace_section_33_66 {
+        templateName = Section3366
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
 
-tt_content.maispace_section_sidebar_r < lib.contentElement
-tt_content.maispace_section_sidebar_r {
-    templateName = SectionSidebarR
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    maispace_section_3col < lib.contentElement
+    maispace_section_3col {
+        templateName = Section3Col
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
 
-tt_content.maispace_section_sidebar_l < lib.contentElement
-tt_content.maispace_section_sidebar_l {
-    templateName = SectionSidebarL
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    maispace_section_4col < lib.contentElement
+    maispace_section_4col {
+        templateName = Section4Col
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
 
-## ----------------------------------------------------------------------------
-## BENTO GRID (b13/container, single colPos 200)
-## ----------------------------------------------------------------------------
-tt_content.maispace_bento < lib.contentElement
-tt_content.maispace_bento {
-    templateName = BentoBox
-    dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
-}
+    maispace_section_sidebar_r < lib.contentElement
+    maispace_section_sidebar_r {
+        templateName = SectionSidebarR
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
 
-## ----------------------------------------------------------------------------
-## SHARED FRONTEND PIDS — exposed under settings for templates that need them.
-## ----------------------------------------------------------------------------
-lib.contentElement.settings.pids {
-    homepage = {$pageUids.homepage}
-    imprint = {$pageUids.imprint}
-    dataProtectionPolicy = {$pageUids.dataProtectionPolicy}
-    accessibilityStatement = {$pageUids.accessibilityStatement}
-    contact = {$pageUids.contact}
-    search = {$pageUids.search}
-    disclaimer = {$pageUids.disclaimer}
-    newsletter = {$pageUids.newsletter}
-    frontendLogin = {$pageUids.frontendLogin}
+    maispace_section_sidebar_l < lib.contentElement
+    maispace_section_sidebar_l {
+        templateName = SectionSidebarL
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
+
+    ## ----------------------------------------------------------------------------
+    ## BENTO GRID (b13/container, single colPos 200)
+    ## ----------------------------------------------------------------------------
+    maispace_bento < lib.contentElement
+    maispace_bento {
+        templateName = BentoBox
+        dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
+    }
 }

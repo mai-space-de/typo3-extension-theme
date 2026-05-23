@@ -1,7 +1,11 @@
 # Fluid Components namespace (sitegeist/fluid-components).
 # `<theme:...>` resolves to EXT:mai_theme/Resources/Private/Components.
 config.namespaces.theme = Maispace\MaiTheme\Components
-plugin.tx_fluidcomponents.namespaces.Maispace\MaiTheme\Components = EXT:mai_theme/Resources/Private/Components
+
+plugin {
+    tx_fluidcomponents.namespaces.Maispace\MaiTheme\Components = EXT:mai_theme/Resources/Private/Components
+    tx_maispace_assets.settings.htmlMinification.enable = 1
+}
 
 page = PAGE
 page {
@@ -156,8 +160,5 @@ page {
         }
     }
 }
-
-# Enable mai_assets HTML output minification for the frontend.
-plugin.tx_maispace_assets.settings.htmlMinification.enable = 1
 
 @import 'EXT:mai_theme/Configuration/TypoScript/Setup/page/body.typoscript'
