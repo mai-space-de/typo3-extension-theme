@@ -941,6 +941,40 @@
 
 
 // ---------------------------------------------------------------------------
+// Textcolumns — richtext body split into balanced CSS columns
+// ---------------------------------------------------------------------------
+.mai-textcolumns__title {
+    font-size:    var(--font-size-lg);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-sm);
+}
+
+.mai-textcolumns__subheader {
+    font-size:    var(--font-size-base);
+    color:        var(--bgm-ink-2);
+    margin-block: 0 var(--space-md);
+}
+
+.mai-textcolumns__body {
+    column-gap:  var(--space-xl);
+    column-rule: 1px solid var(--bgm-line);
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+
+    @include bp-up(md) {
+        column-count: 2;
+    }
+
+    p {
+        margin-block: 0 var(--space-sm);
+
+        &:last-child { margin-block-end: 0; }
+    }
+}
+
+
+// ---------------------------------------------------------------------------
 // Codeblock — syntax-highlighted <pre><code>
 // ---------------------------------------------------------------------------
 .mai-codeblock {
@@ -1304,6 +1338,452 @@
 .mai-teaser__footer {
     padding:     var(--space-md) var(--space-lg);
     border-block-start: 1px solid var(--bgm-line-2);
+}
+
+
+// ---------------------------------------------------------------------------
+// Heading Block — standalone heading with optional subheader
+// ---------------------------------------------------------------------------
+.mai-heading-block {
+    margin-block: 0;
+}
+
+.mai-heading-block__subheader {
+    font-size:   var(--font-size-md);
+    line-height: var(--line-height-relaxed);
+    color:       var(--bgm-ink-2);
+    margin-block: var(--space-xs) 0;
+}
+
+
+// ---------------------------------------------------------------------------
+// Image — standalone image block with optional caption and alignment
+// Alignment variants: --left, --center, --right (default: block)
+// ---------------------------------------------------------------------------
+.mai-image {
+    margin: 0;
+
+    &.mai-image--left {
+        @include bp-up(md) {
+            float:             left;
+            margin-inline-end: var(--space-xl);
+            max-width:         50%;
+        }
+    }
+
+    &.mai-image--right {
+        @include bp-up(md) {
+            float:               right;
+            margin-inline-start: var(--space-xl);
+            max-width:           50%;
+        }
+    }
+
+    &.mai-image--center {
+        margin-inline: auto;
+        text-align:    center;
+    }
+}
+
+.mai-image__img {
+    display:       block;
+    width:         100%;
+    height:        auto;
+    border-radius: var(--img-border-radius);
+    object-fit:    var(--img-object-fit);
+}
+
+.mai-image__caption {
+    font-size:          var(--font-size-sm);
+    color:              var(--bgm-ink-3);
+    text-align:         center;
+    margin-block-start: var(--space-xs);
+    font-style:         italic;
+}
+
+
+// ---------------------------------------------------------------------------
+// Audio — native HTML5 audio player
+// ---------------------------------------------------------------------------
+.mai-audio {
+    margin-block: 0;
+}
+
+.mai-audio__title {
+    font-size:    var(--font-size-base);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-sm);
+}
+
+.mai-audio__player {
+    display:   block;
+    width:     100%;
+    max-width: 40rem;
+}
+
+
+// ---------------------------------------------------------------------------
+// Gallery — inline image grid with lightbox links
+// ---------------------------------------------------------------------------
+.mai-gallery {
+    margin-block: 0;
+}
+
+.mai-gallery__title {
+    font-size:    var(--font-size-lg);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-lg);
+}
+
+.mai-gallery__grid {
+    display:               grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap:                   var(--layout-grid-gap);
+    list-style:            none;
+    margin:                0;
+    padding:               0;
+
+    @include bp-up(md) {
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    }
+}
+
+.mai-gallery__item {
+    aspect-ratio:  4 / 3;
+    overflow:      hidden;
+    border-radius: var(--layout-radius);
+}
+
+.mai-gallery__link {
+    display:  block;
+    height:   100%;
+    overflow: hidden;
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+.mai-gallery__img {
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+    transition: transform var(--duration-slow) var(--easing-standard);
+
+    .mai-gallery__link:hover & {
+        transform: scale(1.04);
+    }
+}
+
+
+// ---------------------------------------------------------------------------
+// Divider — decorative <hr> separator
+// Variants: --line (default), --dashed, --dotted, --gradient, --blank
+// ---------------------------------------------------------------------------
+.mai-divider {
+    border:       none;
+    margin-block: 0;
+
+    &.mai-divider--line {
+        border-block-start: 1px solid var(--color-border);
+    }
+
+    &.mai-divider--dashed {
+        border-block-start: 1px dashed var(--color-border);
+    }
+
+    &.mai-divider--dotted {
+        border-block-start: 1px dotted var(--color-border);
+    }
+
+    &.mai-divider--gradient {
+        height:     1px;
+        background: linear-gradient(
+            to right,
+            transparent,
+            var(--color-border) 20%,
+            var(--color-border) 80%,
+            transparent
+        );
+    }
+
+    // --blank: invisible — provides vertical rhythm via surrounding margins only
+    &.mai-divider--blank { /* intentionally empty */ }
+}
+
+
+// ---------------------------------------------------------------------------
+// Spacer — whitespace control element
+// Applied classes: mai-spacer--top-{size} and mai-spacer--bottom-{size}
+// Spacing values mirror the project spacing scale (none, 2xs–3xl).
+// ---------------------------------------------------------------------------
+.mai-spacer {
+    display: block;
+
+    // Top padding variants
+    &.mai-spacer--top-none { padding-block-start: 0; }
+    &.mai-spacer--top-2xs  { padding-block-start: var(--space-2xs); }
+    &.mai-spacer--top-xs   { padding-block-start: var(--space-xs); }
+    &.mai-spacer--top-sm   { padding-block-start: var(--space-sm); }
+    &.mai-spacer--top-md   { padding-block-start: var(--space-md); }
+    &.mai-spacer--top-lg   { padding-block-start: var(--space-lg); }
+    &.mai-spacer--top-xl   { padding-block-start: var(--space-xl); }
+    &.mai-spacer--top-2xl  { padding-block-start: var(--space-2xl); }
+    &.mai-spacer--top-3xl  { padding-block-start: var(--space-3xl); }
+
+    // Bottom padding variants
+    &.mai-spacer--bottom-none { padding-block-end: 0; }
+    &.mai-spacer--bottom-2xs  { padding-block-end: var(--space-2xs); }
+    &.mai-spacer--bottom-xs   { padding-block-end: var(--space-xs); }
+    &.mai-spacer--bottom-sm   { padding-block-end: var(--space-sm); }
+    &.mai-spacer--bottom-md   { padding-block-end: var(--space-md); }
+    &.mai-spacer--bottom-lg   { padding-block-end: var(--space-lg); }
+    &.mai-spacer--bottom-xl   { padding-block-end: var(--space-xl); }
+    &.mai-spacer--bottom-2xl  { padding-block-end: var(--space-2xl); }
+    &.mai-spacer--bottom-3xl  { padding-block-end: var(--space-3xl); }
+}
+
+
+// ---------------------------------------------------------------------------
+// Text — plain-text article with optional title, subheader, and body
+// Renders bodytext via f:format.nl2br (line-breaks only, no HTML markup)
+// ---------------------------------------------------------------------------
+.mai-text {
+    max-width: var(--layout-prose-width);
+}
+
+.mai-text__title {
+    font-size:    var(--font-size-lg);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-xs);
+}
+
+.mai-text__subheader {
+    font-size:    var(--font-size-base);
+    color:        var(--bgm-ink-2);
+    margin-block: 0 var(--space-md);
+}
+
+.mai-text__body {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--color-text);
+    margin:      0;
+}
+
+
+// ---------------------------------------------------------------------------
+// Richtext — RTE prose block with title, subheader, and full HTML body
+// Renders bodytext via f:format.html — includes <p>, <ul>, <ol>, links, etc.
+// ---------------------------------------------------------------------------
+.mai-richtext {
+    max-width: var(--layout-prose-width);
+}
+
+.mai-richtext__title {
+    font-size:    var(--font-size-lg);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-xs);
+}
+
+.mai-richtext__subheader {
+    font-size:    var(--font-size-base);
+    color:        var(--bgm-ink-2);
+    margin-block: 0 var(--space-md);
+}
+
+.mai-richtext__body {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--color-text);
+
+    p {
+        margin-block: 0 var(--space-sm);
+
+        &:last-child { margin-block-end: 0; }
+    }
+
+    ul,
+    ol {
+        padding-inline-start: var(--space-xl);
+        margin-block:         0 var(--space-sm);
+
+        &:last-child { margin-block-end: 0; }
+    }
+
+    li + li {
+        margin-block-start: var(--space-2xs);
+    }
+}
+
+
+// ---------------------------------------------------------------------------
+// Button block — flex wrapper around a single .mai-button CTA
+// Alignment classes (.mai-button-block--center, --right) can be applied
+// The .mai-button itself is styled in 04-atoms/_button.scss
+// ---------------------------------------------------------------------------
+.mai-button-block {
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         var(--space-sm);
+    align-items: center;
+}
+
+
+// ---------------------------------------------------------------------------
+// Icon — standalone icon block with optional text label
+// Sizes: --sm (20 px), --md (24 px, default), --lg (48 px)
+// Glyph is a Phosphor icon rendered via data-icon attribute + JS sprite
+// ---------------------------------------------------------------------------
+.mai-icon {
+    display:        inline-flex;
+    flex-direction: column;
+    align-items:    center;
+    gap:            var(--space-xs);
+    color:          var(--bgm-teal-700);
+    text-align:     center;
+
+    &.mai-icon--sm { font-size: var(--icon-size-sm); }
+    &.mai-icon--md { font-size: var(--icon-size-md); }
+    &.mai-icon--lg { font-size: var(--icon-size-lg); }
+}
+
+.mai-icon__glyph {
+    display:   flex;
+    font-size: inherit;
+    color:     inherit;
+}
+
+.mai-icon__label {
+    font-size:   var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color:       var(--color-text);
+    line-height: var(--line-height-tight);
+}
+
+
+// ---------------------------------------------------------------------------
+// Video — responsive iframe (YouTube / Vimeo) and native HTML5 <video>
+// Container enforces a 16:9 aspect ratio; the iframe is positioned absolutely
+// ---------------------------------------------------------------------------
+.mai-video__title {
+    font-size:    var(--font-size-base);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-sm);
+}
+
+.mai-video__container {
+    position:      relative;
+    width:         100%;
+    aspect-ratio:  16 / 9;
+    border-radius: var(--layout-radius);
+    overflow:      hidden;
+    background:    #000000;
+}
+
+.mai-video__frame {
+    position: absolute;
+    inset:    0;
+    width:    100%;
+    height:   100%;
+    border:   0;
+}
+
+.mai-video__player {
+    display:       block;
+    width:         100%;
+    height:        auto;
+    border-radius: var(--layout-radius);
+}
+
+
+// ---------------------------------------------------------------------------
+// Table block — RTE-rendered <table> wrapped in a horizontal-scroll container
+// Inner table styles normalise browser defaults to the BGM visual language
+// ---------------------------------------------------------------------------
+.mai-table-block__title {
+    font-size:    var(--font-size-base);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-sm);
+}
+
+.mai-table-block__scroll {
+    overflow-x:    auto;
+    border:        1px solid var(--bgm-line);
+    border-radius: var(--layout-radius);
+
+    table {
+        width:           100%;
+        min-width:       32rem;
+        border-collapse: collapse;
+        font-size:       var(--font-size-base);
+        color:           var(--color-text);
+    }
+
+    th,
+    td {
+        padding:          var(--space-sm) var(--space-md);
+        text-align:       start;
+        border-block-end: 1px solid var(--bgm-line-2);
+    }
+
+    th {
+        font-weight: var(--font-weight-semibold);
+        background:  var(--color-surface);
+        color:       var(--bgm-teal-900);
+    }
+
+    tbody tr:last-child td {
+        border-block-end: 0;
+    }
+
+    tbody tr:hover td {
+        background: var(--bgm-teal-050);
+    }
+}
+
+
+// ---------------------------------------------------------------------------
+// Newsletter — sign-up section with title, intro text, and embedded form
+// Centred teal-tinted layout; form area constrained to a readable input width
+// ---------------------------------------------------------------------------
+.mai-newsletter {
+    background:    var(--bgm-teal-050);
+    border:        1px solid var(--bgm-teal-100);
+    padding-block: var(--space-2xl);
+    text-align:    center;
+}
+
+.mai-newsletter__title {
+    font-size:    var(--font-size-2xl);
+    font-weight:  var(--font-weight-bold);
+    line-height:  var(--line-height-tight);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-md);
+    text-wrap:    balance;
+}
+
+.mai-newsletter__intro {
+    font-size:     var(--font-size-md);
+    line-height:   var(--line-height-relaxed);
+    color:         var(--bgm-ink-2);
+    margin-block:  0 var(--space-xl);
+    max-width:     var(--layout-prose-width);
+    margin-inline: auto;
+
+    p { margin: 0; }
+}
+
+.mai-newsletter__form {
+    max-width:     28rem;
+    margin-inline: auto;
 }
 
 } // @layer theme-organisms

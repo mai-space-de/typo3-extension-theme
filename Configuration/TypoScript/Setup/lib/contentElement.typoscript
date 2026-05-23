@@ -82,7 +82,16 @@ tt_content.maispace_spacer.templateName = Spacer
 tt_content.maispace_embed        < lib.contentElement
 tt_content.maispace_embed.templateName = Embed
 tt_content.maispace_breadcrumb   < lib.contentElement
-tt_content.maispace_breadcrumb.templateName = Breadcrumb
+tt_content.maispace_breadcrumb {
+    templateName = Breadcrumb
+    dataProcessing.90 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+    dataProcessing.90 {
+        special = rootline
+        levels = 20
+        includeNotInMenu = 1
+        as = breadcrumbItems
+    }
+}
 tt_content.maispace_socialmedia  < lib.contentElement
 tt_content.maispace_socialmedia.templateName = Socialmedia
 tt_content.maispace_callout      < lib.contentElement
