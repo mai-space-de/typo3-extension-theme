@@ -936,23 +936,16 @@ new CType("maispace_tabs", $lang("ctype.tabs"), "content-tab")
     ->register();
 
 new CType("maispace_modal", $lang("ctype.modal"), "content-special-html")
-    ->addDefaultHeaderPalette()
-    ->addCustomFields("bodytext")
-    ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
-    ->addCustomFields($sharedTabs)
-    ->addDefaultLanguageTab()
-    ->addDefaultAccessTab()
-    ->setGroup('maispace_widgets')
-    ->register();
+     ->addDefaultHeaderPalette()
+     ->addCustomFields("bodytext")
+     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => 1]])
+     ->addCustomFields($sharedTabs)
+     ->addDefaultLanguageTab()
+     ->addDefaultAccessTab()
+     ->setGroup('maispace_widgets')
+     ->register();
 
-new CType("maispace_timeline", $lang("ctype.timeline"), "content-list-bullet")
-    ->addDefaultHeaderPalette()
-    ->addCustomFields("tx_maitheme_timeline_items")
-    ->addCustomFields($sharedTabs)
-    ->addDefaultLanguageTab()
-    ->addDefaultAccessTab()
-    ->setGroup('maispace_widgets')
-    ->register();
+// Timeline CType moved to mai_timeline extension. Keeping TCA table for backward compatibility.
 
 new CType("maispace_faq", $lang("ctype.faq"), "content-accordion")
     ->addDefaultHeaderPalette()
@@ -1256,24 +1249,8 @@ $GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_slider_items'] = [
     ],
 ];
 
-// Timeline items
-$GLOBALS['TCA']['tt_content']['columns']['tx_maitheme_timeline_items'] = [
-    'label' => $lang('field.items'),
-    'config' => [
-        'type' => 'inline',
-        'foreign_table' => 'tx_maitheme_timeline_item',
-        'foreign_field' => 'parent_uid',
-        'foreign_sortby' => 'sort',
-        'appearance' => [
-            'collapseAll' => true,
-            'expandSingle' => true,
-            'newRecordLinkAddTitle' => true,
-            'showSynchronizationLink' => true,
-            'showAllLocalizationLink' => true,
-            'showPossibleLocalizationRecords' => true,
-        ],
-    ],
-];
+// Timeline items — field removed (CType moved to mai_timeline extension).
+// Keeping TCA table definition for backward compatibility with existing records.
 
 // ============================================================================
 // SECTION CONTAINERS (b13/container)

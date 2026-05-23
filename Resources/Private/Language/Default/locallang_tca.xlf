@@ -431,7 +431,7 @@
             <trans-unit id="ctype.accordion"><source>Accordion</source></trans-unit>
             <trans-unit id="ctype.tabs"><source>Tabs</source></trans-unit>
             <trans-unit id="ctype.modal"><source>Modal</source></trans-unit>
-            <trans-unit id="ctype.timeline"><source>Timeline</source></trans-unit>
+            <!-- Timeline CType moved to mai_timeline extension -->
             <trans-unit id="ctype.faq"><source>FAQ</source></trans-unit>
             <trans-unit id="ctype.beforeafter"><source>Before / After</source></trans-unit>
             <trans-unit id="ctype.steps"><source>Steps</source></trans-unit>
@@ -507,12 +507,6 @@
             <trans-unit id="item.bodytext"><source>Body Text</source></trans-unit>
             <trans-unit id="item.link"><source>Link</source></trans-unit>
             <trans-unit id="item.image"><source>Image</source></trans-unit>
-
-            <!-- Timeline item -->
-            <trans-unit id="item.timeline"><source>Timeline Entry</source></trans-unit>
-            <trans-unit id="item.event_date"><source>Date</source></trans-unit>
-            <trans-unit id="item.title"><source>Title</source></trans-unit>
-            <trans-unit id="item.description"><source>Description</source></trans-unit>
 
         </body>
     </file>
