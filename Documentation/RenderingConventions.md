@@ -84,7 +84,7 @@ namespace doesn't exist in the package.
 Phase-2 stubs under `Templates/ContentElements/` are intentionally minimal:
 they render `data.header` (via `Atom/Heading`) and `data.bodytext` inside a
 `<section class="mai-{slug}" data-ce-uid="{data.uid}" id="…">`. Replace them
-wave-by-wave per `PLANNED_ELEMENTS_IMPLEMENTATION.md` §1 — but keep the wrapper
+wave-by-wave per `PLANNED_ELEMENTS_IMPLEMENTATION.md` (now at `Documentation/PLANNED_ELEMENTS_IMPLEMENTATION.md`) §1 — but keep the wrapper
 attributes in §1 above intact when you do.
 
 ## 5. Shared TypoScript base
