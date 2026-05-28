@@ -1,10 +1,21 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 <f:comment>
     Tabs organism — ARIA tablist pattern.
     The tablist renders buttons (tab_title); panels are rendered via
     Items/TabItem. First tab is selected by default.
     Arguments: items (tx_maitheme_tab_item), data (parent tt_content)
+
+    Asset injection:
+    JS is injected here so this partial is self-contained.
+    The mai:asset.js ViewHelper deduplicates by identifier — safe to include
+    this partial multiple times on a page without double-loading.
 </f:comment>
+<mai:asset.js  identifier="mai-tabs-js"
+               src="EXT:mai_theme/Resources/Public/JavaScript/tabs.js"
+               defer="1"
+               priority="0"/>
 <div class="mai-tabs" data-ce-uid="{data.uid}">
     <div role="tablist"
          class="mai-tabs__list"

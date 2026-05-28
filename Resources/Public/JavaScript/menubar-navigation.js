@@ -118,25 +118,51 @@ class DisclosureNavigation {
   constructor(root) {
     this.root    = root;
     this.toggles = [];
+    this._listenerHoverItems = [];
+
+    this._boundOnRootKeydown = this.onRootKeydown.bind(this);
+    this._boundOnDocumentPointerdown = this.onDocumentPointerdown.bind(this);
+    this._boundOnTopItemPointerenter = this.onTopItemPointerenter.bind(this);
+    this._boundOnTopItemPointerleave = this.onTopItemPointerleave.bind(this);
 
     root.querySelectorAll('.mai-menubar__toggle').forEach(btn => {
       this.toggles.push(new DisclosureToggle(btn, this));
     });
 
     // Close everything on Escape anywhere inside the nav
-    root.addEventListener('keydown', this.onRootKeydown.bind(this));
+    root.addEventListener('keydown', this._boundOnRootKeydown);
 
     // Close on outside click
-    document.addEventListener('pointerdown', this.onDocumentPointerdown.bind(this), true);
+    document.addEventListener('pointerdown', this._boundOnDocumentPointerdown, true);
 
     // Hover behaviour for top-level items on pointer-capable devices
     const supportsHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
     if (supportsHover) {
       root.querySelectorAll('.mai-menubar > .mai-menubar__item.has-submenu').forEach(li => {
-        li.addEventListener('pointerenter', this.onTopItemPointerenter.bind(this));
-        li.addEventListener('pointerleave', this.onTopItemPointerleave.bind(this));
+        li.addEventListener('pointerenter', this._boundOnTopItemPointerenter);
+        li.addEventListener('pointerleave', this._boundOnTopItemPointerleave);
+        this._listenerHoverItems.push(li);
       });
     }
+  }
+
+  /**
+   * Remove all DOM and document event listeners registered by this instance.
+   * Call before re-initialising the navigation (e.g. after AJAX content
+   * replacement) to prevent duplicate listener stacking.
+   */
+  destroy() {
+    this.root.removeEventListener('keydown', this._boundOnRootKeydown);
+    document.removeEventListener('pointerdown', this._boundOnDocumentPointerdown, true);
+
+    this._listenerHoverItems.forEach(li => {
+      li.removeEventListener('pointerenter', this._boundOnTopItemPointerenter);
+      li.removeEventListener('pointerleave', this._boundOnTopItemPointerleave);
+    });
+    this._listenerHoverItems = [];
+
+    this.toggles = [];
+    this.root = null;
   }
 
   closeAll() {
@@ -202,8 +228,18 @@ class MobileToggle {
     this.button = button;
     this.nav    = nav;
 
-    button.addEventListener('click', this.onClick.bind(this));
-    document.addEventListener('pointerdown', this.onDocumentPointerdown.bind(this), true);
+    this._boundOnClick = this.onClick.bind(this);
+    this._boundOnDocumentPointerdown = this.onDocumentPointerdown.bind(this);
+
+    button.addEventListener('click', this._boundOnClick);
+    document.addEventListener('pointerdown', this._boundOnDocumentPointerdown, true);
+  }
+
+  destroy() {
+    this.button.removeEventListener('click', this._boundOnClick);
+    document.removeEventListener('pointerdown', this._boundOnDocumentPointerdown, true);
+    this.button = null;
+    this.nav = null;
   }
 
   isOpen() {
@@ -237,13 +273,19 @@ class MobileToggle {
 // ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.mai-menubar-nav').forEach(nav => {
-    new DisclosureNavigation(nav);
+    if (nav.__maiDisclosureNav) {
+      nav.__maiDisclosureNav.destroy();
+    }
+    nav.__maiDisclosureNav = new DisclosureNavigation(nav);
   });
 
   document.querySelectorAll('.mai-menubar-toggle').forEach(toggle => {
+    if (toggle.__maiMobileToggle) {
+      toggle.__maiMobileToggle.destroy();
+    }
     const nav = toggle.nextElementSibling;
     if (nav && nav.classList.contains('mai-menubar-nav')) {
-      new MobileToggle(toggle, nav);
+      toggle.__maiMobileToggle = new MobileToggle(toggle, nav);
     }
   });
 });

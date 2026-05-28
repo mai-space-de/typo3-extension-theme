@@ -9,7 +9,8 @@
 // Visually hidden — hides content visually while keeping it available
 // to assistive technologies.
 // To temporarily make content visible again (e.g. on focus), use
-// .visually-hidden.focusable — see the skip-link below for reference.
+// .visually-hidden.focusable — see the .mai-skip-link styles in
+// skip-links.scss for a focus-reveal pattern.
 // ---------------------------------------------------------------------------
 @layer theme-atoms {
 .visually-hidden {
@@ -25,44 +26,20 @@
 }
 
 // ---------------------------------------------------------------------------
-// Skip navigation link
-// Positioned off-screen and revealed on keyboard focus.
-// Override --skip-link-bg and --skip-link-text to customise the colours.
-// ---------------------------------------------------------------------------
-.skip-link {
-    --skip-link-bg:   var(--color-primary);
-    --skip-link-text: #ffffff;
-
-    position:   absolute;
-    inset-block-start:  var(--space-sm);
-    inset-inline-start: var(--space-sm);
-    z-index:    9999;
-    transform:  translateY(calc(-100% - var(--space-xl)));
-    transition: transform 200ms ease;
-
-    display:       inline-block;
-    padding:       var(--space-sm) var(--space-md);
-    background:    var(--skip-link-bg);
-    color:         var(--skip-link-text);
-    font-weight:   var(--font-weight-bold);
-    text-decoration: none;
-    border-radius: var(--layout-radius);
-
-    &:focus {
-        transform: translateY(0);
-        outline: 3px solid var(--color-focus-ring);
-        outline-offset: 2px;
-    }
-}
-
+// Skip navigation link styles live in EXT:mai_theme/Resources/Public/Scss/
+// skip-links.scss (.mai-skip-link), included via the SkipLinks partial.
 // ---------------------------------------------------------------------------
 // Focus ring — gold for high contrast visibility (--color-focus-ring).
 // Accessibility-critical: older users rely on a clear visible focus indicator.
+//
+// Note: border-radius is intentionally omitted. Applying border-radius to
+// the global :focus-visible causes the outline to bleed awkwardly on
+// rectangular elements. Elements that need a rounded focus ring should
+// set border-radius on their own :focus-visible rule.
 // ---------------------------------------------------------------------------
 :focus-visible {
     outline:        2px solid var(--color-focus-ring);
     outline-offset: 2px;
-    border-radius:  var(--layout-radius);
 }
 
 // Remove focus ring for mouse users (already handled by :focus-visible).

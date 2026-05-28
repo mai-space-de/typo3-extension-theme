@@ -1,4 +1,18 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Modal content element — native <dialog> element with accessible focus management.
+
+    Asset injection:
+    JS is injected here so this template is self-contained.
+    The mai:asset.js ViewHelper deduplicates by identifier — safe to include
+    this template multiple times on a page without double-loading.
+</f:comment>
+<mai:asset.js  identifier="mai-modal-js"
+               src="EXT:mai_theme/Resources/Public/JavaScript/modal.js"
+               defer="1"
+               priority="0"/>
 <div class="mai-modal-trigger"
      data-ce-uid="{data.uid}"
      {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>

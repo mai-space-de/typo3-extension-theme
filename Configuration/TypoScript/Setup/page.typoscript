@@ -5,6 +5,13 @@ config.namespaces.theme = Maispace\MaiTheme\Components
 plugin {
     tx_fluidcomponents.namespaces.Maispace\MaiTheme\Components = EXT:mai_theme/Resources/Private/Components
     tx_maispace_assets.settings.htmlMinification.enable = 1
+
+    # Override search plugin templates — use mai_theme organism templates
+    tx_maisearch.view {
+        templateRootPaths.100 = EXT:mai_theme/Resources/Private/Templates/
+        partialRootPaths.100 = EXT:mai_theme/Resources/Private/Partials/
+        layoutRootPaths.100 = EXT:mai_theme/Resources/Private/Layouts/
+    }
 }
 
 page = PAGE
