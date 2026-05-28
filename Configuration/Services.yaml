@@ -14,3 +14,10 @@ services:
   Maispace\MaiTheme\Service\BackendThemeService:
     public: true
     shared: true
+
+  Maispace\MaiTheme\Command\MoveNavigationPagesCommand:
+    tags:
+      - name: console.command
+        command: 'theme:move-navigation-pages'
+        description: 'Move main-navigation pages under the Hauptnavigation folder (uid=28).'
+        schedulable: false
