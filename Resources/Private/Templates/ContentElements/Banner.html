@@ -1,13 +1,18 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 <div class="mai-banner"
      data-ce-uid="{data.uid}"
      {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{assets}">
         <div class="mai-banner__media">
-            <f:image image="{assets.0}"
-                     alt="{assets.0.properties.alternative}"
-                     class="mai-banner__image"
-                     loading="lazy"/>
+            <mai:image.picture image="{assets.0}"
+                               alt="{assets.0.properties.alternative}"
+                               elementUid="{data.uid}"
+                               critical="auto"
+                               width="1600"
+                               sizes="100vw"
+                               class="mai-banner__image"/>
         </div>
     </f:if>
     <div class="mai-banner__content">
