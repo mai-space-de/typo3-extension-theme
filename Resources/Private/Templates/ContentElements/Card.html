@@ -1,5 +1,9 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<article class="offer-card {f:if(condition: data.tx_maitheme_card_accent == 'gold', then: 'offer-card--gold')}"
+<f:variable name="cardClass" value="offer-card"/>
+<f:if condition="{data.tx_maitheme_card_accent} == 'gold'">
+    <f:variable name="cardClass" value="offer-card offer-card--gold"/>
+</f:if>
+<article class="{cardClass}"
          data-ce-uid="{data.uid}"
          {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
 
@@ -20,8 +24,12 @@
         </f:if>
 
         <f:if condition="{data.tx_maitheme_link}">
+            <f:variable name="buttonClass" value="button"/>
+            <f:if condition="{data.tx_maitheme_card_accent} == 'gold'">
+                <f:variable name="buttonClass" value="button button-secondary"/>
+            </f:if>
             <f:link.typolink parameter="{data.tx_maitheme_link}"
-                             class="button {f:if(condition: data.tx_maitheme_card_accent == 'gold', then: 'button-secondary')}">
+                             class="{buttonClass}">
                 {f:if(condition: data.tx_maitheme_link_text, then: data.tx_maitheme_link_text, else: 'Mehr erfahren')}
             </f:link.typolink>
         </f:if>
