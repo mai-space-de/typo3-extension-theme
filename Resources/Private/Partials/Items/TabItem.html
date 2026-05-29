@@ -10,6 +10,6 @@
          tabindex="0"
          hidden="{f:if(condition: isSelected, then: '', else: 'hidden')}"
          class="mai-tabs__panel">
-    {item.content -> f:format.html()}
+    {item.data.content -> f:format.html()}
 </section>
 </html>

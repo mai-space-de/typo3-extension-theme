@@ -9,11 +9,11 @@
          data-index="{index}">
     <summary class="mai-accordion__header"
              id="accordion-summary-{parentUid}-{index}">
-        <span class="mai-accordion__question">{item.question}</span>
+        <span class="mai-accordion__question">{item.data.question}</span>
         <span class="mai-accordion__icon" aria-hidden="true">&#9660;</span>
     </summary>
     <div class="mai-accordion__panel" role="region" aria-labelledby="accordion-summary-{parentUid}-{index}">
-        {item.answer -> f:format.html()}
+        {item.data.answer -> f:format.html()}
     </div>
 </details>
 </html>

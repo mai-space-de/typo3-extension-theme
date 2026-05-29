@@ -28,7 +28,7 @@
                     aria-controls="tabpanel-{data.uid}-{it.cycle}"
                     aria-selected="{f:if(condition: it.isFirst, then: 'true', else: 'false')}"
                     tabindex="{f:if(condition: it.isFirst, then: '0', else: '-1')}"
-                    class="mai-tabs__tab">{item.tab_title}</button>
+                    class="mai-tabs__tab">{item.data.tab_title}</button>
         </f:for>
     </f:if>
     </div>
