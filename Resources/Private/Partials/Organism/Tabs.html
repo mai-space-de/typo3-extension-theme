@@ -20,6 +20,7 @@
     <div role="tablist"
          class="mai-tabs__list"
          aria-label="{f:if(condition: data.header, then: data.header, else: 'Tabs')}">
+        <f:if condition="{items.0}">
         <f:for each="{items}" as="item" iteration="it">
             <button type="button"
                     role="tab"
@@ -29,10 +30,13 @@
                     tabindex="{f:if(condition: it.isFirst, then: '0', else: '-1')}"
                     class="mai-tabs__tab">{item.tab_title}</button>
         </f:for>
+    </f:if>
     </div>
-    <f:for each="{items}" as="item" iteration="it">
-        <f:render partial="Items/TabItem"
-                  arguments="{item: item, index: it.cycle, parentUid: data.uid, isSelected: it.isFirst}"/>
-    </f:for>
+    <f:if condition="{items.0}">
+        <f:for each="{items}" as="item" iteration="it">
+            <f:render partial="Items/TabItem"
+                      arguments="{item: item, index: it.cycle, parentUid: data.uid, isSelected: it.isFirst}"/>
+        </f:for>
+    </f:if>
 </div>
 </html>

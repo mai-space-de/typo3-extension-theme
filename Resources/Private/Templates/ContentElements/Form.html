@@ -9,7 +9,9 @@
         <div class="mai-form-block__intro">{data.bodytext -> f:format.html()}</div>
     </f:if>
     <div class="mai-form-block__form">
-        <f:cObject typoscriptObjectPath="tt_content.maispace_form.20" data="{data}"/>
+        <f:if condition="{data.bodytext}">
+            <div class="mai-form-placeholder">{data.bodytext -> f:format.html()}</div>
+        </f:if>
     </div>
 </section>
 </html>
