@@ -1,6 +1,13 @@
 @import 'EXT:mai_theme/Configuration/TsConfig/page/*'
 
 # ===========================================================================
+# DEFAULT BACKEND LAYOUT FOR VISUAL EDITOR
+# ===========================================================================
+# Ensures all pages have a BackendLayout assigned so Visual Editor
+# f:mark.contentArea ViewHelpers can find their colPos definitions.
+TCA.pages.columns.backend_layout.config.default = default
+
+# ===========================================================================
 # DISABLE ALL TYPO3 CORE CONTENT ELEMENTS
 # ===========================================================================
 
