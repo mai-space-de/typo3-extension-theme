@@ -6,14 +6,14 @@
     and toggles aria-hidden on the .mai-menubar ul.
 
     Arguments:
-      label {string} — Visible button label text. Defaults to "Menü".
+      label {string} — Visible button label text. Defaults to LLL:EXT:mai_theme/Resources/Private/Language/de.locallang.xlf:menubar.mobile_label.
 </f:comment>
 
 <button class="mai-menubar-toggle"
         type="button"
         aria-expanded="false"
         aria-controls="mai-menubar-list"
-        aria-label="{f:if(condition: label, then: label, else: 'Menü')}">
+        aria-label="{f:if(condition: label, then: label, else: '{f:translate(key: \'menubar.mobile_label\', extensionName: \'mai_theme\')}')}">
 
     <f:comment>── Hamburger / close icon (CSS-driven via aria-expanded) ──────────</f:comment>
     <span class="mai-menubar-toggle__icon" aria-hidden="true">
@@ -23,7 +23,7 @@
     </span>
 
     <span class="mai-menubar-toggle__label">
-        {f:if(condition: label, then: label, else: 'Menü')}
+        {f:if(condition: label, then: label, else: '{f:translate(key: \'menubar.mobile_label\', extensionName: \'mai_theme\')}')}
     </span>
 
 </button>

@@ -6,6 +6,21 @@
 			<trans-unit id="theme.custom" resname="theme.custom">
 				<source>Custom Theme</source>
 			</trans-unit>
-		</body>
+			<trans-unit id="menubar.main_nav_label" resname="menubar.main_nav_label">
+			<source>Main Navigation</source>
+		</trans-unit>
+		<trans-unit id="menubar.mobile_label" resname="menubar.mobile_label">
+			<source>Menu</source>
+		</trans-unit>
+		<trans-unit id="skip_links.content" resname="skip_links.content">
+			<source>Skip to content</source>
+		</trans-unit>
+		<trans-unit id="skip_links.navigation" resname="skip_links.navigation">
+			<source>Skip to navigation</source>
+		</trans-unit>
+		<trans-unit id="menubar.submenu_label" resname="menubar.submenu_label">
+			<source>Show submenu for %s</source>
+		</trans-unit>
+	</body>
 	</file>
 </xliff>

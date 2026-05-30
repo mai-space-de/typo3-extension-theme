@@ -45,7 +45,7 @@
                 class="mai-menubar__toggle mai-menubar__toggle--depth-{depth}"
                 aria-expanded="false"
                 aria-controls="{submenuId}"
-                aria-label="Untermenü von {item.title} anzeigen">
+                aria-label="{f:translate(key: 'menubar.submenu_label', arguments: '{0: item.title}', extensionName: 'mai_theme')}">
             <f:if condition="{depth} == 0">
                 <f:then>
                     <svg xmlns="http://www.w3.org/2000/svg"

@@ -45,7 +45,7 @@
         a sibling <button> inside each item with children toggles its submenu.
         No role="menubar"/"menu"/"menuitem" — standard landmark + list semantics.
     </f:comment>
-    <ul class="mai-menubar">
+    <ul id="mai-menubar-list" class="mai-menubar">
         <f:for each="{menuItems}" as="item">
             <f:render partial="Organism/Navigation/MenubarItem"
                       arguments="{item: item, depth: 0}"/>

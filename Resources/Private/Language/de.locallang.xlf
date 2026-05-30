@@ -7,6 +7,26 @@
 				<source>Custom Theme</source>
 				<target>Benutzerdefiniertes Theme</target>
 			</trans-unit>
-		</body>
+			<trans-unit id="menubar.main_nav_label" resname="menubar.main_nav_label">
+			<source>Main Navigation</source>
+			<target>Hauptnavigation</target>
+		</trans-unit>
+		<trans-unit id="menubar.mobile_label" resname="menubar.mobile_label">
+			<source>Menu</source>
+			<target>Menü</target>
+		</trans-unit>
+		<trans-unit id="skip_links.content" resname="skip_links.content">
+			<source>Skip to content</source>
+			<target>Zum Inhalt springen</target>
+		</trans-unit>
+		<trans-unit id="skip_links.navigation" resname="skip_links.navigation">
+			<source>Skip to navigation</source>
+			<target>Zur Navigation springen</target>
+		</trans-unit>
+		<trans-unit id="menubar.submenu_label" resname="menubar.submenu_label">
+			<source>Show submenu for %s</source>
+			<target>Untermenü von %s anzeigen</target>
+		</trans-unit>
+	</body>
 	</file>
 </xliff>

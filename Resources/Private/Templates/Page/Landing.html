@@ -1,20 +1,75 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
       data-namespace-typo3-fluid="true">
-<mai:asset.css identifier="mai-theme-main"
-               src="EXT:mai_theme/Resources/Public/Scss/main.scss"
-               priority="1"/>
-<mai:asset.css identifier="mai-theme-bundle"
-               src="EXT:mai_theme/Resources/Private/StyleSheets/bundle.scss"
-               priority="2"/>
-<main class="mai-page mai-page--landing">
-    <f:if condition="{hero}">
-        <div class="mai-page__hero"><f:cObject typoscriptObjectPath="lib.templates.columns.hero"/></div>
-    </f:if>
-    <div class="mai-page__content">
-        <f:mark.contentArea colPos="0">
-            <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
+<f:layout name="Default"/>
+
+<f:comment>
+    Landing page template.
+    - `HeadAssets` emits :root { --mai-* } CSS variables + font preload hints.
+    - `Main` renders the semantic page shell with colPos landmarks.
+</f:comment>
+
+<f:section name="HeadAssets">
+    <f:comment>
+        Webfont — Source Sans 3 (body/headings) + Source Serif 4 (pull-quotes).
+        Loaded before the stylesheet so font-display=swap avoids invisible text.
+    </f:comment>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;900&amp;family=Source+Serif+4:wght@500;700&amp;display=swap"/>
+
+    <f:comment>
+        Critical CSS — inline :root custom properties generated from
+        EXT:mai_theme/Configuration/Sets/MaiTheme/settings.definitions.yaml
+        and piped through `lib.themeVars` in setup.typoscript.
+        Declarations here are outside any @layer, so they override the
+        layered defaults in _variables.scss.
+    </f:comment>
+    <style><f:cObject typoscriptObjectPath="lib.themeVars"/></style>
+
+    <mai:asset.css identifier="mai-theme-main"
+                   src="EXT:mai_theme/Resources/Public/Scss/main.scss"
+                   priority="1"/>
+    <mai:asset.css identifier="mai-theme-bundle"
+                   src="EXT:mai_theme/Resources/Private/StyleSheets/bundle.scss"
+                   priority="2"/>
+</f:section>
+
+<f:section name="Main">
+    <f:mark.contentArea colPos="1">
+        <f:cObject typoscriptObjectPath="lib.templates.columns.popovers"/>
+    </f:mark.contentArea>
+    <f:render partial="Organism/Navigation/SkipLinks" arguments="{_all}"/>
+    <header role="banner">
+        <f:render partial="Organism/Navigation/Menubar"
+                  arguments="{
+                      menuItems:   menuMain,
+                      label:       settings.general.site.name
+                  }"/>
+        <f:mark.contentArea colPos="3">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
         </f:mark.contentArea>
-    </div>
-</main>
+    </header>
+    <main id="main" class="mai-page mai-page--landing" role="main" tabindex="-1">
+        <f:if condition="{hero}">
+            <div class="mai-page__hero"><f:cObject typoscriptObjectPath="lib.templates.columns.hero"/></div>
+        </f:if>
+        <div class="mai-page__content">
+            <f:mark.contentArea colPos="0">
+                <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
+            </f:mark.contentArea>
+        </div>
+    </main>
+    <footer role="contentinfo">
+        <f:mark.contentArea colPos="4">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.afterContent"/>
+        </f:mark.contentArea>
+        <f:mark.contentArea colPos="5">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.footer"/>
+        </f:mark.contentArea>
+    </footer>
+    <f:mark.contentArea colPos="6">
+        <f:cObject typoscriptObjectPath="lib.templates.columns.hidden"/>
+    </f:mark.contentArea>
+</f:section>
 </html>
