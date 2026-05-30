@@ -364,6 +364,9 @@ tt_content {
         pluginName = Stories
         vendorName = Maispace
     }
+    maispace_account_account < tt_content.maiaccount_account
+    maispace_account_mfa < tt_content.maiaccount_mfa
+    maispace_account_stories < tt_content.maiaccount_stories
 
     ## EXT:mai_canteen
     maicanteen_week = USER
@@ -380,6 +383,8 @@ tt_content {
         pluginName = Print
         vendorName = Maispace
     }
+    maispace_canteen_week < tt_content.maicanteen_week
+    maispace_canteen_print < tt_content.maicanteen_print
 
     ## EXT:mai_events
     maievents_registration = USER
@@ -389,6 +394,8 @@ tt_content {
         pluginName = Registration
         vendorName = Maispace
     }
+    maispace_events_list < lib.contentElement
+    maispace_events_list.templateName = EventsList
 
     ## EXT:mai_faq
     maifaq_list = USER
@@ -423,6 +430,8 @@ tt_content {
         pluginName = Detail
         vendorName = Maispace
     }
+    maispace_jobs_list < tt_content.maijobs_list
+    maispace_jobs_detail < tt_content.maijobs_detail
 
     ## EXT:mai_locations
     mailocations_list = USER
@@ -471,6 +480,8 @@ tt_content {
         pluginName = Rss
         vendorName = Maispace
     }
+    maispace_news_list < tt_content.mainews_list
+    maispace_news_rss < tt_content.mainews_rss
 
     ## EXT:mai_newsletter
     mainewsletter_newsletter = USER
