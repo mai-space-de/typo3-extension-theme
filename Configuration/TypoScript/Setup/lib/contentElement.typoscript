@@ -501,6 +501,16 @@ tt_content {
         vendorName = Maispace
     }
 
+    ## EXT:mai_resource
+    mairesource_list = USER
+    mairesource_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiResource
+        pluginName = List
+        vendorName = Maispace
+    }
+    maispace_resource_list < tt_content.mairesource_list
+
     ## EXT:mai_search
     maisearch_search = USER
     maisearch_search {
