@@ -3,3 +3,4 @@ label: Maispace Default Theme
 dependencies:
   - maispace/mai-timeline
   - maispace/mai-events
+  - maispace/mai-resource
