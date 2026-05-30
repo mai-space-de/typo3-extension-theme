@@ -4,3 +4,4 @@ dependencies:
   - maispace/mai-timeline
   - maispace/mai-events
   - maispace/mai-resource
+  - maispace/mai-member

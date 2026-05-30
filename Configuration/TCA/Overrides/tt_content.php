@@ -1087,6 +1087,7 @@ new CType(
     $lang("ctype.codeblock"),
     "content-special-html",
 )
+    ->addDefaultHeaderPalette()
     ->addCustomFields("tx_maitheme_language, bodytext")
     ->addColumnOverride("bodytext", [
         "config" => [

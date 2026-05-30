@@ -473,6 +473,14 @@ tt_content {
         pluginName = Application
         vendorName = Maispace
     }
+    maimember_list = USER
+    maimember_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiMember
+        pluginName = List
+        vendorName = Maispace
+    }
+    maispace_member_list < tt_content.maimember_list
 
     ## EXT:mai_news
     mainews_list = USER
