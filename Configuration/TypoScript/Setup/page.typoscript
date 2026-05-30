@@ -37,6 +37,13 @@ page {
         file = EXT:mai_theme/Resources/Private/Templates/Page/Default.html
 
         dataProcessing {
+            # Page content data processor for Visual Editor (TYPO3 14+)
+            # Provides content areas (content.popovers, content.navbar, etc.)
+            # with ContentArea objects including colPos, identifier, and records
+            5 = TYPO3\CMS\Frontend\DataProcessing\PageContentProcessor
+            5 {
+                as = content
+            }
             10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
             10 {
                 levels = 3
