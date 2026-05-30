@@ -1,7 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
-<f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <div class="mai-beforeafter"
      data-ce-uid="{data.uid}"
      {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
@@ -9,7 +8,7 @@
         <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-beforeafter__title'}"/>
     </f:if>
     <div class="mai-beforeafter__widget" data-widget="beforeafter">
-        <div class="mai-beforeafter__before" aria-label="Vorher">
+        <div class="mai-beforeafter__before">
             <f:if condition="{data.tx_maitheme_image_before}">
                 <f:image image="{data.tx_maitheme_image_before.0}"
                          alt="{data.tx_maitheme_image_before.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'Vorher')}"
@@ -18,7 +17,7 @@
             </f:if>
             <span class="mai-beforeafter__label" aria-hidden="true">Vorher</span>
         </div>
-        <div class="mai-beforeafter__after" aria-label="Nachher">
+        <div class="mai-beforeafter__after">
             <f:if condition="{data.tx_maitheme_image_after}">
                 <f:image image="{data.tx_maitheme_image_after.0}"
                          alt="{data.tx_maitheme_image_after.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'Nachher')}"
@@ -27,7 +26,14 @@
             </f:if>
             <span class="mai-beforeafter__label" aria-hidden="true">Nachher</span>
         </div>
-        <div class="mai-beforeafter__handle" aria-hidden="true"></div>
+        <div class="mai-beforeafter__handle"
+             role="slider"
+             aria-label="Bildvergleich verschieben"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="50"
+             tabindex="0"
+             data-handle="true"></div>
     </div>
 </div>
 </html>

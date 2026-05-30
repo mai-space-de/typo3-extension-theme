@@ -1,11 +1,13 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
       xmlns:seo="http://typo3.org/ns/Maispace/MaiSeo/ViewHelpers"
-      data-namespace-typo3-fluid="true">
+      data-namespace-typo3-fluid="true"
+      lang="{siteLanguage.hreflang}">
 <f:comment>
     Base layout for the Default page template.
     - `HeadAssets` is rendered into <head> via the page.headerData injection.
     - `Main` is the page body shell; per-template sections override it.
+    - lang attribute uses siteLanguage.hreflang (BCP47 format: de-DE, en-GB, etc.) to fix axe html-lang-valid violation
 </f:comment>
 <f:render section="HeadAssets" optional="true"/>
 <seo:structuredData />

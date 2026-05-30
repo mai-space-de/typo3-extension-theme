@@ -1,30 +1,31 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
-<f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <section class="mai-filelist"
          data-ce-uid="{data.uid}"
          {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{header}">
         <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-filelist__title'}"/>
     </f:if>
-    <ul class="mai-filelist__list" role="list">
-        <f:for each="{assets}" as="file">
-            <li class="mai-filelist__item">
-                <a class="mai-filelist__link"
-                   href="{file.publicUrl}"
-                   download
-                   type="{file.mimeType}">
-                    <span class="mai-filelist__name">{file.properties.title -> f:if(condition: '{0}', then: '{0}', else: file.name)}</span>
-                    <span class="mai-filelist__meta">
-                        <span class="mai-filelist__ext">{file.extension -> f:format.case(mode: 'upper')}</span>
-                        <f:if condition="{file.size}">
-                            <span class="mai-filelist__size">{file.size -> f:format.bytes()}</span>
-                        </f:if>
-                    </span>
-                </a>
-            </li>
-        </f:for>
-    </ul>
+    <f:if condition="{assets}">
+        <ul class="mai-filelist__list">
+            <f:for each="{assets}" as="file">
+                <li class="mai-filelist__item">
+                    <a class="mai-filelist__link"
+                       href="{file.publicUrl}"
+                       download
+                       type="{file.mimeType}">
+                        <span class="mai-filelist__name">{file.properties.title -> f:if(condition: '{0}', then: '{0}', else: file.name)}</span>
+                        <span class="mai-filelist__meta">
+                            <span class="mai-filelist__ext">{file.extension -> f:format.case(mode: 'upper')}</span>
+                            <f:if condition="{file.size}">
+                                <span class="mai-filelist__size">{file.size -> f:format.bytes()}</span>
+                            </f:if>
+                        </span>
+                    </a>
+                </li>
+            </f:for>
+        </ul>
+    </f:if>
 </section>
 </html>

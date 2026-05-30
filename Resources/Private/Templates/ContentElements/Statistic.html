@@ -1,11 +1,10 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
-<f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <div class="mai-statistic"
      data-ce-uid="{data.uid}"
      {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
-    <div class="mai-statistic__number" aria-label="{data.tx_maitheme_value}{data.tx_maitheme_unit}">
+    <div class="mai-statistic__number">
         <span class="mai-statistic__value">{data.tx_maitheme_value}</span>
         <f:if condition="{data.tx_maitheme_unit}">
             <span class="mai-statistic__unit">{data.tx_maitheme_unit}</span>
