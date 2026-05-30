@@ -3,12 +3,59 @@
    Begleitung geflüchteter Menschen e.V., Pulheim
    ========================================================= */
 
-/* --- Webfont: Source Sans 3 + Source Serif 4 (Google Fonts substitution) ---
-   The reference materials use a humanist sans (similar to Source Sans / Open
-   Sans) for body and a slightly heavier weight for headings. We substitute
-   Google's Source Sans 3 until the user supplies the exact licensed family.
+/* --- Webfont: Source Sans 3 + Source Serif 4 (self-hosted) ---
+   Fonts are preloaded via mai_assets FontPreloadCollector
+   from EXT:mai_theme/Configuration/Fonts.php
 */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;900&family=Source+Serif+4:wght@500;700&display=swap');
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../Public/Fonts/SourceSans3-wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../Public/Fonts/SourceSans3-wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../../Public/Fonts/SourceSans3-wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../Public/Fonts/SourceSans3-wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../../Public/Fonts/SourceSans3-wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../Public/Fonts/SourceSerif4-wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../Public/Fonts/SourceSerif4-wght.ttf") format("truetype");
+}
 
 :root {
   /* ----- BRAND CORE ---------------------------------------- */
