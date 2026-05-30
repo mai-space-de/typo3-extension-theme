@@ -387,6 +387,13 @@ tt_content {
     maispace_canteen_print < tt_content.maicanteen_print
 
     ## EXT:mai_events
+    maievents_list = USER
+    maievents_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiEvents
+        pluginName = List
+        vendorName = Maispace
+    }
     maievents_registration = USER
     maievents_registration {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
@@ -394,8 +401,7 @@ tt_content {
         pluginName = Registration
         vendorName = Maispace
     }
-    maispace_events_list < lib.contentElement
-    maispace_events_list.templateName = EventsList
+    maispace_events_list < tt_content.maievents_list
 
     ## EXT:mai_faq
     maifaq_list = USER
@@ -405,6 +411,7 @@ tt_content {
         pluginName = List
         vendorName = Maispace
     }
+    maispace_faq_list < tt_content.maifaq_list
 
     ## EXT:mai_gallery
     maigallery_gallery = USER
@@ -448,6 +455,8 @@ tt_content {
         pluginName = Detail
         vendorName = Maispace
     }
+    maispace_locations_list < tt_content.mailocations_list
+    maispace_locations_detail < tt_content.mailocations_detail
 
     ## EXT:mai_member
     maimember_view = USER
@@ -509,6 +518,7 @@ tt_content {
         pluginName = Survey
         vendorName = Maispace
     }
+    maispace_survey_survey < tt_content.maisurvey_survey
 
     ## EXT:mai_team
     maiteam_view = USER
@@ -541,4 +551,7 @@ tt_content {
         pluginName = Single
         vendorName = Maispace
     }
+    maispace_testimonials_list < tt_content.maitestimonials_list
+    maispace_testimonials_slider < tt_content.maitestimonials_slider
+    maispace_testimonials_single < tt_content.maitestimonials_single
 }
