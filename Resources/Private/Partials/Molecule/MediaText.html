@@ -2,7 +2,7 @@
 <div class="mai-media-text mai-media-text--{mediaPosition}">
     <f:if condition="{image}">
         <div class="mai-media-text__media">
-            <f:render partial="Atom/Image" arguments="{image: image, alt: title}"/>
+            <f:render partial="Atom/Image" arguments="{image: image, alt: image.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: title)}"/>
         </div>
     </f:if>
     <div class="mai-media-text__body">

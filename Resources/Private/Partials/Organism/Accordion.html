@@ -8,7 +8,7 @@
          data-ce-uid="{data.uid}"
          aria-label="{f:if(condition: data.header, then: data.header, else: 'Accordion')}">
     <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-accordion__title'}"/>
+        <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: data.header, class: 'mai-accordion__title'}"/>
     </f:if>
     <f:if condition="{items.0}">
         <f:for each="{items}" as="item" iteration="it">

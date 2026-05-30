@@ -18,7 +18,7 @@
 
     <div class="offer-card__body">
         <f:if condition="{header}">
-            <h3 class="offer-card__title">{header}</h3>
+            <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'offer-card__title'}"/>
         </f:if>
 
         <f:if condition="{bodytext}">

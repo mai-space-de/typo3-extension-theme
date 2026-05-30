@@ -129,6 +129,9 @@ final class ContentElementCatalogTest extends TestCase
 
             // Bento grid (b13/container) ───────────────────────────────────────
             'BentoBox'     => ['BentoBox'],
+
+            // Extbase plugin wrapper (configurePlugin templateName = Generic) ─
+            'Generic'      => ['Generic'],
         ];
     }
 

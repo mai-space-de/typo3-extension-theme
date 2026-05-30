@@ -18,10 +18,9 @@
                src="EXT:mai_theme/Resources/Public/JavaScript/tabs.js"
                defer="1"
                priority="0"/>
-<div class="mai-tabs" data-ce-uid="{data.uid}">
+<section class="mai-tabs" data-ce-uid="{data.uid}" aria-label="{f:if(condition: header, then: header, else: 'Tabs')}">
     <div role="tablist"
-         class="mai-tabs__list"
-         aria-label="{f:if(condition: header, then: header, else: 'Tabs')}">
+         class="mai-tabs__list">
         <f:if condition="{items.0}">
         <f:for each="{items}" as="item" iteration="it">
             <button type="button"
@@ -40,5 +39,5 @@
                       arguments="{item: item, index: it.cycle, parentUid: data.uid, isSelected: it.isFirst}"/>
         </f:for>
     </f:if>
-</div>
+</section>
 </html>

@@ -329,4 +329,205 @@ tt_content {
         templateName = BentoBox
         dataProcessing.10 = B13\Container\DataProcessing\ContainerProcessor
     }
+
+    ## ============================================================================
+    ## EXTBASE PLUGIN CTypes
+    ##
+    ## These CTypes are registered by Extbase extensions via configurePlugin()
+    ## with PLUGIN_TYPE_CONTENT_ELEMENT. They must be configured as USER elements
+    ## that bootstrap Extbase, NOT as FLUIDTEMPLATE content elements.
+    ##
+    ## Without this configuration, TYPO3 treats them as unknown CTypes and
+    ## attempts to render them with FLUIDTEMPLATE, looking for templates that
+    ## don't exist (Generic.html fallback).
+    ## ============================================================================
+
+    ## EXT:mai_account
+    maiaccount_account = USER
+    maiaccount_account {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiAccount
+        pluginName = Account
+        vendorName = Maispace
+    }
+    maiaccount_mfa = USER
+    maiaccount_mfa {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiAccount
+        pluginName = Mfa
+        vendorName = Maispace
+    }
+    maiaccount_stories = USER
+    maiaccount_stories {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiAccount
+        pluginName = Stories
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_canteen
+    maicanteen_week = USER
+    maicanteen_week {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiCanteen
+        pluginName = Week
+        vendorName = Maispace
+    }
+    maicanteen_print = USER
+    maicanteen_print {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiCanteen
+        pluginName = Print
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_events
+    maievents_registration = USER
+    maievents_registration {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiEvents
+        pluginName = Registration
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_faq
+    maifaq_list = USER
+    maifaq_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiFaq
+        pluginName = List
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_gallery
+    maigallery_gallery = USER
+    maigallery_gallery {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiGallery
+        pluginName = Gallery
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_jobs
+    maijobs_list = USER
+    maijobs_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiJobs
+        pluginName = List
+        vendorName = Maispace
+    }
+    maijobs_detail = USER
+    maijobs_detail {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiJobs
+        pluginName = Detail
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_locations
+    mailocations_list = USER
+    mailocations_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiLocations
+        pluginName = List
+        vendorName = Maispace
+    }
+    mailocations_detail = USER
+    mailocations_detail {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiLocations
+        pluginName = Detail
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_member
+    maimember_view = USER
+    maimember_view {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiMember
+        pluginName = View
+        vendorName = Maispace
+    }
+    maimember_application = USER
+    maimember_application {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiMember
+        pluginName = Application
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_news
+    mainews_list = USER
+    mainews_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiNews
+        pluginName = List
+        vendorName = Maispace
+    }
+    mainews_rss = USER
+    mainews_rss {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiNews
+        pluginName = Rss
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_newsletter
+    mainewsletter_newsletter = USER
+    mainewsletter_newsletter {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiNewsletter
+        pluginName = Newsletter
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_search
+    maisearch_search = USER
+    maisearch_search {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiSearch
+        pluginName = Search
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_survey
+    maisurvey_survey = USER
+    maisurvey_survey {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiSurvey
+        pluginName = Survey
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_team
+    maiteam_view = USER
+    maiteam_view {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiTeam
+        pluginName = View
+        vendorName = Maispace
+    }
+
+    ## EXT:mai_testimonials
+    maitestimonials_list = USER
+    maitestimonials_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiTestimonials
+        pluginName = List
+        vendorName = Maispace
+    }
+    maitestimonials_slider = USER
+    maitestimonials_slider {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiTestimonials
+        pluginName = Slider
+        vendorName = Maispace
+    }
+    maitestimonials_single = USER
+    maitestimonials_single {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiTestimonials
+        pluginName = Single
+        vendorName = Maispace
+    }
 }

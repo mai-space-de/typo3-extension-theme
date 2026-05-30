@@ -8,7 +8,7 @@
        {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <div class="mai-alert__inner">
         <f:if condition="{header}">
-            <p class="mai-alert__title">{header}</p>
+            <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-alert__title'}"/>
         </f:if>
         <f:if condition="{bodytext}">
             <div class="mai-alert__body">{bodytext}</div>

@@ -17,7 +17,7 @@
     </f:if>
     <div class="mai-profile__content">
         <f:if condition="{header}">
-            <h3 class="mai-profile__name">{header}</h3>
+            <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-profile__name'}"/>
         </f:if>
         <f:if condition="{subheader}">
             <p class="mai-profile__role">{subheader}</p>
