@@ -36,7 +36,9 @@
 </f:section>
 
 <f:section name="Main">
-    <f:cObject typoscriptObjectPath="lib.templates.columns.popovers"/>
+    <f:mark.contentArea colPos="1">
+        <f:cObject typoscriptObjectPath="lib.templates.columns.popovers"/>
+    </f:mark.contentArea>
     <f:render partial="Organism/Navigation/SkipLinks" arguments="{_all}"/>
     <header role="banner">
         <f:render partial="Organism/Navigation/Menubar"
@@ -45,15 +47,25 @@
                       label:       settings.general.site.name,
                       mobileLabel: 'Menü'
                   }"/>
-        <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
+        <f:mark.contentArea colPos="3">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
+        </f:mark.contentArea>
     </header>
     <main id="main" role="main" tabindex="-1">
-        <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
+        <f:mark.contentArea colPos="0">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
+        </f:mark.contentArea>
     </main>
     <footer role="contentinfo">
-        <f:cObject typoscriptObjectPath="lib.templates.columns.afterContent"/>
-        <f:cObject typoscriptObjectPath="lib.templates.columns.footer"/>
+        <f:mark.contentArea colPos="4">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.afterContent"/>
+        </f:mark.contentArea>
+        <f:mark.contentArea colPos="5">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.footer"/>
+        </f:mark.contentArea>
     </footer>
-    <f:cObject typoscriptObjectPath="lib.templates.columns.hidden"/>
+    <f:mark.contentArea colPos="6">
+        <f:cObject typoscriptObjectPath="lib.templates.columns.hidden"/>
+    </f:mark.contentArea>
 </f:section>
 </html>

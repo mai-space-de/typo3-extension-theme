@@ -2,10 +2,14 @@
 <section class="mai-section mai-section--33-66" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
     <div class="mai-section__inner">
         <div class="mai-section__col">
-            <f:for each="{children_220}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            <f:mark.contentArea colPos="220" txContainerParent="{data.uid}">
+                <f:for each="{children_220}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            </f:mark.contentArea>
         </div>
         <div class="mai-section__col">
-            <f:for each="{children_221}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            <f:mark.contentArea colPos="221" txContainerParent="{data.uid}">
+                <f:for each="{children_221}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            </f:mark.contentArea>
         </div>
     </div>
 </section>

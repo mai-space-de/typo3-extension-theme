@@ -1,10 +1,12 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
+<f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <figure class="mai-codeblock"
         data-ce-uid="{data.uid}"
         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
-        <figcaption class="mai-codeblock__caption">{data.header}</figcaption>
+    <f:if condition="{header}">
+        <figcaption class="mai-codeblock__caption">{header}</figcaption>
     </f:if>
-    <pre class="mai-codeblock__pre"><code class="mai-codeblock__code{f:if(condition: data.tx_maitheme_language, then: ' language-{data.tx_maitheme_language}')}">{data.bodytext -> f:format.htmlspecialchars()}</code></pre>
+    <pre class="mai-codeblock__pre"><code class="mai-codeblock__code{f:if(condition: data.tx_maitheme_language, then: ' language-{data.tx_maitheme_language}')}">{bodytext}</code></pre>
 </figure>
 </html>

@@ -1,14 +1,17 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
+<f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
+<f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <aside class="mai-callout mai-callout--{f:if(condition: data.tx_maitheme_variant, then: data.tx_maitheme_variant, else: 'default')}"
        role="note"
        data-ce-uid="{data.uid}"
        {f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
-    <f:if condition="{data.header}">
+    <f:if condition="{header}">
         <f:render partial="Atom/Heading"
-                  arguments="{level: data.header_layout, text: data.header, class: 'mai-callout__title'}"/>
+                  arguments="{level: data.header_layout, text: header, class: 'mai-callout__title'}"/>
     </f:if>
-    <f:if condition="{data.bodytext}">
-        <div class="mai-callout__body">{data.bodytext -> f:format.html()}</div>
+    <f:if condition="{bodytext}">
+        <div class="mai-callout__body">{bodytext}</div>
     </f:if>
 </aside>
 </html>

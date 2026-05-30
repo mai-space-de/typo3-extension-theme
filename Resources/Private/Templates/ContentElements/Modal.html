@@ -1,6 +1,9 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
       data-namespace-typo3-fluid="true">
+<f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
+<f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
+<f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <f:comment>
     Modal content element — native <dialog> element with accessible focus management.
 
@@ -20,21 +23,21 @@
             type="button"
             aria-controls="modal-{data.uid}"
             aria-expanded="false">
-        {f:if(condition: data.header, then: data.header, else: 'Öffnen')}
+        {f:if(condition: header, then: header, else: 'Öffnen')}
     </button>
 
     <dialog class="mai-modal" id="modal-{data.uid}" aria-labelledby="modal-title-{data.uid}">
         <div class="mai-modal__inner">
             <div class="mai-modal__header">
-                <f:if condition="{data.header}">
-                    <h2 class="mai-modal__title" id="modal-title-{data.uid}">{data.header}</h2>
+                <f:if condition="{header}">
+                    <h2 class="mai-modal__title" id="modal-title-{data.uid}">{header}</h2>
                 </f:if>
                 <button class="mai-modal__close" type="button" aria-label="Schließen">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <f:if condition="{data.bodytext}">
-                <div class="mai-modal__body">{data.bodytext -> f:format.html()}</div>
+            <f:if condition="{bodytext}">
+                <div class="mai-modal__body">{bodytext}</div>
             </f:if>
         </div>
     </dialog>

@@ -1,6 +1,9 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
       data-namespace-typo3-fluid="true">
+<f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
+<f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
+<f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <f:comment>
     Slider organism — carousel landmark per WAI-ARIA APG.
     Arguments: items (tx_maitheme_slider_item records, each with `images`
@@ -19,9 +22,9 @@
          data-ce-uid="{data.uid}"
          role="region"
          aria-roledescription="carousel"
-         aria-label="{f:if(condition: data.header, then: data.header, else: 'Carousel')}">
-    <f:if condition="{data.header}">
-        <f:render partial="Atom/Heading" arguments="{level: 2, text: data.header, class: 'mai-slider__title'}"/>
+         aria-label="{f:if(condition: header, then: header, else: 'Carousel')}">
+    <f:if condition="{header}">
+        <f:render partial="Atom/Heading" arguments="{level: 2, text: header, class: 'mai-slider__title'}"/>
     </f:if>
     <ul class="mai-slider__track" aria-live="polite">
         <f:if condition="{items.0}">

@@ -11,6 +11,10 @@
     <f:if condition="{hero}">
         <div class="mai-page__hero"><f:cObject typoscriptObjectPath="lib.templates.columns.hero"/></div>
     </f:if>
-    <div class="mai-page__content"><f:cObject typoscriptObjectPath="lib.templates.columns.content"/></div>
+    <div class="mai-page__content">
+        <f:mark.contentArea colPos="0">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
+        </f:mark.contentArea>
+    </div>
 </main>
 </html>

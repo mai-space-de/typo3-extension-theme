@@ -2,16 +2,24 @@
 <section class="mai-section mai-section--4col" data-ce-uid="{data.uid}"{f:if(condition: data.tx_maitheme_anchor_id, then: ' id="{data.tx_maitheme_anchor_id}"', else: ' id="c{data.uid}"')}>
     <div class="mai-section__inner">
         <div class="mai-section__col">
-            <f:for each="{children_240}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            <f:mark.contentArea colPos="240" txContainerParent="{data.uid}">
+                <f:for each="{children_240}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            </f:mark.contentArea>
         </div>
         <div class="mai-section__col">
-            <f:for each="{children_241}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            <f:mark.contentArea colPos="241" txContainerParent="{data.uid}">
+                <f:for each="{children_241}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            </f:mark.contentArea>
         </div>
         <div class="mai-section__col">
-            <f:for each="{children_242}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            <f:mark.contentArea colPos="242" txContainerParent="{data.uid}">
+                <f:for each="{children_242}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            </f:mark.contentArea>
         </div>
         <div class="mai-section__col">
-            <f:for each="{children_243}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            <f:mark.contentArea colPos="243" txContainerParent="{data.uid}">
+                <f:for each="{children_243}" as="child">{child.renderedContent -> f:format.raw()}</f:for>
+            </f:mark.contentArea>
         </div>
     </div>
 </section>

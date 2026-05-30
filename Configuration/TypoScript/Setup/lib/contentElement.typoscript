@@ -53,6 +53,7 @@ lib.contentElement {
             references.fieldName = tx_maitheme_image_after
             as = imageAfter
         }
+        1770716912 = record-transformation
     }
 
     # Shared frontend PIDs — exposed under settings for templates that need them.

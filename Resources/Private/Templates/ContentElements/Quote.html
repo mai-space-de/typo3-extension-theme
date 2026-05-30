@@ -1,17 +1,20 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
+<f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
+<f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <figure class="mai-quote"
         data-ce-uid="{data.uid}"
         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <blockquote class="mai-quote__blockquote">
-        <f:if condition="{data.bodytext}">
-            <p class="mai-quote__text">{data.bodytext}</p>
+        <f:if condition="{bodytext}">
+            <p class="mai-quote__text">{bodytext}</p>
         </f:if>
     </blockquote>
-    <f:if condition="{data.header}">
+    <f:if condition="{header}">
         <figcaption class="mai-quote__caption">
-            <span class="mai-quote__author">{data.header}</span>
-            <f:if condition="{data.subheader}">
-                <span class="mai-quote__role">{data.subheader}</span>
+            <span class="mai-quote__author">{header}</span>
+            <f:if condition="{subheader}">
+                <span class="mai-quote__role">{subheader}</span>
             </f:if>
         </figcaption>
     </f:if>
