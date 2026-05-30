@@ -40,7 +40,7 @@ page {
             # Page content data processor for Visual Editor (TYPO3 14+)
             # Provides content areas (content.popovers, content.navbar, etc.)
             # with ContentArea objects including colPos, identifier, and records
-            5 = TYPO3\CMS\Frontend\DataProcessing\PageContentProcessor
+            5 = page-content
             5 {
                 as = content
             }
