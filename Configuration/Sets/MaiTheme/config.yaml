@@ -3,5 +3,3 @@ label: Maispace Default Theme
 dependencies:
   - maispace/mai-timeline
   - maispace/mai-events
-pageTSconfig:
-  - 'EXT:mai_theme/Configuration/TsConfig/page/web_layout.tsconfig'

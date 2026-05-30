@@ -3,9 +3,9 @@
 # ===========================================================================
 # DEFAULT BACKEND LAYOUT FOR VISUAL EDITOR
 # ===========================================================================
-# Ensures all pages have a BackendLayout assigned so Visual Editor
-# f:mark.contentArea ViewHelpers can find their colPos definitions.
-TCA.pages.columns.backend_layout.config.default = default
+# Ensures all pages use the Page-TSconfig backend layout so Visual Editor
+# f:mark.contentArea ViewHelpers can find colPos 0–6 (not core default colPos 0 only).
+TCA.pages.columns.backend_layout.config.default = pagets__default
 
 # ===========================================================================
 # DISABLE ALL TYPO3 CORE CONTENT ELEMENTS
