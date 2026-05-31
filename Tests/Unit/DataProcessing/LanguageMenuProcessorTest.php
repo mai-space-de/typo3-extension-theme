@@ -184,6 +184,53 @@ final class LanguageMenuProcessorTest extends TestCase
         self::assertSame('rtl', $result['languages'][0]['direction']);
     }
 
+    public function testProcessorGeneratesAllFourSiteLanguages(): void
+    {
+        $deLanguage = $this->createSiteLanguage(0, 'de', 'Deutsch', 'de-DE', 'de-DE');
+        $enLanguage = $this->createSiteLanguage(1, 'en-us-gb', 'English', 'en-US', 'en-GB');
+        $ukLanguage = $this->createSiteLanguage(2, 'ua', 'Українська', 'uk_UA', 'uk-UA');
+        $arLanguage = $this->createSiteLanguage(3, 'sa', 'العربية', 'ar_SA', 'ar-SA', true);
+
+        $this->requestAttributes['site'] = $this->site;
+        $this->requestAttributes['language'] = $deLanguage;
+        $this->setupSiteLanguages([$deLanguage, $enLanguage, $ukLanguage, $arLanguage]);
+        $this->setupRouter('/', '/en/', '/ua/', '/ar/');
+        $this->setupPageInformation(1);
+
+        $result = $this->process([]);
+
+        $languages = $result['languages'];
+        self::assertCount(4, $languages);
+        self::assertSame(0, $languages[0]['languageUid']);
+        self::assertTrue($languages[0]['isCurrent']);
+        self::assertSame('Deutsch', $languages[0]['label']);
+        self::assertSame(1, $languages[1]['languageUid']);
+        self::assertSame('English', $languages[1]['label']);
+        self::assertSame('en-GB', $languages[1]['hreflang']);
+        self::assertSame(2, $languages[2]['languageUid']);
+        self::assertSame('Українська', $languages[2]['label']);
+        self::assertSame('uk-UA', $languages[2]['hreflang']);
+        self::assertSame(3, $languages[3]['languageUid']);
+        self::assertSame('العربية', $languages[3]['label']);
+        self::assertSame('rtl', $languages[3]['direction']);
+        self::assertSame('ar-SA', $languages[3]['hreflang']);
+    }
+
+    public function testProcessorFallsBackToLocaleWhenHreflangEmpty(): void
+    {
+        $enLanguage = $this->createSiteLanguage(1, 'en-us-gb', 'English', 'en-US', '');
+
+        $this->requestAttributes['site'] = $this->site;
+        $this->requestAttributes['language'] = $enLanguage;
+        $this->setupSiteLanguages([$enLanguage]);
+        $this->setupRouter('/en/');
+        $this->setupPageInformation(42);
+
+        $result = $this->process([]);
+
+        self::assertSame('en-US', $result['languages'][0]['hreflang']);
+    }
+
     public function testProcessorExcludesDisabledLanguages(): void
     {
         $deLanguage = $this->createSiteLanguage(0, 'de', 'Deutsch', 'de-DE', 'de');
