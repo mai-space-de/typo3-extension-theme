@@ -226,8 +226,14 @@ tt_content {
     }
     maispace_tab < tt_content.maispace_tabs
 
-    # maispace_timeline is registered by EXT:mai_timeline and rendered
-    # from that extension's own TypoScript. No entry is needed here.
+    ## EXT:mai_timeline
+    mai_timeline_list = USER
+    mai_timeline_list {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiTimeline
+        pluginName = TimelineList
+        vendorName = Maispace
+    }
 
     maispace_modal < lib.contentElement
     maispace_modal.templateName = Modal
