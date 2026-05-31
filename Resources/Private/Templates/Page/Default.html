@@ -15,9 +15,6 @@
         Self-hosted via mai_assets FontPreloadCollector (EXT:mai_theme/Configuration/Fonts.php).
         Fonts are preloaded + HTTP 103 early-hinted automatically.
     </f:comment>
-    <f:comment>Preconnect to gstatic for font files (non-blocking)</f:comment>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-
     <f:comment>
         Critical CSS — inline :root custom properties generated from
         EXT:mai_theme/Configuration/Sets/MaiTheme/settings.definitions.yaml
@@ -27,6 +24,9 @@
     </f:comment>
     <style><f:cObject typoscriptObjectPath="lib.themeVars"/></style>
 
+    <mai:asset.css identifier="mai-theme-fonts"
+                   src="EXT:mai_theme/Resources/Public/Scss/fonts.scss"
+                   priority="1"/>
     <mai:asset.css identifier="mai-theme-main"
                    src="EXT:mai_theme/Resources/Public/Scss/main.scss"
                    priority="1"/>
@@ -41,11 +41,15 @@
     </f:mark.contentArea>
     <f:render partial="Organism/Navigation/SkipLinks" arguments="{_all}"/>
     <header role="banner">
-        <f:render partial="Organism/Navigation/Menubar"
-                  arguments="{
-                      menuItems:   menuMain,
-                      label:       settings.general.site.name
-                  }"/>
+        <div class="site-header-actions">
+            <f:render partial="Organism/Navigation/Menubar"
+                      arguments="{
+                          menuItems:   menuMain,
+                          label:       settings.general.site.name
+                      }"/>
+            <f:render partial="Organism/Navigation/LanguageMenu"
+                      arguments="{languages: languages}"/>
+        </div>
         <f:mark.contentArea colPos="3">
             <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
         </f:mark.contentArea>

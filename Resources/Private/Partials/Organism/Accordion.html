@@ -1,9 +1,17 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 <f:comment>
     Accordion organism. Delegates row rendering to Items/AccordionItem
     (which uses <details>/<summary> for progressive enhancement).
     Arguments: items (tx_maitheme_accordion_item records), data (parent tt_content)
+
+    Asset injection:
+    CSS is injected here so this partial is self-contained (not in global bundle).
 </f:comment>
+<mai:asset.css identifier="mai-accordion-css"
+               src="EXT:mai_theme/Resources/Public/Scss/accordion-widget.scss"
+               priority="0"/>
 <section class="mai-accordion"
          data-ce-uid="{data.uid}"
          aria-label="{f:if(condition: data.header, then: data.header, else: 'Accordion')}">
