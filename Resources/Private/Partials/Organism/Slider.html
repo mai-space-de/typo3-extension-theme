@@ -28,13 +28,17 @@
     <f:if condition="{header}">
         <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-slider__title'}"/>
     </f:if>
-    <ul class="mai-slider__track" aria-live="polite">
-        <f:if condition="{items.0}">
-            <f:for each="{items}" as="item" iteration="it">
-                <f:render partial="Items/SliderItem"
-                          arguments="{item: item, index: it.cycle, total: it.total, parentUid: data.uid}"/>
-            </f:for>
-        </f:if>
-    </ul>
+    <f:if condition="{items.0}">
+        <f:then>
+            <f:spaceless>
+                <div class="mai-slider__track" aria-live="polite">
+                    <f:for each="{items}" as="item" iteration="it">
+                        <f:render partial="Items/SliderItem"
+                                  arguments="{item: item, index: it.cycle, total: it.total, parentUid: data.uid}"/>
+                    </f:for>
+                </div>
+            </f:spaceless>
+        </f:then>
+    </f:if>
 </section>
 </html>

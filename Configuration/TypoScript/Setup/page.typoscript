@@ -66,6 +66,11 @@ page {
                 as = hero
                 contentSource = content
             }
+            # Smoke-test: render one CType/plugin per audit URL (smoke_ctype / smoke_plugin)
+            56 = Maispace\MaiBase\DataProcessing\SmokeTestContentFilterProcessor
+            56 {
+                as = content
+            }
             # Debug processor — logs when called
             7 = Maispace\MaiBase\DataProcessing\DebugProcessor
             10 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
@@ -204,5 +209,10 @@ page {
         }
     }
 }
+
+# Smoke-test fixture pages: isolate CE/plugin via query param — must not serve a shared cached page.
+[page["uid"] in [10001, 10002]]
+page.config.no_cache = 1
+[end]
 
 @import 'EXT:mai_theme/Configuration/TypoScript/Setup/page/body.typoscript'

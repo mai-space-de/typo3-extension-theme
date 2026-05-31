@@ -26,30 +26,14 @@ lib.templates {
     }
 }
 
-lib.templates {
-    columns {
-        content = COA
-        content {
-            20 < styles.content.get
-            20.select.where = colPos = 0
-        }
-
-        popovers < .content
-        popovers.20.select.where = colPos = 1
-
-        navbar < .content
-        navbar.20.select.where = colPos = 2
-
-        beforeContent < .content
-        beforeContent.20.select.where = colPos = 3
-
-        afterContent < .content
-        afterContent.20.select.where = colPos = 4
-
-        footer < .content
-        footer.20.select.where = colPos = 5
-
-        hidden < .content
-        hidden.20.select.where = colPos = 6
-    }
+# Smoke-test pages: lib.templates.columns.* uses styles.content.get (not page-content areas).
+# Filter tt_content by smoke_ctype / smoke_plugin query param for isolated audit URLs.
+[page["uid"] in [10001, 10002] && (traverse(request.getQueryParams(), "smoke_plugin") || traverse(request.getQueryParams(), "smoke_ctype"))]
+lib.templates.columns.content.20.select.where.cObject = TEXT
+lib.templates.columns.content.20.select.where.cObject {
+    data = GP:smoke_plugin
+    ifEmpty.data = GP:smoke_ctype
+    wrap = colPos = 0 AND CType = '|'
+    required = 1
 }
+[end]

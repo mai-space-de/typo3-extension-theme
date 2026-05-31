@@ -6,7 +6,7 @@
     item columns: headline, bodytext, link, image (FAL via images[0])
     Arguments: item, index, total, parentUid
 </f:comment>
-<li class="mai-slider__item"
+<div class="mai-slider__item"
     role="group"
     aria-roledescription="slide"
     aria-label="{index} of {total}"
@@ -28,5 +28,5 @@
             <f:render partial="Atom/Link" arguments="{link: item.data.link, label: item.data.headline, class: 'mai-slider__link'}"/>
         </f:if>
     </div>
-</li>
+</div>
 </html>
