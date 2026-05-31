@@ -210,6 +210,11 @@ page {
     }
 }
 
+# Smoke isolation: omit page-level H1 so axe audits only the filtered CE/plugin.
+[page["uid"] in [10001, 10002] && (traverse(request.getQueryParams(), "smoke_plugin") || traverse(request.getQueryParams(), "smoke_ctype"))]
+page.10.variables.pageHeading >
+[end]
+
 # Smoke-test fixture pages: isolate CE/plugin via query param — must not serve a shared cached page.
 [page["uid"] in [10001, 10002]]
 page.config.no_cache = 1

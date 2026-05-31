@@ -1898,19 +1898,4 @@
     margin-inline: auto;
 }
 
-// CE / plugin section titles on light backgrounds (WCAG AA contrast)
-.mai-heading,
-[class*='__title'] {
-    color: var(--bgm-ink);
-}
-
-// Dark-band organisms keep light-on-dark title contrast
-.mai-banner,
-.mai-cta {
-    .mai-heading,
-    [class*='__title'] {
-        color: inherit;
-    }
-}
-
 } // @layer theme-organisms
