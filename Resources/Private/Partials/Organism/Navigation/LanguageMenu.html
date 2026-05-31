@@ -19,6 +19,7 @@
 
 <f:if condition="{languages -> f:count()} > 1">
     <nav class="mai-language-menu"
+         data-testid="language-switcher"
          aria-label="{f:if(condition: label, then: label, else: '{f:translate(key: \'language_menu.label\', extensionName: \'mai_theme\')}')}">
         <ul class="mai-language-menu__list">
             <f:for each="{languages}" as="language">

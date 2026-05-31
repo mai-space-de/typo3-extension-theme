@@ -25,10 +25,10 @@
                priority="1"/>
 
 <div class="mai-skip-links">
-    <a class="mai-skip-link" href="#main">
+    <a class="mai-skip-link" href="#main" data-testid="skip-link">
         {f:if(condition: mainLabel, then: mainLabel, else: '{f:translate(key: \'skip_links.content\', extensionName: \'mai_theme\')}')}
     </a>
-    <a class="mai-skip-link" href="#main-nav">
+    <a class="mai-skip-link" href="#main-nav" data-testid="skip-link">
         {f:if(condition: navLabel, then: navLabel, else: '{f:translate(key: \'skip_links.navigation\', extensionName: \'mai_theme\')}')}
     </a>
 </div>
