@@ -33,9 +33,9 @@ final class PageHeadingTest extends TestCase
         $contents = (string) file_get_contents(self::DEFAULT_TEMPLATE_PATH);
 
         self::assertMatchesRegularExpression(
-            '/partial="Molecule\/PageHeading"[\s\S]*arguments="\{pageHeading: pageHeading\}"/',
+            '/<f:if condition="\{hero\}">[\s\S]*partial="Molecule\/PageHeading"[\s\S]*arguments="\{pageHeading: pageHeading\}"/',
             $contents,
-            'Default.html must pass pageHeading into the PageHeading partial',
+            'Default.html must render PageHeading only when no Hero CE is present',
         );
     }
 
@@ -58,5 +58,6 @@ final class PageHeadingTest extends TestCase
 
         self::assertStringContainsString('pageHeading = TEXT', $contents);
         self::assertStringContainsString('field = nav_title // title', $contents);
+        self::assertStringContainsString('HeroContentProcessor', $contents);
     }
 }
