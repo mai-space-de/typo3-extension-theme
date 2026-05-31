@@ -2,6 +2,13 @@
 # `<theme:...>` resolves to EXT:mai_theme/Resources/Private/Components.
 config.namespaces.theme = Maispace\MaiTheme\Components
 
+# Page title configuration - prevent duplication of site name
+# Default TYPO3 providers cause "Site Name: Site Name: Page Title"
+# Remove the recordTitle provider to prevent duplication, keep only record provider
+config.pageTitleProviders {
+    recordTitle >
+}
+
 plugin {
     tx_fluidcomponents.namespaces.Maispace\MaiTheme\Components = EXT:mai_theme/Resources/Private/Components
     tx_maispace_assets.settings.htmlMinification.enable = 1
@@ -52,6 +59,12 @@ page {
             5 = page-content
             5 {
                 as = content
+            }
+            # Skip page-level H1 when colPos 0 contains a Hero CE (h1.hero__title)
+            6 = Maispace\MaiTheme\DataProcessing\HeroContentProcessor
+            6 {
+                as = hero
+                contentSource = content
             }
             # Debug processor — logs when called
             7 = Maispace\MaiBase\DataProcessing\DebugProcessor
