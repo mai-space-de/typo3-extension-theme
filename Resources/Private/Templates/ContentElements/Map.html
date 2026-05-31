@@ -1,4 +1,6 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:consent="http://typo3.org/ns/Maispace/MaiConsent/ViewHelper"
+      data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
 <f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
@@ -9,11 +11,14 @@
         <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-map__title'}"/>
     </f:if>
     <div class="mai-map__container">
-        <iframe class="mai-map__frame"
-                src="https://www.openstreetmap.org/export/embed.html?bbox={data.tx_maitheme_lng}%2C{data.tx_maitheme_lat}%2C{data.tx_maitheme_lng}%2C{data.tx_maitheme_lat}&amp;layer=mapnik&amp;marker={data.tx_maitheme_lat}%2C{data.tx_maitheme_lng}&amp;zoom={f:if(condition: data.tx_maitheme_zoom, then: data.tx_maitheme_zoom, else: 14)}"
-                title="{f:if(condition: header, then: header, else: 'Karte')}"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <consent:gate category="maps"
+                      placeholder="Diese Karte wird von OpenStreetMap geladen. Bitte akzeptieren Sie die Kategorie „Karten“, um die Karte anzuzeigen.">
+            <iframe class="mai-map__frame"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox={data.tx_maitheme_lng}%2C{data.tx_maitheme_lat}%2C{data.tx_maitheme_lng}%2C{data.tx_maitheme_lat}&amp;layer=mapnik&amp;marker={data.tx_maitheme_lat}%2C{data.tx_maitheme_lng}&amp;zoom={f:if(condition: data.tx_maitheme_zoom, then: data.tx_maitheme_zoom, else: 14)}"
+                    title="{f:if(condition: header, then: header, else: 'Karte')}"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </consent:gate>
     </div>
     <f:if condition="{bodytext}">
         <p class="mai-map__description">{bodytext}</p>
