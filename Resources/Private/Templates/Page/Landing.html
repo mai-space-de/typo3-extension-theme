@@ -56,6 +56,11 @@
     </header>
     <main id="main" class="mai-page mai-page--landing" role="main" tabindex="-1">
         <f:if condition="{hero}">
+            <f:else>
+                <f:render partial="Molecule/PageHeading" arguments="{pageHeading: pageHeading}"/>
+            </f:else>
+        </f:if>
+        <f:if condition="{hero}">
             <div class="mai-page__hero"><f:cObject typoscriptObjectPath="lib.templates.columns.hero"/></div>
         </f:if>
         <div class="mai-page__content">

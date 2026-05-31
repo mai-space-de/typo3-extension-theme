@@ -1,0 +1,19 @@
+// =============================================================================
+// 07-templates/_page.scss
+//
+// Page shell — title heading in the main content landmark.
+// =============================================================================
+
+@layer theme-templates {
+.mai-page__title {
+    max-width: var(--layout-content-width);
+    margin-inline: auto;
+    padding-inline: var(--layout-grid-gap);
+    margin-block: var(--space-lg) var(--space-md);
+}
+
+.mai-page--landing .mai-page__title {
+    margin-block-end: var(--space-sm);
+}
+
+}

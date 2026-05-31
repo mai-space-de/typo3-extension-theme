@@ -36,6 +36,13 @@ page {
 
         file = EXT:mai_theme/Resources/Private/Templates/Page/Default.html
 
+        variables {
+            pageHeading = TEXT
+            pageHeading {
+                field = nav_title // title
+            }
+        }
+
         dataProcessing {
             # Debug processor BEFORE page-content — logs when called
             4 = Maispace\MaiBase\DataProcessing\DebugProcessor
