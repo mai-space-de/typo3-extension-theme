@@ -1,0 +1,39 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Language menu organism — renders enabled site languages as a link list.
+
+    Arguments:
+      languages  {array}  — LanguageMenuProcessor result (dataProcessing.25
+                            in page.typoscript). Each item has:
+                            label, url, isCurrent, languageUid, hreflang,
+                            locale, navigationTitle, title, flag, direction.
+      label      {string} — Accessible aria-label for the <nav> landmark.
+                            Defaults to "Sprache wählen" / "Select language".
+
+    Usage example (in template):
+      <f:render partial="Organism/Navigation/LanguageMenu"
+                arguments="{languages: languages}"/>
+</f:comment>
+
+<f:if condition="{languages -> f:count()} > 1">
+    <nav class="mai-language-menu"
+         aria-label="{f:if(condition: label, then: label, else: '{f:translate(key: \'language_menu.label\', extensionName: \'mai_theme\')}')}">
+        <ul class="mai-language-menu__list">
+            <f:for each="{languages}" as="language">
+                <li class="mai-language-menu__item{f:if(condition: language.isCurrent, then: ' mai-language-menu__item--current')}"
+                    lang="{language.hreflang}">
+                    <a href="{language.url}"
+                       class="mai-language-menu__link{f:if(condition: language.isCurrent, then: ' mai-language-menu__link--current')}"
+                       hreflang="{language.hreflang}"
+                       dir="{language.direction}"
+                       aria-current="{f:if(condition: language.isCurrent, then: 'true')}">
+                        {language.label}
+                    </a>
+                </li>
+            </f:for>
+        </ul>
+    </nav>
+</f:if>
+</html>

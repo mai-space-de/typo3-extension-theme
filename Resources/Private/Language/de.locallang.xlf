@@ -27,6 +27,10 @@
 			<source>Show submenu for %s</source>
 			<target>Untermenü von %s anzeigen</target>
 		</trans-unit>
+		<trans-unit id="language_menu.label" resname="language_menu.label">
+			<source>Select language</source>
+			<target>Sprache wählen</target>
+		</trans-unit>
 	</body>
 	</file>
 </xliff>

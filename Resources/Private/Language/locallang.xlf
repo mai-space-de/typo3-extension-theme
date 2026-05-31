@@ -21,6 +21,9 @@
 		<trans-unit id="menubar.submenu_label" resname="menubar.submenu_label">
 			<source>Show submenu for %s</source>
 		</trans-unit>
+		<trans-unit id="language_menu.label" resname="language_menu.label">
+			<source>Select language</source>
+		</trans-unit>
 	</body>
 	</file>
 </xliff>

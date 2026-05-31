@@ -70,6 +70,12 @@ page {
                 special = directory
                 special.value = {$pageUids.footerMenu}
             }
+
+            # Language menu — renders enabled site languages as link list
+            25 = Maispace\MaiTheme\DataProcessing\LanguageMenuProcessor
+            25 {
+                as = languages
+            }
         }
 
         settings {
