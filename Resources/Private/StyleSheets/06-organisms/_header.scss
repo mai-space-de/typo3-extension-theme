@@ -1,30 +1,33 @@
 // =============================================================================
 // 06-organisms/_header.scss
 //
-// Site header — white bar with logo left, nav centre, actions right.
-// Sticky at top; 1 px teal-tinted bottom border.
+// Site header — sticky full-bleed bar, content constrained by inner wrapper.
 //
-// Markup pattern:
-//   <header class="site-header">
-//     <a class="site-header-logo link-unstyled" href="/">
-//       <img src="…/logo-mark.png" alt="" />
-//       <span>Begleitung geflüchteter Menschen e.V. Pulheim</span>
-//     </a>
-//     <nav class="navigation navigation-horizontal" aria-label="Hauptnavigation">…</nav>
-//     <div class="site-header-actions">…</div>
+// Markup pattern (two-div band / inner approach):
+//   <header class="site-header" role="banner">   ← full-bleed: bg, border, sticky
+//     <div class="site-header__inner">            ← max-width centred flex row
+//       <a class="site-header-logo …" href="/">…</a>
+//       <button class="mai-menubar-toggle">…</button>
+//       <nav class="mai-menubar-nav">…</nav>
+//     </div>
 //   </header>
 //
-// Override --header-* custom properties to customise.
+// The outer .site-header spans the full viewport width and carries the
+// background-color, bottom-border, box-shadow, and sticky positioning.
+// The inner .site-header__inner constrains content to --layout-width-max
+// and provides the flex layout.  This is the canonical "page-band" pattern
+// used by topbar, footer, and .mai-inner content-element wrappers.
 // =============================================================================
 
 @import "../02-mixins/media-breakpoint";
+@import "../02-mixins/page-wrap";
 
 @layer theme-organisms {
+
 :root {
     --header-bg:           var(--color-background);
     --header-border-color: var(--bgm-teal-100);
-    --header-height:       5rem;
-    --header-padding-x:    var(--layout-grid-gap);
+    --header-min-height:   4rem;
     --header-shadow:       var(--shadow-sm);
     --header-logo-size:    var(--font-size-base);
     --header-logo-weight:  var(--font-weight-bold);
@@ -33,24 +36,41 @@
 }
 
 // ---------------------------------------------------------------------------
-// Site header
+// Full-bleed outer element — visual treatment only
 // ---------------------------------------------------------------------------
 .site-header {
-    display:          flex;
-    align-items:      center;
-    justify-content:  space-between;
-    gap:              var(--space-lg);
-    height:           var(--header-height);
-    padding-inline:   var(--header-padding-x);
-    background:       var(--header-bg);
-    border-block-end: 1px solid var(--header-border-color);
-    box-shadow:       var(--header-shadow);
-    position:         sticky;
+    background:        var(--header-bg);
+    border-block-end:  1px solid var(--header-border-color);
+    box-shadow:        var(--header-shadow);
+    position:          sticky;
     inset-block-start: 0;
-    z-index:          var(--header-z);
+    z-index:           var(--header-z);
+}
 
-    &.site-header-full {
-        max-width: none;
+// ---------------------------------------------------------------------------
+// Constrained inner wrapper — flex row with wider max-width than content.
+// The header uses --layout-header-width-max (90 rem / 1440 px) so that 7+
+// German-language nav labels fit at common desktop resolutions without
+// triggering the compact/hamburger mode.  Topbar, footer and content areas
+// use the narrower --layout-width-max (72 rem / 1152 px).
+// ---------------------------------------------------------------------------
+.site-header__inner {
+    max-width:      var(--layout-header-width-max, 90rem);
+    margin-inline:  auto;
+    padding-inline: var(--layout-grid-gap);
+    width:          100%;
+    box-sizing:     border-box;
+    display:        flex;
+    align-items:    center;
+    flex-wrap:      wrap;          // absorbs text expansion in uk/ar
+    gap:            var(--space-sm) var(--space-lg);
+    min-height:     var(--header-min-height);
+    padding-block:  var(--space-sm);
+
+    // Push nav (desktop) / hamburger (mobile) to the inline end
+    > .mai-menubar-nav,
+    > .mai-menubar-toggle {
+        margin-inline-start: auto;
     }
 }
 
@@ -58,16 +78,16 @@
 // Logo / site title
 // ---------------------------------------------------------------------------
 .site-header-logo {
-    display:     flex;
-    align-items: center;
-    gap:         var(--space-sm);
-    font-size:   var(--header-logo-size);
-    font-weight: var(--header-logo-weight);
-    color:       var(--header-logo-color);
-    white-space: nowrap;
+    display:         flex;
+    align-items:     center;
+    gap:             var(--space-sm);
+    font-size:       var(--header-logo-size);
+    font-weight:     var(--header-logo-weight);
+    color:           var(--header-logo-color);
+    white-space:     nowrap;
     text-decoration: none;
-    flex-shrink: 0;
-    line-height: var(--line-height-snug);
+    flex-shrink:     0;
+    line-height:     var(--line-height-snug);
 
     img {
         height:       2.75rem;   // 44 px — matches design mockup
@@ -82,14 +102,14 @@
     }
 }
 
-// ---------------------------------------------------------------------------
-// Actions area (language switcher, login, donate CTA)
-// ---------------------------------------------------------------------------
-.site-header-actions {
-    display:     flex;
-    align-items: center;
-    gap:         var(--space-sm);
-    flex-shrink: 0;
+.site-header-logo__name {
+    white-space: normal;
+    max-width:   13em;
+    line-height: 1.15;
+
+    @include bp-down(sm) {
+        font-size: var(--font-size-sm);
+    }
 }
 
-}
+} // end @layer theme-organisms

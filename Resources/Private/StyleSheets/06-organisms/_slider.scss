@@ -49,15 +49,11 @@
 }
 
 // ---------------------------------------------------------------------------
-// Each slide
+// Each slide — the item itself is the card (no separate inner wrapper)
 // ---------------------------------------------------------------------------
-.mai-slider__slide {
+.mai-slider__item {
     scroll-snap-align: start;
     flex-shrink:       0;
-}
-
-// Slide inner card
-.mai-slider__slide-inner {
     background:    var(--color-background);
     border:        2px solid var(--bgm-teal-700);
     border-radius: var(--layout-radius-sm);
@@ -67,14 +63,14 @@
     flex-direction: column;
 }
 
-.mai-slider__slide-img {
+.mai-slider__image {
     width:        100%;
     aspect-ratio: 16 / 9;
     object-fit:   cover;
     display:      block;
 }
 
-.mai-slider__slide-body {
+.mai-slider__body {
     padding:        var(--space-lg);
     display:        flex;
     flex-direction: column;
@@ -82,18 +78,40 @@
     flex:           1 1 auto;
 }
 
-.mai-slider__slide-title {
+.mai-slider__headline {
     font-size:   var(--font-size-lg);
     font-weight: var(--font-weight-bold);
     color:       var(--bgm-teal-900);
     margin:      0;
 }
 
-.mai-slider__slide-text {
+.mai-slider__text {
     font-size:   var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color:       var(--bgm-ink-2);
     margin:      0;
+
+    p { margin: 0; }
+}
+
+.mai-slider__link {
+    display:      inline-flex;
+    align-items:  center;
+    gap:          var(--space-2xs);
+    align-self:   flex-start;
+    font-weight:  var(--font-weight-semibold);
+    color:        var(--bgm-teal-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition:   color var(--duration-fast) var(--easing-standard);
+
+    &:hover { color: var(--bgm-teal-900); }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+        border-radius:  var(--layout-radius-sm);
+    }
 }
 
 // ---------------------------------------------------------------------------

@@ -2,7 +2,20 @@
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
       data-namespace-typo3-fluid="true">
 <f:comment>
-    Language menu organism — renders enabled site languages as a link list.
+    Language menu organism — disclosure dropdown (same WAI-ARIA pattern as
+    the main navigation submenus): a <button> with globe icon + current
+    language label toggles a panel of language links.
+    https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+
+    Accessibility model:
+      - The toggle is a real <button> carrying aria-expanded / aria-controls;
+        its accessible name is "<language_menu.label>: <current language>"
+        (localized via EXT:mai_theme locallang — multisite-safe).
+      - The globe + chevron SVGs are decorative (aria-hidden, focusable=false).
+      - Language links keep hreflang / dir / aria-current="true"; each <li>
+        carries lang="…" so screen readers switch pronunciation.
+      - JS (language-menu.js): click toggles, Escape closes + refocuses the
+        button, click outside closes.
 
     Arguments:
       languages  {array}  — LanguageMenuProcessor result (dataProcessing.25
@@ -10,26 +23,72 @@
                             label, url, isCurrent, languageUid, hreflang,
                             locale, navigationTitle, title, flag, direction.
       label      {string} — Accessible aria-label for the <nav> landmark.
-                            Defaults to "Sprache wählen" / "Select language".
+                            Defaults to locallang key language_menu.label.
 
     Usage example (in template):
       <f:render partial="Organism/Navigation/LanguageMenu"
                 arguments="{languages: languages}"/>
 </f:comment>
 
+<mai:asset.css identifier="mai-language-menu"
+               src="EXT:mai_theme/Resources/Public/Scss/language-menu.scss"
+               priority="0"/>
+<mai:asset.js  identifier="mai-language-menu-js"
+               src="EXT:mai_theme/Resources/Public/JavaScript/language-menu.js"
+               defer="1"
+               priority="0"/>
+
 <f:if condition="{languages -> f:count()} > 1">
+
+    <f:comment>── Resolve current language for the toggle label ────────────────</f:comment>
+    <f:for each="{languages}" as="language">
+        <f:if condition="{language.isCurrent}">
+            <f:variable name="currentLanguage" value="{language}"/>
+        </f:if>
+    </f:for>
+
     <nav class="mai-language-menu"
          data-testid="language-switcher"
          aria-label="{f:if(condition: label, then: label, else: '{f:translate(key: \'language_menu.label\', extensionName: \'mai_theme\')}')}">
-        <ul class="mai-language-menu__list">
+
+        <f:comment>── Disclosure toggle: globe + current language + chevron ────</f:comment>
+        <button type="button"
+                class="mai-language-menu__toggle"
+                data-testid="language-toggle"
+                aria-expanded="false"
+                aria-controls="mai-language-menu-list">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="mai-language-menu__globe"
+                 aria-hidden="true"
+                 focusable="false"
+                 width="18" height="18" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span class="visually-hidden">{f:translate(key: 'language_menu.label', extensionName: 'mai_theme')}: </span>
+            <span class="mai-language-menu__current">{currentLanguage.label}</span>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="mai-language-menu__arrow"
+                 aria-hidden="true"
+                 focusable="false"
+                 width="12" height="9" viewBox="0 0 12 9">
+                <polygon points="1 0, 11 0, 6 8"/>
+            </svg>
+        </button>
+
+        <f:comment>── Dropdown panel ────────────────────────────────────────────</f:comment>
+        <ul id="mai-language-menu-list" class="mai-language-menu__list" hidden>
             <f:for each="{languages}" as="language">
                 <li class="mai-language-menu__item{f:if(condition: language.isCurrent, then: ' mai-language-menu__item--current')}"
                     lang="{language.hreflang}">
                     <a href="{language.url}"
                        class="mai-language-menu__link{f:if(condition: language.isCurrent, then: ' mai-language-menu__link--current')}"
                        hreflang="{language.hreflang}"
-                       dir="{language.direction}"
-                       aria-current="{f:if(condition: language.isCurrent, then: 'true')}">
+                       {f:if(condition: language.direction, then: 'dir="{language.direction}"')}
+                       {f:if(condition: language.isCurrent, then: 'aria-current="true"')}>
                         {language.label}
                     </a>
                 </li>

@@ -3,19 +3,23 @@
 
 <f:comment>
     Search results organism — overrides `EXT:mai_search/Resources/Private/Templates/Search/Results.html`.
-    Renders a themed search form + results list using mai_theme components.
-    Assigned variables:
-        query           — string, the search query
-        results         — array of SearchResult {type, title, snippet, url, icon, date, score, rootline}
-        count           — int, number of results
-        ragEnabled      — bool, whether RAG/synthesis is active
-        synthesisAnswer — string, AI-synthesised answer; empty string when RAG is disabled or unavailable
+    Assigned variables from SearchController:
+        query, type, results, count, types, typeTotal, page, perPage, totalPages,
+        prevPage, nextPage, ragEnabled, synthesisResult
+    Visual language: BGM Design System (NewsCard / EventRow / form tokens).
 </f:comment>
 
-<section class="mai-search" aria-label="{f:translate(key: 'search.label', default: 'Site search')}">
+<section class="mai-search" aria-label="{f:translate(key: 'search.label', default: 'Site search')}" data-testid="search-results">
 
-    <f:comment>Search form</f:comment>
-    <f:form action="results" method="post" name="search" class="mai-search__form">
+    <f:if condition="{query}">
+        <f:else>
+            <p class="mai-search__lead">
+                <f:translate key="search.lead" default="Finden Sie Angebote, Neuigkeiten und Seiten rund um Begleitung geflüchteter Menschen in Pulheim."/>
+            </p>
+        </f:else>
+    </f:if>
+
+    <f:form action="results" method="get" name="search" class="mai-search__form" role="search">
         <div class="mai-search__field">
             <label for="search-query" class="mai-search__label">
                 <f:translate key="search.placeholder" default="Search..."/>
@@ -26,25 +30,37 @@
                 value="{query}"
                 placeholder="{f:translate(key: 'search.placeholder', default: 'Search...')}"
                 class="mai-search__input"
-                additionalAttributes="{autocomplete: 'off'}"
+                additionalAttributes="{autocomplete: 'off', type: 'search', 'data-testid': 'search-input'}"
             />
+            <f:if condition="{type}">
+                <f:form.hidden name="type" value="{type}" />
+            </f:if>
             <f:form.submit
                 value="{f:translate(key: 'search.submit', default: 'Search')}"
                 class="mai-search__submit"
+                additionalAttributes="{'data-testid': 'search-submit'}"
             />
         </div>
     </f:form>
 
-    <f:comment>RAG answer card — rendered only when RAG is enabled and a synthesis answer is available</f:comment>
-    <f:if condition="{ragEnabled} && {synthesisAnswer}">
+    <f:if condition="{synthesisResult.answer}">
         <aside class="mai-search__synthesis" aria-label="{f:translate(key: 'search.synthesis.label', default: 'AI-generated answer')}">
             <header class="mai-search__synthesis-header">
-                <span class="mai-search__synthesis-icon" aria-hidden="true">✦</span>
+                <span class="mai-search__synthesis-icon" aria-hidden="true">AI</span>
                 <span class="mai-search__synthesis-title">
                     <f:translate key="search.synthesis.title" default="AI Answer"/>
                 </span>
             </header>
-            <p class="mai-search__synthesis-body">{synthesisAnswer}</p>
+            <p class="mai-search__synthesis-body">{synthesisResult.answer}</p>
+            <f:if condition="{synthesisResult.sources}">
+                <ul class="mai-search__synthesis-sources">
+                    <f:for each="{synthesisResult.sources}" as="source">
+                        <li>
+                            <a href="{source.url}">{source.title}</a>
+                        </li>
+                    </f:for>
+                </ul>
+            </f:if>
             <footer class="mai-search__synthesis-footer">
                 <small class="mai-search__synthesis-disclaimer">
                     <f:translate key="search.synthesis.disclaimer" default="AI-generated summary — verify with search results below."/>
@@ -53,111 +69,53 @@
         </aside>
     </f:if>
 
-    <f:comment>Result count</f:comment>
-    <p class="mai-search__count" role="status">
-        <f:translate
-            key="search.results.count"
-            arguments="{0: count, 1: query}"
-            default="{count} results for &quot;{query}&quot;"
-        />
-    </p>
-
-    <f:comment>Results list or empty state</f:comment>
-    <f:if condition="{results}">
-        <f:then>
-            <ol class="mai-search__list" aria-label="{f:translate(key: 'search.results.list_label', default: 'Search results')}">
-                <f:for each="{results}" as="result">
-                    <li class="mai-search__item">
-                        <article class="mai-search__result">
-                            <a href="{result.url}" class="mai-search__link">
-                                <f:if condition="{result.icon}">
-                                    <span class="mai-search__icon" aria-hidden="true">{result.icon}</span>
-                                </f:if>
-                                <span class="mai-search__title">{result.title}</span>
-                            </a>
-                            <f:if condition="{result.rootline}">
-                                <nav class="mai-search__rootline" aria-label="Breadcrumb">
-                                    <f:for each="{result.rootline}" as="crumb" iteration="iter">
-                                        <f:if condition="{iter.isLast}">
-                                            <f:then>
-                                                <span class="mai-search__rootline-current">{crumb}</span>
-                                            </f:then>
-                                            <f:else>
-                                                <span class="mai-search__rootline-crumb">{crumb}</span>
-                                                <span class="mai-search__rootline-sep" aria-hidden="true">›</span>
-                                            </f:else>
-                                        </f:if>
-                                    </f:for>
-                                </nav>
-                            </f:if>
-                            <p class="mai-search__snippet">{result.snippet}</p>
-                            <footer class="mai-search__meta">
-                                <f:if condition="{result.date}">
-                                    <time class="mai-search__date" datetime="{result.date -> f:format.date(format: 'Y-m-d')}">
-                                        {result.date -> f:format.date()}
-                                    </time>
-                                </f:if>
-                                <span class="mai-search__type">{result.type}</span>
-                            </footer>
-                        </article>
+    <f:if condition="{types}">
+        <nav class="mai-search__filters" aria-label="{f:translate(key: 'search.filters.label', default: 'Filter by type')}">
+            <ul class="mai-search__filters-list">
+                <li>
+                    <f:link.action
+                        action="results"
+                        arguments="{query: query, page: 1}"
+                        class="mai-search__filter{f:if(condition: '!{type}', then: ' is-active')}"
+                    >
+                        <f:translate key="search.filters.all" default="All" />
+                        <span class="mai-search__filter-count">({typeTotal})</span>
+                    </f:link.action>
+                </li>
+                <f:for each="{types}" as="typeCount" key="typeKey">
+                    <li>
+                        <f:link.action
+                            action="results"
+                            arguments="{query: query, type: typeKey, page: 1}"
+                            class="mai-search__filter{f:if(condition: '{type} == {typeKey}', then: ' is-active')}"
+                        >
+                            {typeKey}
+                            <span class="mai-search__filter-count">({typeCount})</span>
+                        </f:link.action>
                     </li>
                 </f:for>
-            </ol>
-        </f:then>
-        <f:else>
-            <p class="mai-search__none" role="status">
-                <f:translate key="search.results.none" default="No results found." />
-            </p>
-        </f:else>
+            </ul>
+        </nav>
     </f:if>
-</section>
 
-</html>
-
-
-<section class="mai-search" aria-label="{f:translate(key: 'search.label', default: 'Site search')}">
-
-    <f:comment>Search form</f:comment>
-    <f:form action="results" method="post" name="search" class="mai-search__form">
-        <div class="mai-search__field">
-            <label for="search-query" class="mai-search__label">
-                <f:translate key="search.placeholder" default="Search..."/>
-            </label>
-            <f:form.textfield
-                id="search-query"
-                name="query"
-                value="{query}"
-                placeholder="{f:translate(key: 'search.placeholder', default: 'Search...')}"
-                class="mai-search__input"
-                additionalAttributes="{autocomplete: 'off'}"
+    <f:if condition="{query}">
+        <p class="mai-search__count" role="status">
+            <f:translate
+                key="search.results.count"
+                arguments="{0: count, 1: query}"
+                default="{count} results for &quot;{query}&quot;"
             />
-            <f:form.submit
-                value="{f:translate(key: 'search.submit', default: 'Search')}"
-                class="mai-search__submit"
-            />
-        </div>
-    </f:form>
+        </p>
+    </f:if>
 
-    <f:comment>Result count</f:comment>
-    <p class="mai-search__count" role="status">
-        <f:translate
-            key="search.results.count"
-            arguments="{0: count, 1: query}"
-            default="{count} results for &quot;{query}&quot;"
-        />
-    </p>
-
-    <f:comment>Results list or empty state</f:comment>
     <f:if condition="{results}">
         <f:then>
             <ol class="mai-search__list" aria-label="{f:translate(key: 'search.results.list_label', default: 'Search results')}">
                 <f:for each="{results}" as="result">
-                    <li class="mai-search__item">
+                    <li class="mai-search__item" data-testid="search-result-item">
                         <article class="mai-search__result">
                             <a href="{result.url}" class="mai-search__link">
-                                <f:if condition="{result.icon}">
-                                    <span class="mai-search__icon" aria-hidden="true">{result.icon}</span>
-                                </f:if>
+                                <span class="mai-search__icon" data-type="{result.type}" aria-hidden="true"></span>
                                 <span class="mai-search__title">{result.title}</span>
                             </a>
                             <f:if condition="{result.rootline}">
@@ -175,24 +133,66 @@
                                     </f:for>
                                 </nav>
                             </f:if>
-                            <p class="mai-search__snippet">{result.snippet}</p>
+                            <f:if condition="{result.snippet}">
+                                <p class="mai-search__snippet">{result.snippet}</p>
+                            </f:if>
                             <footer class="mai-search__meta">
+                                <f:if condition="{result.type}">
+                                    <span class="mai-search__type">{result.type}</span>
+                                </f:if>
                                 <f:if condition="{result.date}">
                                     <time class="mai-search__date" datetime="{result.date -> f:format.date(format: 'Y-m-d')}">
                                         {result.date -> f:format.date()}
                                     </time>
                                 </f:if>
-                                <span class="mai-search__type">{result.type}</span>
                             </footer>
                         </article>
                     </li>
                 </f:for>
             </ol>
+
+            <f:if condition="{totalPages} > 1">
+                <nav class="mai-search__pagination" aria-label="{f:translate(key: 'search.pagination.label', default: 'Search results pages')}">
+                    <ul class="mai-search__pagination-list">
+                        <f:if condition="{prevPage}">
+                            <li>
+                                <f:link.action
+                                    action="results"
+                                    arguments="{query: query, type: type, page: prevPage}"
+                                    class="mai-search__pagination-link"
+                                >
+                                    <f:translate key="search.pagination.prev" default="Previous" />
+                                </f:link.action>
+                            </li>
+                        </f:if>
+                        <li class="mai-search__pagination-status">
+                            <f:translate
+                                key="search.pagination.status"
+                                arguments="{0: page, 1: totalPages}"
+                                default="Page {page} of {totalPages}"
+                            />
+                        </li>
+                        <f:if condition="{nextPage}">
+                            <li>
+                                <f:link.action
+                                    action="results"
+                                    arguments="{query: query, type: type, page: nextPage}"
+                                    class="mai-search__pagination-link"
+                                >
+                                    <f:translate key="search.pagination.next" default="Next" />
+                                </f:link.action>
+                            </li>
+                        </f:if>
+                    </ul>
+                </nav>
+            </f:if>
         </f:then>
         <f:else>
-            <p class="mai-search__none" role="status">
-                <f:translate key="search.results.none" default="No results found." />
-            </p>
+            <f:if condition="{query}">
+                <p class="mai-search__none" role="status" data-testid="search-no-results">
+                    <f:translate key="search.results.none" default="No results found." />
+                </p>
+            </f:if>
         </f:else>
     </f:if>
 </section>

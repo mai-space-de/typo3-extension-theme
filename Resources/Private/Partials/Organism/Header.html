@@ -1,0 +1,36 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Site header organism — sticky white bar: logo left, main navigation right.
+    Language switcher + login live in the Topbar partial above (desktop) and
+    in the offcanvas footer (mobile).
+
+    Arguments (pass {_all} from the page template):
+      menuMain  {array}  — MenuProcessor result (dataProcessing.10)
+      languages {array}  — LanguageMenuProcessor result (passed through to offcanvas)
+      settings  {array}  — theme settings (pids.homepage, pids.frontendLogin, general.site.logo)
+      siteName  {string} — brand name from page.10.variables.siteName
+</f:comment>
+
+<header class="site-header" role="banner">
+    <div class="site-header__inner">
+
+        <f:comment>── Logo / brand ─────────────────────────────────────────────────</f:comment>
+        <f:link.page pageUid="{settings.pids.homepage}" class="site-header-logo link-unstyled">
+            <f:if condition="{settings.general.site.logo}">
+                <f:image src="{settings.general.site.logo}"
+                         alt=""
+                         class="site-header-logo__img"
+                         loading="eager"
+                         decoding="async"/>
+            </f:if>
+            <span class="site-header-logo__name">{siteName}<span class="visually-hidden"> {f:translate(key: 'header.home_link_suffix', extensionName: 'mai_theme')}</span></span>
+        </f:link.page>
+
+        <f:comment>── Main navigation — toggle (mobile) + nav landmark (desktop) ──</f:comment>
+        <f:render partial="Organism/Navigation/Menubar"
+                  arguments="{menuItems: menuMain, languages: languages, settings: settings}"/>
+
+    </div>
+</header>
+</html>

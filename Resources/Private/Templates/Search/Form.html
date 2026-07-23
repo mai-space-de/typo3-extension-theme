@@ -3,12 +3,12 @@
 
 <f:comment>
     Search form organism — overrides `EXT:mai_search/Resources/Private/Templates/Search/Form.html`.
-    Renders a themed search form using mai_theme components.
+    Renders a themed search form using BGM Design System tokens.
     Arguments: query (string)
 </f:comment>
 
 <section class="mai-search" aria-label="{f:translate(key: 'search.label', default: 'Site search')}">
-    <f:form action="results" method="post" name="search" class="mai-search__form">
+    <f:form action="results" method="post" name="search" class="mai-search__form" role="search">
         <div class="mai-search__field">
             <label for="search-query" class="mai-search__label">
                 <f:translate key="search.placeholder" default="Search..."/>
@@ -19,11 +19,12 @@
                 value="{query}"
                 placeholder="{f:translate(key: 'search.placeholder', default: 'Search...')}"
                 class="mai-search__input"
-                additionalAttributes="{autocomplete: 'off'}"
+                additionalAttributes="{autocomplete: 'off', type: 'search', 'data-testid': 'search-input'}"
             />
             <f:form.submit
                 value="{f:translate(key: 'search.submit', default: 'Search')}"
                 class="mai-search__submit"
+                additionalAttributes="{'data-testid': 'search-submit'}"
             />
         </div>
     </f:form>

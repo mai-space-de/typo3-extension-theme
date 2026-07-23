@@ -217,29 +217,48 @@ class DisclosureNavigation {
 }
 
 // ---------------------------------------------------------------------------
-// Mobile hamburger toggle (unchanged behaviour, adapted to disclosure nav)
+// Offcanvas hamburger toggle — full-screen panel with focus management.
+//
+// Accessibility:
+//   - aria-expanded on the button reflects panel state.
+//   - aria-modal="true" on the nav signals to AT that content outside the
+//     panel is inert (backed up by the inert attribute on siblings).
+//   - Focus is trapped inside the panel while it is open (Tab cycles within;
+//     inert on all siblings prevents AT escape without inert polyfill).
+//   - Escape closes the panel and returns focus to the toggle button.
+//   - Body scroll is locked while the panel is open.
 // ---------------------------------------------------------------------------
 class MobileToggle {
   /**
    * @param {HTMLButtonElement} button  - .mai-menubar-toggle
-   * @param {HTMLElement}       nav     - .mai-menubar-nav
+   * @param {HTMLElement}       nav     - .mai-menubar-nav (offcanvas panel)
    */
   constructor(button, nav) {
-    this.button = button;
-    this.nav    = nav;
+    this.button       = button;
+    this.nav          = nav;
+    this._inertedEls  = [];
 
-    this._boundOnClick = this.onClick.bind(this);
-    this._boundOnDocumentPointerdown = this.onDocumentPointerdown.bind(this);
+    this._boundOnClick    = this.onClick.bind(this);
+    this._boundOnKeydown  = this.onKeydown.bind(this);
+    this._boundTrapFocus  = this.trapFocus.bind(this);
 
     button.addEventListener('click', this._boundOnClick);
-    document.addEventListener('pointerdown', this._boundOnDocumentPointerdown, true);
+    document.addEventListener('keydown', this._boundOnKeydown);
+
+    // Wire the close button that lives inside the panel
+    const closeBtn = nav.querySelector('.mai-menubar-close__btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => this.close());
+    }
   }
 
   destroy() {
     this.button.removeEventListener('click', this._boundOnClick);
-    document.removeEventListener('pointerdown', this._boundOnDocumentPointerdown, true);
+    document.removeEventListener('keydown', this._boundOnKeydown);
+    document.removeEventListener('keydown', this._boundTrapFocus);
+    this._releaseInert();
     this.button = null;
-    this.nav = null;
+    this.nav    = null;
   }
 
   isOpen() {
@@ -247,24 +266,174 @@ class MobileToggle {
   }
 
   open() {
-    // Mobile only: CSS hides .mai-menubar-nav by default below the md breakpoint
-    // and shows it when the hamburger button has aria-expanded="true"
-    // (sibling selector in menubar-navigation.scss).
     this.button.setAttribute('aria-expanded', 'true');
+    this.nav.setAttribute('aria-modal', 'true');
+    document.body.classList.add('mai-offcanvas-open');
+    this._applyInert();
+    document.addEventListener('keydown', this._boundTrapFocus);
+
+    // Move focus into the panel — first to the close button, which is the
+    // first interactive element and gives the most predictable entry point.
+    const first = this.nav.querySelector(
+      '.mai-menubar-close__btn, button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+    );
+    if (first) first.focus();
   }
 
   close() {
     this.button.setAttribute('aria-expanded', 'false');
+    this.nav.removeAttribute('aria-modal');
+    document.body.classList.remove('mai-offcanvas-open');
+    this._releaseInert();
+    document.removeEventListener('keydown', this._boundTrapFocus);
+    // Return focus to the toggle so keyboard users can continue navigating
+    this.button.focus();
   }
 
   onClick() {
     this.isOpen() ? this.close() : this.open();
   }
 
-  onDocumentPointerdown(event) {
+  onKeydown(event) {
     if (!this.isOpen()) return;
-    if (this.button.contains(event.target) || this.nav.contains(event.target)) return;
-    this.close();
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      event.preventDefault();
+      this.close();
+    }
+  }
+
+  // Tab focus trap — cycles focus within the panel for browsers that do not
+  // fully honour the inert attribute on siblings yet.
+  trapFocus(event) {
+    if (event.key !== 'Tab') return;
+    const focusables = [...this.nav.querySelectorAll(
+      'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), ' +
+      'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )].filter(el => !el.closest('[hidden]'));
+
+    if (!focusables.length) { event.preventDefault(); return; }
+    const first = focusables[0];
+    const last  = focusables[focusables.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  // Set inert on every element outside the offcanvas panel so that keyboard
+  // and AT users cannot reach content behind it.
+  _applyInert() {
+    const navParent = this.nav.parentElement; // typically <header>
+
+    // Inert all direct body children except the nav's parent
+    [...document.body.children].forEach(el => {
+      if (el === navParent || el === this.nav) return;
+      if (!el.inert) { el.inert = true; this._inertedEls.push(el); }
+    });
+
+    // Inert siblings within the nav's parent (e.g. logo link + hamburger)
+    if (navParent && navParent !== document.body) {
+      [...navParent.children].forEach(el => {
+        if (el === this.nav) return;
+        if (!el.inert) { el.inert = true; this._inertedEls.push(el); }
+      });
+    }
+  }
+
+  _releaseInert() {
+    this._inertedEls.forEach(el => { el.inert = false; });
+    this._inertedEls = [];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Adaptive collapse — switches to the mobile layout as soon as the top-level
+// items actually wrap, instead of waiting for the $bp-md viewport breakpoint.
+//
+// Menu-label width depends on the active language (uk/ar run noticeably
+// longer than de), so a fixed pixel breakpoint either wraps ugly two-row
+// desktop menus well before it kicks in, or has to be so conservative it
+// shows the hamburger on ordinary laptop screens. Measuring the real
+// rendered wrap and setting [data-nav-mode="compact"] on .site-header
+// (consumed by menubar-navigation.scss's nav-collapsed mixin) sidesteps
+// that trade-off entirely. Below the $bp-md media query the native CSS
+// already applies, so this is skipped there — and still works with JS off.
+// ---------------------------------------------------------------------------
+const NAV_COLLAPSE_MIN_WIDTH = 768; // keep in sync with $bp-md in tokens/_breakpoints.scss
+
+class NavCompactController {
+  /**
+   * @param {HTMLElement} header - .site-header
+   * The nav may be a direct child or nested inside .site-header__inner — both
+   * are supported.  data-nav-mode is always set on .site-header so the CSS
+   * [data-nav-mode="compact"] ancestor selector works from any depth.
+   */
+  constructor(header) {
+    this.header = header;
+    // The top-level menubar <ul> has class "mai-menubar"; submenu <ul>s use
+    // "mai-menubar__submenu".  This query is unique regardless of nesting depth.
+    this.list = header.querySelector('ul.mai-menubar');
+    if (!this.list) return;
+
+    this._raf = null;
+    this._boundCheck = this.check.bind(this);
+    this._boundScheduleCheck = this.scheduleCheck.bind(this);
+
+    this.check();
+
+    this._resizeObserver = ('ResizeObserver' in window) ? new ResizeObserver(this._boundScheduleCheck) : null;
+    if (this._resizeObserver) {
+      this._resizeObserver.observe(header);
+    } else {
+      window.addEventListener('resize', this._boundScheduleCheck);
+    }
+
+    // Web-font swaps can change label widths after the initial check.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(this._boundCheck);
+    }
+  }
+
+  scheduleCheck() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+    this._raf = requestAnimationFrame(this._boundCheck);
+  }
+
+  check() {
+    if (!window.matchMedia(`(min-width: ${NAV_COLLAPSE_MIN_WIDTH}px)`).matches) {
+      // Native small-viewport CSS already applies; nothing for JS to force.
+      return;
+    }
+
+    // Re-render in row layout before measuring, so a header that was forced
+    // compact by an earlier (narrower) check gets a fair chance to un-collapse.
+    this.header.removeAttribute('data-nav-mode');
+
+    if (this.isWrapped()) {
+      this.header.setAttribute('data-nav-mode', 'compact');
+    }
+  }
+
+  isWrapped() {
+    const items = Array.from(this.list.children);
+    if (items.length < 2) return false;
+    const firstTop = items[0].offsetTop;
+    return items.some(item => item.offsetTop !== firstTop);
+  }
+
+  destroy() {
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+    } else {
+      window.removeEventListener('resize', this._boundScheduleCheck);
+    }
+    if (this._raf) cancelAnimationFrame(this._raf);
+    this.header = null;
+    this.list = null;
   }
 }
 
@@ -283,9 +452,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggle.__maiMobileToggle) {
       toggle.__maiMobileToggle.destroy();
     }
-    const nav = toggle.nextElementSibling;
+    // Prefer aria-controls reference (robust against DOM ordering)
+    const navId = toggle.getAttribute('aria-controls');
+    const nav   = (navId && document.getElementById(navId))
+                  || toggle.nextElementSibling;
     if (nav && nav.classList.contains('mai-menubar-nav')) {
       toggle.__maiMobileToggle = new MobileToggle(toggle, nav);
     }
   });
+
+  document.querySelectorAll('.site-header').forEach(header => {
+    if (header.__maiNavCompact) {
+      header.__maiNavCompact.destroy();
+    }
+    if (header.querySelector('.mai-menubar-nav')) {
+      header.__maiNavCompact = new NavCompactController(header);
+    }
+  });
+
+  // Reveal the offcanvas slide/fade transition (see menubar-navigation.scss
+  // ":root:not(.mai-nav-ready)") only once the initial compact/no-compact
+  // measurement has settled — otherwise NavCompactController's first check,
+  // or its post-font-swap recheck, can itself flash the panel on load.
+  const revealNavTransitions = () => {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.documentElement.classList.add('mai-nav-ready');
+    }));
+  };
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(revealNavTransitions, revealNavTransitions);
+  } else {
+    revealNavTransitions();
+  }
 });

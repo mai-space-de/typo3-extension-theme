@@ -40,20 +40,11 @@
         <f:cObject typoscriptObjectPath="lib.templates.columns.popovers"/>
     </f:mark.contentArea>
     <f:render partial="Organism/Navigation/SkipLinks" arguments="{_all}"/>
-    <header role="banner">
-        <div class="site-header-actions">
-            <f:render partial="Organism/Navigation/Menubar"
-                      arguments="{
-                          menuItems:   menuMain,
-                          label:       settings.general.site.name
-                      }"/>
-            <f:render partial="Organism/Navigation/LanguageMenu"
-                      arguments="{languages: languages}"/>
-        </div>
-        <f:mark.contentArea colPos="3">
-            <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
-        </f:mark.contentArea>
-    </header>
+    <f:render partial="Organism/Topbar" arguments="{_all}"/>
+    <f:render partial="Organism/Header" arguments="{_all}"/>
+    <f:mark.contentArea colPos="3">
+        <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
+    </f:mark.contentArea>
     <main id="main" role="main" tabindex="-1">
         <f:if condition="{hero}">
             <f:else>
@@ -64,10 +55,11 @@
             <f:cObject typoscriptObjectPath="lib.templates.columns.content"/>
         </f:mark.contentArea>
     </main>
-    <footer role="contentinfo">
+    <footer class="site-footer" role="contentinfo">
         <f:mark.contentArea colPos="4">
             <f:cObject typoscriptObjectPath="lib.templates.columns.afterContent"/>
         </f:mark.contentArea>
+        <f:render partial="Organism/Footer" arguments="{_all}"/>
         <f:mark.contentArea colPos="5">
             <f:cObject typoscriptObjectPath="lib.templates.columns.footer"/>
         </f:mark.contentArea>

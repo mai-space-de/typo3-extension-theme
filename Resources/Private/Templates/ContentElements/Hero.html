@@ -36,10 +36,10 @@
             </f:if>
         </div>
 
-        <f:if condition="{assets.0}">
+        <f:if condition="{images.0}">
             <div class="hero__logo-frame">
-                <mai:image.picture image="{assets.0}"
-                                   alt="{assets.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'BGM Pulheim')}"
+                <mai:image.picture image="{images.0}"
+                                   alt="{images.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'BGM Pulheim')}"
                                    elementUid="{data.uid}"
                                    width="1600"
                                    fileExtension="jpg"

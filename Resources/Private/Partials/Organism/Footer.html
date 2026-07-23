@@ -1,0 +1,95 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Site footer organism — two-column layout:
+      Left  : brand (logo + name + tagline)
+      Right : sitemap columns (nav items with children) + legal column
+
+    Arguments (pass {_all} from the page template):
+      menuMain   {array}  — MenuProcessor (dataProcessing.10 / Hauptnavigation)
+      footerMain {array}  — MenuProcessor (dataProcessing.20 / Footer folder)
+      settings   {array}  — theme settings (logo, homepage pid)
+      siteName   {string} — page.10.variables.siteName from TypoScript
+</f:comment>
+
+<div class="site-footer__inner">
+    <div class="site-footer__grid">
+
+        <f:comment>── Brand column ────────────────────────────────────────────────</f:comment>
+        <div class="site-footer__brand">
+            <f:link.page pageUid="{settings.pids.homepage}" class="site-footer__logo link-unstyled">
+                <f:variable name="footerLogoSrc" value="{f:if(condition: settings.general.site.logoFooter, then: settings.general.site.logoFooter, else: settings.general.site.logo)}"/>
+                <f:if condition="{footerLogoSrc}">
+                    <f:image src="{footerLogoSrc}"
+                             alt=""
+                             class="site-footer__logo-img"
+                             loading="lazy"
+                             decoding="async"/>
+                </f:if>
+                <span class="site-footer__logo-name">{siteName}</span>
+            </f:link.page>
+            <p class="site-footer__tagline">
+                {f:translate(key: 'footer.tagline', extensionName: 'mai_theme')}
+            </p>
+        </div>
+
+        <f:comment>── Sitemap + legal (sub-grid so they don't bleed into brand) ─</f:comment>
+        <div class="site-footer__columns">
+
+            <f:comment>── One column per top-level nav item that has sub-pages ────</f:comment>
+            <f:for each="{menuMain}" as="column">
+                <f:if condition="{column.hasSubpages}">
+                    <nav class="site-footer__column"
+                         aria-labelledby="footer-col-{column.data.uid}">
+                        <h2 id="footer-col-{column.data.uid}" class="site-footer__heading">
+                            <f:link.page pageUid="{column.data.uid}"
+                                         class="site-footer__heading-link link-unstyled">
+                                {column.title}
+                            </f:link.page>
+                        </h2>
+                        <ul class="site-footer__list">
+                            <f:for each="{column.children}" as="child">
+                                <li>
+                                    <a href="{child.link}"
+                                       class="site-footer__link"
+                                       {f:if(condition: child.target, then: 'target="{child.target}" rel="noopener noreferrer"')}
+                                       {f:if(condition: child.active, then: 'aria-current="page"')}>{child.title}</a>
+                                </li>
+                            </f:for>
+                        </ul>
+                    </nav>
+                </f:if>
+            </f:for>
+
+            <f:comment>── Legal links from footer menu folder ──────────────────────</f:comment>
+            <f:if condition="{footerMain}">
+                <nav class="site-footer__column site-footer__column--legal"
+                     aria-labelledby="footer-col-legal">
+                    <h2 id="footer-col-legal" class="site-footer__heading">
+                        {f:translate(key: 'footer.legal_heading', extensionName: 'mai_theme')}
+                    </h2>
+                    <ul class="site-footer__list">
+                        <f:for each="{footerMain}" as="item">
+                            <li>
+                                <a href="{item.link}"
+                                   class="site-footer__link"
+                                   {f:if(condition: item.target, then: 'target="{item.target}" rel="noopener noreferrer"')}>{item.title}</a>
+                            </li>
+                        </f:for>
+                    </ul>
+                </nav>
+            </f:if>
+        </div>
+    </div>
+
+    <f:comment>── Meta bar: copyright left, funding note right ─────────────────</f:comment>
+    <div class="site-footer__meta">
+        <p class="site-footer__copyright">
+            © {f:format.date(date: 'now', format: 'Y')} {siteName}
+        </p>
+        <p class="site-footer__funded">
+            {f:translate(key: 'footer.funded_by', extensionName: 'mai_theme')}
+        </p>
+    </div>
+</div>
+</html>

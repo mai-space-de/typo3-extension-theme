@@ -31,6 +31,34 @@
 			<source>Select language</source>
 			<target>Sprache wählen</target>
 		</trans-unit>
+		<trans-unit id="header.home_link_suffix" resname="header.home_link_suffix">
+			<source>– to homepage</source>
+			<target>– zur Startseite</target>
+		</trans-unit>
+		<trans-unit id="header.login" resname="header.login">
+			<source>Login</source>
+			<target>Anmelden</target>
+		</trans-unit>
+		<trans-unit id="header.search" resname="header.search">
+			<source>Search</source>
+			<target>Suche</target>
+		</trans-unit>
+		<trans-unit id="footer.legal_heading" resname="footer.legal_heading">
+			<source>Legal</source>
+			<target>Rechtliches</target>
+		</trans-unit>
+		<trans-unit id="footer.tagline" resname="footer.tagline">
+			<source>Practical, helpful, warm-hearted. Since 2016.</source>
+			<target>Praxisnah, hilfsbereit, herzlich. Seit 2016.</target>
+		</trans-unit>
+		<trans-unit id="footer.funded_by" resname="footer.funded_by">
+			<source>Funded by the City of Pulheim</source>
+			<target>Gefördert durch die Stadt Pulheim</target>
+		</trans-unit>
+		<trans-unit id="nav.close" resname="nav.close">
+			<source>Close navigation</source>
+			<target>Navigation schließen</target>
+		</trans-unit>
 	</body>
 	</file>
 </xliff>

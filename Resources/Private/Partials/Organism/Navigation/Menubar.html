@@ -2,26 +2,27 @@
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
       data-namespace-typo3-fluid="true">
 <f:comment>
-    Menubar navigation organism — WAI-ARIA APG "Navigation Menubar" pattern.
-    https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+    Menubar navigation organism — WAI-ARIA disclosure navigation + offcanvas
+    on mobile/compact viewports.
+    https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+
+    Offcanvas behaviour (mobile / compact mode):
+      - The hamburger toggle sets aria-expanded="true" on itself.
+      - JS (MobileToggle) opens the nav as a full-screen panel: adds
+        aria-modal, traps focus (Tab + inert siblings), locks body scroll.
+      - The close button inside the panel returns focus to the toggle.
+      - Escape always closes.
+      - The offcanvas footer repeats language switcher + login for mobile
+        users who cannot see the topbar.
 
     Arguments:
-      menuItems  {array}   — MenuProcessor result (multi-level, processed via
-                             dataProcessing.10 in page.typoscript / lib.templates.base).
-                             Each item has: title, link, target, active, current,
-                             hasSubpages, children[].
-      label      {string}  — Accessible aria-label for the <nav> landmark.
-                             Defaults to site name. Pass via {settings.general.site.name}
-                             or hardcode per-template.
-      mobileLabel {string} — Visible label for mobile toggle button (default "Menü").
-
-    Asset injection:
-      CSS and JS are injected here so this partial is self-contained.
-      The mai:asset.* ViewHelpers deduplicate by identifier — safe to include
-      this partial multiple times on a page without double-loading.
+      menuItems {array}  — MenuProcessor result (multi-level)
+      languages {array}  — LanguageMenuProcessor result (for offcanvas footer)
+      settings  {array}  — theme settings (pids.frontendLogin for offcanvas footer)
+      label     {string} — Accessible aria-label for the <nav> landmark
 </f:comment>
 
-<f:comment>── Assets (injected once, deduplicated by identifier) ──────────────────</f:comment>
+<f:comment>── Assets ────────────────────────────────────────────────────────────</f:comment>
 <mai:asset.css identifier="mai-menubar-nav"
                src="EXT:mai_theme/Resources/Public/Scss/menubar-navigation.scss"
                priority="0"/>
@@ -30,27 +31,61 @@
                defer="1"
                priority="0"/>
 
-<f:comment>── Mobile toggle ─────────────────────────────────────────────────────</f:comment>
+<f:comment>── Hamburger (visible in compact / narrow viewports) ─────────────</f:comment>
 <f:render partial="Organism/Navigation/MobileToggle"
           arguments="{label: mobileLabel}"/>
 
-<f:comment>── Nav landmark ──────────────────────────────────────────────────────</f:comment>
+<f:comment>── Nav landmark ─────────────────────────────────────────────────</f:comment>
 <nav id="main-nav"
      class="mai-menubar-nav"
      data-testid="mobile-menu"
-     aria-label="{f:if(condition: label, then: label, else: '{f:translate(key: \'menubar.main_nav_label\', extensionName: \'mai_theme\')}')}"
-     tabindex="-1">
+     aria-label="{f:if(condition: label, then: label, else: '{f:translate(key: \'menubar.main_nav_label\', extensionName: \'mai_theme\')}')}">
 
-    <f:comment>
-        Disclosure navigation: plain <ul> list. Links are always links;
-        a sibling <button> inside each item with children toggles its submenu.
-        No role="menubar"/"menu"/"menuitem" — standard landmark + list semantics.
-    </f:comment>
+    <f:comment>── Offcanvas close bar (hidden on desktop via CSS) ───────────────</f:comment>
+    <div class="mai-menubar-close">
+        <button type="button"
+                class="mai-menubar-close__btn"
+                data-testid="menu-close"
+                aria-label="{f:translate(key: 'nav.close', extensionName: 'mai_theme')}">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 aria-hidden="true" focusable="false"
+                 width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+            <span>{f:translate(key: 'nav.close', extensionName: 'mai_theme')}</span>
+        </button>
+    </div>
+
+    <f:comment>── Navigation list ───────────────────────────────────────────────</f:comment>
     <ul id="mai-menubar-list" class="mai-menubar">
         <f:for each="{menuItems}" as="item">
             <f:render partial="Organism/Navigation/MenubarItem"
                       arguments="{item: item, depth: 0}"/>
         </f:for>
     </ul>
+
+    <f:comment>── Offcanvas footer: language + search + login (hidden on desktop) ────────</f:comment>
+    <div class="mai-menubar-offcanvas-footer">
+        <f:render partial="Organism/Navigation/LanguageMenu"
+                  arguments="{languages: languages}"/>
+        <f:if condition="{settings.pids.search}">
+            <f:link.page pageUid="{settings.pids.search}"
+                         class="mai-button mai-button--outline mai-menubar-offcanvas-footer__search"
+                         additionalAttributes="{'data-testid': 'menubar-search'}">
+                {f:translate(key: 'header.search', extensionName: 'mai_theme')}
+            </f:link.page>
+        </f:if>
+        <f:if condition="{settings.pids.frontendLogin}">
+            <f:link.page pageUid="{settings.pids.frontendLogin}"
+                         class="mai-button mai-button--primary mai-menubar-offcanvas-footer__login"
+                         additionalAttributes="{'data-testid': 'menubar-login'}">
+                {f:translate(key: 'header.login', extensionName: 'mai_theme')}
+            </f:link.page>
+        </f:if>
+    </div>
+
 </nav>
 </html>

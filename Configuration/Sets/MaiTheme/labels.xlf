@@ -532,6 +532,12 @@
             <trans-unit id="settings.description.pageUids.frontendLogin">
                 <source>Page UID for the frontend login page.</source>
             </trans-unit>
+            <trans-unit id="settings.pageUids.frontendRegister">
+                <source>Frontend Register</source>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.frontendRegister">
+                <source>Page UID for the frontend registration page.</source>
+            </trans-unit>
             <trans-unit id="settings.pageUids.mainMenu">
                 <source>Main navigation (directory root)</source>
             </trans-unit>

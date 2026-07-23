@@ -10,7 +10,8 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
 /**
- * Sets a boolean template variable when colPos 0 contains a Hero content element.
+ * Sets a boolean template variable when a Hero CE is present on the page
+ * (typically main content colPos 0 or beforeContent colPos 3).
  *
  * @example TypoScript:
  * 6 = Maispace\MaiTheme\DataProcessing\HeroContentProcessor
@@ -22,8 +23,6 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 final class HeroContentProcessor implements DataProcessorInterface
 {
     private const HERO_CTYPE = 'maispace_hero';
-
-    private const MAIN_CONTENT_COL_POS = 0;
 
     public function process(
         ContentObjectRenderer $cObj,
@@ -38,22 +37,18 @@ final class HeroContentProcessor implements DataProcessorInterface
         $as = $cObj->stdWrapValue('as', $processorConfiguration, 'hero');
         $contentSource = $cObj->stdWrapValue('contentSource', $processorConfiguration, 'content');
 
-        $processedData[$as] = $this->hasHeroInMainContent($processedData[$contentSource] ?? null);
+        $processedData[$as] = $this->hasHero($processedData[$contentSource] ?? null);
 
         return $processedData;
     }
 
-    private function hasHeroInMainContent(mixed $content): bool
+    private function hasHero(mixed $content): bool
     {
         if (!$content instanceof ContentAreaCollection) {
             return false;
         }
 
         foreach ($content as $area) {
-            if ($area->getColPos() !== self::MAIN_CONTENT_COL_POS) {
-                continue;
-            }
-
             foreach ($area->getRecords() as $record) {
                 if (!$record instanceof RecordInterface) {
                     continue;

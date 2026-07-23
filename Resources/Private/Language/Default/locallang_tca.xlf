@@ -82,6 +82,21 @@
             <trans-unit id="field.link">
                 <source>Link</source>
             </trans-unit>
+            <trans-unit id="field.link_text">
+                <source>Link text</source>
+            </trans-unit>
+            <trans-unit id="field.link_secondary">
+                <source>Secondary link</source>
+            </trans-unit>
+            <trans-unit id="field.link_secondary_text">
+                <source>Secondary link text</source>
+            </trans-unit>
+            <trans-unit id="field.eyebrow">
+                <source>Eyebrow</source>
+            </trans-unit>
+            <trans-unit id="field.badge_text">
+                <source>Badge text</source>
+            </trans-unit>
             <trans-unit id="field.anchor_id">
                 <source>Anchor ID</source>
             </trans-unit>

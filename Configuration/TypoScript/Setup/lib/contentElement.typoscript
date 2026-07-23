@@ -67,6 +67,7 @@ lib.contentElement {
         disclaimer = {$pageUids.disclaimer}
         newsletter = {$pageUids.newsletter}
         frontendLogin = {$pageUids.frontendLogin}
+        frontendRegister = {$pageUids.frontendRegister}
     }
 }
 
@@ -356,6 +357,13 @@ tt_content {
         pluginName = Account
         vendorName = Maispace
     }
+    maiaccount_register = USER
+    maiaccount_register {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MaiAccount
+        pluginName = Register
+        vendorName = Maispace
+    }
     maiaccount_mfa = USER
     maiaccount_mfa {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
@@ -371,6 +379,7 @@ tt_content {
         vendorName = Maispace
     }
     maispace_account_account < tt_content.maiaccount_account
+    maispace_account_register < tt_content.maiaccount_register
     maispace_account_mfa < tt_content.maiaccount_mfa
     maispace_account_stories < tt_content.maiaccount_stories
 

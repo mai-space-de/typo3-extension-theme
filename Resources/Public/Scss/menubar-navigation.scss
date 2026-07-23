@@ -21,6 +21,26 @@
 @import "tokens/breakpoints";
 
 // ---------------------------------------------------------------------------
+// Collapsed-nav trigger
+//
+// $bp-md alone switches too late: menu-label width varies by language
+// (uk/ar run long — see .mai-menubar comment below), so the row can already
+// be wrapping onto a second line well above 768px. menubar-navigation.js
+// measures actual wrap and sets [data-nav-mode="compact"] on .site-header
+// as soon as it happens, regardless of viewport width. The media query
+// stays as the no-JS / genuinely-narrow-viewport floor.
+// ---------------------------------------------------------------------------
+@mixin nav-collapsed {
+    @include media-down($bp-md) {
+        @content;
+    }
+
+    [data-nav-mode="compact"] & {
+        @content;
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Design tokens — BGM Pulheim
 // ---------------------------------------------------------------------------
 :root {
@@ -75,7 +95,7 @@
         outline-offset: 2px;
     }
 
-    @include media-down($bp-md) {
+    @include nav-collapsed {
         display: flex;
     }
 }
@@ -109,29 +129,139 @@
 }
 
 // ---------------------------------------------------------------------------
-// Nav landmark wrapper
+// Nav landmark wrapper + offcanvas behaviour
 // ---------------------------------------------------------------------------
+:root {
+    --nav-offcanvas-z: 500;
+}
+
 .mai-menubar-nav {
     margin:  0;
     padding: 0;
-
-    @include media-down($bp-md) {
-        position: relative;
-    }
 }
 
-// Mobile: hide nav when toggle is collapsed; slide out below header when open
-@include media-down($bp-md) {
-    .mai-menubar-toggle[aria-expanded="false"] + .mai-menubar-nav {
-        display: none;
+// Offcanvas: full-viewport panel, slides in from the inline-end edge.
+// Controlled via aria-expanded on the toggle; JS adds aria-modal, traps
+// focus, and locks body scroll (see menubar-navigation.js MobileToggle).
+@include nav-collapsed {
+    .mai-menubar-nav {
+        display:    flex;
+        flex-direction: column;
+        position:   fixed;
+        inset:      0;
+        z-index:    var(--nav-offcanvas-z);
+        background: var(--bgm-card, #fff);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+
+        // Hidden: translated off the inline-end edge + invisible
+        translate:   100% 0;
+        opacity:     0;
+        visibility:  hidden;
+        transition:  translate  280ms cubic-bezier(.2, 0, .2, 1),
+                     opacity    280ms cubic-bezier(.2, 0, .2, 1),
+                     visibility 280ms;
+    }
+
+    // RTL: slide from inline-start
+    [dir="rtl"] .mai-menubar-nav {
+        translate: -100% 0;
     }
 
     .mai-menubar-toggle[aria-expanded="true"] + .mai-menubar-nav {
-        position:           absolute;
-        inset-inline-start: 0;
-        inset-block-start:  100%;
-        width:              100%;
-        z-index:            200;
+        translate:  0 0;
+        opacity:    1;
+        visibility: visible;
+    }
+}
+
+// Guard against a load-time flicker: NavCompactController's first wrap
+// check (and its post-font-swap recheck) can flip data-nav-mode shortly
+// after paint, which would otherwise animate the slide/fade transition
+// above as a visible flash of the offcanvas panel. Transitions stay off
+// until menubar-navigation.js confirms the initial layout has settled.
+:root:not(.mai-nav-ready) .mai-menubar-nav {
+    transition: none !important;
+}
+
+// Respect prefers-reduced-motion: skip the slide, keep the fade
+@media (prefers-reduced-motion: reduce) {
+    .mai-menubar-nav {
+        transition: opacity 1ms, visibility 1ms !important;
+        translate:  none !important;
+    }
+}
+
+// Body scroll lock — applied by JS when the offcanvas opens
+body.mai-offcanvas-open {
+    overflow: hidden;
+}
+
+// ---------------------------------------------------------------------------
+// Offcanvas close bar — hidden on desktop, shown inside the panel on mobile
+// ---------------------------------------------------------------------------
+.mai-menubar-close {
+    display: none;
+
+    @include nav-collapsed {
+        display:          flex;
+        align-items:      center;
+        justify-content:  flex-end;
+        padding:          var(--space-3, 12px) var(--space-3, 12px) var(--space-2, 8px);
+        border-block-end: 1px solid var(--bgm-teal-100, #d8e6e6);
+        flex-shrink:      0;
+    }
+}
+
+.mai-menubar-close__btn {
+    display:       inline-flex;
+    align-items:   center;
+    gap:           var(--space-2, 8px);
+    background:    none;
+    border:        2px solid transparent;
+    border-radius: var(--radius-md, 4px);
+    cursor:        pointer;
+    padding:       var(--space-2, 8px) var(--space-3, 12px);
+    color:         var(--bgm-teal-800, #16575a);
+    font-size:     var(--fs-base, 1rem);
+    font-weight:   var(--fw-semibold, 600);
+    line-height:   1;
+    transition:    background-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
+
+    &:hover {
+        background-color: var(--bgm-teal-050, #eef4f4);
+        color:            var(--bgm-teal-900, #0e3f3f);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--bgm-gold-500, #d8b222);
+        outline-offset: 2px;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Offcanvas footer — language + login shown at the bottom of the panel
+// ---------------------------------------------------------------------------
+.mai-menubar-offcanvas-footer {
+    display: none;
+
+    @include nav-collapsed {
+        display:            flex;
+        align-items:        center;
+        flex-wrap:          wrap;
+        gap:                var(--space-2, 8px) var(--space-3, 12px);
+        padding:            var(--space-3, 12px) var(--space-3, 12px) var(--space-4, 16px);
+        border-block-start: 1px solid var(--bgm-teal-100, #d8e6e6);
+        margin-block-start: auto;
+    }
+
+    // Search / login take full width on very small screens
+    &__search,
+    &__login {
+        @include media-down($bp-sm) {
+            width: 100%;
+            justify-content: center;
+        }
     }
 }
 
@@ -141,21 +271,21 @@
 .mai-menubar {
     display:        flex;
     flex-direction: row;
-    flex-wrap:      nowrap;
+    // Wrap onto a second row instead of overflowing the viewport —
+    // menu labels expand considerably in uk/ar translations.
+    flex-wrap:      wrap;
     align-items:    center;
     gap:            0;
     margin:         0;
     padding:        0;
     list-style:     none;
 
-    // Mobile: vertical stack with teal card border
-    @include media-down($bp-md) {
-        flex-direction:   column;
-        align-items:      stretch;
-        width:            100%;
-        background-color: var(--bgm-card, #ffffff);
-        border:           2px solid var(--bgm-teal-700, #1f6e6e);
-        box-shadow:       var(--shadow-md, 0 4px 14px rgba(14, 63, 63, 0.08));
+    // Offcanvas: vertical stack, full-width — panel provides the container
+    @include nav-collapsed {
+        flex-direction: column;
+        align-items:    stretch;
+        width:          100%;
+        padding:        var(--space-2, 8px) 0;
     }
 }
 
@@ -168,7 +298,7 @@
     list-style: none;
     position:   relative;
 
-    @include media-down($bp-md) {
+    @include nav-collapsed {
         display: block;
         width:   100%;
     }
@@ -177,7 +307,7 @@
 .mai-menubar > .mai-menubar__item {
     display: inline-block;
 
-    @include media-down($bp-md) {
+    @include nav-collapsed {
         display: block;
     }
 }
@@ -189,7 +319,9 @@
     display:         inline-flex;
     align-items:     center;
     gap:             var(--space-1, 4px);
-    padding:         var(--space-2, 8px) var(--space-3, 12px);
+    // Inline padding reduced from space-3 (12 px) to space-2 (8 px) per side
+    // so 7 German-language labels fit within the 90 rem header container.
+    padding:         var(--space-2, 8px);
     color:           var(--nav-link-color);
     font-size:       var(--fs-base, 1rem);
     font-weight:     var(--fw-semibold, 600);
@@ -337,7 +469,7 @@
     }
 
     // Mobile: static, full-width, inset teal left border (accordion-style)
-    @include media-down($bp-md) {
+    @include nav-collapsed {
         position:   static;
         box-shadow: none;
         border:     none;

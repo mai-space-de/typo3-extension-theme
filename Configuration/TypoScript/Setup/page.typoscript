@@ -27,6 +27,14 @@ page {
 
     config < config
 
+    # Responsive viewport — required for the mobile navigation breakpoints.
+    # No maximum-scale / user-scalable restrictions (WCAG 1.4.4 reflow/zoom).
+    meta.viewport = width=device-width, initial-scale=1
+
+    # Site favicon from site set setting general.site.favicon (EXT: or public path).
+    # Without this, the setting is only passed into Fluid and never rendered in <head>.
+    shortcutIcon = {$general.site.favicon}
+
     10 = FLUIDTEMPLATE
     10 {
         templateRootPaths {
@@ -48,6 +56,13 @@ page {
             pageHeading {
                 field = nav_title // title
             }
+
+            # Site name for the header brand block — per-language websiteTitle
+            # from the site config, falling back to the site-wide title.
+            siteName = TEXT
+            siteName {
+                data = siteLanguage:websiteTitle // site:websiteTitle
+            }
         }
 
         dataProcessing {
@@ -60,7 +75,7 @@ page {
             5 {
                 as = content
             }
-            # Skip page-level H1 when colPos 0 contains a Hero CE (h1.hero__title)
+            # Skip page-level H1 when a Hero CE is present (colPos 0 or beforeContent colPos 3)
             6 = Maispace\MaiTheme\DataProcessing\HeroContentProcessor
             6 {
                 as = hero
@@ -114,11 +129,13 @@ page {
                 disclaimer = {$pageUids.disclaimer}
                 newsletter = {$pageUids.newsletter}
                 frontendLogin = {$pageUids.frontendLogin}
+                frontendRegister = {$pageUids.frontendRegister}
             }
             general {
                 site {
                     logo = {$general.site.logo}
                     logoAlt = {$general.site.logoAlt}
+                    logoFooter = {$general.site.logoFooter}
                     favicon = {$general.site.favicon}
                 }
             }

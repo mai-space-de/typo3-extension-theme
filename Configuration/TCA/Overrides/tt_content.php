@@ -215,6 +215,26 @@ new Field("tt_content", "tx_maitheme_link", $lang("field.link"))
     ->setConfig(new LinkConfig())
     ->registerField();
 
+new Field("tt_content", "tx_maitheme_link_text", $lang("field.link_text"))
+    ->setConfig((new InputConfig())->setSize(40)->setEval("trim"))
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_link_secondary", $lang("field.link_secondary"))
+    ->setConfig(new LinkConfig())
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_link_secondary_text", $lang("field.link_secondary_text"))
+    ->setConfig((new InputConfig())->setSize(40)->setEval("trim"))
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_eyebrow", $lang("field.eyebrow"))
+    ->setConfig((new InputConfig())->setSize(50)->setEval("trim"))
+    ->registerField();
+
+new Field("tt_content", "tx_maitheme_badge_text", $lang("field.badge_text"))
+    ->setConfig((new InputConfig())->setSize(40)->setEval("trim"))
+    ->registerField();
+
 new Field("tt_content", "tx_maitheme_anchor_id", $lang("field.anchor_id"))
     ->setConfig((new InputConfig())->setSize(30)->setEval("trim"))
     ->registerField();
@@ -726,7 +746,12 @@ new CType("maispace_embed", $lang("ctype.embed"), "content-media")
 new CType("maispace_hero", $lang("ctype.hero"), "content-textmedia")
     ->addDefaultHeaderPalette()
     ->addSubheaderField()
-    ->addCustomFields("bodytext, image, tx_maitheme_link")
+    ->addCustomFields(
+        "tx_maitheme_eyebrow, bodytext, image," .
+        "tx_maitheme_link, tx_maitheme_link_text," .
+        "tx_maitheme_link_secondary, tx_maitheme_link_secondary_text," .
+        "tx_maitheme_badge_text",
+    )
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => true]])
     ->addCustomFields(
         "--div--;" .
@@ -764,7 +789,7 @@ new CType("maispace_banner", $lang("ctype.banner"), "content-image")
 new CType("maispace_cta", $lang("ctype.cta"), "content-special-html")
     ->addDefaultHeaderPalette()
     ->addSubheaderField()
-    ->addCustomFields("bodytext, tx_maitheme_link")
+    ->addCustomFields("bodytext, tx_maitheme_link, tx_maitheme_link_text")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => true]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
@@ -819,7 +844,7 @@ new CType("maispace_teaser", $lang("ctype.teaser"), "content-textmedia")
 new CType("maispace_featurebox", $lang("ctype.featurebox"), "content-textmedia")
     ->addDefaultHeaderPalette()
     ->addSubheaderField()
-    ->addCustomFields("tx_maitheme_icon_identifier, bodytext, tx_maitheme_link")
+    ->addCustomFields("tx_maitheme_icon_identifier, bodytext, tx_maitheme_link, tx_maitheme_link_text")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => true]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()

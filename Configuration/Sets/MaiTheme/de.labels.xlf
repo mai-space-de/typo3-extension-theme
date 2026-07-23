@@ -662,6 +662,14 @@
                 <source>Page UID for the frontend login page.</source>
                 <target>Seiten-UID für die Frontend-Login-Seite.</target>
             </trans-unit>
+            <trans-unit id="settings.pageUids.frontendRegister">
+                <source>Frontend Register</source>
+                <target>Frontend-Registrierung</target>
+            </trans-unit>
+            <trans-unit id="settings.description.pageUids.frontendRegister">
+                <source>Page UID for the frontend registration page.</source>
+                <target>Seiten-UID für die Frontend-Registrierungsseite.</target>
+            </trans-unit>
             <trans-unit id="settings.pageUids.mainMenu">
                 <source>Main navigation (directory root)</source>
                 <target>Hauptnavigation (Verzeichnis-Wurzel)</target>

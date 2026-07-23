@@ -1,0 +1,93 @@
+// =============================================================================
+// topbar.scss
+//
+// Utility topbar — language switcher + search + login, sits above the sticky header.
+// Not sticky itself: scrolls away so the main nav takes over.
+// Hidden below $bp-md — those actions live inside the offcanvas instead.
+// Inner wrapper uses the canonical page-wrap pattern from _page-wrap.scss.
+// =============================================================================
+
+@import "tokens/breakpoints";
+
+.site-topbar {
+    background: var(--bgm-teal-900, #0e3f3f);
+    color:      #fff;
+
+    // Hidden on narrow viewports — actions are in the offcanvas panel
+    @include media-down($bp-md) {
+        display: none;
+    }
+}
+
+.site-topbar__inner {
+    // Canonical page-wrap: max-width + centered + edge padding
+    max-width:      var(--layout-width-max, 72rem);
+    margin-inline:  auto;
+    padding-inline: var(--layout-grid-gap, clamp(1rem, 3vw, 2rem));
+    width:          100%;
+    box-sizing:     border-box;
+
+    display:         flex;
+    align-items:     center;
+    justify-content: flex-end;
+    gap:             var(--space-sm, 0.5rem);
+    padding-block:   var(--space-xs, 0.25rem);
+}
+
+// Override language menu colours for dark topbar
+.site-topbar .mai-language-menu__toggle {
+    color:     rgba(255, 255, 255, 0.85);
+    font-size: var(--fs-sm, 0.875rem);
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.12);
+        color:            #fff;
+    }
+
+    &:focus-visible {
+        outline-color: var(--bgm-gold-500, #d8b222);
+    }
+
+    &[aria-expanded="true"] {
+        background-color: rgba(255, 255, 255, 0.15);
+        color:            #fff;
+    }
+}
+
+.site-topbar .mai-language-menu__globe {
+    opacity: 0.75;
+}
+
+// Dropdown panel keeps the white card style (already defined in language-menu.scss)
+
+.site-topbar__search,
+.site-topbar__login {
+    display:         inline-flex;
+    align-items:     center;
+    gap:             var(--space-2, 8px);
+    padding:         var(--space-1, 4px) var(--space-3, 12px);
+    font-size:       var(--fs-sm, 0.875rem);
+    font-weight:     var(--fw-semibold, 600);
+    color:           rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    border:          1px solid rgba(255, 255, 255, 0.3);
+    border-radius:   var(--radius-md, 4px);
+    transition:      background-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1)),
+                     color            var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.12);
+        color:            #fff;
+        text-decoration:  none;
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--bgm-gold-500, #d8b222);
+        outline-offset: 2px;
+    }
+}
+
+.site-topbar__search-icon {
+    flex-shrink: 0;
+    opacity:     0.85;
+}

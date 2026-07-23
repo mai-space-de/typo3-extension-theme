@@ -42,6 +42,11 @@ settings:
     type: string
     category: mai-theme.general
 
+  general.site.logoFooter:
+    default: ''
+    type: string
+    category: mai-theme.general
+
   general.site.favicon:
     default: ''
     type: string
@@ -462,6 +467,11 @@ settings:
     category: mai-theme.pageUids
 
   pageUids.frontendLogin:
+    default: 0
+    type: page
+    category: mai-theme.pageUids
+
+  pageUids.frontendRegister:
     default: 0
     type: page
     category: mai-theme.pageUids

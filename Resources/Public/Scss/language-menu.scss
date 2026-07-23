@@ -1,0 +1,140 @@
+// =============================================================================
+// language-menu.scss
+//
+// Language switcher dropdown — BGM Pulheim brand.
+// Rendered by Partials/Organism/Navigation/LanguageMenu.html as a <nav>
+// landmark with a disclosure <button> (globe + current language) toggling
+// a dropdown panel of language links (language-menu.js).
+//
+// Classes (must not be renamed — JS depends on them):
+//   .mai-language-menu           — <nav> landmark wrapper (positioning root)
+//   .mai-language-menu__toggle   — disclosure <button>
+//   .mai-language-menu__globe    — globe SVG inside the toggle
+//   .mai-language-menu__current  — visible current-language label
+//   .mai-language-menu__arrow    — chevron SVG inside the toggle
+//   .mai-language-menu__list     — dropdown <ul> (hidden attr toggled by JS)
+//   .mai-language-menu__item     — <li> (carries lang="…")
+//   .mai-language-menu__link     — <a hreflang dir>
+//   .mai-language-menu__link--current / [aria-current="true"] — active language
+// =============================================================================
+
+.mai-language-menu {
+    position: relative;
+}
+
+// ---------------------------------------------------------------------------
+// Disclosure toggle — globe + current language + chevron
+// ---------------------------------------------------------------------------
+.mai-language-menu__toggle {
+    display:       inline-flex;
+    align-items:   center;
+    gap:           var(--space-2, 8px);
+    padding:       var(--space-2, 8px) var(--space-3, 12px);
+    background:    transparent;
+    border:        2px solid transparent;
+    border-radius: var(--radius-md, 4px);
+    cursor:        pointer;
+    color:         var(--bgm-teal-800, #16575a);
+    font-size:     var(--fs-sm, 0.875rem);
+    font-weight:   var(--fw-semibold, 600);
+    line-height:   1;
+    white-space:   nowrap;
+    transition:    background-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2, 0, 0.2, 1)),
+                   color            var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2, 0, 0.2, 1));
+
+    &:hover {
+        background-color: var(--bgm-teal-050, #eef4f4);
+        color:            var(--bgm-teal-900, #0e3f3f);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--bgm-gold-500, #d8b222);
+        outline-offset: 2px;
+    }
+
+    &[aria-expanded="true"] {
+        background-color: var(--bgm-teal-100, #d8e6e6);
+        color:            var(--bgm-teal-900, #0e3f3f);
+    }
+}
+
+.mai-language-menu__globe {
+    flex-shrink: 0;
+}
+
+.mai-language-menu__arrow {
+    fill:        currentcolor;
+    flex-shrink: 0;
+    transition:  transform var(--duration-base, 200ms) var(--easing-standard, cubic-bezier(0.2, 0, 0.2, 1));
+}
+
+.mai-language-menu__toggle[aria-expanded="true"] .mai-language-menu__arrow {
+    transform: rotate(180deg);
+}
+
+// ---------------------------------------------------------------------------
+// Dropdown panel — signature card outline, aligned to the inline end so it
+// never overflows the viewport edge next to the login button
+// ---------------------------------------------------------------------------
+.mai-language-menu__list {
+    position:          absolute;
+    inset-block-start: 100%;
+    inset-inline-end:  0;
+    margin:            0;
+    padding:           var(--space-2, 8px) var(--space-1, 4px);
+    min-width:         max-content;
+    background-color:  var(--bgm-card, #ffffff);
+    border:            2px solid var(--bgm-teal-700, #1f6e6e);
+    border-radius:     var(--radius-md, 4px);
+    box-shadow:        var(--shadow-md, 0 4px 14px rgba(14, 63, 63, 0.08));
+    list-style:        none;
+    z-index:           200;
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.mai-language-menu__item {
+    margin:     0;
+    padding:    0;
+    list-style: none;
+}
+
+// ---------------------------------------------------------------------------
+// Language links — block rows, gold inline-start border marks the current
+// language (mirrors the main-nav submenu pattern)
+// ---------------------------------------------------------------------------
+.mai-language-menu__link {
+    display:         flex;
+    width:           100%;
+    padding:         var(--space-2, 8px) var(--space-4, 16px) var(--space-2, 8px) var(--space-3, 12px);
+    font-size:       var(--fs-sm, 0.875rem);
+    font-weight:     var(--fw-semibold, 600);
+    color:           var(--bgm-teal-800, #16575a);
+    text-decoration: none;
+    white-space:     nowrap;
+    border-inline-start: 2px solid transparent;
+    transition:      background-color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2, 0, 0.2, 1)),
+                     color            var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2, 0, 0.2, 1)),
+                     border-color     var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2, 0, 0.2, 1));
+
+    &:hover {
+        background-color:          var(--bgm-teal-050, #eef4f4);
+        color:                     var(--bgm-teal-900, #0e3f3f);
+        border-inline-start-color: var(--bgm-teal-300, #9bbbbb);
+        text-decoration:           none;
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--bgm-gold-500, #d8b222);
+        outline-offset: -2px;
+    }
+
+    &[aria-current="true"],
+    &.mai-language-menu__link--current {
+        color:                     var(--bgm-teal-900, #0e3f3f);
+        font-weight:               var(--fw-bold, 700);
+        border-inline-start-color: var(--bgm-gold-500, #d8b222);
+    }
+}

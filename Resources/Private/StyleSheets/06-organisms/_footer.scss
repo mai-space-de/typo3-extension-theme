@@ -1,0 +1,191 @@
+// =============================================================================
+// 06-organisms/_footer.scss
+//
+// Site footer — deep-teal bar.
+//
+// Layout (2-column grid, brand | columns):
+//   .site-footer__grid        — 2 columns: brand (fixed) + sitemap block
+//   .site-footer__brand       — logo + org name + tagline
+//   .site-footer__columns     — auto-fit sub-grid for nav/legal columns
+//   .site-footer__column      — individual nav section (<nav>)
+//   .site-footer__meta        — bottom bar: copyright + funding note
+//
+// Design token source: Design/README.md + Footer.jsx
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+@import "../02-mixins/page-wrap";
+
+@layer theme-organisms {
+
+// ---------------------------------------------------------------------------
+// Custom properties
+// ---------------------------------------------------------------------------
+:root {
+    --footer-bg:            var(--bgm-teal-900, #0e3f3f);
+    --footer-fg:            #ffffff;
+    --footer-fg-muted:      var(--bgm-teal-300, #9bbbbb);
+    --footer-heading-color: var(--bgm-gold-300, #ead687);
+    --footer-link-hover:    var(--bgm-gold-300, #ead687);
+    --footer-border:        rgba(255, 255, 255, 0.12);
+    --footer-padding-block: var(--space-3xl, 5rem);
+    --footer-brand-width:   16rem;
+    --footer-col-min:       9rem;
+}
+
+// ---------------------------------------------------------------------------
+// Shell — full-bleed outer element
+// ---------------------------------------------------------------------------
+.site-footer {
+    background:         var(--footer-bg);
+    color:              var(--footer-fg);
+    margin-block-start: var(--space-3xl, 5rem);
+}
+
+// Canonical inner wrapper: max-width + centred + edge padding
+.site-footer__inner {
+    @include page-wrap;
+    padding-block: var(--footer-padding-block) var(--space-xl, 2.5rem);
+}
+
+// ---------------------------------------------------------------------------
+// Outer 2-column grid: brand | columns-block
+// Mobile: single column stack
+// Tablet+: brand fixed-width left, columns fill the rest
+// ---------------------------------------------------------------------------
+.site-footer__grid {
+    display:          grid;
+    grid-template-columns: 1fr;
+    gap:              var(--space-2xl, 3.5rem);
+    margin-block-end: var(--space-2xl, 3.5rem);
+
+    @include bp-up(md) {
+        grid-template-columns: var(--footer-brand-width) 1fr;
+        align-items: start;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Brand column
+// ---------------------------------------------------------------------------
+.site-footer__brand {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-md, 1.25rem);
+}
+
+.site-footer__logo {
+    display:     flex;
+    align-items: center;
+    gap:         var(--space-sm, 1rem);
+    color:       var(--footer-fg);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+        color:           var(--footer-heading-color);
+        text-decoration: none;
+    }
+}
+
+.site-footer__logo-img {
+    height:      3rem;
+    width:       auto;
+    flex-shrink: 0;
+}
+
+.site-footer__logo-name {
+    font-weight: var(--font-weight-bold, 700);
+    font-size:   var(--font-size-sm, 0.875rem);
+    line-height: var(--line-height-snug, 1.3);
+}
+
+.site-footer__tagline {
+    margin:     0;
+    font-size:  var(--font-size-sm, 0.875rem);
+    line-height: var(--line-height-relaxed, 1.65);
+    color:      var(--footer-fg-muted);
+}
+
+// ---------------------------------------------------------------------------
+// Columns sub-grid — fills the right side of the outer grid
+// auto-fit so the number of columns adapts to how many nav sections exist
+// ---------------------------------------------------------------------------
+.site-footer__columns {
+    display:               grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--footer-col-min), 1fr));
+    gap:                   var(--space-xl, 2.5rem) var(--space-lg, 2rem);
+    align-items:           start;
+}
+
+// ---------------------------------------------------------------------------
+// Individual nav column
+// ---------------------------------------------------------------------------
+.site-footer__column {
+    // nothing extra needed — layout comes from the sub-grid
+}
+
+.site-footer__heading {
+    margin:         0 0 var(--space-md, 1.25rem);
+    font-size:      var(--font-size-xs, 0.75rem);
+    font-weight:    var(--font-weight-bold, 700);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color:          var(--footer-heading-color);
+}
+
+.site-footer__heading-link {
+    color:           inherit;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+        color: var(--footer-fg);
+    }
+}
+
+.site-footer__list {
+    list-style: none;
+    margin:     0;
+    padding:    0;
+    display:    flex;
+    flex-direction: column;
+    gap:        var(--space-sm, 1rem);
+}
+
+.site-footer__link {
+    color:           var(--footer-fg);
+    text-decoration: none;
+    font-size:       var(--font-size-sm, 0.875rem);
+    line-height:     var(--line-height-snug, 1.3);
+    transition:      color var(--duration-fast, 120ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
+
+    &:hover,
+    &:focus-visible {
+        color:           var(--footer-link-hover);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Meta bar — copyright left, funding note right
+// ---------------------------------------------------------------------------
+.site-footer__meta {
+    border-block-start: 1px solid var(--footer-border);
+    padding-block-start: var(--space-md, 1.25rem);
+    display:             flex;
+    flex-wrap:           wrap;
+    justify-content:     space-between;
+    align-items:         center;
+    gap:                 var(--space-sm, 1rem);
+}
+
+.site-footer__copyright,
+.site-footer__funded {
+    margin:    0;
+    font-size: var(--font-size-xs, 0.75rem);
+    color:     var(--footer-fg-muted);
+}
+
+} // end @layer theme-organisms

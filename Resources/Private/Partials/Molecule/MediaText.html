@@ -1,15 +1,24 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<div class="mai-media-text mai-media-text--{mediaPosition}">
+<f:comment>
+    mediaPosition is the raw TYPO3 core `imageorient` value. This component only
+    supports a genuine two-column layout, which maps to the two "beside text"
+    core options: 25 (image right) and 26 (image left). Other legacy
+    imageorient values (stacked/in-text) aren't representable here and fall
+    back to --left.
+</f:comment>
+<div class="mai-mediatext mai-mediatext--{f:if(condition: '{mediaPosition} == 25', then: 'right', else: 'left')}">
     <f:if condition="{image}">
-        <div class="mai-media-text__media">
+        <div class="mai-mediatext__media">
             <f:render partial="Atom/Image" arguments="{image: image, alt: image.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: title)}"/>
         </div>
     </f:if>
-    <div class="mai-media-text__body">
+    <div class="mai-mediatext__content">
         <f:if condition="{title}">
-            <f:render partial="Atom/Heading" arguments="{level: 2, text: title}"/>
+            <f:render partial="Atom/Heading" arguments="{level: 2, text: title, class: 'mai-mediatext__title'}"/>
         </f:if>
-        <f:if condition="{text}">{text -> f:format.html()}</f:if>
+        <f:if condition="{text}">
+            <div class="mai-mediatext__body">{text -> f:format.html()}</div>
+        </f:if>
     </div>
 </div>
 </html>

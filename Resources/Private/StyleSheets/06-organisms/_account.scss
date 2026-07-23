@@ -1,0 +1,140 @@
+// =============================================================================
+// 06-organisms/_account.scss
+//
+// Frontend account surfaces (login, register) — BGM double-frame card pattern
+// matching Design/ui_kits/website/MitwirkenForm.jsx and preview/forms.html.
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+
+@layer theme-organisms {
+
+main:has(.mai-account-login) {
+    background: var(--color-surface);
+}
+
+main:has(.mai-account-login) .mai-page__title {
+    max-width: 26rem;
+    margin-inline: auto;
+    margin-block-end: var(--space-lg);
+    padding-inline: var(--layout-grid-gap);
+    text-align: center;
+    color: var(--bgm-teal-900);
+    font-weight: var(--font-weight-bold);
+}
+
+.mai-account-login {
+    display: flex;
+    justify-content: center;
+    padding-block: 0 var(--space-3xl);
+    padding-inline: var(--layout-grid-gap);
+}
+
+.mai-account-login__card {
+    width: 100%;
+    max-width: 26rem;
+    background: var(--color-background);
+    border: 2px solid var(--bgm-teal-700);
+    padding: var(--space-xl);
+}
+
+.mai-account-login__lead {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--bgm-ink-2);
+}
+
+.mai-account-login__form {
+    max-width: none;
+    gap: var(--space-md);
+
+    .form-field label {
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-bold);
+        color: var(--bgm-teal-900);
+    }
+
+    .form-actions {
+        border-block-start: 0;
+        padding-block-start: var(--space-sm);
+        margin-block-start: var(--space-xs);
+
+        > .button {
+            min-width: 0;
+            width: 100%;
+        }
+    }
+}
+
+.mai-account-login__errors {
+    margin-block-end: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    border-inline-start: 4px solid var(--color-danger);
+    background: color-mix(in srgb, var(--color-danger) 8%, var(--color-background));
+}
+
+.mai-account-login__error {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-danger);
+
+    + .mai-account-login__error {
+        margin-block-start: var(--space-xs);
+    }
+}
+
+.mai-account-login__greeting {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--bgm-teal-900);
+}
+
+.mai-account-login__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: 0;
+}
+
+.mai-account-login__links {
+    margin-block-start: var(--space-lg);
+    padding-block-start: var(--space-md);
+    border-block-start: 1px solid var(--bgm-line);
+}
+
+.mai-account-login__register {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--bgm-ink-2);
+    text-align: center;
+}
+
+.mai-account-login__register-label {
+    margin-inline-end: var(--space-xs);
+}
+
+.mai-account-login__register-link {
+    font-weight: var(--font-weight-bold);
+    color: var(--bgm-teal-700);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+
+    &:hover {
+        color: var(--bgm-teal-900);
+    }
+}
+
+@include bp-up(md) {
+    .mai-account-login {
+        padding-block-end: var(--space-4xl);
+    }
+
+    .mai-account-login__card {
+        padding: var(--space-2xl);
+    }
+}
+
+}

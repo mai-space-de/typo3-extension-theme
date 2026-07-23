@@ -1,0 +1,201 @@
+// =============================================================================
+// 06-organisms/_location.scss
+//
+// Styles for the mai_locations plugin (Location/List + Location/Detail).
+// Reuses the BGM card/prose language rather than inventing a new pattern.
+// =============================================================================
+
+@layer theme-organisms {
+
+// ---------------------------------------------------------------------------
+// Location card — List view
+// ---------------------------------------------------------------------------
+.location-card {
+    background:    var(--color-background);
+    border:        1px solid var(--bgm-line);
+    border-radius: var(--layout-radius);
+    overflow:      hidden;
+    display:       flex;
+    flex-direction: column;
+    transition:    box-shadow var(--duration-base) var(--easing-standard);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+    }
+}
+
+.location-card__image img {
+    width:        100%;
+    height:       auto;
+    aspect-ratio: 4 / 3;
+    object-fit:   cover;
+    display:      block;
+}
+
+.location-card__content {
+    padding:        var(--space-lg);
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-xs);
+}
+
+.location-card__name {
+    font-size:   var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color:       var(--bgm-teal-900);
+    margin:      0;
+
+    a {
+        color:           inherit;
+        text-decoration: none;
+
+        &:hover { text-decoration: underline; }
+
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.location-card__address {
+    font-style:  normal;
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-base);
+    color:       var(--bgm-ink-2);
+}
+
+.location-card__phone,
+.location-card__email {
+    margin:    0;
+    font-size: var(--font-size-sm);
+
+    a {
+        color:           var(--bgm-teal-700);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover { color: var(--bgm-teal-900); }
+
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Location detail — Detail view
+// ---------------------------------------------------------------------------
+.location-detail__image img {
+    width:         100%;
+    height:        auto;
+    aspect-ratio:  16 / 9;
+    object-fit:    cover;
+    border-radius: var(--layout-radius);
+    display:       block;
+}
+
+.location-detail__body {
+    display:            flex;
+    flex-direction:     column;
+    gap:                var(--space-md);
+    margin-block-start: var(--space-lg);
+    max-width:          var(--layout-prose-width);
+}
+
+.location-detail__name {
+    margin: 0;
+}
+
+.location-detail__address {
+    font-style:  normal;
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--bgm-ink-2);
+}
+
+.location-detail__phone,
+.location-detail__email {
+    margin:    0;
+    font-size: var(--font-size-base);
+
+    a {
+        color:           var(--bgm-teal-700);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover { color: var(--bgm-teal-900); }
+
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.location-detail__description {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--color-text);
+
+    p {
+        margin-block: 0 var(--space-sm);
+        &:last-child { margin-block-end: 0; }
+    }
+}
+
+// NOTE: no JS currently initialises a map on this div (no leaflet/OSM
+// wiring found) — this is a placeholder frame only, not a functional map.
+.location-detail__map {
+    aspect-ratio:  16 / 7;
+    border:        1px solid var(--bgm-line);
+    border-radius: var(--layout-radius);
+    background:    var(--color-surface);
+}
+
+// ---------------------------------------------------------------------------
+// Opening hours — used inside Location/Detail
+// ---------------------------------------------------------------------------
+.opening-hours {
+    list-style:    none;
+    margin:        0;
+    padding:       0;
+    display:       flex;
+    flex-direction: column;
+    border:        1px solid var(--bgm-line);
+    border-radius: var(--layout-radius);
+    overflow:      hidden;
+}
+
+.opening-hours__row {
+    display:         flex;
+    justify-content: space-between;
+    align-items:     baseline;
+    gap:             var(--space-md);
+    padding:         var(--space-sm) var(--space-md);
+    border-block-end: 1px solid var(--bgm-line-2);
+
+    &:last-child { border-block-end: 0; }
+
+    &.opening-hours__row--closed {
+        color: var(--bgm-ink-3);
+    }
+}
+
+.opening-hours__day {
+    font-weight: var(--font-weight-semibold);
+    color:       var(--bgm-teal-900);
+}
+
+.opening-hours__times {
+    color: var(--color-text);
+}
+
+.opening-hours__note {
+    display:   block;
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+}

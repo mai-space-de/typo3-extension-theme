@@ -6,7 +6,7 @@
          data-ce-uid="{data.uid}"
          {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{data.tx_maitheme_icon_identifier}">
-        <div class="mai-featurebox__icon" aria-hidden="true">
+        <div class="mai-featurebox__badge" aria-hidden="true">
             <span class="mai-icon mai-icon--{data.tx_maitheme_icon_identifier}"></span>
         </div>
     </f:if>

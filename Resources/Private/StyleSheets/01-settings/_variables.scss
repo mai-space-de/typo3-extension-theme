@@ -102,9 +102,13 @@
     // Layout
     // -------------------------------------------------------------------------
 
-    --layout-width-min:      320px;
-    --layout-width-max:      72rem;         // 1152 px — design spec max-content
-    --layout-content-width:  72rem;
+    --layout-width-min:        320px;
+    --layout-width-max:        72rem;         // 1152 px — content, footer, topbar
+    --layout-content-max:      var(--layout-width-max); // alias — use either name
+    --layout-content-width:    72rem;
+    // Header gets a wider container so 7+ German nav labels fit without
+    // triggering compact/hamburger mode at typical 1440-1920 px desktop widths.
+    --layout-header-width-max: 90rem;         // 1440 px
     --layout-prose-width:    42rem;         // reading column ≈ 672 px
     --layout-card-width:     22rem;
     --layout-text-width:     65ch;

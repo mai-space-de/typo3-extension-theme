@@ -2,6 +2,8 @@
 @import "01-settings/variables";
 
 // -- 02 Mixins (no CSS output, imported per-partial where needed) -------------
+// page-wrap is imported here so @layer theme-organisms partials can @use it
+@import "02-mixins/page-wrap";
 
 // -- 03 Generic ---------------------------------------------------------------
 @import "03-generic/reset";
@@ -26,12 +28,16 @@
 
 // -- 06 Organisms -------------------------------------------------------------
 @import "06-organisms/header";
+@import "06-organisms/footer";
 @import "06-organisms/navigation";
 @import "06-organisms/form";
+@import "06-organisms/account";
 @import "06-organisms/hero";
 @import "06-organisms/timeline";
 @import "06-organisms/section";
 @import "06-organisms/content-elements";
+@import "06-organisms/location";
+@import "06-organisms/search";
 
 // -- 07 Templates -------------------------------------------------------------
 @import "07-templates/page";

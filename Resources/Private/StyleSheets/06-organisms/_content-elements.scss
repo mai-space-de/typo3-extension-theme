@@ -8,16 +8,16 @@
 // =============================================================================
 
 @import "../02-mixins/media-breakpoint";
+@import "../02-mixins/page-wrap";
 
 @layer theme-organisms {
 
 // ---------------------------------------------------------------------------
-// Shared inner wrapper — used by most full-width sections
+// Shared inner wrapper — used by most full-width sections.
+// Single source of truth for the page-wrap pattern.
 // ---------------------------------------------------------------------------
 .mai-inner {
-    max-width:      var(--layout-width-max);
-    margin-inline:  auto;
-    padding-inline: var(--layout-grid-gap);
+    @include page-wrap;
 }
 
 
@@ -117,6 +117,14 @@
     margin-block-start: 0.1em;
 }
 
+// Wraps title + body; kept separate from the icon so the flex row on
+// .mai-alert lines up an (optional) icon with this text stack.
+.mai-alert__inner {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-2xs);
+}
+
 .mai-alert__title {
     font-size:    var(--font-size-base);
     font-weight:  var(--font-weight-bold);
@@ -154,7 +162,17 @@
     }
 }
 
-.mai-banner__inner {
+.mai-banner__media {
+    img {
+        width:      100%;
+        height:     auto;
+        max-height: 24rem;
+        object-fit: cover;
+        display:    block;
+    }
+}
+
+.mai-banner__content {
     max-width:      var(--layout-prose-width);
     margin-inline:  auto;
     padding-inline: var(--layout-grid-gap);
@@ -259,6 +277,15 @@
     max-width:            var(--layout-prose-width);
 }
 
+// The figure already carries the accent rule + indent above, so the
+// nested <blockquote> resets the generic tag styling from
+// 03-generic/_typography.scss to avoid a doubled border/indent.
+.mai-quote__blockquote {
+    margin:               0;
+    border-inline-start:  0;
+    padding-inline-start: 0;
+}
+
 .mai-quote__text {
     font-family:    var(--font-family-serif);
     font-size:      var(--font-size-xl);
@@ -267,12 +294,17 @@
     color:          var(--bgm-teal-900);
     font-style:     italic;
     margin:         0 0 var(--space-sm);
+    text-wrap:      balance;
 
     &::before { content: "\201C"; }   // "
     &::after  { content: "\201D"; }   // "
 }
 
-.mai-quote__cite {
+.mai-quote__caption {
+    display: block;
+}
+
+.mai-quote__author {
     display:        block;
     font-family:    var(--font-family-base);
     font-size:      var(--font-size-sm);
@@ -281,6 +313,18 @@
     font-style:     normal;
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
+}
+
+.mai-quote__role {
+    display:        block;
+    font-family:    var(--font-family-base);
+    font-size:      var(--font-size-sm);
+    color:          var(--bgm-ink-3);
+    font-style:     normal;
+    font-weight:    var(--font-weight-normal);
+    text-transform: none;
+    letter-spacing: normal;
+    margin-block-start: var(--space-2xs);
 }
 
 
@@ -297,7 +341,16 @@
     gap:           var(--space-md);
 }
 
-.mai-testimonial__quote {
+// The figure's blockquote child resets the generic tag styling from
+// 03-generic/_typography.scss — the card border already provides the
+// visual frame, so the tag-level accent border/indent would double up.
+.mai-testimonial__blockquote {
+    margin:               0;
+    border-inline-start:  0;
+    padding-inline-start: 0;
+}
+
+.mai-testimonial__text {
     font-family:  var(--font-family-serif);
     font-size:    var(--font-size-lg);
     font-style:   italic;
@@ -309,13 +362,11 @@
     &::after  { content: "\201C"; }   // "
 }
 
-.mai-testimonial__footer {
-    display:     flex;
-    align-items: center;
-    gap:         var(--space-md);
+.mai-testimonial__media {
+    flex-shrink: 0;
 }
 
-.mai-testimonial__portrait {
+.mai-testimonial__avatar {
     width:         3rem;
     height:        3rem;
     border-radius: var(--layout-radius-full);
@@ -324,11 +375,18 @@
     border:        2px solid var(--bgm-teal-100);
 }
 
-.mai-testimonial__author {
-    font-style: normal;
-    display:    flex;
-    flex-direction: column;
-    gap:        var(--space-2xs);
+.mai-testimonial__caption {
+    font-style:         normal;
+    display:            flex;
+    flex-direction:     column;
+    gap:                var(--space-2xs);
+    margin-block-start: var(--space-md);
+}
+
+.mai-testimonial__role {
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+    margin:    0;
 }
 
 .mai-testimonial__name {
@@ -455,6 +513,7 @@
 // ---------------------------------------------------------------------------
 .mai-featurebox {
     --featurebox-border: var(--bgm-teal-700);
+    --featurebox-icon:   var(--bgm-gold-500);
 
     position:       relative;
     background:     var(--color-background);
@@ -462,9 +521,6 @@
     border-radius:  var(--layout-radius-sm);
     padding:        var(--space-xl);
     padding-block-start: calc(var(--space-xl) + var(--space-lg));
-    display:        flex;
-    flex-direction: column;
-    gap:            var(--space-md);
     transition:     border-color var(--duration-fast) var(--easing-standard);
 
     &:hover {
@@ -473,10 +529,14 @@
 
     &.mai-featurebox--gold {
         --featurebox-border: var(--bgm-gold-500);
+        --featurebox-icon:   var(--bgm-teal-700);
         &:hover { border-color: var(--bgm-gold-700); }
     }
 }
 
+// Double-frame badge — half-overlaps the card's top-left corner.
+// Icon colour is the opposite accent from the border (teal border → gold
+// icon, gold border → teal icon) per the BGM offer-card signature device.
 .mai-featurebox__badge {
     position:           absolute;
     inset-block-start:  calc(-1 * var(--space-lg));
@@ -490,7 +550,13 @@
     align-items:        center;
     justify-content:    center;
     font-size:          var(--icon-size-md);
-    color:              var(--featurebox-border);
+    color:              var(--featurebox-icon);
+}
+
+.mai-featurebox__content {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-md);
 }
 
 .mai-featurebox__title {
@@ -498,6 +564,13 @@
     font-weight:  var(--font-weight-bold);
     color:        var(--bgm-teal-900);
     margin:       0;
+}
+
+.mai-featurebox__subtitle {
+    font-size:   var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color:       var(--bgm-ink-3);
+    margin:      0;
 }
 
 .mai-featurebox__body {
@@ -510,6 +583,26 @@
     p { margin: 0; }
 }
 
+.mai-featurebox__link {
+    display:      inline-flex;
+    align-items:  center;
+    gap:          var(--space-2xs);
+    align-self:   flex-start;
+    font-weight:  var(--font-weight-semibold);
+    color:        var(--bgm-teal-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition:   color var(--duration-fast) var(--easing-standard);
+
+    &:hover { color: var(--bgm-teal-900); }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+        border-radius:  var(--layout-radius-sm);
+    }
+}
+
 
 // ---------------------------------------------------------------------------
 // Statistic — large number + label, standalone or in a grid row
@@ -520,12 +613,24 @@
 }
 
 .mai-statistic__number {
-    display:        block;
+    display:        flex;
+    align-items:    baseline;
+    justify-content: center;
+    gap:            var(--space-2xs);
+}
+
+.mai-statistic__value {
     font-size:      var(--font-size-4xl);
     font-weight:    var(--font-weight-black);
     line-height:    var(--line-height-tight);
     color:          var(--bgm-teal-700);
     letter-spacing: var(--tracking-tight);
+}
+
+.mai-statistic__unit {
+    font-size:   var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color:       var(--bgm-teal-700);
 }
 
 .mai-statistic__label {
@@ -675,10 +780,14 @@
     gap:           var(--space-md);
 }
 
-.mai-profile__head {
-    display:     flex;
-    align-items: center;
-    gap:         var(--space-lg);
+.mai-profile__media {
+    flex-shrink: 0;
+}
+
+.mai-profile__content {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-2xs);
 }
 
 .mai-profile__avatar {
@@ -716,6 +825,10 @@
 
 // ---------------------------------------------------------------------------
 // Mediatext — image + text side by side
+// Modifiers: --left (default; media first) / --right (media flips to the
+// end via order). Two content elements share this class: TextMedia (via
+// Molecule/MediaText, mapped from imageorient) and Mediatext (native
+// tx_maitheme_media_position field) — both always emit one of the two.
 // ---------------------------------------------------------------------------
 .mai-mediatext {
     display:        grid;
@@ -725,7 +838,7 @@
     @include bp-up(md) {
         grid-template-columns: 1fr 1.2fr;
 
-        &.mai-mediatext--reversed {
+        &.mai-mediatext--right {
             grid-template-columns: 1.2fr 1fr;
 
             .mai-mediatext__media { order: 2; }
@@ -769,36 +882,49 @@
 // ---------------------------------------------------------------------------
 // Icon list — icon + label rows
 // ---------------------------------------------------------------------------
-.mai-iconlist {
+.mai-iconlist__title {
+    margin-block: 0 var(--space-md);
+}
+
+// Bodytext is RTE-authored <li> markup with no BEM classes, so items are
+// styled by tag rather than by a .mai-iconlist__item modifier.
+.mai-iconlist__list {
     list-style: none;
     margin:     0;
     padding:    0;
     display:    flex;
     flex-direction: column;
     gap:        var(--space-sm);
-}
 
-.mai-iconlist__item {
-    display:     flex;
-    align-items: flex-start;
-    gap:         var(--space-sm);
-    font-size:   var(--font-size-base);
-    line-height: var(--line-height-base);
-    color:       var(--color-text);
-}
+    li {
+        display:     flex;
+        align-items: flex-start;
+        gap:         var(--space-sm);
+        font-size:   var(--font-size-base);
+        line-height: var(--line-height-base);
+        color:       var(--color-text);
 
-.mai-iconlist__icon {
-    flex-shrink: 0;
-    font-size:   var(--icon-size-md);
-    color:       var(--bgm-teal-700);
-    margin-block-start: 0.05em;
+        &::before {
+            content:            "\2713";
+            flex-shrink:        0;
+            font-weight:        var(--font-weight-bold);
+            color:              var(--bgm-teal-700);
+            margin-block-start: 0.05em;
+        }
+    }
 }
 
 
 // ---------------------------------------------------------------------------
 // Link list — condensed vertical link column with icon arrows
 // ---------------------------------------------------------------------------
-.mai-linklist {
+.mai-linklist__title {
+    margin-block: 0 var(--space-md);
+}
+
+// Bodytext is RTE-authored <li><a> markup with no BEM classes, so items
+// and links are styled by tag rather than by .mai-linklist__item/__link.
+.mai-linklist__list {
     list-style: none;
     margin:     0;
     padding:    0;
@@ -809,77 +935,83 @@
     > li + li {
         border-block-start: 1px solid var(--bgm-line-2);
     }
-}
 
-.mai-linklist__item {
-    display: flex;
-}
+    a {
+        display:      flex;
+        align-items:  center;
+        justify-content: space-between;
+        gap:          var(--space-sm);
+        padding:      var(--space-sm) 0;
+        width:        100%;
+        font-size:    var(--font-size-base);
+        font-weight:  var(--font-weight-semibold);
+        color:        var(--bgm-teal-700);
+        text-decoration: none;
+        transition:   color var(--duration-fast) var(--easing-standard);
 
-.mai-linklist__link {
-    display:      flex;
-    align-items:  center;
-    justify-content: space-between;
-    gap:          var(--space-sm);
-    padding:      var(--space-sm) 0;
-    width:        100%;
-    font-size:    var(--font-size-base);
-    font-weight:  var(--font-weight-semibold);
-    color:        var(--bgm-teal-700);
-    text-decoration: none;
-    transition:   color var(--duration-fast) var(--easing-standard);
+        &:hover {
+            color: var(--bgm-teal-900);
+        }
 
-    &:hover {
-        color: var(--bgm-teal-900);
+        &:focus-visible {
+            outline: 2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+            border-radius: var(--layout-radius);
+        }
+
+        &::after {
+            content:     "\2192";
+            flex-shrink: 0;
+            font-weight: var(--font-weight-normal);
+            color:       var(--bgm-teal-500);
+        }
     }
-
-    &:focus-visible {
-        outline: 2px solid var(--color-focus-ring);
-        outline-offset: 2px;
-        border-radius: var(--layout-radius);
-    }
-}
-
-.mai-linklist__arrow {
-    flex-shrink: 0;
-    font-size:   var(--icon-size-sm);
-    color:       var(--bgm-teal-500);
 }
 
 
 // ---------------------------------------------------------------------------
 // Social media — icon link row
 // ---------------------------------------------------------------------------
-.mai-socialmedia {
+.mai-socialmedia__title {
+    margin-block: 0 var(--space-md);
+}
+
+// Bodytext is RTE-authored <li><a> markup with no BEM classes, so links
+// are styled by tag rather than by a .mai-socialmedia__link modifier.
+.mai-socialmedia__list {
+    list-style: none;
+    margin:     0;
+    padding:    0;
     display:     flex;
     flex-wrap:   wrap;
     gap:         var(--space-sm);
     align-items: center;
-}
 
-.mai-socialmedia__link {
-    display:         flex;
-    align-items:     center;
-    justify-content: center;
-    width:           2.5rem;
-    height:          2.5rem;
-    border:          2px solid var(--bgm-teal-300);
-    border-radius:   var(--layout-radius);
-    color:           var(--bgm-teal-700);
-    font-size:       var(--icon-size-md);
-    text-decoration: none;
-    transition:      background-color var(--duration-fast) var(--easing-standard),
-                     border-color var(--duration-fast) var(--easing-standard),
-                     color var(--duration-fast) var(--easing-standard);
+    a {
+        display:         flex;
+        align-items:     center;
+        justify-content: center;
+        width:           2.5rem;
+        height:          2.5rem;
+        border:          2px solid var(--bgm-teal-300);
+        border-radius:   var(--layout-radius);
+        color:           var(--bgm-teal-700);
+        font-size:       var(--icon-size-md);
+        text-decoration: none;
+        transition:      background-color var(--duration-fast) var(--easing-standard),
+                         border-color var(--duration-fast) var(--easing-standard),
+                         color var(--duration-fast) var(--easing-standard);
 
-    &:hover {
-        background:   var(--bgm-teal-700);
-        border-color: var(--bgm-teal-700);
-        color:        #ffffff;
-    }
+        &:hover {
+            background:   var(--bgm-teal-700);
+            border-color: var(--bgm-teal-700);
+            color:        #ffffff;
+        }
 
-    &:focus-visible {
-        outline:        2px solid var(--color-focus-ring);
-        outline-offset: 2px;
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
     }
 }
 
@@ -900,6 +1032,13 @@
     margin:       0;
 }
 
+.mai-contactinfo__details {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-sm);
+    margin:         0;
+}
+
 .mai-contactinfo__row {
     display:     flex;
     align-items: flex-start;
@@ -908,14 +1047,17 @@
     color:       var(--color-text);
 }
 
-.mai-contactinfo__icon {
+.mai-contactinfo__label {
     flex-shrink: 0;
-    font-size:   var(--icon-size-sm);
-    color:       var(--bgm-teal-700);
-    margin-block-start: 0.2em;
+    min-width:   7rem;
+    margin:      0;
+    font-size:   var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color:       var(--bgm-teal-900);
 }
 
 .mai-contactinfo__value {
+    margin:      0;
     line-height: var(--line-height-base);
 
     a {
@@ -924,6 +1066,31 @@
         text-underline-offset: 2px;
 
         &:hover { color: var(--bgm-teal-900); }
+
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.mai-contactinfo__link {
+    display:      inline-flex;
+    align-items:  center;
+    gap:          var(--space-2xs);
+    align-self:   flex-start;
+    font-weight:  var(--font-weight-semibold);
+    color:        var(--bgm-teal-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition:   color var(--duration-fast) var(--easing-standard);
+
+    &:hover { color: var(--bgm-teal-900); }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+        border-radius:  var(--layout-radius-sm);
     }
 }
 
@@ -983,17 +1150,47 @@
     gap:         var(--space-xs);
 }
 
-.mai-rating__stars {
-    display:     flex;
-    gap:         var(--space-2xs);
-    font-size:   var(--font-size-lg);
-    color:       var(--bgm-gold-500);
+.mai-rating__label {
+    font-size:   var(--font-size-sm);
+    color:       var(--bgm-ink-3);
+    font-weight: var(--font-weight-semibold);
+    margin:      0;
 }
 
-.mai-rating__label {
-    font-size:  var(--font-size-sm);
-    color:      var(--bgm-ink-3);
-    font-weight: var(--font-weight-semibold);
+.mai-rating__value {
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+    margin:    0;
+}
+
+// role="img" on .mai-rating__stars removes its children from the
+// accessibility tree, so the ★ glyphs below are purely decorative —
+// the real text alternative is the element's aria-label.
+.mai-rating__stars {
+    position:       relative;
+    display:        inline-block;
+    font-size:      var(--font-size-lg);
+    line-height:    1;
+    letter-spacing: 0.15em;
+    color:          var(--bgm-teal-100);
+
+    &::before {
+        content: "\2605\2605\2605\2605\2605";
+    }
+}
+
+.mai-rating__fill {
+    position:   absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    overflow:   hidden;
+    width:      calc(var(--rating) / var(--rating-max) * 100%);
+    color:      var(--bgm-gold-500);
+    white-space: nowrap;
+
+    &::before {
+        content: "\2605\2605\2605\2605\2605";
+    }
 }
 
 
@@ -1127,7 +1324,15 @@
 // ---------------------------------------------------------------------------
 // Map — OpenStreetMap / embedded map wrapper
 // ---------------------------------------------------------------------------
-.mai-map {
+.mai-map__title {
+    font-size:    var(--font-size-base);
+    font-weight:  var(--font-weight-bold);
+    color:        var(--bgm-teal-900);
+    margin-block: 0 var(--space-sm);
+}
+
+.mai-map__container {
+    position:      relative;
     border:        1px solid var(--bgm-line);
     border-radius: var(--layout-radius);
     overflow:      hidden;
@@ -1136,71 +1341,79 @@
     @include bp-up(md) {
         aspect-ratio: 16 / 7;
     }
-
-    iframe {
-        width:  100%;
-        height: 100%;
-        border: 0;
-        display: block;
-    }
 }
 
-.mai-map__title {
-    font-size:    var(--font-size-base);
-    font-weight:  var(--font-weight-bold);
-    color:        var(--bgm-teal-900);
-    margin-block: 0 var(--space-sm);
+.mai-map__frame {
+    width:   100%;
+    height:  100%;
+    border:  0;
+    display: block;
+}
+
+.mai-map__description {
+    font-size:    var(--font-size-sm);
+    color:        var(--bgm-ink-3);
+    margin-block: var(--space-sm) 0;
 }
 
 
 // ---------------------------------------------------------------------------
 // Data list — definition-list style key/value pairs
 // ---------------------------------------------------------------------------
-.mai-datalist {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--bgm-line);
-    border-radius: var(--layout-radius);
-    overflow: hidden;
+.mai-datalist__title {
+    margin-block: 0 var(--space-md);
 }
 
-.mai-datalist__row {
-    display:   grid;
+// Bodytext is RTE-authored <dt>/<dd> pairs with no BEM classes, so rows
+// are styled by tag. CSS grid auto-places each dt/dd pair into its own
+// row since they alternate columns in source order.
+.mai-datalist__list {
+    display:       grid;
     grid-template-columns: 1fr 2fr;
-    border-block-end: 1px solid var(--bgm-line-2);
-
-    &:last-child { border-block-end: 0; }
+    margin:        0;
+    border:        1px solid var(--bgm-line);
+    border-radius: var(--layout-radius);
+    overflow:      hidden;
 
     @include bp-down(sm) {
         grid-template-columns: 1fr;
     }
-}
 
-.mai-datalist__key {
-    padding:     var(--space-sm) var(--space-md);
-    font-size:   var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color:       var(--bgm-teal-900);
-    background:  var(--color-surface);
-    border-inline-end: 1px solid var(--bgm-line-2);
+    dt {
+        padding:     var(--space-sm) var(--space-md);
+        font-size:   var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
+        color:       var(--bgm-teal-900);
+        background:  var(--color-surface);
+        border-inline-end: 1px solid var(--bgm-line-2);
+        margin:      0;
 
-    @include bp-down(sm) {
-        border-inline-end: 0;
-        border-block-end:  1px solid var(--bgm-line-2);
+        @include bp-down(sm) {
+            border-inline-end: 0;
+            border-block-end:  1px solid var(--bgm-line-2);
+        }
     }
-}
 
-.mai-datalist__value {
-    padding:     var(--space-sm) var(--space-md);
-    font-size:   var(--font-size-base);
-    color:       var(--color-text);
+    dd {
+        padding:     var(--space-sm) var(--space-md);
+        font-size:   var(--font-size-base);
+        color:       var(--color-text);
+        margin:      0;
+        border-block-end: 1px solid var(--bgm-line-2);
+
+        &:last-of-type { border-block-end: 0; }
+    }
 }
 
 
 // ---------------------------------------------------------------------------
 // Filelist — downloadable files list
 // ---------------------------------------------------------------------------
-.mai-filelist {
+.mai-filelist__title {
+    margin-block: 0 var(--space-md);
+}
+
+.mai-filelist__list {
     list-style: none;
     margin:     0;
     padding:    0;
@@ -1248,9 +1461,15 @@
 }
 
 .mai-filelist__meta {
-    font-size:  var(--font-size-xs);
-    color:      var(--bgm-ink-3);
+    display:     flex;
+    gap:         var(--space-2xs);
+    font-size:   var(--font-size-xs);
+    color:       var(--bgm-ink-3);
     flex-shrink: 0;
+}
+
+.mai-filelist__ext {
+    font-weight: var(--font-weight-semibold);
 }
 
 
@@ -1265,6 +1484,30 @@
     aspect-ratio:  16 / 9;
 }
 
+.mai-beforeafter__title {
+    margin-block: 0 var(--space-sm);
+}
+
+// Widget root — fills the aspect-ratio box set on .mai-beforeafter
+.mai-beforeafter__widget {
+    position: relative;
+    width:    100%;
+    height:   100%;
+}
+
+// Both slides stack absolutely; .before is the full base layer,
+// .after is clipped to a percentage width by JS (--handle position).
+.mai-beforeafter__before,
+.mai-beforeafter__after {
+    position: absolute;
+    inset:    0;
+}
+
+.mai-beforeafter__after {
+    clip-path: inset(0 50% 0 0);
+    transition: clip-path var(--duration-base) var(--easing-standard);
+}
+
 .mai-beforeafter__img {
     position:   absolute;
     inset:      0;
@@ -1273,9 +1516,28 @@
     object-fit: cover;
 }
 
-.mai-beforeafter__after {
-    clip-path: inset(0 50% 0 0);
-    transition: clip-path var(--duration-base) var(--easing-standard);
+// "Vorher"/"Nachher" caption badges — aria-hidden (decorative; the real
+// text alternative lives on the images' alt attributes and the handle's
+// aria-label), shown as a small overlay chip in the lower corners.
+.mai-beforeafter__label {
+    position:       absolute;
+    inset-block-end: var(--space-sm);
+    font-size:      var(--font-size-xs);
+    font-weight:    var(--font-weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color:          #ffffff;
+    background:     rgb(0 0 0 / 55%);
+    padding:        var(--space-2xs) var(--space-sm);
+    border-radius:  var(--layout-radius-sm);
+}
+
+.mai-beforeafter__before .mai-beforeafter__label {
+    inset-inline-start: var(--space-sm);
+}
+
+.mai-beforeafter__after .mai-beforeafter__label {
+    inset-inline-end: var(--space-sm);
 }
 
 .mai-beforeafter__handle {
@@ -1288,21 +1550,24 @@
     display:         flex;
     align-items:     center;
     justify-content: center;
-}
 
-.mai-beforeafter__knob {
-    position:         absolute;
-    width:            2.5rem;
-    height:           2.5rem;
-    background:       #ffffff;
-    border-radius:    var(--layout-radius-full);
-    border:           2px solid var(--bgm-teal-700);
-    display:          flex;
-    align-items:      center;
-    justify-content:  center;
-    font-size:        var(--icon-size-sm);
-    color:            var(--bgm-teal-700);
-    box-shadow:       var(--shadow-sm);
+    // Draggable knob — rendered as a pseudo-element since the template
+    // keeps the handle itself free of decorative child markup.
+    &::before {
+        content:          "";
+        position:         absolute;
+        width:            2.5rem;
+        height:           2.5rem;
+        background:       #ffffff;
+        border-radius:    var(--layout-radius-full);
+        border:           2px solid var(--bgm-teal-700);
+        box-shadow:       var(--shadow-sm);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
 }
 
 
@@ -1399,16 +1664,14 @@
 }
 
 .mai-teaser__image {
-    img {
-        width:        100%;
-        height:       auto;
-        aspect-ratio: 16 / 9;
-        object-fit:   cover;
-        display:      block;
-    }
+    width:        100%;
+    height:       auto;
+    aspect-ratio: 16 / 9;
+    object-fit:   cover;
+    display:      block;
 }
 
-.mai-teaser__body {
+.mai-teaser__content {
     padding:        var(--space-lg);
     display:        flex;
     flex-direction: column;
@@ -1416,7 +1679,7 @@
     flex:           1 1 auto;
 }
 
-.mai-teaser__eyebrow {
+.mai-teaser__subtitle {
     font-size:      var(--font-size-xs);
     font-weight:    var(--font-weight-semibold);
     letter-spacing: var(--tracking-wide);
@@ -1433,23 +1696,34 @@
     margin:      0;
 }
 
-.mai-teaser__excerpt {
+.mai-teaser__body {
     font-size:   var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color:       var(--bgm-ink-2);
     flex:        1 1 auto;
     margin:      0;
+
+    p { margin: 0; }
 }
 
-.mai-teaser__meta {
-    font-size:  var(--font-size-sm);
-    color:      var(--bgm-ink-3);
-    margin:     0;
-}
+.mai-teaser__link {
+    display:      inline-flex;
+    align-items:  center;
+    gap:          var(--space-2xs);
+    align-self:   flex-start;
+    font-weight:  var(--font-weight-semibold);
+    color:        var(--bgm-teal-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition:   color var(--duration-fast) var(--easing-standard);
 
-.mai-teaser__footer {
-    padding:     var(--space-md) var(--space-lg);
-    border-block-start: 1px solid var(--bgm-line-2);
+    &:hover { color: var(--bgm-teal-900); }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+        border-radius:  var(--layout-radius-sm);
+    }
 }
 
 
@@ -1863,13 +2137,21 @@
 
 
 // ---------------------------------------------------------------------------
-// Newsletter — sign-up section with title, intro text, and embedded form
-// Centred teal-tinted layout; form area constrained to a readable input width
+// Newsletter — sign-up section with title, intro text, and embedded form.
+//
+// Two complementary blocks:
+//   1. .mai-newsletter (theme CE wrapper)  —  full-width teal-tinted banner
+//   2. .mai-newsletter-subscribe (plugin)  —  white card inside the banner
+//
+// Design: follows BGM brand — signature 2 px teal border, gold submit
+// button, clean stacked layout inspired by the Mitwirken form.
 // ---------------------------------------------------------------------------
+
+// ---- CE wrapper: full-width banner ------------------------------------------
 .mai-newsletter {
     background:    var(--bgm-teal-050);
     border:        1px solid var(--bgm-teal-100);
-    padding-block: var(--space-2xl);
+    padding-block: clamp(var(--space-2xl), 6vw, var(--space-4xl));
     text-align:    center;
 }
 
@@ -1896,6 +2178,289 @@
 .mai-newsletter__form {
     max-width:     28rem;
     margin-inline: auto;
+}
+
+
+// ---- Plugin output: subscribe card ------------------------------------------
+//
+// The template is EXT:mai_newsletter …/Newsletter/SubscribeForm.html.
+// It renders a white card with the signature 2 px teal border that sits
+// inside (or instead of) the CE wrapper above. The form is stacked:
+// header → messages → field → submit → legal.
+
+.mai-newsletter-subscribe {
+    background:    var(--color-background);
+    border:        2px solid var(--color-border-strong);
+    border-radius: var(--layout-radius-sm);
+    padding:       var(--space-xl);
+    max-width:     34rem;
+    margin-inline: auto;
+    text-align:    start;
+
+    // "Card" shadow — subtle, teal-tinted, per design system
+    box-shadow:    var(--shadow-md);
+}
+
+// ---- Header ----------------------------------------------------------------
+.mai-newsletter-subscribe__header {
+    margin-block-end: var(--space-lg);
+}
+
+.mai-newsletter-subscribe__title {
+    font-size:     var(--font-size-xl);
+    font-weight:   var(--font-weight-bold);
+    line-height:   var(--line-height-snug);
+    color:         var(--bgm-teal-900);
+    margin:        0 0 var(--space-sm);
+    text-wrap:     balance;
+}
+
+.mai-newsletter-subscribe__lead {
+    font-size:     var(--font-size-base);
+    line-height:   var(--line-height-relaxed);
+    color:         var(--bgm-ink-2);
+    margin:        0;
+
+    p { margin: 0; }
+}
+
+// ---- Success message -------------------------------------------------------
+.mai-newsletter-subscribe__success {
+    display:        flex;
+    align-items:    flex-start;
+    gap:            var(--space-sm);
+    background:     var(--bgm-teal-050);
+    border:         1px solid var(--bgm-teal-300);
+    border-radius:  var(--layout-radius);
+    padding:        var(--space-md);
+    margin-block-end: var(--space-lg);
+}
+
+.mai-newsletter-subscribe__success-icon {
+    flex-shrink: 0;
+    font-size:   var(--font-size-lg);
+    color:       var(--color-success);
+    line-height: 1;
+}
+
+.mai-newsletter-subscribe__success-text {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-base);
+    color:       var(--bgm-teal-900);
+    margin:      0;
+}
+
+// ---- Error / flash messages ------------------------------------------------
+.mai-newsletter-subscribe__errors,
+.mai-newsletter-subscribe__flash-error {
+    background:       var(--bgm-gold-050);
+    border:           1px solid var(--color-accent);
+    border-radius:    var(--layout-radius);
+    padding:          var(--space-sm) var(--space-md);
+    margin-block-end: var(--space-md);
+}
+
+.mai-newsletter-subscribe__error,
+.mai-newsletter-subscribe__flash-error-message {
+    font-size:   var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color:       var(--color-danger);
+    margin:      0;
+
+    + .mai-newsletter-subscribe__error {
+        margin-block-start: var(--space-xs);
+    }
+}
+
+
+// ---- Form ------------------------------------------------------------------
+.mai-newsletter-subscribe__form {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-md);
+}
+
+// ---- Field ----------------------------------------------------------------
+.mai-newsletter-subscribe__field {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-xs);
+}
+
+.mai-newsletter-subscribe__label {
+    font-size:    var(--font-size-xs);
+    font-weight:  var(--font-weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color:        var(--bgm-teal-900);
+    cursor:       pointer;
+}
+
+.mai-newsletter-subscribe__input {
+    width:         100%;
+    padding:       var(--space-sm) var(--space-md);
+    font-family:   var(--font-family-base);
+    font-size:     var(--font-size-base);
+    color:         var(--color-text);
+    background:    var(--color-background);
+    border:        2px solid var(--color-border);
+    border-radius: var(--layout-radius);
+    transition:    border-color var(--duration-fast) var(--easing-standard),
+                   box-shadow var(--duration-fast) var(--easing-standard);
+    appearance:    none;
+
+    &::placeholder {
+        color:   var(--bgm-ink-3);
+        opacity: 0.6;
+    }
+
+    &:focus {
+        outline:      none;
+        border-color: var(--bgm-teal-700);
+        box-shadow:   0 0 0 3px rgba(31, 110, 110, 0.2);
+    }
+
+    // Error state — when parent has is-error class or :user-invalid
+    .mai-newsletter-subscribe__field.is-error &,
+    &:user-invalid {
+        border-color: var(--color-danger);
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba(179, 38, 30, 0.25);
+        }
+    }
+}
+
+// ---- Submit button — gold / volunteer variant ------------------------------
+.mai-newsletter-subscribe__submit {
+    display:          inline-flex;
+    align-items:      center;
+    justify-content:  center;
+    gap:              var(--space-xs);
+    cursor:           pointer;
+    font-family:      var(--font-family-base);
+    font-size:        var(--font-size-base);
+    font-weight:      var(--font-weight-semibold);
+    line-height:      var(--line-height-tight);
+    text-align:       center;
+    text-decoration:  none;
+    white-space:      nowrap;
+    padding-block:    var(--space-sm);
+    padding-inline:   var(--space-lg);
+    border:           2px solid var(--color-accent-soft);
+    border-radius:    var(--layout-radius);
+    background-color: var(--color-accent-soft);
+    color:            var(--color-fg-on-gold);
+    align-self:       flex-start;
+    transition:       background-color var(--duration-fast) var(--easing-standard),
+                      border-color var(--duration-fast) var(--easing-standard),
+                      color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        background-color: var(--color-accent);
+        border-color:     var(--color-accent);
+        color:            var(--color-fg-on-gold);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+
+    &:active {
+        background-color: var(--bgm-gold-700);
+        border-color:     var(--bgm-gold-700);
+        color:            #ffffff;
+    }
+}
+
+// ---- Legal / privacy note --------------------------------------------------
+.mai-newsletter-subscribe__legal {
+    font-size:   var(--font-size-xs);
+    line-height: var(--line-height-base);
+    color:       var(--bgm-ink-3);
+    margin:      0;
+}
+
+
+// ---- Confirm / Unsubscribe status pages ------------------------------------
+//
+// Templates: EXT:mai_newsletter …/Newsletter/Confirm.html | Unsubscribe.html.
+// Card-style success/fail message with icon, used after the user clicks
+// the confirmation or unsubscribe link in their email.
+
+.mai-newsletter-confirm,
+.mai-newsletter-unsubscribe {
+    max-width:     34rem;
+    margin-inline: auto;
+    padding-block: var(--space-xl);
+}
+
+.mai-newsletter-confirm__status,
+.mai-newsletter-unsubscribe__status {
+    display:          flex;
+    align-items:      flex-start;
+    gap:              var(--space-md);
+    background:       var(--color-background);
+    border:           2px solid var(--color-border-strong);
+    border-radius:    var(--layout-radius-sm);
+    padding:          var(--space-xl);
+    box-shadow:       var(--shadow-md);
+}
+
+.mai-newsletter-confirm__status--fail,
+.mai-newsletter-unsubscribe__status--fail {
+    border-color: var(--color-danger);
+    background:   var(--bgm-gold-050);
+}
+
+.mai-newsletter-confirm__icon,
+.mai-newsletter-unsubscribe__icon {
+    flex-shrink:   0;
+    width:         2.5rem;
+    height:        2.5rem;
+    display:       flex;
+    align-items:   center;
+    justify-content: center;
+    font-size:     var(--font-size-lg);
+    font-weight:   var(--font-weight-bold);
+    border-radius: var(--layout-radius-full);
+
+    .mai-newsletter-confirm__status--success &,
+    .mai-newsletter-unsubscribe__status--success & {
+        background: var(--bgm-teal-050);
+        color:      var(--color-success);
+    }
+
+    .mai-newsletter-confirm__status--fail &,
+    .mai-newsletter-unsubscribe__status--fail & {
+        background: var(--bgm-gold-100);
+        color:      var(--color-danger);
+    }
+}
+
+.mai-newsletter-confirm__content,
+.mai-newsletter-unsubscribe__content {
+    flex: 1 1 auto;
+}
+
+.mai-newsletter-confirm__title,
+.mai-newsletter-unsubscribe__title {
+    font-size:   var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
+    color:       var(--bgm-teal-900);
+    margin:      0 0 var(--space-sm);
+}
+
+.mai-newsletter-confirm__message,
+.mai-newsletter-unsubscribe__message {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--bgm-ink-2);
+    margin:      0;
+
+    p { margin: 0; }
 }
 
 } // @layer theme-organisms

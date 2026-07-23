@@ -33,7 +33,7 @@ final class HeroContentProcessorTest extends TestCase
         self::assertFalse($result['hero']);
     }
 
-    public function testProcessorSetsHeroFalseWhenMainContentHasNoHero(): void
+    public function testProcessorSetsHeroTrueWhenBeforeContentContainsHero(): void
     {
         $content = $this->createContentCollection([
             0 => [$this->createContentRecord('maispace_text')],
@@ -42,7 +42,7 @@ final class HeroContentProcessorTest extends TestCase
 
         $result = $this->process(['content' => $content]);
 
-        self::assertFalse($result['hero']);
+        self::assertTrue($result['hero']);
     }
 
     public function testProcessorSetsHeroTrueWhenMainContentContainsHero(): void

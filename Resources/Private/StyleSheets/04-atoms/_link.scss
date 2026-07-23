@@ -24,7 +24,7 @@ a {
         border-radius:  var(--layout-radius);
     }
 
-    &:visited {
+    &:not(.button, .mai-button):visited {
         color: var(--color-link-visited);
     }
 

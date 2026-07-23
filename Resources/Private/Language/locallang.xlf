@@ -24,6 +24,27 @@
 		<trans-unit id="language_menu.label" resname="language_menu.label">
 			<source>Select language</source>
 		</trans-unit>
+		<trans-unit id="header.home_link_suffix" resname="header.home_link_suffix">
+			<source>– to homepage</source>
+		</trans-unit>
+		<trans-unit id="header.login" resname="header.login">
+			<source>Login</source>
+		</trans-unit>
+		<trans-unit id="header.search" resname="header.search">
+			<source>Search</source>
+		</trans-unit>
+		<trans-unit id="footer.legal_heading" resname="footer.legal_heading">
+			<source>Legal</source>
+		</trans-unit>
+		<trans-unit id="footer.tagline" resname="footer.tagline">
+			<source>Practical, helpful, warm-hearted. Since 2016.</source>
+		</trans-unit>
+		<trans-unit id="footer.funded_by" resname="footer.funded_by">
+			<source>Funded by the City of Pulheim</source>
+		</trans-unit>
+		<trans-unit id="nav.close" resname="nav.close">
+			<source>Close navigation</source>
+		</trans-unit>
 	</body>
 	</file>
 </xliff>

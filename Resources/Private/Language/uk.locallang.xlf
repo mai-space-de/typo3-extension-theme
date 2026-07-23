@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="uk" datatype="plaintext" original="EXT:mai_theme/Resources/Private/Language/locallang.xlf" date="2026-07-23T12:00:00Z" product-name="mai_theme">
+		<header/>
+		<body>
+			<trans-unit id="theme.custom" resname="theme.custom">
+				<source>Custom Theme</source>
+				<target>Користувацька тема</target>
+			</trans-unit>
+			<trans-unit id="menubar.main_nav_label" resname="menubar.main_nav_label">
+				<source>Main Navigation</source>
+				<target>Головна навігація</target>
+			</trans-unit>
+			<trans-unit id="menubar.mobile_label" resname="menubar.mobile_label">
+				<source>Menu</source>
+				<target>Меню</target>
+			</trans-unit>
+			<trans-unit id="skip_links.content" resname="skip_links.content">
+				<source>Skip to content</source>
+				<target>Перейти до вмісту</target>
+			</trans-unit>
+			<trans-unit id="skip_links.navigation" resname="skip_links.navigation">
+				<source>Skip to navigation</source>
+				<target>Перейти до навігації</target>
+			</trans-unit>
+			<trans-unit id="menubar.submenu_label" resname="menubar.submenu_label">
+				<source>Show submenu for %s</source>
+				<target>Показати підменю для %s</target>
+			</trans-unit>
+			<trans-unit id="language_menu.label" resname="language_menu.label">
+				<source>Select language</source>
+				<target>Вибрати мову</target>
+			</trans-unit>
+			<trans-unit id="header.home_link_suffix" resname="header.home_link_suffix">
+				<source>– to homepage</source>
+				<target>– на головну сторінку</target>
+			</trans-unit>
+			<trans-unit id="header.login" resname="header.login">
+				<source>Login</source>
+				<target>Увійти</target>
+			</trans-unit>
+			<trans-unit id="header.search" resname="header.search">
+				<source>Search</source>
+				<target>Пошук</target>
+			</trans-unit>
+			<trans-unit id="footer.legal_heading" resname="footer.legal_heading">
+				<source>Legal</source>
+				<target>Правове</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
