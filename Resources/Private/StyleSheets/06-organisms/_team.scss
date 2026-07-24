@@ -1,0 +1,241 @@
+// =============================================================================
+// 06-organisms/_team.scss
+//
+// Styles for the mai_team plugin (TeamMember/List + TeamMember/Detail).
+// Reuses the BGM card language established in _location.scss.
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+
+@layer theme-organisms {
+
+// ---------------------------------------------------------------------------
+// List — card grid
+// ---------------------------------------------------------------------------
+.mai-team-list {
+    display:               grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--layout-card-width), 1fr));
+    gap:                   var(--layout-grid-gap);
+}
+
+.mai-team-list__item {
+    display:        flex;
+    flex-direction: column;
+    background:     var(--color-background);
+    border:         1px solid var(--bgm-line);
+    border-radius:  var(--layout-radius);
+    overflow:       hidden;
+    transition:     box-shadow var(--duration-base) var(--easing-standard);
+
+    &:hover,
+    &:focus-within { box-shadow: var(--shadow-md); }
+}
+
+.mai-team-list__image img {
+    width:        100%;
+    height:       auto;
+    aspect-ratio: 1 / 1;
+    object-fit:   var(--img-object-fit, cover);
+    display:      block;
+}
+
+.mai-team-list__content {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-2xs);
+    padding:        var(--space-lg);
+}
+
+.mai-team-list__name {
+    margin:      0;
+    font-size:   var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+
+    a {
+        color:           var(--bgm-teal-900);
+        text-decoration: none;
+
+        &:hover { text-decoration: underline; }
+
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.mai-team-list__role {
+    margin:    0;
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+.mai-team-list__email {
+    margin:    0;
+    font-size: var(--font-size-sm);
+
+    a {
+        color:           var(--bgm-teal-700);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover { color: var(--bgm-teal-900); }
+
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.mai-team-list__empty {
+    font-size: var(--font-size-md);
+    color:     var(--bgm-ink-3);
+}
+
+.mai-team-list__pagination {
+    grid-column:        1 / -1;
+    margin-block-start: var(--space-xl);
+}
+
+// The shared Pagination.html partial renders its own <nav class="mai-team-pagination">
+.mai-team-pagination__list {
+    list-style: none;
+    margin:     0;
+    padding:    0;
+    display:    flex;
+    flex-wrap:  wrap;
+    gap:        var(--space-xs);
+}
+
+.mai-team-pagination__link {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    min-width:       2.75rem;
+    min-height:      2.75rem;
+    padding-inline:  var(--space-sm);
+    border:          2px solid var(--bgm-line);
+    border-radius:   var(--layout-radius);
+    color:           var(--bgm-teal-800);
+    text-decoration: none;
+    font-weight:     var(--font-weight-semibold);
+    transition:      background-color var(--duration-fast) var(--easing-standard),
+                     border-color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        border-color: var(--bgm-teal-700);
+        background:   var(--bgm-teal-050);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+.mai-team-pagination__item--current .mai-team-pagination__link,
+.mai-team-pagination__link[aria-current="page"] {
+    background:   var(--bgm-teal-700);
+    border-color: var(--bgm-teal-700);
+    color:        #ffffff;
+}
+
+// ---------------------------------------------------------------------------
+// Detail — image + content, matches .location-detail two-column intent
+// ---------------------------------------------------------------------------
+.mai-team-detail {
+    display:            flex;
+    flex-direction:     column;
+    gap:                var(--space-xl);
+
+    @include bp-up(md) {
+        flex-direction: row;
+        align-items:    flex-start;
+    }
+}
+
+.mai-team-detail__image {
+    flex-shrink: 0;
+
+    img {
+        width:         100%;
+        max-width:     16rem;
+        height:        auto;
+        aspect-ratio:  1 / 1;
+        object-fit:    var(--img-object-fit, cover);
+        border-radius: var(--layout-radius);
+        display:       block;
+    }
+}
+
+.mai-team-detail__content {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-sm);
+    max-width:      var(--layout-prose-width);
+}
+
+.mai-team-detail__name {
+    margin: 0;
+    color:  var(--bgm-teal-900);
+}
+
+.mai-team-detail__role {
+    margin:      0;
+    font-size:   var(--font-size-md);
+    color:       var(--bgm-ink-3);
+}
+
+.mai-team-detail__bio {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--color-text);
+
+    p:last-child { margin-block-end: 0; }
+}
+
+.mai-team-detail__contact {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-2xs);
+    margin-block-start: var(--space-sm);
+}
+
+.mai-team-detail__email,
+.mai-team-detail__phone,
+.mai-team-detail__linkedin {
+    margin:    0;
+    font-size: var(--font-size-base);
+
+    a {
+        color:           var(--bgm-teal-700);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover { color: var(--bgm-teal-900); }
+
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
+    }
+}
+
+.mai-team-detail__back {
+    display:             inline-block;
+    margin-block-start:  var(--space-2xl);
+    color:               var(--bgm-teal-700);
+    font-weight:         var(--font-weight-semibold);
+    text-decoration:     underline;
+    text-underline-offset: 2px;
+
+    &:hover { color: var(--bgm-teal-900); }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+}

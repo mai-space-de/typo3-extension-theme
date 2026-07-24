@@ -449,6 +449,23 @@ body.mai-offcanvas-open {
 // ---------------------------------------------------------------------------
 // Submenu panels
 // Visibility: JS toggles [hidden]; transition for smooth open/close
+//
+// Positioning strategy (progressive enhancement, desktop only):
+//   1. Static floor (below): depth-1 dropdowns open below-left of their
+//      trigger; nested fly-outs open to the inline-end side. Works with
+//      JS disabled, but has no viewport-edge collision detection.
+//   2. JS enhancement (menubar-navigation.js `positionSubmenu`): measures
+//      the trigger + submenu against the viewport on open and toggles
+//      `--flip-inline` / `--flip-block` to keep the panel on-screen.
+//
+//   Native CSS anchor positioning (`anchor()`/`position-anchor`) was
+//   evaluated as a further enhancement, but the submenu is a DOM
+//   descendant of its own trigger <li> (see MenubarItem.html) — with the
+//   trigger as both the anchor and the absolute-positioning containing
+//   block, current Chromium fails to resolve `anchor()` against it
+//   (verified empirically: computed inset falls back to ~0 instead of the
+//   anchor's edge). Revisit if the submenu markup is ever restructured to
+//   render as a sibling of its trigger instead of a child.
 // ---------------------------------------------------------------------------
 .mai-menubar__submenu {
     position:          absolute;
@@ -478,4 +495,36 @@ body.mai-offcanvas-open {
         min-width:  0;
         width:      100%;
     }
+}
+
+// Nested fly-outs (depth ≥ 2): open to the side of their own <li> instead of
+// stacking below it — the previous shared rule dropped every depth below-left
+// of its trigger, so a third-level panel rendered on top of the sibling rows
+// still below it in the parent dropdown ("dropdowns overlap" on desktop).
+.mai-menubar__submenu .mai-menubar__submenu {
+    inset-block-start:   calc(var(--space-2, 8px) * -1);
+    inset-inline-start:  100%;
+    inset-inline-end:    auto;
+    margin-inline-start: var(--space-1, 4px);
+}
+
+// ---------------------------------------------------------------------------
+// Collision flips — applied as plain classes by positionSubmenu() in
+// menubar-navigation.js when an open panel would overflow the viewport.
+// ---------------------------------------------------------------------------
+.mai-menubar__submenu--flip-inline {
+    inset-inline-start: auto;
+    inset-inline-end:   0;
+}
+
+.mai-menubar__submenu .mai-menubar__submenu.mai-menubar__submenu--flip-inline {
+    inset-inline-start:  auto;
+    inset-inline-end:    100%;
+    margin-inline-start: 0;
+    margin-inline-end:   var(--space-1, 4px);
+}
+
+.mai-menubar__submenu--flip-block {
+    inset-block-start: auto;
+    inset-block-end:   100%;
 }

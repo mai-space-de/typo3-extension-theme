@@ -36,13 +36,23 @@ final class HeroContentProcessor implements DataProcessorInterface
 
         $as = $cObj->stdWrapValue('as', $processorConfiguration, 'hero');
         $contentSource = $cObj->stdWrapValue('contentSource', $processorConfiguration, 'content');
+        $currentPageUid = $cObj->getRequest()->getAttribute('frontend.page.information')?->getId() ?? 0;
 
-        $processedData[$as] = $this->hasHero($processedData[$contentSource] ?? null);
+        $processedData[$as] = $this->hasHero($processedData[$contentSource] ?? null, $currentPageUid);
 
         return $processedData;
     }
 
-    private function hasHero(mixed $content): bool
+    /**
+     * Only counts a Hero CE that actually lives on the current page. The
+     * "beforeContent" column (colPos 3) is backend-layout-configured to
+     * slide up the rootline when empty, so page-content data processing
+     * (unlike the styles.content.get render column) resolves an ancestor's
+     * Hero CE for every descendant page — without the pid check below,
+     * {hero} is true sitewide and the page-level H1 in PageHeading.html
+     * never renders on any page but the one that owns the Hero CE.
+     */
+    private function hasHero(mixed $content, int $currentPageUid): bool
     {
         if (!$content instanceof ContentAreaCollection) {
             return false;
@@ -55,6 +65,10 @@ final class HeroContentProcessor implements DataProcessorInterface
                 }
 
                 if ($record->getMainType() !== 'tt_content') {
+                    continue;
+                }
+
+                if ($record->getPid() !== $currentPageUid) {
                     continue;
                 }
 

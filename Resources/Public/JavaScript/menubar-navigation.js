@@ -19,9 +19,57 @@
  *   - Click outside the nav closes all open submenus
  *   - Hover on desktop opens a top-level submenu (and closes siblings)
  *   - Mobile hamburger toggle (.mai-menubar-toggle) opens/closes the whole nav
+ *   - Submenu positioning, viewport-collision aware (see positionSubmenu()
+ *     below): measures the trigger + submenu against the viewport on open
+ *     and flips the panel via CSS utility classes when it would overflow.
+ *
+ *     (Native CSS anchor positioning was evaluated as a lighter-weight
+ *     alternative but dropped — see menubar-navigation.scss for why it
+ *     doesn't work with this markup's trigger/submenu nesting.)
  */
 
 'use strict';
+
+/**
+ * Collision-detection for submenu placement: measures the trigger and the
+ * (now-visible) submenu against the viewport and flips it via utility
+ * classes when it would overflow.
+ *
+ * @param {DisclosureToggle} toggle
+ */
+function positionSubmenu(toggle) {
+  const { submenu, depth } = toggle;
+  const li = toggle.button.closest('.mai-menubar__item');
+  if (!submenu || !li) return;
+
+  // Reset before measuring so a previous flip doesn't skew this one
+  submenu.classList.remove('mai-menubar__submenu--flip-inline', 'mai-menubar__submenu--flip-block');
+
+  const liRect      = li.getBoundingClientRect();
+  const menuRect     = submenu.getBoundingClientRect();
+  const viewportWidth  = document.documentElement.clientWidth;
+  const viewportHeight = document.documentElement.clientHeight;
+  // toggle.depth is the depth of the ITEM that owns this button (0 = top
+  // level); its submenu is one level deeper. Depth 0 controls the depth-1
+  // dropdown (opens below, arrow-down); depth ≥ 1 controls a depth-2+
+  // fly-out (opens to the side, arrow-right — see MenubarItem.html).
+  const isNested = depth >= 1;
+
+  // Inline axis: top-level dropdowns default to left-aligned under the
+  // trigger; nested fly-outs default to the inline-end side of the trigger.
+  const inlineEdge = isNested ? liRect.right : liRect.left;
+  if (inlineEdge + menuRect.width > viewportWidth) {
+    submenu.classList.add('mai-menubar__submenu--flip-inline');
+  }
+
+  // Block axis: flip a top-level dropdown above its trigger if it would run
+  // past the bottom of the viewport. Nested fly-outs stay pinned to the
+  // trigger's top edge — flipping them vertically as well would require
+  // recomputing against the (already-flipped) parent panel's edge.
+  if (!isNested && liRect.bottom + menuRect.height > viewportHeight) {
+    submenu.classList.add('mai-menubar__submenu--flip-block');
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Single disclosure button controller
@@ -53,6 +101,9 @@ class DisclosureToggle {
     if (!this.submenu) return;
     this.button.setAttribute('aria-expanded', 'true');
     this.submenu.hidden = false;
+    // Measuring only makes sense once [hidden] is removed and the panel
+    // has box dimensions to read.
+    positionSubmenu(this);
   }
 
   close() {

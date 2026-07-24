@@ -524,6 +524,15 @@ tt_content {
         vendorName = Maispace
     }
 
+    ## maispace_newsletter's Newsletter.html stub cObject-calls this .20 path
+    ## to render the actual EXT:mai_newsletter subscribe form. Copying
+    ## tt_content.mainewsletter_newsletter itself (rather than its .20) would
+    ## copy the plugin's own FLUIDTEMPLATE/Generic wrapper, which cObject-calls
+    ## tt_content.{data.CType}.20 again with data.CType still "maispace_newsletter"
+    ## — infinite recursion. Must be defined after mainewsletter_newsletter
+    ## above since `<` copies by source order.
+    maispace_newsletter.20 < tt_content.mainewsletter_newsletter.20
+
     ## EXT:mai_resource
     mairesource_list = USER
     mairesource_list {

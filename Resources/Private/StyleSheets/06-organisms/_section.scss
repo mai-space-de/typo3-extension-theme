@@ -66,7 +66,7 @@
 // ---------------------------------------------------------------------------
 // Full-width section — single column, prose width constraint
 // ---------------------------------------------------------------------------
-.mai-section--full .mai-section__content {
+.mai-section--full .mai-section__col {
     max-width:      var(--layout-content-width);
     margin-inline:  auto;
 }
@@ -74,7 +74,7 @@
 // ---------------------------------------------------------------------------
 // 50/50 two-column layout
 // ---------------------------------------------------------------------------
-.mai-section--5050 .mai-section__columns {
+.mai-section--50-50 .mai-section__inner {
     display:     grid;
     gap:         var(--layout-grid-gap);
     align-items: start;
@@ -87,7 +87,7 @@
 // ---------------------------------------------------------------------------
 // 33/66 layout (narrow left | wide right)
 // ---------------------------------------------------------------------------
-.mai-section--33-66 .mai-section__columns {
+.mai-section--33-66 .mai-section__inner {
     display:     grid;
     gap:         var(--layout-grid-gap);
     align-items: start;
@@ -100,7 +100,7 @@
 // ---------------------------------------------------------------------------
 // 66/33 layout (wide left | narrow right)
 // ---------------------------------------------------------------------------
-.mai-section--6633 .mai-section__columns {
+.mai-section--66-33 .mai-section__inner {
     display:     grid;
     gap:         var(--layout-grid-gap);
     align-items: start;
@@ -113,7 +113,7 @@
 // ---------------------------------------------------------------------------
 // 3-column layout
 // ---------------------------------------------------------------------------
-.mai-section--3col .mai-section__columns {
+.mai-section--3col .mai-section__inner {
     display:               grid;
     gap:                   var(--layout-grid-gap);
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
@@ -122,7 +122,7 @@
 // ---------------------------------------------------------------------------
 // 4-column layout
 // ---------------------------------------------------------------------------
-.mai-section--4col .mai-section__columns {
+.mai-section--4col .mai-section__inner {
     display:               grid;
     gap:                   var(--layout-grid-gap);
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
@@ -131,20 +131,20 @@
 // ---------------------------------------------------------------------------
 // Sidebar layouts (main + aside)
 // ---------------------------------------------------------------------------
-.mai-section--sidebar-l .mai-section__columns,
-.mai-section--sidebar-r .mai-section__columns {
+.mai-section--sidebar-l .mai-section__inner,
+.mai-section--sidebar-r .mai-section__inner {
     display:     grid;
     gap:         var(--layout-grid-gap);
     align-items: start;
 }
 
-.mai-section--sidebar-l .mai-section__columns {
+.mai-section--sidebar-l .mai-section__inner {
     @include bp-up(md) {
         grid-template-columns: var(--layout-sidebar-aside) 1fr;
     }
 }
 
-.mai-section--sidebar-r .mai-section__columns {
+.mai-section--sidebar-r .mai-section__inner {
     @include bp-up(md) {
         grid-template-columns: 1fr var(--layout-sidebar-aside);
     }

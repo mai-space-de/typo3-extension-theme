@@ -2,12 +2,12 @@
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
 <f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
-<article class="mai-featurebox"
+<article class="mai-featurebox{f:if(condition: data.tx_maitheme_accent, then: ' mai-featurebox--gold')}"
          data-ce-uid="{data.uid}"
          {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{data.tx_maitheme_icon_identifier}">
         <div class="mai-featurebox__badge" aria-hidden="true">
-            <span class="mai-icon mai-icon--{data.tx_maitheme_icon_identifier}"></span>
+            <span class="mai-icon__glyph" data-icon="{data.tx_maitheme_icon_identifier}"></span>
         </div>
     </f:if>
     <div class="mai-featurebox__content">
@@ -21,7 +21,7 @@
             <div class="mai-featurebox__body">{bodytext}</div>
         </f:if>
         <f:if condition="{data.tx_maitheme_link}">
-            <f:link.typolink parameter="{data.tx_maitheme_link}" class="mai-featurebox__link">
+            <f:link.typolink parameter="{data.tx_maitheme_link}" class="mai-featurebox__link button{f:if(condition: data.tx_maitheme_accent, then: ' button-secondary')}">
                 {f:if(condition: data.tx_maitheme_link_text, then: data.tx_maitheme_link_text, else: 'Mehr erfahren')}
             </f:link.typolink>
         </f:if>

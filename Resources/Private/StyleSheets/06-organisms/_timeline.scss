@@ -2,6 +2,9 @@
 // 06-organisms/_timeline.scss
 //
 // Vertical timeline organism — ordered <ol> with time + article entries.
+// Shared by the mai_timeline plugin (Timeline/List.html) and the
+// maispace_timeline DataProcessor CType (Partials/Organism/Timeline.html +
+// Partials/Items/TimelineItem.html) — both render identical markup/classes.
 // BGM Pulheim style: teal track line, gold year markers, square connectors.
 // =============================================================================
 
@@ -13,11 +16,18 @@
     max-width: var(--layout-prose-width);
 }
 
-.mai-timeline__title {
+// Section header (h2, when data.header is set). Per-entry headings (h3)
+// reuse the same class — scoped to article context to keep sizes distinct.
+.mai-timeline > .mai-timeline__title {
     font-size:    var(--font-size-2xl);
     font-weight:  var(--font-weight-bold);
     color:        var(--bgm-teal-900);
     margin-block: 0 var(--space-2xl);
+}
+
+.mai-timeline__empty {
+    font-size: var(--font-size-md);
+    color:     var(--bgm-ink-3);
 }
 
 // ---------------------------------------------------------------------------
@@ -49,31 +59,36 @@
     padding-block: var(--space-md) var(--space-2xl);
 
     &:last-child { padding-block-end: 0; }
+
+    // The connector dot on the track — purely decorative, no markup needed.
+    &::before {
+        content:            "";
+        position:           absolute;
+        inset-block-start:  calc(var(--space-md) + 0.2em);
+        inset-inline-start: calc(-1 * (var(--space-2xl) + var(--space-md)) + var(--space-xl) - 0.5rem);
+        width:              1rem;
+        height:             1rem;
+        background:         var(--bgm-teal-700);
+        border:             2px solid var(--color-background);
+        border-radius:      var(--layout-radius-sm);
+        box-shadow:         0 0 0 2px var(--bgm-teal-700);
+    }
+
+    // Gold dot for featured/highlighted entries
+    &--featured::before {
+        background:  var(--bgm-gold-500);
+        box-shadow:  0 0 0 2px var(--bgm-gold-500);
+    }
 }
 
-// The connector dot on the track
-.mai-timeline__dot {
-    position:           absolute;
-    inset-block-start:  calc(var(--space-md) + 0.2em);
-    inset-inline-start: calc(-1 * (var(--space-2xl) + var(--space-md)) + var(--space-xl) - 0.5rem);
-    width:              1rem;
-    height:             1rem;
-    background:         var(--bgm-teal-700);
-    border:             2px solid var(--color-background);
-    border-radius:      var(--layout-radius-sm);
-    box-shadow:         0 0 0 2px var(--bgm-teal-700);
-}
-
-// Gold dot for featured/highlighted entries
-.mai-timeline__item--featured .mai-timeline__dot {
-    background:  var(--bgm-gold-500);
-    box-shadow:  0 0 0 2px var(--bgm-gold-500);
+.mai-timeline__entry {
+    display: block;
 }
 
 // ---------------------------------------------------------------------------
 // Item content
 // ---------------------------------------------------------------------------
-.mai-timeline__time {
+.mai-timeline__date {
     display:      block;
     font-size:    var(--font-size-sm);
     font-weight:  var(--font-weight-bold);
@@ -83,14 +98,14 @@
     margin-block-end: var(--space-xs);
 }
 
-.mai-timeline__heading {
+.mai-timeline__entry > .mai-timeline__title {
     font-size:    var(--font-size-lg);
     font-weight:  var(--font-weight-bold);
     color:        var(--bgm-teal-900);
     margin-block: 0 var(--space-sm);
 }
 
-.mai-timeline__body {
+.mai-timeline__description {
     font-size:   var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color:       var(--bgm-ink-2);
@@ -99,17 +114,17 @@
     p { margin: 0; }
 }
 
-.mai-timeline__image {
-    margin-block-start: var(--space-md);
-
-    img {
-        width:         100%;
-        max-width:     32rem;
-        height:        auto;
-        border-radius: var(--layout-radius);
-        border:        1px solid var(--bgm-line);
-        display:       block;
-    }
+.mai-timeline__media {
+    margin-block: var(--space-sm) var(--space-md);
 }
 
-} // @layer theme-organisms
+.mai-timeline__image {
+    width:         100%;
+    max-width:     32rem;
+    height:        auto;
+    border-radius: var(--layout-radius);
+    border:        1px solid var(--bgm-line);
+    display:       block;
+}
+
+}

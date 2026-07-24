@@ -1,0 +1,261 @@
+// =============================================================================
+// 06-organisms/_gallery.scss
+//
+// Styles for the mai_gallery plugin (Gallery/List + Gallery/Show).
+// Reuses the BGM card-grid language; the plugin's own EXT:mai_gallery
+// gallery.css asset is an empty stub — all visual rules live here so the
+// component follows the same design tokens as every other organism.
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+@import "../02-mixins/page-wrap";
+
+@layer theme-organisms {
+
+// ---------------------------------------------------------------------------
+// List — year filter + card grid + pagination
+// ---------------------------------------------------------------------------
+.mai-gallery-list__grid {
+    list-style:            none;
+    margin:                var(--space-xl) 0 0;
+    padding:               0;
+    display:               grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--layout-card-width), 1fr));
+    gap:                   var(--layout-grid-gap);
+}
+
+.mai-gallery-list__item {
+    margin: 0;
+}
+
+.mai-gallery-list__empty {
+    font-size: var(--font-size-md);
+    color:     var(--bgm-ink-3);
+    padding-block: var(--space-xl) 0;
+}
+
+// Year filter — pill-style nav, mirrors the language-menu / tabs pattern.
+.mai-gallery-year-filter__list {
+    list-style:    none;
+    margin:        0;
+    padding:       0;
+    display:       flex;
+    flex-wrap:     wrap;
+    gap:           var(--space-sm);
+}
+
+.mai-gallery-year-filter__link {
+    display:         inline-flex;
+    align-items:     center;
+    padding:         var(--space-xs) var(--space-md);
+    border:          2px solid var(--bgm-teal-300);
+    border-radius:   var(--layout-radius-full);
+    color:           var(--bgm-teal-800);
+    text-decoration: none;
+    font-size:       var(--font-size-sm);
+    font-weight:     var(--font-weight-semibold);
+    transition:      background-color var(--duration-fast) var(--easing-standard),
+                     border-color var(--duration-fast) var(--easing-standard),
+                     color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        border-color: var(--bgm-teal-700);
+        color:        var(--bgm-teal-900);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+
+    &--active,
+    &[aria-current] {
+        background:   var(--bgm-teal-700);
+        border-color: var(--bgm-teal-700);
+        color:        #ffffff;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Gallery card
+// ---------------------------------------------------------------------------
+.mai-gallery-card {
+    display:       block;
+    background:    var(--color-background);
+    border:        1px solid var(--bgm-line);
+    border-radius: var(--layout-radius);
+    overflow:      hidden;
+    transition:    box-shadow var(--duration-base) var(--easing-standard);
+
+    &:hover { box-shadow: var(--shadow-md); }
+
+    &:focus-within {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+.mai-gallery-card__link {
+    display:         block;
+    color:           inherit;
+    text-decoration: none;
+
+    &:focus-visible { outline: none; } // card itself carries the focus ring
+}
+
+.mai-gallery-card__cover img,
+.mai-gallery-card__img {
+    width:        100%;
+    height:       auto;
+    aspect-ratio: 4 / 3;
+    object-fit:   var(--img-object-fit, cover);
+    display:      block;
+}
+
+.mai-gallery-card__body {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-2xs);
+    padding:        var(--space-lg);
+}
+
+.mai-gallery-card__title {
+    margin:      0;
+    font-size:   var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color:       var(--bgm-teal-900);
+}
+
+.mai-gallery-card__year,
+.mai-gallery-card__count {
+    margin:    0;
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+// ---------------------------------------------------------------------------
+// Pagination — matches the shared list/detail nav pattern
+// ---------------------------------------------------------------------------
+.mai-gallery-pagination {
+    margin-block-start: var(--space-2xl);
+}
+
+.mai-gallery-pagination__list {
+    list-style: none;
+    margin:     0;
+    padding:    0;
+    display:    flex;
+    flex-wrap:  wrap;
+    gap:        var(--space-xs);
+}
+
+.mai-gallery-pagination__link {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    min-width:       2.75rem;    // 44 px — WCAG touch target
+    min-height:      2.75rem;
+    padding-inline:  var(--space-sm);
+    border:          2px solid var(--bgm-line);
+    border-radius:   var(--layout-radius);
+    color:           var(--bgm-teal-800);
+    text-decoration: none;
+    font-weight:     var(--font-weight-semibold);
+    transition:      background-color var(--duration-fast) var(--easing-standard),
+                     border-color var(--duration-fast) var(--easing-standard);
+
+    &:hover {
+        border-color: var(--bgm-teal-700);
+        background:   var(--bgm-teal-050);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+.mai-gallery-pagination__item--current .mai-gallery-pagination__link,
+.mai-gallery-pagination__link[aria-current="page"] {
+    background:   var(--bgm-teal-700);
+    border-color: var(--bgm-teal-700);
+    color:        #ffffff;
+}
+
+// ---------------------------------------------------------------------------
+// Detail — header, description, image grid, back link
+// ---------------------------------------------------------------------------
+.mai-gallery-detail__header {
+    margin-block-end: var(--space-lg);
+}
+
+.mai-gallery-detail__title {
+    margin: 0 0 var(--space-2xs);
+    color:  var(--bgm-teal-900);
+}
+
+.mai-gallery-detail__year {
+    margin:    0;
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+.mai-gallery-detail__description {
+    max-width:        var(--layout-prose-width);
+    margin-block-end: var(--space-xl);
+    font-size:        var(--font-size-base);
+    line-height:      var(--line-height-relaxed);
+    color:            var(--color-text);
+}
+
+.mai-gallery-detail__images {
+    list-style:            none;
+    margin:                0;
+    padding:               0;
+    display:               grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap:                   var(--space-md);
+}
+
+.mai-gallery-detail__image-item {
+    margin: 0;
+}
+
+.mai-gallery-image {
+    margin: 0;
+}
+
+.mai-gallery-image__img {
+    width:         100%;
+    height:        auto;
+    aspect-ratio:  4 / 3;
+    object-fit:    var(--img-object-fit, cover);
+    border-radius: var(--layout-radius);
+    display:       block;
+}
+
+.mai-gallery-image__caption {
+    margin-block-start: var(--space-2xs);
+    font-size:          var(--font-size-sm);
+    color:              var(--bgm-ink-3);
+}
+
+.mai-gallery-detail__back {
+    margin-block-start: var(--space-2xl);
+}
+
+.mai-gallery-detail__back-link {
+    color:           var(--bgm-teal-700);
+    font-weight:     var(--font-weight-semibold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover { color: var(--bgm-teal-900); }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+}

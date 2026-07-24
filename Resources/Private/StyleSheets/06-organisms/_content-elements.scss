@@ -20,6 +20,32 @@
     @include page-wrap;
 }
 
+// ---------------------------------------------------------------------------
+// Standalone-placement safety net.
+// `<main>` itself carries no width constraint — most content elements are
+// designed as grid cells inside a Section/BentoBox container (or nest an
+// __inner element) which supplies the page-wrap constraint, so they don't
+// set their own top-level max-width. Placed directly in the main content
+// column (the common case — most CTypes/plugins have no wrapping
+// container), they otherwise render full-bleed, edge to edge, with no
+// gutter, at any viewport wider than --layout-width-max.
+//
+// :where() keeps this at zero specificity so it can never override a
+// component's own more considered width (e.g. prose-width quote/richtext
+// blocks, or the plugin card grids in _gallery.scss/_team.scss/etc.) —
+// it only fills in the default for elements that don't set one.
+//
+// Excluded: organisms that intentionally bleed edge-to-edge and manage
+// their own constrained __inner wrapper (hero, cta, alert, logoshowcase,
+// section, bentobox) — capping the outer element here would collapse the
+// very background bleed they're built to show. Also excluded: display:
+// inline-flex atoms (badge, icon, logo) — `width: 100%` from page-wrap
+// would stretch them across the whole column instead of sizing to content.
+// ---------------------------------------------------------------------------
+:where(#main) > :where(:not(.full-width, .hero, .mai-alert, .mai-cta, .mai-logoshowcase, .mai-section, .mai-bentobox, .mai-badge, .mai-icon, .mai-logo)) {
+    @include page-wrap;
+}
+
 
 // ---------------------------------------------------------------------------
 // Callout — aside with coloured left-border accent, role="note"
@@ -330,6 +356,13 @@
 
 // ---------------------------------------------------------------------------
 // Testimonial — quote card, Source Serif 4 body, avatar + attribution
+//
+// Two markup consumers share this card:
+//  - maispace_testimonial CType (Templates/ContentElements/Testimonial.html):
+//    __blockquote, __text, __media, __avatar, __caption
+//  - mai_testimonials plugin (Single/Slider/List.html):
+//    __quote, __footer, __portrait, __author
+// Both share __name, __role, __organisation.
 // ---------------------------------------------------------------------------
 .mai-testimonial {
     background:    var(--color-background);
@@ -339,6 +372,10 @@
     display:       flex;
     flex-direction: column;
     gap:           var(--space-md);
+
+    &--featured {
+        padding: var(--space-2xl);
+    }
 }
 
 // The figure's blockquote child resets the generic tag styling from
@@ -350,7 +387,8 @@
     padding-inline-start: 0;
 }
 
-.mai-testimonial__text {
+.mai-testimonial__text,
+.mai-testimonial__quote {
     font-family:  var(--font-family-serif);
     font-size:    var(--font-size-lg);
     font-style:   italic;
@@ -366,7 +404,8 @@
     flex-shrink: 0;
 }
 
-.mai-testimonial__avatar {
+.mai-testimonial__avatar,
+.mai-testimonial__portrait {
     width:         3rem;
     height:        3rem;
     border-radius: var(--layout-radius-full);
@@ -375,18 +414,23 @@
     border:        2px solid var(--bgm-teal-100);
 }
 
-.mai-testimonial__caption {
+// footer wraps portrait + author for the plugin markup — same layout as
+// the CType's figcaption caption.
+.mai-testimonial__caption,
+.mai-testimonial__footer {
     font-style:         normal;
     display:            flex;
-    flex-direction:     column;
-    gap:                var(--space-2xs);
+    align-items:        center;
+    gap:                var(--space-md);
     margin-block-start: var(--space-md);
 }
 
-.mai-testimonial__role {
-    font-size: var(--font-size-sm);
-    color:     var(--bgm-ink-3);
-    margin:    0;
+// cite wraps name/role/organisation, stacked, for the plugin markup.
+.mai-testimonial__author {
+    font-style:     normal;
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-2xs);
 }
 
 .mai-testimonial__name {
@@ -396,16 +440,38 @@
     margin:      0;
 }
 
-.mai-testimonial__role {
+.mai-testimonial__role,
+.mai-testimonial__organisation {
     font-size: var(--font-size-sm);
     color:     var(--bgm-ink-3);
     margin:    0;
 }
 
-.mai-testimonial__organisation {
-    font-size: var(--font-size-sm);
+// ---------------------------------------------------------------------------
+// Testimonials containers — grid/list/single wrappers around .mai-testimonial
+// cards (mai_testimonials plugin: List.html / Single.html)
+// ---------------------------------------------------------------------------
+.mai-testimonials__empty {
+    font-size: var(--font-size-md);
     color:     var(--bgm-ink-3);
-    margin:    0;
+}
+
+.mai-testimonials--grid .mai-testimonials__list {
+    list-style:            none;
+    margin:                0;
+    padding:               0;
+    display:               grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--layout-card-width), 1fr));
+    gap:                   var(--layout-grid-gap);
+}
+
+.mai-testimonials__item {
+    margin: 0;
+}
+
+.mai-testimonials--single .mai-testimonial {
+    max-width:     var(--layout-prose-width);
+    margin-inline: auto;
 }
 
 
@@ -514,17 +580,20 @@
 .mai-featurebox {
     --featurebox-border: var(--bgm-teal-700);
     --featurebox-icon:   var(--bgm-gold-500);
+    --featurebox-badge-size: 4rem;   // 64px — matches the reference offer-card badge
 
     position:       relative;
     background:     var(--color-background);
     border:         2px solid var(--featurebox-border);
     border-radius:  var(--layout-radius-sm);
     padding:        var(--space-xl);
-    padding-block-start: calc(var(--space-xl) + var(--space-lg));
-    transition:     border-color var(--duration-fast) var(--easing-standard);
+    padding-block-start: calc(var(--featurebox-badge-size) / 2 + var(--space-lg));
+    transition:     border-color var(--duration-fast) var(--easing-standard),
+                    transform var(--duration-fast) var(--easing-standard);
 
     &:hover {
         border-color: var(--bgm-teal-900);
+        transform:    translate(-2px, -2px);
     }
 
     &.mai-featurebox--gold {
@@ -534,22 +603,34 @@
     }
 }
 
+// Offer-card grid — 2-up when nested in a BentoBox (colPos 200), matching
+// the reference "single column mobile, 2-up tablet/desktop" offer-card
+// layout. Standalone featureboxes (direct main children) are unaffected —
+// the safety-net page-wrap rule above only targets that case.
+.mai-bentobox > .mai-featurebox {
+    grid-column: span 12;
+
+    @include bp-up(sm) {
+        grid-column: span 6;
+    }
+}
+
 // Double-frame badge — half-overlaps the card's top-left corner.
 // Icon colour is the opposite accent from the border (teal border → gold
 // icon, gold border → teal icon) per the BGM offer-card signature device.
 .mai-featurebox__badge {
     position:           absolute;
-    inset-block-start:  calc(-1 * var(--space-lg));
+    inset-block-start:  calc(-1 * var(--featurebox-badge-size) / 2);
     inset-inline-start: var(--space-lg);
-    width:              var(--icon-size-lg);   // 48px
-    height:             var(--icon-size-lg);
+    width:              var(--featurebox-badge-size);
+    height:             var(--featurebox-badge-size);
     background:         var(--color-background);
     border:             2px solid var(--featurebox-border);
     border-radius:      var(--layout-radius-sm);
     display:            flex;
     align-items:        center;
     justify-content:    center;
-    font-size:          var(--icon-size-md);
+    font-size:          var(--icon-size-lg);
     color:              var(--featurebox-icon);
 }
 
@@ -583,24 +664,13 @@
     p { margin: 0; }
 }
 
+// Rendered as a solid .button (see 04-atoms/_button.scss) rather than a
+// text link — the reference offer-card CTA is a filled button, not an
+// underlined "Mehr erfahren" link. This class now only carries the
+// flex-item layout concern (stop the button stretching full-width inside
+// the column) — .button already owns the visual styling and focus ring.
 .mai-featurebox__link {
-    display:      inline-flex;
-    align-items:  center;
-    gap:          var(--space-2xs);
-    align-self:   flex-start;
-    font-weight:  var(--font-weight-semibold);
-    color:        var(--bgm-teal-700);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    transition:   color var(--duration-fast) var(--easing-standard);
-
-    &:hover { color: var(--bgm-teal-900); }
-
-    &:focus-visible {
-        outline:        2px solid var(--color-focus-ring);
-        outline-offset: 2px;
-        border-radius:  var(--layout-radius-sm);
-    }
+    align-self: flex-start;
 }
 
 

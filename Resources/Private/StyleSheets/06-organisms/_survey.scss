@@ -1,0 +1,197 @@
+// =============================================================================
+// 06-organisms/_survey.scss
+//
+// Styles for the mai_survey plugin (List, Step wizard, Show, Confirmation).
+// The plugin's own EXT:mai_survey survey.css asset is an empty stub — all
+// visual rules live here so the component follows the shared design tokens.
+// Question inputs (text/select/checkbox/radio/range) already receive base
+// focus/border treatment from 05-molecules/_form-field.scss; this file only
+// adds the survey-specific layout on top.
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+
+@layer theme-organisms {
+
+// ---------------------------------------------------------------------------
+// Survey list — card grid of available surveys
+// ---------------------------------------------------------------------------
+.mai-survey-list__grid {
+    display:               grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--layout-card-width), 1fr));
+    gap:                   var(--layout-grid-gap);
+    margin-block-start:    var(--space-xl);
+}
+
+.mai-survey-list__card {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-md);
+    background:     var(--color-background);
+    border:         1px solid var(--bgm-line);
+    border-radius:  var(--layout-radius);
+    padding:        var(--space-lg);
+}
+
+.mai-survey-list__card-title {
+    margin: 0;
+    color:  var(--bgm-teal-900);
+}
+
+.mai-survey-list__card-description {
+    margin:      0;
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--color-text);
+    flex:        1 1 auto;
+}
+
+.mai-survey-list__empty {
+    font-size: var(--font-size-md);
+    color:     var(--bgm-ink-3);
+}
+
+// ---------------------------------------------------------------------------
+// Step wizard
+// ---------------------------------------------------------------------------
+.mai-survey-step {
+    max-width: var(--layout-prose-width);
+}
+
+.mai-survey-step__errors {
+    margin-block: var(--space-md);
+    padding:       var(--space-md) var(--space-lg);
+    border-inline-start: 4px solid var(--color-danger);
+    background:    color-mix(in srgb, var(--color-danger) 8%, transparent);
+}
+
+.mai-survey-step__error {
+    margin: 0;
+    color:  var(--color-danger);
+
+    & + & { margin-block-start: var(--space-2xs); }
+}
+
+.mai-survey-step__question {
+    margin-block: var(--space-lg);
+}
+
+.mai-survey-step__actions {
+    display:            flex;
+    flex-wrap:          wrap;
+    gap:                var(--space-sm);
+    margin-block-start: var(--space-xl);
+    padding-block-start: var(--space-md);
+    border-block-start:  1px solid var(--color-border);
+
+    // Submit sits at the end of the row on wide screens.
+    > [data-survey-submit] { margin-inline-start: auto; }
+}
+
+// ---------------------------------------------------------------------------
+// Progress indicator
+// ---------------------------------------------------------------------------
+.mai-survey-progress {
+    margin-block-end: var(--space-xl);
+}
+
+.mai-survey-progress p {
+    margin:      0 0 var(--space-xs);
+    font-size:   var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color:       var(--bgm-teal-800);
+}
+
+.mai-survey-progress__track {
+    height:        0.5rem;
+    background:    var(--bgm-teal-050);
+    border-radius: var(--layout-radius-full);
+    overflow:      hidden;
+}
+
+.mai-survey-progress__bar {
+    display:    block;
+    height:     100%;
+    background: var(--bgm-teal-700);
+    transition: width var(--duration-base) var(--easing-standard);
+}
+
+// ---------------------------------------------------------------------------
+// Question fieldset — inherits base fieldset/legend from 06-organisms/_form.scss
+// ---------------------------------------------------------------------------
+.mai-survey-question {
+    display:            flex;
+    flex-direction:     column;
+    gap:                var(--space-sm);
+    padding:            var(--space-lg);
+
+    legend {
+        font-size: var(--font-size-md);
+    }
+}
+
+.mai-survey-question__text {
+    width: 100%;
+}
+
+.mai-survey-question__option {
+    display: block;
+}
+
+.mai-survey-question__label {
+    display:      flex;
+    align-items:  center;
+    gap:          var(--space-sm);
+    min-height:   2.75rem;  // 44 px — WCAG touch target
+    cursor:       pointer;
+    font-weight:  var(--font-weight-normal);
+}
+
+.mai-survey-question__input {
+    accent-color: var(--bgm-teal-700);
+
+    &[type="checkbox"],
+    &[type="radio"] {
+        width:  1.25rem;
+        height: 1.25rem;
+        flex-shrink: 0;
+
+        &:focus-visible {
+            outline:        2px solid var(--color-focus-ring);
+            outline-offset: 2px;
+        }
+    }
+
+    &--range {
+        width: 100%;
+    }
+}
+
+.mai-survey-question__scale {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-xs);
+}
+
+.mai-survey-question__scale-labels {
+    display:         flex;
+    justify-content: space-between;
+    font-size:       var(--font-size-sm);
+    color:           var(--bgm-ink-3);
+}
+
+.mai-survey-question__scale-output {
+    align-self:  center;
+    font-weight: var(--font-weight-bold);
+    color:       var(--bgm-teal-800);
+}
+
+// ---------------------------------------------------------------------------
+// Show (preview) + Confirmation
+// ---------------------------------------------------------------------------
+.mai-survey-show,
+.mai-survey-confirmation {
+    max-width: var(--layout-prose-width);
+}
+
+}

@@ -42,10 +42,10 @@
     <f:render partial="Organism/Navigation/SkipLinks" arguments="{_all}"/>
     <f:render partial="Organism/Topbar" arguments="{_all}"/>
     <f:render partial="Organism/Header" arguments="{_all}"/>
-    <f:mark.contentArea colPos="3">
-        <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
-    </f:mark.contentArea>
     <main id="main" role="main" tabindex="-1">
+        <f:mark.contentArea colPos="3">
+            <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
+        </f:mark.contentArea>
         <f:if condition="{hero}">
             <f:else>
                 <f:render partial="Molecule/PageHeading" arguments="{pageHeading: pageHeading}"/>

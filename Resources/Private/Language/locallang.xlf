@@ -33,6 +33,9 @@
 		<trans-unit id="header.search" resname="header.search">
 			<source>Search</source>
 		</trans-unit>
+		<trans-unit id="topbar.label" resname="topbar.label">
+			<source>Utility navigation</source>
+		</trans-unit>
 		<trans-unit id="footer.legal_heading" resname="footer.legal_heading">
 			<source>Legal</source>
 		</trans-unit>

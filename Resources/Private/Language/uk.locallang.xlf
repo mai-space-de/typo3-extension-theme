@@ -43,6 +43,10 @@
 				<source>Search</source>
 				<target>Пошук</target>
 			</trans-unit>
+			<trans-unit id="topbar.label" resname="topbar.label">
+				<source>Utility navigation</source>
+				<target>Швидкий доступ</target>
+			</trans-unit>
 			<trans-unit id="footer.legal_heading" resname="footer.legal_heading">
 				<source>Legal</source>
 				<target>Правове</target>

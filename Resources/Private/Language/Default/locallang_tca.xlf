@@ -122,6 +122,15 @@
             <trans-unit id="field.variant">
                 <source>Variant</source>
             </trans-unit>
+            <trans-unit id="field.accent">
+                <source>Accent colour</source>
+            </trans-unit>
+            <trans-unit id="accent.teal">
+                <source>Teal (default)</source>
+            </trans-unit>
+            <trans-unit id="accent.gold">
+                <source>Gold</source>
+            </trans-unit>
             <trans-unit id="field.button_style">
                 <source>Button Style</source>
             </trans-unit>

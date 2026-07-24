@@ -7,14 +7,18 @@ namespace Maispace\MaiTheme\Tests\Unit\DataProcessing;
 use Maispace\MaiTheme\DataProcessing\HeroContentProcessor;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Domain\RecordInterface;
 use TYPO3\CMS\Core\Page\ContentArea;
 use TYPO3\CMS\Core\Page\ContentAreaCollection;
 use TYPO3\CMS\Core\Page\ContentSlideMode;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Page\PageInformation;
 
 final class HeroContentProcessorTest extends TestCase
 {
+    private const CURRENT_PAGE_UID = 3;
+
     private HeroContentProcessor $processor;
 
     private ContentObjectRenderer&MockObject $cObj;
@@ -23,6 +27,17 @@ final class HeroContentProcessorTest extends TestCase
     {
         $this->processor = new HeroContentProcessor();
         $this->cObj = $this->createMock(ContentObjectRenderer::class);
+
+        // PageInformation is a final DTO — real instance instead of a mock.
+        $pageInformation = new PageInformation();
+        $pageInformation->setId(self::CURRENT_PAGE_UID);
+
+        $request = $this->createMock(ServerRequestInterface::class);
+        $request->method('getAttribute')
+            ->with('frontend.page.information')
+            ->willReturn($pageInformation);
+
+        $this->cObj->method('getRequest')->willReturn($request);
     }
 
     public function testProcessorSetsHeroFalseWhenContentSourceMissing(): void
@@ -59,6 +74,25 @@ final class HeroContentProcessorTest extends TestCase
         self::assertTrue($result['hero']);
     }
 
+    /**
+     * The "beforeContent" column (colPos 3) is backend-layout-configured to
+     * slide up the rootline when empty, so page-content data processing can
+     * resolve an ancestor page's Hero CE even though it is not rendered on
+     * the current page. Without a pid check, {hero} would be true on every
+     * descendant page and the page-level H1 in PageHeading.html would never
+     * render anywhere but the page that owns the Hero CE.
+     */
+    public function testProcessorSetsHeroFalseWhenHeroBelongsToAnAncestorPage(): void
+    {
+        $content = $this->createContentCollection([
+            3 => [$this->createContentRecord('maispace_hero', pid: 1)],
+        ]);
+
+        $result = $this->process(['content' => $content]);
+
+        self::assertFalse($result['hero']);
+    }
+
     public function testProcessorUsesCustomVariableNames(): void
     {
         $content = $this->createContentCollection([
@@ -68,7 +102,7 @@ final class HeroContentProcessorTest extends TestCase
         $this->cObj
             ->method('stdWrapValue')
             ->willReturnCallback(
-                static fn (string $key, array $config, mixed $default): mixed => match ($key) {
+                static fn(string $key, array $config, mixed $default): mixed => match ($key) {
                     'as' => 'hasHero',
                     'contentSource' => 'pageContent',
                     default => $default,
@@ -121,11 +155,12 @@ final class HeroContentProcessorTest extends TestCase
         return new ContentAreaCollection($areas);
     }
 
-    private function createContentRecord(string $cType): RecordInterface&MockObject
+    private function createContentRecord(string $cType, int $pid = self::CURRENT_PAGE_UID): RecordInterface&MockObject
     {
         $record = $this->createMock(RecordInterface::class);
         $record->method('getMainType')->willReturn('tt_content');
         $record->method('getRecordType')->willReturn($cType);
+        $record->method('getPid')->willReturn($pid);
 
         return $record;
     }

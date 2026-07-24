@@ -271,6 +271,17 @@ new Field("tt_content", "tx_maitheme_variant", $lang("field.variant"))
     )
     ->registerField();
 
+// ── Brand accent (teal/gold card border — offer-card family) ─────────────────
+
+new Field("tt_content", "tx_maitheme_accent", $lang("field.accent"))
+    ->setConfig(
+        (new SelectSingleConfig())->setItems([
+            ["label" => $lang("accent.teal"), "value" => ""],
+            ["label" => $lang("accent.gold"), "value" => "gold"],
+        ])
+    )
+    ->registerField();
+
 // ── Per-CType specific fields ─────────────────────────────────────────────────
 
 // Icon element
@@ -844,7 +855,7 @@ new CType("maispace_teaser", $lang("ctype.teaser"), "content-textmedia")
 new CType("maispace_featurebox", $lang("ctype.featurebox"), "content-textmedia")
     ->addDefaultHeaderPalette()
     ->addSubheaderField()
-    ->addCustomFields("tx_maitheme_icon_identifier, bodytext, tx_maitheme_link, tx_maitheme_link_text")
+    ->addCustomFields("tx_maitheme_icon_identifier, tx_maitheme_accent, bodytext, tx_maitheme_link, tx_maitheme_link_text")
     ->addColumnOverride("bodytext", ["config" => ["enableRichtext" => true]])
     ->addCustomFields($sharedTabs)
     ->addDefaultLanguageTab()
