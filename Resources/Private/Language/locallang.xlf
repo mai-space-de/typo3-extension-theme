@@ -40,10 +40,7 @@
 			<source>Legal</source>
 		</trans-unit>
 		<trans-unit id="footer.tagline" resname="footer.tagline">
-			<source>Practical, helpful, warm-hearted. Since 2016.</source>
-		</trans-unit>
-		<trans-unit id="footer.funded_by" resname="footer.funded_by">
-			<source>Funded by the City of Pulheim</source>
+			<source>Practical, helpful, warm-hearted. Since 2023.</source>
 		</trans-unit>
 		<trans-unit id="nav.close" resname="nav.close">
 			<source>Close navigation</source>

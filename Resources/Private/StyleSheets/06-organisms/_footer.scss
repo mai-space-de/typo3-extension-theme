@@ -169,7 +169,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// Meta bar — copyright left, funding note right
+// Meta bar — copyright
 // ---------------------------------------------------------------------------
 .site-footer__meta {
     border-block-start: 1px solid var(--footer-border);
@@ -181,8 +181,7 @@
     gap:                 var(--space-sm, 1rem);
 }
 
-.site-footer__copyright,
-.site-footer__funded {
+.site-footer__copyright {
     margin:    0;
     font-size: var(--font-size-xs, 0.75rem);
     color:     var(--footer-fg-muted);

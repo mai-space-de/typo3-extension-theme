@@ -35,7 +35,7 @@ function Hero({ onCta }) {
               background: 'var(--bgm-gold-300)', color: 'var(--bgm-teal-900)',
               padding: '8px 14px', fontSize: 13, fontWeight: 700, letterSpacing: '.04em',
               border: '2px solid var(--bgm-gold-500)', textTransform: 'uppercase',
-            }}>seit 2016</div>
+            }}>seit 2023</div>
           </div>
         </div>
       </div>

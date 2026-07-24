@@ -15,7 +15,7 @@ function Footer() {
               <div style={{ fontWeight: 700, fontSize: 14, lineHeight: 1.3 }}>Begleitung geflüchteter<br/>Menschen e.V., Pulheim</div>
             </div>
             <p style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--bgm-teal-300)', marginBottom: 16 }}>
-              Praxisnah, hilfsbereit, herzlich. Seit 2016.
+              Praxisnah, hilfsbereit, herzlich. Seit 2023.
             </p>
             <div style={{ fontSize: 13, color: 'var(--bgm-teal-300)' }}>
               <Icon name="map-pin" color="gold" size={14} /> Gemeindehaus, 50259 Pulheim<br/>
@@ -33,7 +33,6 @@ function Footer() {
         </div>
         <div style={{ borderTop: '1px solid rgba(255,255,255,.15)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--bgm-teal-300)' }}>
           <div>© 2026 Begleitung geflüchteter Menschen e.V., Pulheim</div>
-          <div>Gefördert durch die Stadt Pulheim</div>
         </div>
       </div>
     </footer>
