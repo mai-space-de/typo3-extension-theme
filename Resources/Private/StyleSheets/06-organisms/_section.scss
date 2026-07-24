@@ -155,7 +155,10 @@
 // Each BentoCell is a container column; no styles imposed here beyond flow.
 // ---------------------------------------------------------------------------
 .mai-bentobox {
-    padding-block: var(--layout-section-pad-y);
+    max-width:      var(--layout-width-max);
+    margin-inline:  auto;
+    padding-inline: var(--layout-grid-gap);
+    padding-block:  var(--layout-section-pad-y);
     display:               grid;
     gap:                   var(--space-md);
     grid-template-columns: repeat(12, 1fr);
