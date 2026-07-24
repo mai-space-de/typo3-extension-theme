@@ -1,7 +1,23 @@
 // Design tokens — typography
-$font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !default;
+//
+// --font-family-base, --font-size-base and --line-height-base are declared
+// unlayered here, which always beats the @layer theme-settings values in
+// 01-settings/_variables.scss (CSS cascade layers: unlayered > any layer).
+// Values below are kept identical to the BGM brand tokens so the two
+// declarations can never disagree — this file previously shipped a generic
+// system-ui placeholder that silently overrode the self-hosted Source Sans 3
+// stack everywhere.
+//
+// unquote() below is required, not cosmetic: #{} interpolation of a Sass list
+// of quoted strings strips each string's quotes, so "Source Sans 3" would
+// compile to the bare tokens Source Sans 3 — invalid as a CSS family-name
+// (digits can't start an unquoted ident), which makes font-family invalid at
+// computed-value time and silently falls back to the browser's default serif.
+// Pre-building the value as a single already-unquoted string with literal
+// embedded quote characters sidesteps that.
+$font-family-base: unquote('"Source Sans 3", "Source Sans Pro", "Open Sans", "Helvetica Neue", Arial, sans-serif') !default;
 $font-family-heading: $font-family-base !default;
-$font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !default;
+$font-family-mono: unquote('ui-monospace, "SF Mono", Menlo, Consolas, monospace') !default;
 
 $font-size-base: 1rem !default;
 $font-size-sm: 0.875rem !default;
@@ -10,7 +26,7 @@ $font-size-xl: 1.5rem !default;
 $font-size-2xl: 2rem !default;
 $font-size-3xl: 2.5rem !default;
 
-$line-height-base: 1.6 !default;
+$line-height-base: 1.55 !default;
 $line-height-heading: 1.2 !default;
 
 :root {

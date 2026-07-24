@@ -19,7 +19,7 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maispace_richtext {
-                iconIdentifier = content-text-mixed
+                iconIdentifier = content-textmedia
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.richtext
                 tt_content_defValues {
                     CType = maispace_richtext
@@ -278,8 +278,8 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maispace_timeline {
-                iconIdentifier = content-list-bullet
-                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.timeline
+                iconIdentifier = content-timeline
+                title = LLL:EXT:mai_timeline/Resources/Private/Language/Default/locallang_db.xlf:ctype.timeline
                 tt_content_defValues {
                     CType = maispace_timeline
                 }
@@ -299,7 +299,7 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maispace_steps {
-                iconIdentifier = content-list-bullet
+                iconIdentifier = content-listgroup
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.steps
                 tt_content_defValues {
                     CType = maispace_steps
@@ -355,14 +355,14 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maispace_gallery {
-                iconIdentifier = content-image-gallery
+                iconIdentifier = content-gallery
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.gallery
                 tt_content_defValues {
                     CType = maispace_gallery
                 }
             }
             maispace_filelist {
-                iconIdentifier = content-filelinks
+                iconIdentifier = content-special-uploads
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.filelist
                 tt_content_defValues {
                     CType = maispace_filelist

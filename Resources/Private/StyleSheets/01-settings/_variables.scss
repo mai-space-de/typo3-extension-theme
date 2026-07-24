@@ -103,12 +103,13 @@
     // -------------------------------------------------------------------------
 
     --layout-width-min:        320px;
-    --layout-width-max:        72rem;         // 1152 px — content, footer, topbar
+    // Aligned with --layout-header-width-max so page bands (header, content,
+    // footer, topbar) share one right/left edge instead of the header
+    // appearing wider than the content below it.
+    --layout-width-max:        90rem;         // 1440 px — content, footer, topbar
     --layout-content-max:      var(--layout-width-max); // alias — use either name
-    --layout-content-width:    72rem;
-    // Header gets a wider container so 7+ German nav labels fit without
-    // triggering compact/hamburger mode at typical 1440-1920 px desktop widths.
-    --layout-header-width-max: 90rem;         // 1440 px
+    --layout-content-width:    90rem;
+    --layout-header-width-max: 90rem;         // 1440 px — kept as an alias; same value as --layout-width-max
     --layout-prose-width:    42rem;         // reading column ≈ 672 px
     --layout-card-width:     22rem;
     --layout-text-width:     65ch;

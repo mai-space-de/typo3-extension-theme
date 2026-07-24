@@ -1,0 +1,230 @@
+// =============================================================================
+// 06-organisms/_jobs.scss
+//
+// Styles for the mai_jobs plugin (Job/List, Job/Detail, Application/Apply).
+// Reuses the BGM card grid language established in _team.scss / _survey.scss.
+// ---------------------------------------------------------------------------
+// Status values come from Classes/Domain/Model/Job.php ('open' default) and
+// Resources/Private/Language/*.xlf (open, filled, closed).
+// =============================================================================
+
+@import "../02-mixins/media-breakpoint";
+
+@layer theme-organisms {
+
+// ---------------------------------------------------------------------------
+// List — filter chips + card grid
+// ---------------------------------------------------------------------------
+.mai-jobs__filter-section {
+    display:            flex;
+    flex-direction:     column;
+    gap:                var(--space-sm);
+    margin-block-end:   var(--space-xl);
+}
+
+.mai-jobs__filters {
+    display:   flex;
+    flex-wrap: wrap;
+    gap:       var(--space-xs);
+}
+
+.mai-jobs__filter {
+    background:    transparent;
+    color:         var(--bgm-teal-700);
+    border:        2px solid var(--bgm-line);
+    border-radius: var(--layout-radius-full);
+    padding-block:  var(--btn-sm-padding-y);
+    padding-inline: var(--btn-lg-padding-x);
+    font-size:     var(--font-size-sm);
+
+    &:hover {
+        background:   var(--bgm-teal-050);
+        border-color: var(--bgm-teal-700);
+    }
+
+    &--active,
+    &[aria-selected="true"] {
+        background:   var(--bgm-teal-700);
+        border-color: var(--bgm-teal-700);
+        color:        #ffffff;
+    }
+}
+
+.mai-jobs__list {
+    display:               grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--layout-card-width), 1fr));
+    gap:                   var(--layout-grid-gap);
+}
+
+.mai-jobs__item {
+    display:             flex;
+    flex-direction:      column;
+    gap:                 var(--space-sm);
+    background:          var(--color-background);
+    border:              1px solid var(--bgm-line);
+    border-inline-start: 4px solid var(--bgm-teal-700);
+    border-radius:       var(--layout-radius);
+    padding:             var(--space-lg);
+    transition:          box-shadow var(--duration-base) var(--easing-standard);
+
+    &:hover { box-shadow: var(--shadow-md); }
+
+    &--filled { border-inline-start-color: var(--bgm-gold-500); }
+    &--closed { border-inline-start-color: var(--bgm-line); }
+}
+
+.mai-jobs__title {
+    margin:      0;
+    font-size:   var(--font-size-lg);
+    color:       var(--bgm-teal-900);
+}
+
+.mai-jobs__meta {
+    display:     flex;
+    flex-wrap:   wrap;
+    align-items: center;
+    gap:         var(--space-sm);
+}
+
+.mai-jobs__status {
+    display:        inline-flex;
+    align-items:    center;
+    padding-block:  var(--space-2xs);
+    padding-inline: var(--space-sm);
+    border-radius:  var(--layout-radius-sm);
+    font-size:      var(--font-size-xs);
+    font-weight:    var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+
+    &--open   { background: var(--bgm-teal-050); color: var(--bgm-teal-800); }
+    &--filled { background: var(--bgm-gold-050);  color: var(--bgm-gold-900); }
+    &--closed { background: var(--bgm-line-2);    color: var(--bgm-ink-3); }
+}
+
+.mai-jobs__deadline {
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+.mai-jobs__link {
+    align-self: flex-start;
+    margin-block-start: var(--space-xs);
+}
+
+.mai-jobs__empty {
+    font-size: var(--font-size-md);
+    color:     var(--bgm-ink-3);
+}
+
+// ---------------------------------------------------------------------------
+// Detail
+// ---------------------------------------------------------------------------
+.mai-jobs-detail {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-md);
+    max-width:      var(--layout-prose-width);
+}
+
+.mai-jobs-detail__title {
+    margin: 0;
+}
+
+.mai-jobs-detail__meta {
+    display:     flex;
+    flex-wrap:   wrap;
+    align-items: center;
+    gap:         var(--space-sm);
+}
+
+.mai-jobs-detail__status {
+    display:        inline-flex;
+    align-items:    center;
+    padding-block:  var(--space-2xs);
+    padding-inline: var(--space-sm);
+    border-radius:  var(--layout-radius-sm);
+    font-size:      var(--font-size-xs);
+    font-weight:    var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+
+    &--open   { background: var(--bgm-teal-050); color: var(--bgm-teal-800); }
+    &--filled { background: var(--bgm-gold-050);  color: var(--bgm-gold-900); }
+    &--closed { background: var(--bgm-line-2);    color: var(--bgm-ink-3); }
+}
+
+.mai-jobs-detail__deadline {
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+.mai-jobs-detail__description,
+.mai-jobs-detail__requirements {
+    font-size:   var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color:       var(--color-text);
+
+    p { margin-block: 0 var(--space-sm); }
+    p:last-child { margin-block-end: 0; }
+}
+
+.mai-jobs-detail__apply {
+    margin-block-start: var(--space-xl);
+    padding-block-start: var(--space-xl);
+    border-block-start:  1px solid var(--color-border);
+}
+
+// ---------------------------------------------------------------------------
+// Application form — mounted inside Job/Detail's ApplicationForm section
+// ---------------------------------------------------------------------------
+.mai-jobs-apply__title {
+    margin-block-start: 0;
+}
+
+.mai-jobs-apply__errors {
+    display:              flex;
+    flex-direction:       column;
+    gap:                  var(--space-2xs);
+    margin-block:         var(--space-md);
+    padding:              var(--space-md) var(--space-lg);
+    border-inline-start:  4px solid var(--color-danger);
+    background:           color-mix(in srgb, var(--color-danger) 8%, transparent);
+}
+
+.mai-jobs-apply__error {
+    margin: 0;
+    color:  var(--color-danger);
+}
+
+.mai-jobs-apply__fields {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-lg);
+    max-width:      var(--form-max-width, 600px);
+}
+
+.mai-jobs-apply__field {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-xs);
+}
+
+.mai-jobs-apply__label {
+    font-weight: var(--font-weight-medium);
+    font-size:   var(--font-size-base);
+    color:       var(--color-text);
+}
+
+.mai-jobs-apply__hint {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+.mai-jobs-apply__submit {
+    display:            flex;
+    margin-block-start: var(--space-lg);
+}
+
+}

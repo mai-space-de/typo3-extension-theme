@@ -432,6 +432,7 @@
             <trans-unit id="ctype.banner"><source>Banner</source></trans-unit>
             <trans-unit id="ctype.cta"><source>Call to Action</source></trans-unit>
             <trans-unit id="ctype.mediatext"><source>Media &amp; Text</source></trans-unit>
+            <trans-unit id="ctype.textmedia"><source>Text &amp; Media</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — CARDS & COMPONENTS
@@ -495,6 +496,8 @@
             <trans-unit id="ctype.section_4col"><source>4 Column Section</source></trans-unit>
             <trans-unit id="ctype.section_sidebar_r"><source>Sidebar Right (3/4 + 1/4)</source></trans-unit>
             <trans-unit id="ctype.section_sidebar_l"><source>Sidebar Left (1/4 + 3/4)</source></trans-unit>
+            <trans-unit id="ctype.bento"><source>Bento Grid</source></trans-unit>
+            <trans-unit id="ctype.bento.description"><source>Grid container for arranging tiles in a bento-style layout</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CONTAINER COLUMN NAMES

@@ -21,7 +21,8 @@ if (class_exists(\B13\Container\Tca\Registry::class)) {
                     ],
                 ],
             ],
-        )->setIcon('content-elements-mailform'),
+        )->setIcon('content-dashboard')
+            ->setGroup('maispace_sections'),
     );
 }
 

@@ -8,18 +8,23 @@ lib.templates {
 
         popovers < .content
         popovers.20.select.where = colPos = 1
+        popovers.20.slide = -1
 
         navbar < .content
         navbar.20.select.where = colPos = 2
+        navbar.20.slide = -1
 
         beforeContent < .content
         beforeContent.20.select.where = colPos = 3
+        beforeContent.20.slide = -1
 
         afterContent < .content
         afterContent.20.select.where = colPos = 4
+        afterContent.20.slide = -1
 
         footer < .content
         footer.20.select.where = colPos = 5
+        footer.20.slide = -1
 
         hidden < .content
         hidden.20.select.where = colPos = 6

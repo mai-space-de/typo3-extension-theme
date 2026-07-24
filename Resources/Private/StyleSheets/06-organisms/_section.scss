@@ -165,6 +165,16 @@
     grid-auto-rows:        minmax(8rem, auto);
 }
 
+// Featurebox cards carry a double-frame badge that overhangs the card's
+// top edge by half its own height (see .mai-featurebox__badge). The
+// default row-gap above is too narrow to clear that overhang, so a
+// featurebox in row 2+ overlaps the row above it. Widen just the row-gap,
+// and only when the grid actually holds featureboxes — other bentocell
+// content (stats, media, highlight cells) has no overhang to clear.
+.mai-bentobox:has(.mai-featurebox) {
+    row-gap: var(--space-3xl);
+}
+
 .mai-bentobox__inner {
     max-width:      var(--layout-width-max);
     margin-inline:  auto;

@@ -48,11 +48,11 @@
 }
 
 // ---------------------------------------------------------------------------
-// Constrained inner wrapper — flex row with wider max-width than content.
-// The header uses --layout-header-width-max (90 rem / 1440 px) so that 7+
-// German-language nav labels fit at common desktop resolutions without
-// triggering the compact/hamburger mode.  Topbar, footer and content areas
-// use the narrower --layout-width-max (72 rem / 1152 px).
+// Constrained inner wrapper — flex row, same max-width as content/footer.
+// --layout-header-width-max is kept as a distinct token (currently aliased
+// to the same 90 rem / 1440 px as --layout-width-max) in case the header
+// ever needs to diverge again — e.g. if 7+ German-language nav labels start
+// triggering the compact/hamburger mode at common desktop resolutions.
 // ---------------------------------------------------------------------------
 .site-header__inner {
     max-width:      var(--layout-header-width-max, 90rem);
@@ -60,14 +60,19 @@
     padding-inline: var(--layout-grid-gap);
     width:          100%;
     box-sizing:     border-box;
-    display:        flex;
-    align-items:    center;
-    flex-wrap:      wrap;          // absorbs text expansion in uk/ar
-    gap:            var(--space-sm) var(--space-lg);
-    min-height:     var(--header-min-height);
-    padding-block:  var(--space-sm);
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between; // logo at the start, nav/toggle at the end — uses the full row width
+    flex-wrap:       wrap;          // absorbs text expansion in uk/ar
+    gap:             var(--space-sm) var(--space-lg);
+    min-height:      var(--header-min-height);
+    padding-block:   var(--space-sm);
 
-    // Push nav (desktop) / hamburger (mobile) to the inline end
+    // Belt-and-suspenders for the wrapped case: if the row breaks onto a
+    // second line (narrow viewport, long uk/ar labels), that line may hold
+    // only the toggle/nav with no sibling for `space-between` to distribute
+    // against, so it would otherwise land at the line's start. The auto
+    // margin keeps it pinned to the inline end on its own line too.
     > .mai-menubar-nav,
     > .mai-menubar-toggle {
         margin-inline-start: auto;

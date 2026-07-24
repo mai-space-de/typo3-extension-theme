@@ -8,7 +8,7 @@
 //   .my-band__inner { @include page-wrap; }
 //
 // Produces:
-//   max-width: var(--layout-width-max)  — 72 rem / 1152 px site maximum
+//   max-width: var(--layout-width-max)  — 90 rem / 1440 px site maximum
 //   margin-inline: auto                 — centres within the viewport
 //   padding-inline: var(--layout-grid-gap) — responsive edge breathing room
 //   width: 100%                         — fills the band without overflow
@@ -19,7 +19,7 @@
 // =============================================================================
 
 @mixin page-wrap {
-    max-width:      var(--layout-width-max);    // 72rem = 1152px
+    max-width:      var(--layout-width-max);    // 90rem = 1440px
     margin-inline:  auto;
     padding-inline: var(--layout-grid-gap);     // clamp(1rem, 3vw, 2rem)
     width:          100%;

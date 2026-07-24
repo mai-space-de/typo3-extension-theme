@@ -19,7 +19,7 @@
 // ---------------------------------------------------------------------------
 .mai-news-list__grid {
     display:               grid;
-    gap:                   var(--space-5);       // 24 px — matches UI kit gap
+    gap:                   var(--space-lg);       // 24 px — matches UI kit gap
     grid-template-columns: 1fr;
 
     @include bp-up(md) {
@@ -35,18 +35,22 @@
 // Card
 // ---------------------------------------------------------------------------
 .mai-news-list__card {
+    position:         relative;                   // anchors the stretched title link
     display:          flex;
     flex-direction:   column;
     background:       var(--color-background);   // #ffffff
     border:           1px solid var(--bgm-line-2); // #ebebeb
     border-radius:    var(--layout-radius);      // 4 px
     overflow:         hidden;                     // clip image corners
+    cursor:           pointer;                    // matches UI kit
     transition:       border-color var(--duration-base) var(--easing-standard),
-                      box-shadow var(--duration-base) var(--easing-standard);
+                      box-shadow var(--duration-base) var(--easing-standard),
+                      transform var(--duration-base) var(--easing-standard);
 
     &:hover {
         border-color: var(--bgm-teal-700);        // #1f6e6e
         box-shadow:   var(--shadow-md);           // subtle teal shadow
+        transform:    translateY(-2px);
     }
 }
 
@@ -69,8 +73,8 @@
 .mai-news-list__card-body {
     display:        flex;
     flex-direction: column;
-    gap:            var(--space-3);               // 12 px
-    padding:        var(--space-5);               // 24 px
+    gap:            var(--space-sm);               // 8 px
+    padding:        var(--space-lg);               // 24 px
     flex:           1 1 auto;                     // fill card height
 }
 
@@ -80,9 +84,9 @@
 .mai-news-list__card-meta {
     display:     flex;
     flex-wrap:   wrap;
-    gap:         var(--space-2);                  // 8 px
+    gap:         10px;                             // matches UI kit gap
     align-items: center;
-    margin-block-end: var(--space-1);             // 4 px
+    margin-block-end: 14px;                        // matches UI kit marginBottom
 }
 
 .mai-news-list__tag {
@@ -98,17 +102,41 @@
     white-space:    nowrap;
 }
 
-.mai-news-list__date {
-    font-size:   var(--font-size-sm);             // 14 px
-    color:       var(--bgm-ink-3);                // #6b6b6b
-    line-height: 1.4;
+// Date badge — borrowed from the calendar's EventRow day/month tile,
+// scaled down to sit inline in the card meta row.
+.mai-news-list__date-badge {
+    display:         inline-flex;
+    flex-direction:  column;
+    align-items:     center;
+    justify-content: center;
+    min-width:       2.5rem;
+    padding:         2px var(--space-sm);
+    border:          2px solid var(--bgm-teal-700);
+    border-radius:   var(--layout-radius-sm);
+    line-height:     1.1;
+    flex-shrink:     0;
+}
+
+.mai-news-list__date-day {
+    font-size:   var(--font-size-base);           // 16 px
+    font-weight: var(--font-weight-bold);
+    color:       var(--bgm-teal-900);
+}
+
+.mai-news-list__date-month {
+    font-size:      10px;
+    font-weight:    var(--font-weight-bold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color:          var(--bgm-teal-700);
+    margin-block-start: 1px;
 }
 
 // ---------------------------------------------------------------------------
 // Title
 // ---------------------------------------------------------------------------
 .mai-news-list__title {
-    font-size:      var(--font-size-lg);          // 22 px — slightly larger than UI kit 19 px
+    font-size:      19px;                           // matches UI kit exactly
     font-weight:    var(--font-weight-bold);      // 700
     line-height:    var(--line-height-snug);      // 1.3
     color:          var(--bgm-teal-900);          // #0e3f3f
@@ -117,6 +145,14 @@
     a {
         color:           inherit;
         text-decoration: none;
+
+        // Stretched link: makes the whole card clickable (matches its cursor: pointer)
+        // while keeping a single visible, accessible link per card.
+        &::after {
+            content:  "";
+            position: absolute;
+            inset:    0;
+        }
 
         &:hover {
             color:           var(--bgm-teal-700);
@@ -130,8 +166,8 @@
 // Teaser / excerpt
 // ---------------------------------------------------------------------------
 .mai-news-list__teaser {
-    font-size:   var(--font-size-base);           // 16 px
-    line-height: var(--line-height-relaxed);      // 1.7
+    font-size:   14px;                            // matches UI kit exactly
+    line-height: 1.6;                             // matches UI kit exactly
     color:       var(--bgm-ink-2);                // #3a3a3a
     margin:      0;
     flex:        1 1 auto;                        // push read-more down
@@ -141,9 +177,12 @@
 // Read-more link
 // ---------------------------------------------------------------------------
 .mai-news-list__read-more {
+    position:      relative;                      // stays above the card's stretched title link
+    z-index:       1;
     display:       inline-flex;
     align-items:   center;
     gap:           0.25em;
+    margin-top:    16px;                           // matches UI kit marginTop
     font-size:     var(--font-size-sm);           // 14 px
     font-weight:   var(--font-weight-semibold);   // 600
     color:         var(--bgm-teal-700);           // #1f6e6e
@@ -165,7 +204,7 @@
 .mai-news-list__empty {
     text-align:  center;
     color:       var(--bgm-ink-3);
-    padding:     var(--space-6) var(--space-5);   // 32 px 24 px
+    padding:     var(--space-xl) var(--space-lg);   // 32 px 24 px
 }
 
 // ---------------------------------------------------------------------------
@@ -174,14 +213,14 @@
 .mai-news-list__pagination {
     display:         flex;
     justify-content: center;
-    gap:             var(--space-4);              // 16 px
-    margin-block-start: var(--space-6);           // 32 px
+    gap:             var(--space-md);              // 16 px
+    margin-block-start: var(--space-xl);           // 32 px
 
     a {
         display:        inline-flex;
         align-items:    center;
         gap:            0.35em;
-        padding:        var(--space-2) var(--space-4);  // 8 px 16 px
+        padding:        var(--space-sm) var(--space-md);  // 8 px 16 px
         font-size:      var(--font-size-sm);
         font-weight:    var(--font-weight-semibold);
         color:          var(--bgm-teal-700);
@@ -205,24 +244,24 @@
 // Detail page
 // ---------------------------------------------------------------------------
 .mai-news-detail {
-    max-width:  var(--layout-prose-width);        // ~672 px reading width
+    max-width:  75rem;                             // ~1200 px — wider than prose-width; article has full-width images
     margin:     0 auto;
-    padding:    var(--space-5);                   // 24 px
+    padding:    var(--space-lg);                   // 24 px
 
     @include bp-up(md) {
-        padding: var(--space-6) var(--space-5);   // 32 px 24 px
+        padding: var(--space-xl) var(--space-lg);   // 32 px 24 px
     }
 }
 
 .mai-news-detail__header {
-    margin-block-end: var(--space-5);
+    margin-block-end: var(--space-lg);
 }
 
 .mai-news-detail__tags-row {
     display:     flex;
     flex-wrap:   wrap;
-    gap:         var(--space-2);
-    margin-block-end: var(--space-3);
+    gap:         var(--space-sm);
+    margin-block-end: var(--space-sm);
 }
 
 .mai-news-detail__tag {
@@ -242,7 +281,7 @@
     font-weight:    var(--font-weight-bold);
     line-height:    var(--line-height-tight);
     color:          var(--bgm-teal-900);
-    margin:         0 0 var(--space-3);
+    margin:         0 0 var(--space-sm);
 }
 
 .mai-news-detail__date {
@@ -252,7 +291,7 @@
 }
 
 .mai-news-detail__images {
-    margin-block-end: var(--space-5);
+    margin-block-end: var(--space-lg);
 
     .mai-news-detail__img {
         display:      block;
@@ -268,8 +307,8 @@
     font-weight:    var(--font-weight-medium);
     line-height:    var(--line-height-relaxed);
     color:          var(--bgm-ink-2);
-    margin-block:   0 var(--space-5);
-    padding-block-end: var(--space-4);
+    margin-block:   0 var(--space-lg);
+    padding-block-end: var(--space-md);
     border-block-end: 1px solid var(--bgm-line-2);
 }
 
@@ -280,27 +319,27 @@
 
     // Spacing for RTE content
     p {
-        margin-block: 0 0 var(--space-4);
+        margin-block: 0 0 var(--space-md);
     }
 
     ul, ol {
-        margin-block: 0 0 var(--space-4);
-        padding-inline-start: var(--space-5);
+        margin-block: 0 0 var(--space-md);
+        padding-inline-start: var(--space-lg);
     }
 
     h2, h3, h4 {
         color: var(--bgm-teal-800);
-        margin-block: var(--space-5) var(--space-3);
+        margin-block: var(--space-lg) var(--space-sm);
     }
 }
 
 .mai-news-detail__tags {
     display:     flex;
     flex-wrap:   wrap;
-    gap:         var(--space-2);
+    gap:         var(--space-sm);
     align-items: baseline;
-    margin-block: var(--space-6) var(--space-5);
-    padding-block-start: var(--space-4);
+    margin-block: var(--space-xl) var(--space-lg);
+    padding-block-start: var(--space-md);
     border-block-start: 1px solid var(--bgm-line-2);
 }
 
@@ -319,7 +358,7 @@
     font-weight:     var(--font-weight-semibold);
     color:           var(--bgm-teal-700);
     text-decoration: none;
-    padding:         var(--space-2) var(--space-4);
+    padding:         var(--space-sm) var(--space-md);
     border:          1px solid var(--bgm-line-2);
     border-radius:   var(--layout-radius);
     transition:      border-color var(--duration-fast) var(--easing-standard),

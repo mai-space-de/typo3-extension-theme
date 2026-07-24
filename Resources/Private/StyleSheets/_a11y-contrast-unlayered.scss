@@ -22,18 +22,19 @@ h1.mai-hero__title {
     color: #0e3f3f;
 }
 
+// Scoped to the .mai-heading CType only. The old wildcard
+// `h1-h6[class*='__title']` swept up every plugin/component title (member,
+// jobs, news, gallery, timeline, search, newsletter, events, consent, ...)
+// and forced them to plain black, overriding the brand's teal heading tint
+// from 03-generic/_typography.scss. Those teal shades (teal-700 5.97:1,
+// teal-800 8.25:1, teal-900 higher still) already clear WCAG AA (4.5:1) on
+// white, so the wildcard override was unnecessary and off-brand.
 h1.mai-heading,
 h2.mai-heading,
 h3.mai-heading,
 h4.mai-heading,
 h5.mai-heading,
-h6.mai-heading,
-h1[class*='__title'],
-h2[class*='__title'],
-h3[class*='__title'],
-h4[class*='__title'],
-h5[class*='__title'],
-h6[class*='__title'] {
+h6.mai-heading {
     color: #1a1a1a;
 }
 
@@ -42,11 +43,7 @@ h6[class*='__title'] {
     h1.mai-heading,
     h2.mai-heading,
     h3.mai-heading,
-    h4.mai-heading,
-    h1[class*='__title'],
-    h2[class*='__title'],
-    h3[class*='__title'],
-    h4[class*='__title'] {
+    h4.mai-heading {
         color: inherit;
     }
 }

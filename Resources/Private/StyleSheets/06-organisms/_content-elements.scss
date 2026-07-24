@@ -46,6 +46,35 @@
     @include page-wrap;
 }
 
+// ---------------------------------------------------------------------------
+// Standalone-placement vertical rhythm.
+// True full-bleed bands (hero, section, bentobox, logoshowcase — no
+// border, background runs the full width) already reserve their own
+// breathing room via padding-block, so a neighbour touching them still
+// gets a visible gap. Bare content elements (heading-block, mediatext,
+// plugin lists, …) carry no such padding, so two of them next to each
+// other collide with zero gap. Add the section rhythm only between two
+// "gapless" elements — reusing the same exclusion list on both sides of
+// the adjacent-sibling combinator means the rule stays silent wherever a
+// full-bleed band's own padding already does the job.
+//
+// cta/banner/alert are deliberately NOT excluded here even though they
+// also carry padding-block: unlike the bands above, they render as a
+// bordered/discrete box rather than an edge-to-edge bleed, so that
+// padding is internal breathing for their own text, not a substitute for
+// external spacing — without this rule their box edge butts straight
+// into the neighbouring element.
+//
+// Unlike the page-wrap rule above, #main is left outside :where() here:
+// several bare organisms reset their own margin-block to 0 at normal
+// class specificity (.mai-heading-block, .mai-image, .mai-audio,
+// .mai-gallery) — a fully zero-specificity selector would always lose
+// that fight, so the ID's specificity is needed to win it.
+// ---------------------------------------------------------------------------
+#main > :where(:not(.full-width, .hero, .mai-logoshowcase, .mai-section, .mai-bentobox, .mai-badge, .mai-icon, .mai-logo)) + :where(:not(.full-width, .hero, .mai-logoshowcase, .mai-section, .mai-bentobox, .mai-badge, .mai-icon, .mai-logo)) {
+    margin-block-start: var(--layout-section-pad-y);
+}
+
 
 // ---------------------------------------------------------------------------
 // Callout — aside with coloured left-border accent, role="note"
@@ -451,6 +480,13 @@
 // Testimonials containers — grid/list/single wrappers around .mai-testimonial
 // cards (mai_testimonials plugin: List.html / Single.html)
 // ---------------------------------------------------------------------------
+.mai-testimonials__title {
+    font-size:        var(--font-size-2xl);
+    font-weight:      var(--font-weight-bold);
+    color:            var(--bgm-teal-900);
+    margin:           0 0 var(--space-lg);
+}
+
 .mai-testimonials__empty {
     font-size: var(--font-size-md);
     color:     var(--bgm-ink-3);
@@ -519,6 +555,14 @@
     display:         inline-flex;
     align-items:     center;
     justify-content: center;
+    // The generic `button` reset (04-atoms/_button.scss, @layer theme-atoms)
+    // gives every <button> padding-block/padding-inline. That layer loses to
+    // this one for properties both declare, but padding isn't declared here,
+    // so it applies uncontested — squeezing this fixed 44×44 box's content
+    // area to near-zero and forcing the chevron flex-item to shrink down to
+    // just its border stroke (a single diagonal line instead of a corner).
+    // This is a fixed square via width/height + border, not padding — zero it.
+    padding:         0;
     width:           2.75rem;    // 44 px — WCAG touch target
     height:          2.75rem;
     background:      transparent;
@@ -540,6 +584,30 @@
         outline:        2px solid var(--color-focus-ring);
         outline-offset: 2px;
     }
+}
+
+// Chevron — a rotated bordered corner, not the "‹ ›" glyph. Text glyphs
+// don't sit centered within their own line box consistently across font
+// stacks, so flex-centering the button never guaranteed the ink lined up
+// with the box (it visibly didn't here). Rotating a border-inline-end +
+// border-block-end corner by ∓45°/135° is centered by geometry instead —
+// the meeting point of the two borders lands exactly on the box's own
+// rotation centre for both axes, independent of any font.
+.mai-testimonials__btn::before {
+    content:            "";
+    display:            inline-block;   // width/height don't apply to inline boxes — without this the box collapses to its border stroke
+    width:              0.55em;
+    height:             0.55em;
+    border-inline-end:  2px solid currentColor;
+    border-block-end:   2px solid currentColor;
+}
+
+.mai-testimonials__btn--prev::before {
+    transform: rotate(135deg);
+}
+
+.mai-testimonials__btn--next::before {
+    transform: rotate(-45deg);
 }
 
 // ---------------------------------------------------------------------------
