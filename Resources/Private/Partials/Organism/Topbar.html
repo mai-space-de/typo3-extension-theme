@@ -23,7 +23,7 @@
     <div class="site-topbar__inner">
 
         <f:render partial="Organism/Navigation/LanguageMenu"
-                  arguments="{languages: languages}"/>
+                  arguments="{languages: languages, listId: 'mai-language-menu-list-topbar'}"/>
 
         <f:if condition="{settings.pids.search}">
             <f:link.page pageUid="{settings.pids.search}"

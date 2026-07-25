@@ -24,10 +24,14 @@
                             locale, navigationTitle, title, flag, direction.
       label      {string} — Accessible aria-label for the <nav> landmark.
                             Defaults to locallang key language_menu.label.
+      listId     {string} — Unique id for the disclosure <ul>. Required when
+                            the partial is rendered more than once per page
+                            (topbar + offcanvas). Defaults to
+                            mai-language-menu-list.
 
     Usage example (in template):
       <f:render partial="Organism/Navigation/LanguageMenu"
-                arguments="{languages: languages}"/>
+                arguments="{languages: languages, listId: 'mai-language-menu-list-topbar'}"/>
 </f:comment>
 
 <mai:asset.css identifier="mai-language-menu"
@@ -39,6 +43,8 @@
                priority="0"/>
 
 <f:if condition="{languages -> f:count()} > 1">
+
+    <f:variable name="menuListId" value="{f:if(condition: listId, then: listId, else: 'mai-language-menu-list')}"/>
 
     <f:comment>── Resolve current language for the toggle label ────────────────</f:comment>
     <f:for each="{languages}" as="language">
@@ -56,7 +62,7 @@
                 class="mai-language-menu__toggle"
                 data-testid="language-toggle"
                 aria-expanded="false"
-                aria-controls="mai-language-menu-list">
+                aria-controls="{menuListId}">
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="mai-language-menu__globe"
                  aria-hidden="true"
@@ -80,7 +86,7 @@
         </button>
 
         <f:comment>── Dropdown panel ────────────────────────────────────────────</f:comment>
-        <ul id="mai-language-menu-list" class="mai-language-menu__list" hidden>
+        <ul id="{menuListId}" class="mai-language-menu__list" hidden>
             <f:for each="{languages}" as="language">
                 <li class="mai-language-menu__item{f:if(condition: language.isCurrent, then: ' mai-language-menu__item--current')}"
                     lang="{language.hreflang}">

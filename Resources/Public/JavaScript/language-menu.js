@@ -27,8 +27,14 @@ class LanguageMenuDisclosure {
     this.root   = root;
     this.button = root.querySelector('.mai-language-menu__toggle');
 
-    const controlledId = this.button ? this.button.getAttribute('aria-controls') : null;
-    this.panel = controlledId ? document.getElementById(controlledId) : null;
+    // Prefer the list inside this root — the partial is rendered twice
+    // (topbar + offcanvas) and duplicate getElementById lookups would always
+    // bind every toggle to the first (often display:none) panel.
+    this.panel = root.querySelector('.mai-language-menu__list');
+    if (!this.panel) {
+      const controlledId = this.button ? this.button.getAttribute('aria-controls') : null;
+      this.panel = controlledId ? document.getElementById(controlledId) : null;
+    }
 
     if (!this.button || !this.panel) {
       return;

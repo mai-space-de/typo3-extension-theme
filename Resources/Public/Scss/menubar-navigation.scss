@@ -263,6 +263,21 @@ body.mai-offcanvas-open {
             justify-content: center;
         }
     }
+
+    // Language disclosure: expand in-flow (not absolute) so the list is not
+    // clipped by the offcanvas overflow and stays visible above the footer.
+    .mai-language-menu {
+        width: 100%;
+    }
+
+    .mai-language-menu__list {
+        position:          static;
+        inset:             auto;
+        width:             100%;
+        min-width:         0;
+        margin-block-start: var(--space-2, 8px);
+        box-shadow:        none;
+    }
 }
 
 // ---------------------------------------------------------------------------

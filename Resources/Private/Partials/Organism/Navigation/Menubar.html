@@ -70,7 +70,7 @@
     <f:comment>── Offcanvas footer: language + search + login (hidden on desktop) ────────</f:comment>
     <div class="mai-menubar-offcanvas-footer">
         <f:render partial="Organism/Navigation/LanguageMenu"
-                  arguments="{languages: languages}"/>
+                  arguments="{languages: languages, listId: 'mai-language-menu-list-offcanvas'}"/>
         <f:if condition="{settings.pids.search}">
             <f:link.page pageUid="{settings.pids.search}"
                          class="mai-button mai-button--outline mai-menubar-offcanvas-footer__search"
