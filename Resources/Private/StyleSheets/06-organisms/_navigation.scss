@@ -168,11 +168,12 @@
 // Breadcrumb navigation
 // ---------------------------------------------------------------------------
 .breadcrumb {
-    display:   flex;
-    flex-wrap: wrap;
-    gap:       var(--space-xs);
-    font-size: var(--font-size-sm);
-    color:     var(--color-secondary);
+    display:       flex;
+    flex-wrap:     wrap;
+    gap:           var(--space-xs);
+    padding-block: var(--space-md);
+    font-size:     var(--font-size-sm);
+    color:         var(--color-secondary);
 
     ol,
     ul {
