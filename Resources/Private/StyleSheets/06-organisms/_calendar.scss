@@ -3,6 +3,14 @@
 //
 // FullCalendar mount + event info dialog for mai_events.
 // Design tokens from 01-settings/_variables.scss.
+//
+// Contrast map (WCAG AA on white / stated surfaces):
+//   white  #fff      on teal-800 #16575a  ≈ 8.3:1  — solid events, toolbar buttons
+//   white  #fff      on teal-900 #0e3f3f  ≈ 11.1:1 — button/event hover + active
+//   teal-900         on white / teal-050           — chrome (title, day numbers)
+//   ink    #1a1a1a   on white / teal-050           — list + dot-event titles
+//   ink-2  #3a3a3a   on disabled #ebebeb  ≈ 7.2:1  — disabled toolbar buttons
+//   ink-3  #6b6b6b   on white             ≈ 5.3:1  — other-month day numbers
 // =============================================================================
 
 @import "../02-mixins/media-breakpoint";
@@ -10,7 +18,7 @@
 @layer theme-organisms {
 
 // ---------------------------------------------------------------------------
-// Calendar wrapper
+// Calendar wrapper + dialog + iCal (no conflict with FC-injected CSS)
 // ---------------------------------------------------------------------------
 .mai-calendar {
     display:        flex;
@@ -22,9 +30,6 @@
     min-height: 28rem;
 }
 
-// ---------------------------------------------------------------------------
-// Event info popup (native <dialog>) — centered in the visible viewport
-// ---------------------------------------------------------------------------
 .mai-calendar-popup {
     position:      fixed;
     inset:         0;
@@ -38,7 +43,6 @@
     height:        fit-content;
     overflow:      auto;
     background:    transparent;
-    // Ensure top-layer dialog stays viewport-centered even if UA margin was reset
     translate:     0 0;
 
     &::backdrop {
@@ -47,32 +51,32 @@
 }
 
 .mai-calendar-popup__panel {
-    position:   relative;
-    padding:    var(--space-xl);
-    background: var(--color-background);
-    border:     1px solid var(--bgm-line);
+    position:      relative;
+    padding:       var(--space-xl);
+    background:    var(--color-background);
+    border:        1px solid var(--bgm-line);
     border-radius: var(--layout-radius);
-    box-shadow: var(--shadow-md, 0 8px 24px rgba(0, 0, 0, 0.12));
+    box-shadow:    var(--shadow-md, 0 8px 24px rgba(0, 0, 0, 0.12));
 }
 
 .mai-calendar-popup__close {
-    position:        absolute;
-    top:             var(--space-sm);
+    position:         absolute;
+    top:              var(--space-sm);
     inset-inline-end: var(--space-sm);
-    display:         inline-flex;
-    align-items:     center;
-    justify-content: center;
-    width:           2.25rem;
-    height:          2.25rem;
-    margin:          0;
-    padding:         0;
-    border:          none;
-    border-radius:   var(--layout-radius-sm);
-    background:      transparent;
-    color:           var(--bgm-ink-3);
-    font-size:       var(--font-size-xl);
-    line-height:     1;
-    cursor:          pointer;
+    display:          inline-flex;
+    align-items:      center;
+    justify-content:  center;
+    width:            2.25rem;
+    height:           2.25rem;
+    margin:           0;
+    padding:          0;
+    border:           none;
+    border-radius:    var(--layout-radius-sm);
+    background:       transparent;
+    color:            var(--bgm-ink-3);
+    font-size:        var(--font-size-xl);
+    line-height:      1;
+    cursor:           pointer;
 
     &:hover {
         color:      var(--bgm-teal-900);
@@ -86,18 +90,18 @@
 }
 
 .mai-calendar-popup__title {
-    margin:         0 var(--space-2xl) var(--space-sm) 0;
-    font-size:      var(--font-size-lg);
-    font-weight:    var(--font-weight-bold);
-    line-height:    var(--line-height-snug);
-    color:          var(--bgm-teal-900);
+    margin:      0 var(--space-2xl) var(--space-sm) 0;
+    font-size:   var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
+    color:       var(--bgm-teal-900);
 }
 
 .mai-calendar-popup__time,
 .mai-calendar-popup__location {
-    margin:      0 0 var(--space-xs);
-    font-size:   var(--font-size-sm);
-    color:       var(--bgm-ink-3);
+    margin:    0 0 var(--space-xs);
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
 }
 
 .mai-calendar-popup__description {
@@ -107,9 +111,6 @@
     color:       var(--bgm-ink-2);
 }
 
-// ---------------------------------------------------------------------------
-// iCal download link
-// ---------------------------------------------------------------------------
 .mai-calendar__ical-link {
     display:     flex;
     align-items: center;
@@ -118,7 +119,7 @@
 .mai-calendar__ical-button {
     display:         inline-flex;
     align-items:     center;
-    gap:              var(--space-xs);
+    gap:             var(--space-xs);
     padding:         var(--space-sm) var(--space-lg);
     font-family:     var(--font-family-base);
     font-size:       var(--font-size-sm);
@@ -152,61 +153,133 @@
 } // @layer theme-organisms
 
 // =============================================================================
-// FullCalendar overrides — UNLAYERED on purpose.
+// FullCalendar — UNLAYERED
 //
-// FullCalendar injects its base CSS as unlayered <style> rules. Declarations
-// inside @layer lose to those regardless of specificity, which left FC defaults
-// like more-link #d0d0d0 + white text and disabled opacity:.65 (washed grey +
-// white). Unlayered rules here can beat FC on specificity.
+// FC injects unlayered CSS. Theme rules inside @layer lose to those regardless
+// of specificity. These overrides stay outside @layer so they can win.
+//
+// Event types (do not style all .fc-event the same):
+//   .fc-daygrid-block-event / .fc-timegrid-event / .fc-h-event
+//       → solid teal chip, white text
+//   .fc-daygrid-dot-event
+//       → transparent row, dark title, teal dot
+//   .fc-list-event
+//       → table row on white, dark title; hover teal-050
 // =============================================================================
 .mai-calendar--fullcalendar {
+    // ------------------------------------------------------------------ base
     .fc {
         font-family: var(--font-family-base);
+        font-size:   var(--font-size-base); // 16px — FC children use em from here
         color:       var(--color-text);
 
-        // WCAG 2.1 AA: white on teal-800 ≈ 8.25:1; hover teal-900 ≈ 11.1:1
+        --fc-small-font-size:            0.85em;
+
         --fc-button-bg-color:            var(--bgm-teal-800);
         --fc-button-border-color:        var(--bgm-teal-800);
-        --fc-button-text-color:          var(--color-fg-on-teal);
+        --fc-button-text-color:          #ffffff;
         --fc-button-hover-bg-color:      var(--bgm-teal-900);
         --fc-button-hover-border-color:  var(--bgm-teal-900);
         --fc-button-active-bg-color:     var(--bgm-teal-900);
         --fc-button-active-border-color: var(--bgm-teal-900);
+
         --fc-event-bg-color:             var(--bgm-teal-800);
         --fc-event-border-color:         var(--bgm-teal-800);
-        --fc-event-text-color:           var(--color-fg-on-teal);
+        --fc-event-text-color:           #ffffff;
+
         --fc-today-bg-color:             var(--bgm-teal-050);
         --fc-list-event-hover-bg-color:  var(--bgm-teal-050);
         --fc-border-color:               var(--bgm-line);
         --fc-page-bg-color:              var(--color-background);
-        --fc-neutral-bg-color:           var(--color-surface);
+        --fc-neutral-bg-color:           var(--bgm-teal-050);
         --fc-neutral-text-color:         var(--bgm-ink-2);
-        // FC default more-link bg is #d0d0d0 — never pair with white text
-        --fc-more-link-bg-color:         var(--bgm-teal-800);
-        --fc-more-link-text-color:       var(--color-fg-on-teal);
+        --fc-more-link-bg-color:         transparent;
+        --fc-more-link-text-color:       var(--bgm-teal-800);
     }
 
+    // --------------------------------------------------------------- chrome
     .fc .fc-toolbar-title {
-        font-size:   var(--font-size-xl);
+        font-size:   1.25em; // ~20px at 16px base — FC default 1.75em is too large here
         font-weight: var(--font-weight-bold);
         color:       var(--bgm-teal-900);
     }
 
+    .fc-theme-standard td,
+    .fc-theme-standard th,
+    .fc-theme-standard .fc-scrollgrid {
+        border-color: var(--fc-border-color);
+    }
+
+    .fc .fc-col-header-cell-cushion,
+    .fc .fc-daygrid-day-number,
+    .fc .fc-list-day-text,
+    .fc .fc-list-day-side-text {
+        color:           var(--bgm-teal-900);
+        text-decoration: none;
+        font-weight:     var(--font-weight-semibold);
+    }
+
+    .fc .fc-timegrid-slot-label-cushion {
+        color:       var(--bgm-ink-2);
+        font-weight: var(--font-weight-regular, 400);
+    }
+
+    // FC defaults other-month days to opacity:.3 — fails contrast.
+    .fc .fc-day-other .fc-daygrid-day-top {
+        opacity: 1;
+    }
+
+    .fc .fc-day-other .fc-daygrid-day-number {
+        color:       var(--bgm-ink-3);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .fc .fc-daygrid-day.fc-day-today,
+    .fc .fc-timegrid-col.fc-day-today {
+        background-color: var(--fc-today-bg-color);
+    }
+
+    .fc .fc-list-day-cushion {
+        background-color: var(--fc-neutral-bg-color);
+    }
+
+    // ------------------------------------------------------------- toolbar
+    // Reset site-wide `button {}` atoms (padding/font/flex) — FC must stay compact.
     .fc .fc-button,
     .fc .fc-button-primary {
-        background-color: var(--bgm-teal-800);
-        border-color:     var(--bgm-teal-800);
-        color:            #ffffff;
+        display:          inline-block;
+        align-items:      initial;
+        justify-content:  initial;
+        gap:              0;
+        width:            auto;
+        height:           auto;
+        margin:           0;
+        padding:          0.4em 0.75em;
+        font-family:      var(--font-family-base);
+        font-size:        var(--font-size-sm); // 14px — readable, not CTA-sized
         font-weight:      var(--font-weight-semibold);
-        border-radius:    var(--layout-radius);
+        line-height:      1.5;
+        white-space:      nowrap;
         text-transform:   none;
+        text-decoration:  none;
+        vertical-align:   middle;
+        border-radius:    var(--layout-radius);
+        border:           1px solid var(--bgm-teal-800);
+        background-color: var(--bgm-teal-800);
+        color:            #ffffff;
         box-shadow:       none;
+        opacity:          1;
+        cursor:           pointer;
+    }
+
+    .fc .fc-button-primary:not(:disabled):hover,
+    .fc .fc-button-primary:not(:disabled):focus {
+        background-color: var(--bgm-teal-900);
+        border-color:     var(--bgm-teal-900);
+        color:            #ffffff;
         opacity:          1;
     }
 
-    // Hover / focus / active: keep white on dark teal — never light grey
-    .fc .fc-button-primary:not(:disabled):hover,
-    .fc .fc-button-primary:not(:disabled):focus,
     .fc .fc-button-primary:not(:disabled):active,
     .fc .fc-button-primary:not(:disabled).fc-button-active {
         background-color: var(--bgm-teal-900);
@@ -220,108 +293,126 @@
         outline-offset: 2px;
     }
 
-    // Disabled: solid muted surface + dark ink (no opacity wash, no white text)
+    // Disabled: muted surface + dark ink (never white + opacity wash)
     .fc .fc-button:disabled,
     .fc .fc-button-primary:disabled,
     .fc .fc-button-primary:disabled:hover {
         opacity:          1;
+        cursor:           not-allowed;
+        pointer-events:   none;
         background-color: var(--color-disabled-bg);
         border-color:     var(--color-disabled-bg);
         color:            var(--bgm-ink-2);
     }
 
-    .fc-theme-standard td,
-    .fc-theme-standard th,
-    .fc-theme-standard .fc-scrollgrid {
-        border-color: var(--fc-border-color);
-    }
-
-    .fc .fc-col-header-cell-cushion,
-    .fc .fc-daygrid-day-number,
-    .fc .fc-timegrid-slot-label-cushion,
-    .fc .fc-list-day-text,
-    .fc .fc-list-day-side-text {
-        color:           var(--bgm-teal-900);
-        text-decoration: none;
-        font-weight:     var(--font-weight-semibold);
-    }
-
-    .fc .fc-timegrid-slot-label-cushion {
-        font-weight: var(--font-weight-regular, 400);
-        color:       var(--bgm-ink-2);
-    }
-
-    .fc .fc-day-other .fc-daygrid-day-top {
-        opacity: 1;
-    }
-
-    .fc .fc-day-other .fc-daygrid-day-number {
-        color:       var(--bgm-ink-3);
-        font-weight: var(--font-weight-semibold);
-    }
-
-    .fc .fc-daygrid-day.fc-day-today,
-    .fc .fc-timegrid-col.fc-day-today {
-        background: var(--fc-today-bg-color);
-    }
-
-    .fc-event,
-    .fc-event:hover,
-    .fc-daygrid-dot-event:hover {
+    // ------------------------------------------ solid events (month/week)
+    .fc-daygrid-block-event,
+    .fc-timegrid-event,
+    .fc-h-event {
         cursor:           pointer;
         border:           none;
-        background-color: var(--bgm-teal-800);
         border-radius:    var(--layout-radius-sm);
+        background-color: var(--bgm-teal-800);
         opacity:          1;
     }
 
-    .fc-event:hover,
-    .fc-daygrid-event:hover,
-    .fc-timegrid-event:hover {
+    .fc-daygrid-block-event:hover,
+    .fc-timegrid-event:hover,
+    .fc-h-event:hover {
         background-color: var(--bgm-teal-900);
     }
 
-    .fc-event .fc-event-main,
-    .fc-event .fc-event-title,
-    .fc-event .fc-event-time,
-    .fc-event:hover .fc-event-main,
-    .fc-event:hover .fc-event-title,
-    .fc-event:hover .fc-event-time {
+    .fc-daygrid-block-event .fc-event-main,
+    .fc-daygrid-block-event .fc-event-title,
+    .fc-daygrid-block-event .fc-event-time,
+    .fc-timegrid-event .fc-event-main,
+    .fc-timegrid-event .fc-event-title,
+    .fc-timegrid-event .fc-event-time,
+    .fc-h-event .fc-event-main,
+    .fc-h-event .fc-event-title,
+    .fc-h-event .fc-event-time {
         color: #ffffff;
     }
 
-    .fc-list-event-title,
-    .fc-list-event-title a,
-    .fc-list-event-time {
-        color:           var(--color-text);
-        text-decoration: none;
+    // ------------------------------------------ dot events (month, timed)
+    // Transparent row + dark title. Do NOT paint teal fill (that caused
+    // dark-on-teal when title color stayed ink).
+    .fc-daygrid-dot-event {
+        cursor:           pointer;
+        background-color: transparent;
+        border:           none;
+        opacity:          1;
+        color:            var(--color-text);
+    }
+
+    .fc-daygrid-dot-event .fc-event-title,
+    .fc-daygrid-dot-event .fc-event-time {
+        color:       var(--color-text);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .fc-daygrid-dot-event:hover {
+        background-color: var(--bgm-teal-050);
+        color:            var(--color-text);
+    }
+
+    .fc-daygrid-dot-event:hover .fc-event-title,
+    .fc-daygrid-dot-event:hover .fc-event-time {
+        color: var(--color-text);
+    }
+
+    .fc-daygrid-event-dot {
+        border-color: var(--bgm-teal-800);
+    }
+
+    // ---------------------------------------------------------- list view
+    .fc-list-event,
+    .fc-list-event:hover {
+        background-color: transparent;
+        border:           none;
+        opacity:          1;
+        cursor:           pointer;
+    }
+
+    .fc-list-event td {
+        background-color: transparent;
     }
 
     .fc-list-event:hover td {
         background-color: var(--bgm-teal-050);
     }
 
+    .fc-list-event-title,
+    .fc-list-event-title a,
+    .fc-list-event-time,
     .fc-list-event:hover .fc-list-event-title,
     .fc-list-event:hover .fc-list-event-title a,
     .fc-list-event:hover .fc-list-event-time {
-        color: var(--color-text);
+        color:           var(--color-text);
+        text-decoration: none;
     }
 
     .fc-list-event-dot {
         border-color: var(--bgm-teal-800);
     }
 
+    // ----------------------------------------------------------- more link
+    // Text link — avoid FC's default grey pill (#d0d0d0) with light/white text.
     .fc .fc-more-link,
     .fc .fc-more-link:hover {
-        color:            #ffffff;
-        background-color: var(--bgm-teal-800);
+        display:          inline;
+        padding:          0;
+        font-size:        var(--font-size-sm);
         font-weight:      var(--font-weight-semibold);
+        color:            var(--bgm-teal-800);
+        background-color: transparent;
         opacity:          1;
+        text-decoration:  none;
     }
 
     .fc .fc-more-link:hover {
-        background-color: var(--bgm-teal-900);
-        color:            #ffffff;
+        color:           var(--bgm-teal-900);
+        text-decoration: underline;
     }
 }
 
@@ -332,6 +423,6 @@
     }
 
     .mai-calendar--fullcalendar .fc .fc-toolbar-title {
-        font-size: var(--font-size-lg);
+        font-size: 1.125em;
     }
 }
