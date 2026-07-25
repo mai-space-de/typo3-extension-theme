@@ -31,12 +31,18 @@
     &:focus-within { box-shadow: var(--shadow-md); }
 }
 
-.mai-team-list__image img {
+.mai-team-list__image {
     width:        100%;
-    height:       auto;
     aspect-ratio: 1 / 1;
-    object-fit:   var(--img-object-fit, cover);
-    display:      block;
+    overflow:     hidden;
+    background:   var(--bgm-teal-050, #e8f2f1);
+
+    img {
+        width:      100%;
+        height:     100%;
+        object-fit: var(--img-object-fit, cover);
+        display:    block;
+    }
 }
 
 .mai-team-list__content {
@@ -70,7 +76,8 @@
     color:     var(--bgm-ink-3);
 }
 
-.mai-team-list__email {
+.mai-team-list__email,
+.mai-team-list__phone {
     margin:    0;
     font-size: var(--font-size-sm);
 
