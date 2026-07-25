@@ -377,21 +377,26 @@ class MobileToggle {
 
   // Set inert on every element outside the offcanvas panel so that keyboard
   // and AT users cannot reach content behind it.
+  //
+  // Walk from the panel up to <body> and inert *siblings* at each level.
+  // Never inert an ancestor of the panel — that would make the panel itself
+  // non-interactive (the nav lives inside .site-header__inner → .site-header).
   _applyInert() {
-    const navParent = this.nav.parentElement; // typically <header>
+    let current = this.nav;
 
-    // Inert all direct body children except the nav's parent
-    [...document.body.children].forEach(el => {
-      if (el === navParent || el === this.nav) return;
-      if (!el.inert) { el.inert = true; this._inertedEls.push(el); }
-    });
+    while (current && current !== document.body) {
+      const parent = current.parentElement;
+      if (!parent) break;
 
-    // Inert siblings within the nav's parent (e.g. logo link + hamburger)
-    if (navParent && navParent !== document.body) {
-      [...navParent.children].forEach(el => {
-        if (el === this.nav) return;
-        if (!el.inert) { el.inert = true; this._inertedEls.push(el); }
+      [...parent.children].forEach(el => {
+        if (el === current) return;
+        if (el.inert) return;
+        el.inert = true;
+        this._inertedEls.push(el);
       });
+
+      if (parent === document.body) break;
+      current = parent;
     }
   }
 
