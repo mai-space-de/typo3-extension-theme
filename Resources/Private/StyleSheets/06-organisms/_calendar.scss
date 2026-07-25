@@ -109,6 +109,29 @@
     font-size:   var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color:       var(--bgm-ink-2);
+
+    p {
+        margin: 0 0 var(--space-sm);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    ul,
+    ol {
+        margin:               0 0 var(--space-sm);
+        padding-inline-start: 1.25rem;
+    }
+
+    a {
+        color:           var(--color-link);
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--color-link-hover);
+        }
+    }
 }
 
 .mai-calendar__ical-link {
