@@ -171,6 +171,20 @@
     color:       var(--bgm-ink-2);                // #3a3a3a
     margin:      0;
     flex:        1 1 auto;                        // push read-more down
+
+    p {
+        margin: 0;
+
+        &:not(:last-child) {
+            margin-bottom: 0.5em;
+        }
+    }
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 0.12em;
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -310,6 +324,20 @@
     margin-block:   0 var(--space-lg);
     padding-block-end: var(--space-md);
     border-block-end: 1px solid var(--bgm-line-2);
+
+    p {
+        margin: 0;
+
+        &:not(:last-child) {
+            margin-bottom: 0.5em;
+        }
+    }
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 0.12em;
+    }
 }
 
 .mai-news-detail__body {
