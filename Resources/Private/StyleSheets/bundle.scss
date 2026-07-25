@@ -1,5 +1,5 @@
-// Member/team list image+phone styles live in organism partials; bump this
-// file when those change so mai_assets content-hash cache invalidates.
+// Member/team list + FullCalendar organism styles (viewport-centered popup);
+// bump this file when those change so mai_assets content-hash cache invalidates.
 @import "01-settings/variables";
 
 // -- 02 Mixins (no CSS output, imported per-partial where needed) -------------

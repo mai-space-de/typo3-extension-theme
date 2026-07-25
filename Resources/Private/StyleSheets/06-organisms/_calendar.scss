@@ -1,10 +1,7 @@
 // =============================================================================
 // 06-organisms/_calendar.scss
 //
-// Calendar organism — event list, navigation, and view switcher.
-// The event row follows the BGM Pulheim design system's EventRow pattern:
-// date badge (day + month) with teal border, bold title, time/location meta.
-//
+// FullCalendar mount + event info dialog for mai_events.
 // Design tokens from 01-settings/_variables.scss.
 // =============================================================================
 
@@ -21,323 +18,210 @@
     gap:            var(--space-lg);
 }
 
-// ---------------------------------------------------------------------------
-// Navigation — prev / today / next + view mode switcher
-// ---------------------------------------------------------------------------
-.mai-calendar__navigation {
-    display:         flex;
-    flex-wrap:       wrap;
-    align-items:     center;
-    justify-content: space-between;
-    gap:             var(--space-md);
+.mai-calendar__mount {
+    min-height: 28rem;
 }
 
-.mai-calendar__nav-controls {
-    display:     flex;
-    flex-wrap:   wrap;
-    gap:         var(--space-xs);
-    align-items: center;
-}
+// ---------------------------------------------------------------------------
+// FullCalendar theme overrides (FC injects its own base CSS via JS)
+// ---------------------------------------------------------------------------
+.mai-calendar--fullcalendar {
+    .fc {
+        font-family: var(--font-family-base);
+        color:       var(--bgm-ink-2);
 
-.mai-calendar__nav-btn {
-    display:         inline-flex;
-    align-items:     center;
-    gap:             var(--space-2xs);
-    padding:         var(--space-xs) var(--space-md);
-    font-family:     var(--font-family-base);
-    font-size:       var(--font-size-sm);
-    font-weight:     var(--font-weight-semibold);
-    color:           var(--bgm-teal-700);
-    background:      transparent;
-    border:          2px solid var(--bgm-teal-700);
-    border-radius:   var(--layout-radius);
-    text-decoration: none;
-    cursor:          pointer;
-    transition:      background-color var(--duration-fast) var(--easing-standard),
-                     color var(--duration-fast) var(--easing-standard);
-
-    &:hover {
-        background: var(--bgm-teal-700);
-        color:      #ffffff;
+        // Map FullCalendar theme vars to site primary (text on primary = white)
+        --fc-button-bg-color:            var(--color-primary);
+        --fc-button-border-color:        var(--color-primary);
+        --fc-button-text-color:          var(--btn-primary-text);
+        --fc-button-hover-bg-color:      var(--color-primary-hover);
+        --fc-button-hover-border-color:  var(--color-primary-hover);
+        --fc-button-active-bg-color:     var(--color-primary-hover);
+        --fc-button-active-border-color: var(--color-primary-hover);
+        --fc-event-bg-color:             var(--color-primary);
+        --fc-event-border-color:         var(--color-primary);
+        --fc-event-text-color:           var(--btn-primary-text);
+        --fc-today-bg-color:             var(--bgm-teal-050);
+        --fc-list-event-hover-bg-color:  var(--bgm-teal-050);
+        --fc-border-color:               var(--bgm-line-2);
+        --fc-page-bg-color:              var(--color-background);
+        --fc-neutral-bg-color:           var(--color-surface, var(--bgm-teal-050));
+        --fc-neutral-text-color:         var(--bgm-ink-3);
+        --fc-more-link-bg-color:         var(--color-primary);
+        --fc-more-link-text-color:       var(--btn-primary-text);
     }
 
-    &:focus-visible {
-        outline:        2px solid var(--color-focus-ring);
-        outline-offset: 2px;
-    }
-}
-
-.mai-calendar__view-switcher {
-    display:     flex;
-    gap:         var(--space-2xs);
-    align-items: center;
-}
-
-.mai-calendar__view-btn {
-    padding:         var(--space-xs) var(--space-md);
-    font-family:     var(--font-family-base);
-    font-size:       var(--font-size-sm);
-    font-weight:     var(--font-weight-semibold);
-    color:           var(--bgm-ink-3);
-    background:      transparent;
-    border:          1px solid var(--bgm-line);
-    border-radius:   var(--layout-radius);
-    text-decoration: none;
-    cursor:          pointer;
-    transition:      background-color var(--duration-fast) var(--easing-standard),
-                     color var(--duration-fast) var(--easing-standard),
-                     border-color var(--duration-fast) var(--easing-standard);
-
-    &:hover {
-        color:        var(--bgm-teal-700);
-        border-color: var(--bgm-teal-700);
+    .fc .fc-toolbar-title {
+        font-size:   var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        color:       var(--bgm-teal-900);
     }
 
-    &:focus-visible {
-        outline:        2px solid var(--color-focus-ring);
-        outline-offset: 2px;
-    }
+    .fc .fc-button-primary {
+        background:     var(--fc-button-bg-color);
+        border-color:   var(--fc-button-border-color);
+        color:          var(--fc-button-text-color);
+        font-weight:    var(--font-weight-semibold);
+        border-radius:  var(--layout-radius);
+        text-transform: none;
+        box-shadow:     none;
 
-    &--active {
-        color:            #ffffff;
-        background:       var(--bgm-teal-700);
-        border-color:     var(--bgm-teal-700);
-
-        &:hover {
-            background:   var(--bgm-teal-800);
-            border-color: var(--bgm-teal-800);
-            color:        #ffffff;
-        }
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Calendar header — page title for the current view
-// ---------------------------------------------------------------------------
-.mai-calendar__header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-md);
-}
-
-.mai-calendar__title {
-    font-size:      var(--font-size-xl);
-    font-weight:    var(--font-weight-bold);
-    line-height:    var(--line-height-tight);
-    color:          var(--bgm-teal-900);
-    margin:         0;
-}
-
-// ---------------------------------------------------------------------------
-// Event list — unstyled <ul> wrapper
-// ---------------------------------------------------------------------------
-.mai-calendar__event-list {
-    list-style: none;
-    margin:     0;
-    padding:    0;
-    display:    flex;
-    flex-direction: column;
-}
-
-.mai-calendar__event-list-item {
-    margin: 0;
-}
-
-// ---------------------------------------------------------------------------
-// Event row — the signature BGM calendar item
-//
-// Layout: date badge | body (title + meta + description)
-// Inspired by the EventRow.jsx design system reference.
-// ---------------------------------------------------------------------------
-.mai-calendar__event {
-    display:         grid;
-    grid-template-columns: auto 1fr;
-    gap:             var(--space-lg);
-    align-items:     start;
-    padding:         var(--space-lg) var(--space-xl);
-    background:      var(--color-background);
-    border-block-end: 1px solid var(--bgm-line-2);
-    transition:      background-color var(--duration-fast) var(--easing-standard);
-
-    &:first-child {
-        border-block-start: 1px solid var(--bgm-line-2);
-    }
-
-    &:hover {
-        background: var(--bgm-teal-050);
-    }
-
-    // Compact variant — tighter padding, no description, no date badge
-// Used in month grid cells where the day number is already shown by the grid.
-    &--compact {
-        padding:         var(--space-xs) var(--space-sm);
-        align-items:     center;
-        border-block-end: none;
-        background:      transparent;
-
-        &:first-child {
-            border-block-start: none;
-        }
-
-        &:hover {
-            background: var(--bgm-teal-050);
-            border-radius: var(--layout-radius-sm);
-        }
-
-        .mai-calendar__event-date {
-            display: none;
-        }
-
-        .mai-calendar__event-title {
-            font-size: var(--font-size-sm);
-        }
-
-        .mai-calendar__event-meta {
-            font-size: var(--font-size-xs);
-        }
-
-        .mai-calendar__event-description {
-            display: none;
-        }
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Date badge — day number + abbreviated month, teal-bordered
-// ---------------------------------------------------------------------------
-.mai-calendar__event-date {
-    display:         flex;
-    flex-direction:  column;
-    align-items:     center;
-    justify-content: center;
-    text-align:      center;
-    min-width:       4rem;    // 64 px
-    padding:         var(--space-sm) var(--space-xs);
-    border:          2px solid var(--bgm-teal-700);
-    border-radius:   var(--layout-radius-sm);
-    flex-shrink:     0;
-}
-
-.mai-calendar__event-day {
-    font-size:      var(--font-size-xl);
-    font-weight:    var(--font-weight-bold);
-    line-height:    var(--line-height-tight);
-    color:          var(--bgm-teal-900);
-}
-
-.mai-calendar__event-month {
-    font-size:         var(--font-size-xs);
-    font-weight:       var(--font-weight-bold);
-    letter-spacing:    var(--tracking-caps);
-    text-transform:    uppercase;
-    color:             var(--bgm-teal-700);
-    margin-block-start: var(--space-2xs);
-}
-
-// ---------------------------------------------------------------------------
-// Event body — title + meta + description stack
-// ---------------------------------------------------------------------------
-.mai-calendar__event-body {
-    display:        flex;
-    flex-direction: column;
-    gap:            var(--space-xs);
-    min-width:      0;   // prevent grid blowout from long titles
-}
-
-.mai-calendar__event-title {
-    font-size:      var(--font-size-md);
-    font-weight:    var(--font-weight-bold);
-    line-height:    var(--line-height-snug);
-    color:          var(--bgm-teal-900);
-    margin:         0;
-
-    a {
-        color:           inherit;
-        text-decoration: none;
-        transition:      color var(--duration-fast) var(--easing-standard);
-
-        &:hover {
-            color: var(--bgm-teal-700);
+        &:hover,
+        &:focus,
+        &:active,
+        &:not(:disabled).fc-button-active {
+            background:   var(--fc-button-hover-bg-color);
+            border-color: var(--fc-button-hover-border-color);
+            color:        var(--btn-primary-text-hover);
         }
 
         &:focus-visible {
             outline:        2px solid var(--color-focus-ring);
             outline-offset: 2px;
-            border-radius:  var(--layout-radius-sm);
         }
+    }
+
+    .fc .fc-button-primary:disabled {
+        opacity: 0.55;
+    }
+
+    .fc-theme-standard td,
+    .fc-theme-standard th,
+    .fc-theme-standard .fc-scrollgrid {
+        border-color: var(--fc-border-color);
+    }
+
+    .fc .fc-col-header-cell-cushion,
+    .fc .fc-daygrid-day-number {
+        color:           var(--bgm-teal-900);
+        text-decoration: none;
+        font-weight:     var(--font-weight-semibold);
+    }
+
+    .fc .fc-daygrid-day.fc-day-today,
+    .fc .fc-timegrid-col.fc-day-today {
+        background: var(--fc-today-bg-color);
+    }
+
+    .fc-event {
+        cursor:        pointer;
+        border:        none;
+        background:    var(--fc-event-bg-color);
+        border-radius: var(--layout-radius-sm);
+    }
+
+    .fc-event .fc-event-main,
+    .fc-event .fc-event-title,
+    .fc-event .fc-event-time {
+        color: var(--fc-event-text-color);
+    }
+
+    .fc-list-event:hover td {
+        background: var(--fc-list-event-hover-bg-color);
+    }
+
+    .fc-list-event-dot {
+        border-color: var(--color-primary);
     }
 }
 
 // ---------------------------------------------------------------------------
-// Meta row — time + location, separated by a middot
+// Event info popup (native <dialog>) — centered in the visible viewport
 // ---------------------------------------------------------------------------
-.mai-calendar__event-meta {
-    display:     flex;
-    flex-wrap:   wrap;
-    align-items: center;
-    gap:         var(--space-2xs);
+.mai-calendar-popup {
+    position:      fixed;
+    inset:         0;
+    margin:        auto;
+    padding:       0;
+    border:        none;
+    border-radius: var(--layout-radius);
+    max-width:     min(32rem, calc(100vw - 2rem));
+    max-height:    calc(100vh - 2rem);
+    width:         100%;
+    height:        fit-content;
+    overflow:      auto;
+    background:    transparent;
+    // Ensure top-layer dialog stays viewport-centered even if UA margin was reset
+    translate:     0 0;
+
+    &::backdrop {
+        background: rgba(15, 40, 38, 0.45);
+    }
+}
+
+.mai-calendar-popup__panel {
+    position:   relative;
+    padding:    var(--space-xl);
+    background: var(--color-background);
+    border:     1px solid var(--bgm-line);
+    border-radius: var(--layout-radius);
+    box-shadow: var(--shadow-md, 0 8px 24px rgba(0, 0, 0, 0.12));
+}
+
+.mai-calendar-popup__close {
+    position:        absolute;
+    top:             var(--space-sm);
+    inset-inline-end: var(--space-sm);
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    width:           2.25rem;
+    height:          2.25rem;
+    margin:          0;
+    padding:         0;
+    border:          none;
+    border-radius:   var(--layout-radius-sm);
+    background:      transparent;
+    color:           var(--bgm-ink-3);
+    font-size:       var(--font-size-xl);
+    line-height:     1;
+    cursor:          pointer;
+
+    &:hover {
+        color:      var(--bgm-teal-900);
+        background: var(--bgm-teal-050);
+    }
+
+    &:focus-visible {
+        outline:        2px solid var(--color-focus-ring);
+        outline-offset: 2px;
+    }
+}
+
+.mai-calendar-popup__title {
+    margin:         0 var(--space-2xl) var(--space-sm) 0;
+    font-size:      var(--font-size-lg);
+    font-weight:    var(--font-weight-bold);
+    line-height:    var(--line-height-snug);
+    color:          var(--bgm-teal-900);
+}
+
+.mai-calendar-popup__time,
+.mai-calendar-popup__location {
+    margin:      0 0 var(--space-xs);
     font-size:   var(--font-size-sm);
     color:       var(--bgm-ink-3);
 }
 
-.mai-calendar__event-time {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2xs);
-}
-
-.mai-calendar__event-location {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2xs);
-
-    // Middot separator before location (after time)
-    &::before {
-        content:     "\00B7";   // ·
-        font-weight: var(--font-weight-bold);
-        color:       var(--bgm-ink-3);
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Description — shown in full (non-compact) mode
-// ---------------------------------------------------------------------------
-.mai-calendar__event-description {
+.mai-calendar-popup__description {
+    margin:      var(--space-md) 0 0;
     font-size:   var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color:       var(--bgm-ink-2);
-    margin-block-start: var(--space-xs);
-
-    p {
-        margin: 0;
-
-        &:last-child { margin-block-end: 0; }
-    }
-}
-
-// ---------------------------------------------------------------------------
-// No events message
-// ---------------------------------------------------------------------------
-.mai-calendar__no-events {
-    font-size:   var(--font-size-md);
-    color:       var(--bgm-ink-3);
-    text-align:  center;
-    padding:     var(--space-2xl) var(--space-lg);
-    margin:      0;
 }
 
 // ---------------------------------------------------------------------------
 // iCal download link
 // ---------------------------------------------------------------------------
 .mai-calendar__ical-link {
-    display:    flex;
+    display:     flex;
     align-items: center;
 }
 
 .mai-calendar__ical-button {
     display:         inline-flex;
     align-items:     center;
-    gap:             var(--space-xs);
+    gap:              var(--space-xs);
     padding:         var(--space-sm) var(--space-lg);
     font-family:     var(--font-family-base);
     font-size:       var(--font-size-sm);
@@ -362,165 +246,19 @@
     }
 }
 
-// ---------------------------------------------------------------------------
-// Responsive — small-viewport adjustments
-// ---------------------------------------------------------------------------
 @include bp-down(sm) {
-    .mai-calendar__event {
-        padding: var(--space-md);
-        gap:     var(--space-md);
+    .mai-calendar__mount {
+        min-height: 22rem;
     }
 
-    .mai-calendar__event-date {
-        min-width: 3.5rem;
-        padding:   var(--space-xs);
+    .mai-calendar--fullcalendar .fc .fc-toolbar {
+        flex-direction: column;
+        gap:            var(--space-sm);
     }
 
-    .mai-calendar__event-day {
+    .mai-calendar--fullcalendar .fc .fc-toolbar-title {
         font-size: var(--font-size-lg);
     }
-
-    .mai-calendar__navigation {
-        flex-direction: column;
-        align-items:    stretch;
-    }
-
-    .mai-calendar__nav-controls {
-        justify-content: center;
-    }
-
-    .mai-calendar__view-switcher {
-        justify-content: center;
-    }
-
-    // Month grid — horizontal scroll on narrow screens
-    .mai-calendar__grid {
-        font-size: var(--font-size-sm);
-    }
-
-    // Week view — stack days vertically on mobile
-    .mai-calendar__week-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Month grid — 7-column table layout
-// ---------------------------------------------------------------------------
-.mai-calendar__grid {
-    width:           100%;
-    border-collapse: collapse;
-    border:          1px solid var(--bgm-line);
-    border-radius:   var(--layout-radius);
-    overflow:        hidden;
-    table-layout:    fixed;
-
-    th,
-    td {
-        padding:      var(--space-sm);
-        text-align:   left;
-        border:       1px solid var(--bgm-line-2);
-        vertical-align: top;
-    }
-
-    th {
-        font-size:      var(--font-size-xs);
-        font-weight:    var(--font-weight-semibold);
-        letter-spacing: var(--tracking-wide);
-        text-transform: uppercase;
-        color:          var(--bgm-teal-900);
-        background:     var(--color-surface);
-        padding:        var(--space-sm) var(--space-md);
-    }
-}
-
-.mai-calendar__day {
-    min-height: 6rem;
-    background: var(--color-background);
-
-    &--other-month {
-        color:            var(--bgm-ink-3);
-        background:       var(--color-surface);
-        opacity:          0.6;
-    }
-
-    &--today {
-        background: var(--bgm-teal-050);
-    }
-}
-
-.mai-calendar__day-number {
-    display:        inline-block;
-    font-size:      var(--font-size-sm);
-    font-weight:    var(--font-weight-bold);
-    color:          var(--bgm-teal-900);
-    margin-block-end: var(--space-xs);
-}
-
-.mai-calendar__events {
-    list-style: none;
-    margin:     0;
-    padding:    0;
-    display:    flex;
-    flex-direction: column;
-    gap:        var(--space-2xs);
-}
-
-.mai-calendar__event-item {
-    margin: 0;
-}
-
-// ---------------------------------------------------------------------------
-// Week view — 7-column grid layout
-// ---------------------------------------------------------------------------
-.mai-calendar__week-row {
-    display:               grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap:                   var(--space-sm);
-    margin-block-end:      var(--space-md);
-}
-
-.mai-calendar__day-column {
-    display:        flex;
-    flex-direction: column;
-    border:         1px solid var(--bgm-line-2);
-    border-radius:  var(--layout-radius);
-    overflow:       hidden;
-
-    &--today {
-        border-color: var(--bgm-teal-700);
-        background:   var(--bgm-teal-050);
-    }
-}
-
-.mai-calendar__day-header {
-    display:         flex;
-    flex-direction:  column;
-    align-items:     center;
-    padding:         var(--space-sm);
-    background:      var(--color-surface);
-    border-block-end: 1px solid var(--bgm-line-2);
-}
-
-.mai-calendar__weekday-name {
-    font-size:         var(--font-size-xs);
-    font-weight:       var(--font-weight-semibold);
-    letter-spacing:    var(--tracking-wide);
-    text-transform:    uppercase;
-    color:             var(--bgm-ink-3);
-}
-
-.mai-calendar__day-number {
-    font-size:   var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    color:       var(--bgm-teal-900);
-}
-
-.mai-calendar__day-events {
-    padding: var(--space-sm);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
 }
 
 } // @layer theme-organisms
