@@ -43,7 +43,7 @@ return (new Table($lang('item.slide')))
     ->addColumn(
         'bodytext',
         $lang('item.bodytext'),
-        (new TextConfig())->setRows(4)->setCols(60)
+        (new TextConfig())->setRows(4)->setCols(60)->enableRte()
     )
     ->addColumn(
         'link',
