@@ -2,8 +2,8 @@
 // 06-organisms/_member.scss
 //
 // Styles for the mai_member plugin (Member/List + Application/Form).
-// Reuses the BGM card language established in _team.scss — member cards are
-// the same shape as team cards, minus the role line.
+// Reuses the BGM card language established in _team.scss — member cards share
+// the same shape as team cards, including an optional position line.
 // =============================================================================
 
 @import "../02-mixins/media-breakpoint";
@@ -63,6 +63,18 @@
             outline-offset: 2px;
         }
     }
+}
+
+.mai-member-list__position {
+    margin:    0;
+    font-size: var(--font-size-sm);
+    color:     var(--bgm-ink-3);
+}
+
+.mai-member-detail__position {
+    margin:      0;
+    font-size:   var(--font-size-md);
+    color:       var(--bgm-ink-3);
 }
 
 .mai-member-list__email {
