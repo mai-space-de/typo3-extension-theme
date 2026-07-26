@@ -284,9 +284,13 @@ new Field("tt_content", "tx_maitheme_accent", $lang("field.accent"))
 
 // ── Per-CType specific fields ─────────────────────────────────────────────────
 
-// Icon element
+// Icon element / Featurebox
 new Field("tt_content", "tx_maitheme_icon_identifier", $lang("field.icon_identifier"))
-    ->setConfig((new InputConfig())->setSize(40)->setEval("trim"))
+    ->setConfig(
+        (new SelectSingleConfig())
+            ->setItems(\Maispace\MaiTheme\Icon\ContentIconCatalog::tcaItems())
+            ->setDefault('')
+    )
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_icon_size", $lang("field.icon_size"))

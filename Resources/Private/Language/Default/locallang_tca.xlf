@@ -143,6 +143,27 @@
             <trans-unit id="field.icon_size">
                 <source>Icon Size</source>
             </trans-unit>
+            <trans-unit id="icon.map_pin"><source>Map pin</source></trans-unit>
+            <trans-unit id="icon.hand_heart"><source>Hand with heart</source></trans-unit>
+            <trans-unit id="icon.user"><source>User</source></trans-unit>
+            <trans-unit id="icon.user_circle"><source>User circle</source></trans-unit>
+            <trans-unit id="icon.users_three"><source>Users</source></trans-unit>
+            <trans-unit id="icon.calendar_blank"><source>Calendar</source></trans-unit>
+            <trans-unit id="icon.chat_circle"><source>Chat</source></trans-unit>
+            <trans-unit id="icon.book_open"><source>Book</source></trans-unit>
+            <trans-unit id="icon.house"><source>House</source></trans-unit>
+            <trans-unit id="icon.globe"><source>Globe</source></trans-unit>
+            <trans-unit id="icon.envelope_simple"><source>Envelope</source></trans-unit>
+            <trans-unit id="icon.newspaper"><source>Newspaper</source></trans-unit>
+            <trans-unit id="icon.download_simple"><source>Download</source></trans-unit>
+            <trans-unit id="icon.question"><source>Question</source></trans-unit>
+            <trans-unit id="icon.heart"><source>Heart</source></trans-unit>
+            <trans-unit id="icon.flower"><source>Flower</source></trans-unit>
+            <trans-unit id="icon.check_circle"><source>Check</source></trans-unit>
+            <trans-unit id="icon.info"><source>Info</source></trans-unit>
+            <trans-unit id="icon.warning_circle"><source>Warning</source></trans-unit>
+            <trans-unit id="icon.star"><source>Star</source></trans-unit>
+            <trans-unit id="icon.phone"><source>Phone</source></trans-unit>
             <trans-unit id="field.divider_style">
                 <source>Divider Style</source>
             </trans-unit>

@@ -702,6 +702,14 @@
     color:              var(--featurebox-icon);
 }
 
+.mai-featurebox__icon {
+    display: block;
+    width:   1em;
+    height:  1em;
+    color:   inherit;
+    fill:    currentColor;
+}
+
 .mai-featurebox__content {
     display:        flex;
     flex-direction: column;
@@ -2181,6 +2189,14 @@
     display:   flex;
     font-size: inherit;
     color:     inherit;
+}
+
+.mai-icon__svg {
+    display: block;
+    width:   1em;
+    height:  1em;
+    color:   inherit;
+    fill:    currentColor;
 }
 
 .mai-icon__label {

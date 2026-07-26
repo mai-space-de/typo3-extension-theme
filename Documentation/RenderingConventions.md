@@ -247,24 +247,25 @@ Background mode (`type=background`) automatically emits a silent looped
 `<video>`. Facade modes (YouTube/Vimeo) emit a poster image + play button and
 only load the iframe on click — the recommended performance pattern.
 
-### SVG icon (not yet wired — needs your call)
+### SVG icon (Featurebox / Icon CE)
 
-`mai:svg.icon` requires both `identifier` AND a `source` EXT: path. The current
-`tx_maitheme_icon_identifier` text field doesn't carry the source path. Pick a
-convention before fleshing out the Icon CE template:
+Editors pick from a curated Phosphor-fill set via `tx_maitheme_icon_identifier`
+(select with backend icons). Files live in
+`EXT:mai_theme/Resources/Public/Icons/Content/{identifier}.svg` and are registered
+in `Configuration/Icons.php` through `ContentIconCatalog`.
 
-1. **Theme-owned sprite** — editor picks from a dropdown; theme ships
-   `EXT:mai_theme/Resources/Public/Icons/*.svg`; template derives
-   `source="EXT:mai_theme/Resources/Public/Icons/{identifier}.svg"`. Needs an
-   `itemsProcFunc` on the TCA select to auto-populate from the directory.
-2. **Editor-uploaded** — swap the identifier field for a FAL `svg` file upload;
-   template passes the uploaded file's path as `source`. Needs a VH tweak or
-   a helper that extracts the filesystem path from the FAL reference.
-3. **Free text + known convention** — keep the current text field; document
-   that `identifier` is a filename stem under `Resources/Public/Icons/`; same
-   template derivation as (1) but editors type the name manually.
+Templates render via `<mai:svg.icon>` into the shared SVG sprite:
 
-Option (1) is the best UX; (3) is the smallest change.
+```html
+<mai:svg.icon
+    identifier="mai-theme-content-{data.tx_maitheme_icon_identifier}"
+    source="EXT:mai_theme/Resources/Public/Icons/Content/{data.tx_maitheme_icon_identifier}.svg"
+    class="mai-featurebox__icon"
+    size="1em"/>
+```
+
+To add an icon: drop the SVG into `Icons/Content/`, add it to
+`ContentIconCatalog::ICONS`, and add a `icon.*` label in `locallang_tca.xlf`.
 
 ### Known gaps to fix when this pattern gets exercised for real
 

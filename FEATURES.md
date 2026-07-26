@@ -246,6 +246,10 @@ Shared page UID settings forwarded to all content elements via
 `maispace_testimonial`, `maispace_quote`, `maispace_logo`, `maispace_logoshowcase`,
 `maispace_statistic`, `maispace_badge`, `maispace_contactinfo`
 
+* Content icons — Featurebox / Icon CEs use a curated Phosphor-fill SVG select
+  (`tx_maitheme_icon_identifier`); backend shows icons via Icon API; frontend
+  renders through `<mai:svg.icon>` sprite (`ContentIconCatalog`)
+
 **Widgets (8 CTypes + aliases)**
 
 `maispace_textmedia` (dedicated processor: `image` field, variable `image`);

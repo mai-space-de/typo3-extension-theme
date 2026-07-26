@@ -1,5 +1,13 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
       data-namespace-typo3-fluid="true">
-<mai:icon identifier="{identifier}" class="mai-icon {class}"/>
+<f:if condition="{identifier}">
+    <mai:svg.icon
+        identifier="mai-theme-content-{identifier}"
+        source="EXT:mai_theme/Resources/Public/Icons/Content/{identifier}.svg"
+        class="mai-icon {class}"
+        size="{f:if(condition: size, then: size, else: '1em')}"
+        label="{label}"
+    />
+</f:if>
 </html>
