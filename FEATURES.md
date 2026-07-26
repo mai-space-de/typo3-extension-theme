@@ -223,6 +223,11 @@ All custom CTypes follow a single rendering base: `lib.contentElement`.
 | 14 | `tx_maitheme_image_before` | `{imageBefore}` |
 | 15 | `tx_maitheme_image_after` | `{imageAfter}` |
 
+Templates must use the Fluid variable that matches the TCA field
+(`addDefaultImageTab` / `image` → `{images}`; `addDefaultMediaTab` /
+`assets` → `{assets}`). Using the wrong variable renders an empty
+media slot even when a file is attached.
+
 Shared page UID settings forwarded to all content elements via
 `lib.contentElement.settings.pids.*`.
 

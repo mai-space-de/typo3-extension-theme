@@ -2,14 +2,14 @@
 <figure class="mai-image{f:if(condition: data.tx_maitheme_alignment, then: ' mai-image--{data.tx_maitheme_alignment}')}"
         data-ce-uid="{data.uid}"
         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
-    <f:if condition="{assets}">
-        <f:image image="{assets.0}"
-                 alt="{assets.0.properties.alternative}"
-                 title="{assets.0.properties.title}"
+    <f:if condition="{images}">
+        <f:image image="{images.0}"
+                 alt="{images.0.properties.alternative}"
+                 title="{images.0.properties.title}"
                  class="mai-image__img"
                  loading="lazy"/>
-        <f:if condition="{assets.0.properties.description}">
-            <figcaption class="mai-image__caption">{assets.0.properties.description}</figcaption>
+        <f:if condition="{images.0.properties.description}">
+            <figcaption class="mai-image__caption">{images.0.properties.description}</figcaption>
         </f:if>
     </f:if>
 </figure>

@@ -7,10 +7,10 @@
 <section class="mai-banner"
          data-ce-uid="{data.uid}"
          {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
-    <f:if condition="{assets}">
+    <f:if condition="{images}">
         <div class="mai-banner__media">
-            <mai:image.picture image="{assets.0}"
-                               alt="{assets.0.properties.alternative}"
+            <mai:image.picture image="{images.0}"
+                               alt="{images.0.properties.alternative}"
                                elementUid="{data.uid}"
                                critical="auto"
                                width="1600"

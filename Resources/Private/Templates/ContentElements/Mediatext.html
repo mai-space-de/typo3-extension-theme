@@ -5,10 +5,10 @@
 <div class="mai-mediatext mai-mediatext--{f:if(condition: data.tx_maitheme_media_position, then: data.tx_maitheme_media_position, else: 'right')}"
      data-ce-uid="{data.uid}"
      {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
-    <f:if condition="{assets}">
+    <f:if condition="{images}">
         <div class="mai-mediatext__media">
-            <f:image image="{assets.0}"
-                     alt="{assets.0.properties.alternative}"
+            <f:image image="{images.0}"
+                     alt="{images.0.properties.alternative}"
                      class="mai-mediatext__image"
                      loading="lazy"/>
         </div>

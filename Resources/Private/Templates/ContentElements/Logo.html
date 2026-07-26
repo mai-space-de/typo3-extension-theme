@@ -2,19 +2,19 @@
 <section class="mai-logo"
          data-ce-uid="{data.uid}"
          {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
-    <f:if condition="{assets}">
+    <f:if condition="{images}">
         <f:if condition="{data.tx_maitheme_link}">
             <f:then>
                 <f:link.typolink parameter="{data.tx_maitheme_link}" class="mai-logo__link">
-                    <f:image image="{assets.0}"
-                             alt="{assets.0.properties.alternative}"
+                    <f:image image="{images.0}"
+                             alt="{images.0.properties.alternative}"
                              class="mai-logo__img"
                              loading="lazy"/>
                 </f:link.typolink>
             </f:then>
             <f:else>
-                <f:image image="{assets.0}"
-                         alt="{assets.0.properties.alternative}"
+                <f:image image="{images.0}"
+                         alt="{images.0.properties.alternative}"
                          class="mai-logo__img"
                          loading="lazy"/>
             </f:else>

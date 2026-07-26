@@ -5,10 +5,10 @@
 <article class="mai-profile"
          data-ce-uid="{data.uid}"
          {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
-    <f:if condition="{assets}">
+    <f:if condition="{images}">
         <div class="mai-profile__media">
-            <f:image image="{assets.0}"
-                     alt="{assets.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: data.header)}"
+            <f:image image="{images.0}"
+                     alt="{images.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: data.header)}"
                      class="mai-profile__avatar"
                      width="160"
                      height="160"

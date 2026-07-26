@@ -7,9 +7,9 @@
     <f:if condition="{header}">
         <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-logoshowcase__title'}"/>
     </f:if>
-    <f:if condition="{assets}">
+    <f:if condition="{images}">
         <ul class="mai-logoshowcase__grid">
-            <f:for each="{assets}" as="file">
+            <f:for each="{images}" as="file">
                 <li class="mai-logoshowcase__item">
                     <f:image image="{file}"
                              alt="{file.properties.alternative}"
