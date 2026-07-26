@@ -8,8 +8,12 @@
 </f:comment>
 <div class="mai-mediatext mai-mediatext--{f:if(condition: '{mediaPosition} == 25', then: 'right', else: 'left')}">
     <f:if condition="{image}">
+        <f:variable name="imageAlt" value="{title}" />
+        <f:if condition="{image.properties.alternative}">
+            <f:variable name="imageAlt" value="{image.properties.alternative}" />
+        </f:if>
         <div class="mai-mediatext__media">
-            <f:render partial="Atom/Image" arguments="{image: image, alt: image.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: title)}"/>
+            <f:render partial="Atom/Image" arguments="{image: image, alt: imageAlt}"/>
         </div>
     </f:if>
     <div class="mai-mediatext__content">
