@@ -13,8 +13,9 @@ new CType('maispace_textmedia', 'LLL:EXT:mai_theme/Resources/Private/Language/De
     ->addCustomFields('bodytext, image, imageorient, imagewidth')
     // TYPO3 14: bodytext has no RTE by default — must enable via columnsOverrides.
     ->addColumnOverride('bodytext', ['config' => ['enableRichtext' => true]])
-    // This component only renders a genuine two-column layout (Molecule/MediaText),
-    // so only the two core "beside text" imageorient values apply here.
+    // With media this is a two-column layout (Molecule/MediaText); without media
+    // the frontend collapses to one column. Only the two core "beside text"
+    // imageorient values apply when an image is present.
     ->addColumnOverride('imageorient', [
         'config' => [
             'items' => [

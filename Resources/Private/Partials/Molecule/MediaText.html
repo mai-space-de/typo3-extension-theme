@@ -1,8 +1,8 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:comment>
-    mediaPosition is the raw TYPO3 core `imageorient` value. This component only
-    supports a genuine two-column layout, which maps to the two "beside text"
-    core options: 25 (image right) and 26 (image left). Other legacy
+    mediaPosition is the raw TYPO3 core `imageorient` value. With media this is
+    a two-column layout: 25 (image right) and 26 (image left). Without an image
+    the media column is omitted and CSS collapses to one column. Other legacy
     imageorient values (stacked/in-text) aren't representable here and fall
     back to --left.
 </f:comment>
@@ -17,7 +17,7 @@
             <f:render partial="Atom/Heading" arguments="{level: 2, text: title, class: 'mai-mediatext__title'}"/>
         </f:if>
         <f:if condition="{text}">
-            <div class="mai-mediatext__body">{text -> f:format.html()}</div>
+            <div class="mai-mediatext__body">{text}</div>
         </f:if>
     </div>
 </div>

@@ -4,6 +4,6 @@
 <section class="mai-textmedia-wrapper"
          data-ce-uid="{data.uid}"
          {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
-    <f:render partial="Molecule/MediaText" arguments="{title: data.header, text: data.bodytext, image: data.image.0, mediaPosition: data.imageorient}"/>
+    <f:render partial="Molecule/MediaText" arguments="{title: header, text: bodytext, image: image.0, mediaPosition: data.imageorient}"/>
 </section>
 </html>

@@ -1019,7 +1019,8 @@
 // Modifiers: --left (default; media first) / --right (media flips to the
 // end via order). Two content elements share this class: TextMedia (via
 // Molecule/MediaText, mapped from imageorient) and Mediatext (native
-// tx_maitheme_media_position field) — both always emit one of the two.
+// tx_maitheme_media_position field). Without a media child the grid
+// collapses to a single column so text alone does not leave an empty lane.
 // ---------------------------------------------------------------------------
 .mai-mediatext {
     display:        grid;
@@ -1034,6 +1035,10 @@
 
             .mai-mediatext__media { order: 2; }
             .mai-mediatext__content { order: 1; }
+        }
+
+        &:not(:has(.mai-mediatext__media)) {
+            grid-template-columns: 1fr;
         }
     }
 }

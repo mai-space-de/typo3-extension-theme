@@ -262,7 +262,8 @@ empty = current page) via `MenuProcessor` (`special = directory`) as a
 
 **Widgets (8 CTypes + aliases)**
 
-`maispace_textmedia` (dedicated processor: `image` field, variable `image`);
+`maispace_textmedia` (dedicated processor: `image` field, variable `image`;
+template uses `image.0`; two-column only when media is present);
 `maispace_accordion` (loads `tx_maitheme_accordion_item` children ordered by `sort`);
 `maispace_faq` / `maispace_steps` alias `maispace_accordion` processor;
 `maispace_slider` (loads `tx_maitheme_slider_item` with nested `FilesProcessor`);
