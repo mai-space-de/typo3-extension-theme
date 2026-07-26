@@ -313,9 +313,14 @@ body.mai-offcanvas-open {
     list-style: none;
     position:   relative;
 
+    // Mobile / compact: flex row so the link fills remaining width and the
+    // disclosure toggle stays pinned to the trailing edge of the same row.
+    // flex-wrap lets the submenu drop onto a full-width second row.
     @include nav-collapsed {
-        display: block;
-        width:   100%;
+        display:     flex;
+        flex-wrap:   wrap;
+        align-items: stretch;
+        width:       100%;
     }
 }
 
@@ -323,7 +328,7 @@ body.mai-offcanvas-open {
     display: inline-block;
 
     @include nav-collapsed {
-        display: block;
+        display: flex;
     }
 }
 
@@ -368,6 +373,25 @@ body.mai-offcanvas-open {
         border-block-end-color: var(--nav-active-border);
         background-color: transparent;
     }
+
+    // Mobile / compact: occupy remaining row width beside the toggle
+    @include nav-collapsed {
+        flex:          1 1 0;
+        min-width:     0;
+        display:       flex;
+        white-space:   normal;
+        padding-block: var(--space-3, 12px);
+        padding-inline: var(--space-3, 12px);
+        border-radius: 0;
+    }
+}
+
+// Items without a disclosure button: link takes the full row
+@include nav-collapsed {
+    .mai-menubar__item:not(.has-submenu) > .mai-menubar__link {
+        flex:  1 1 100%;
+        width: 100%;
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -401,9 +425,26 @@ body.mai-offcanvas-open {
         background-color: var(--bgm-teal-100, #d8e6e6);
         color:            var(--bgm-teal-900, #0e3f3f);
     }
+
+    // Mobile / compact: ≥44×44 touch target, static so it stays aligned
+    // with the parent link row even when the submenu below is open.
+    @include nav-collapsed {
+        flex:            0 0 auto;
+        align-self:      stretch;
+        position:        static;
+        inset:           auto;
+        transform:       none;
+        margin:          0;
+        min-width:       2.75rem;
+        min-height:      2.75rem;
+        padding:         var(--space-3, 12px);
+        border-radius:   0;
+    }
 }
 
-// Nested submenu toggles sit at the right edge of the row
+// Nested submenu toggles sit at the right edge of the row (desktop fly-outs).
+// On mobile this absolute + 50% vertical centering is wrong: once the nested
+// submenu opens, the <li> grows and the toggle drifts to mid-children.
 .mai-menubar__submenu .mai-menubar__toggle {
     position:          absolute;
     inset-inline-end:  var(--space-1, 4px);
@@ -411,6 +452,13 @@ body.mai-offcanvas-open {
     transform:         translateY(-50%);
     margin:            0;
     padding:           var(--space-1, 4px) var(--space-2, 8px);
+
+    @include nav-collapsed {
+        position:  static;
+        inset:     auto;
+        transform: none;
+        padding:   var(--space-3, 12px);
+    }
 }
 
 // Submenu links: block-level, full-width
@@ -437,6 +485,14 @@ body.mai-offcanvas-open {
         border-inline-start-color: var(--nav-active-border);
         border-block-end:          none;
     }
+
+    // Mobile: share the row with the disclosure toggle (not width:100%)
+    @include nav-collapsed {
+        width:          auto;
+        flex:           1 1 0;
+        padding-block:  var(--space-3, 12px);
+        padding-inline: var(--space-3, 12px) var(--space-2, 8px);
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -445,15 +501,29 @@ body.mai-offcanvas-open {
 .mai-menubar__arrow {
     fill:        currentcolor;
     flex-shrink: 0;
+
+    @include nav-collapsed {
+        width:  14px;
+        height: auto;
+    }
 }
 
 .mai-menubar__arrow--down {
     margin-inline-start: var(--space-1, 4px);
     transition: transform var(--duration-base, 200ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
+
+    @include nav-collapsed {
+        margin-inline-start: 0;
+    }
 }
 
 .mai-menubar__arrow--right {
     transition: transform var(--duration-base, 200ms) var(--easing-standard, cubic-bezier(0.2,0,0.2,1));
+
+    @include nav-collapsed {
+        width:  10px;
+        height: 14px;
+    }
 }
 
 .mai-menubar__toggle[aria-expanded="true"] {
@@ -500,7 +570,8 @@ body.mai-offcanvas-open {
         display: none;
     }
 
-    // Mobile: static, full-width, inset teal left border (accordion-style)
+    // Mobile: static, full-width, inset teal left border (accordion-style).
+    // flex-basis 100% forces a new row under the link+toggle pair.
     @include nav-collapsed {
         position:   static;
         box-shadow: none;
@@ -508,6 +579,7 @@ body.mai-offcanvas-open {
         border-inline-start: 3px solid var(--bgm-teal-700, #1f6e6e);
         padding:    0 0 0 var(--space-3, 12px);
         min-width:  0;
+        flex:       1 1 100%;
         width:      100%;
     }
 }
@@ -521,6 +593,13 @@ body.mai-offcanvas-open {
     inset-inline-start:  100%;
     inset-inline-end:    auto;
     margin-inline-start: var(--space-1, 4px);
+
+    // Mobile accordion: cancel fly-out insets so the panel stays in normal flow
+    @include nav-collapsed {
+        inset:               auto;
+        margin-inline-start: 0;
+        margin-inline-end:   0;
+    }
 }
 
 // ---------------------------------------------------------------------------

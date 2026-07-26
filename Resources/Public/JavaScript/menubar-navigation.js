@@ -186,15 +186,54 @@ class DisclosureNavigation {
     // Close on outside click
     document.addEventListener('pointerdown', this._boundOnDocumentPointerdown, true);
 
-    // Hover behaviour for top-level items on pointer-capable devices
-    const supportsHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
-    if (supportsHover) {
-      root.querySelectorAll('.mai-menubar > .mai-menubar__item.has-submenu').forEach(li => {
-        li.addEventListener('pointerenter', this._boundOnTopItemPointerenter);
-        li.addEventListener('pointerleave', this._boundOnTopItemPointerleave);
-        this._listenerHoverItems.push(li);
-      });
+    // Hover behaviour for top-level items on pointer-capable devices —
+    // desktop horizontal menubar only. In collapsed / offcanvas mode a
+    // pointerenter would open the disclosure and the subsequent click on
+    // the same toggle would immediately close it again (hover/click fight),
+    // so second-level items appear impossible to open in DevTools responsive
+    // mode and on hover-capable tablets.
+    this._hoverMq = window.matchMedia
+      ? window.matchMedia('(hover: hover) and (min-width: 768px)')
+      : null;
+    this._boundSyncHoverListeners = this.syncHoverListeners.bind(this);
+    this.syncHoverListeners();
+    if (this._hoverMq) {
+      if (this._hoverMq.addEventListener) {
+        this._hoverMq.addEventListener('change', this._boundSyncHoverListeners);
+      } else if (this._hoverMq.addListener) {
+        this._hoverMq.addListener(this._boundSyncHoverListeners);
+      }
     }
+  }
+
+  /**
+   * True when the menubar is shown as the mobile/compact offcanvas accordion.
+   * Hover-open must stay off in that mode.
+   */
+  isCollapsedMode() {
+    if (window.matchMedia('(max-width: 767px)').matches) return true;
+    const header = this.root.closest('.site-header');
+    return header?.getAttribute('data-nav-mode') === 'compact';
+  }
+
+  syncHoverListeners() {
+    this._removeHoverListeners();
+    const wantsHover = this._hoverMq && this._hoverMq.matches && !this.isCollapsedMode();
+    if (!wantsHover) return;
+
+    this.root.querySelectorAll('.mai-menubar > .mai-menubar__item.has-submenu').forEach(li => {
+      li.addEventListener('pointerenter', this._boundOnTopItemPointerenter);
+      li.addEventListener('pointerleave', this._boundOnTopItemPointerleave);
+      this._listenerHoverItems.push(li);
+    });
+  }
+
+  _removeHoverListeners() {
+    this._listenerHoverItems.forEach(li => {
+      li.removeEventListener('pointerenter', this._boundOnTopItemPointerenter);
+      li.removeEventListener('pointerleave', this._boundOnTopItemPointerleave);
+    });
+    this._listenerHoverItems = [];
   }
 
   /**
@@ -206,11 +245,14 @@ class DisclosureNavigation {
     this.root.removeEventListener('keydown', this._boundOnRootKeydown);
     document.removeEventListener('pointerdown', this._boundOnDocumentPointerdown, true);
 
-    this._listenerHoverItems.forEach(li => {
-      li.removeEventListener('pointerenter', this._boundOnTopItemPointerenter);
-      li.removeEventListener('pointerleave', this._boundOnTopItemPointerleave);
-    });
-    this._listenerHoverItems = [];
+    if (this._hoverMq) {
+      if (this._hoverMq.removeEventListener) {
+        this._hoverMq.removeEventListener('change', this._boundSyncHoverListeners);
+      } else if (this._hoverMq.removeListener) {
+        this._hoverMq.removeListener(this._boundSyncHoverListeners);
+      }
+    }
+    this._removeHoverListeners();
 
     this.toggles = [];
     this.root = null;
@@ -251,6 +293,7 @@ class DisclosureNavigation {
   }
 
   onTopItemPointerenter(event) {
+    if (this.isCollapsedMode()) return;
     const li = event.currentTarget;
     const btn = li.querySelector(':scope > .mai-menubar__toggle');
     const toggle = btn ? this.toggleFor(btn) : null;
@@ -260,6 +303,7 @@ class DisclosureNavigation {
   }
 
   onTopItemPointerleave(event) {
+    if (this.isCollapsedMode()) return;
     const li = event.currentTarget;
     const btn = li.querySelector(':scope > .mai-menubar__toggle');
     const toggle = btn ? this.toggleFor(btn) : null;
