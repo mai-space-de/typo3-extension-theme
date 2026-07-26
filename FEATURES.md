@@ -116,7 +116,7 @@ Boolean settings that activate or suppress individual CType registrations at
 |---|---|
 | `elements.core.disableAll` | Suppress all TYPO3 built-in CTypes (default: `true`) |
 | `elements.basic.*` | text, heading, richtext, image, video, audio, button, linklist, icon, divider, breadcrumb, socialmedia, embed, spacer, callout, iconlist, textcolumns |
-| `elements.page.*` | hero, banner, cta, mediatext |
+| `elements.page.*` | hero, banner, cta, subpages, mediatext |
 | `elements.components.*` | card, teaser, featurebox, profile, testimonial, quote, logo, logoshowcase, statistic, badge, contactinfo |
 | `elements.widgets.*` | slider, accordion, tabs, modal, timeline, faq, beforeafter, steps |
 | `elements.forms.*` | form, newsletter, map |
@@ -241,9 +241,14 @@ Shared page UID settings forwarded to all content elements via
 `maispace_breadcrumb`, `maispace_socialmedia`, `maispace_callout`,
 `maispace_iconlist`, `maispace_textcolumns`
 
-**Page (4 CTypes)**
+**Page (5 CTypes)**
 
-`maispace_hero`, `maispace_banner`, `maispace_cta`, `maispace_mediatext`
+`maispace_hero`, `maispace_banner`, `maispace_cta`, `maispace_subpages`,
+`maispace_mediatext`
+
+`maispace_subpages` lists child pages of an optional parent (`pages` field;
+empty = current page) via `MenuProcessor` (`special = directory`) as a
+2-up offer-card grid (title, abstract, media, link).
 
 **Components (11 CTypes)**
 

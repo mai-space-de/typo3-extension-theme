@@ -74,6 +74,7 @@ final class ContentElementCatalogTest extends TestCase
             'Cta'          => ['Cta'],
             'Hero'         => ['Hero'],
             'Mediatext'    => ['Mediatext'],
+            'Subpages'     => ['Subpages'],
 
             // Components group ─────────────────────────────────────────────────
             'Badge'        => ['Badge'],

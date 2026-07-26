@@ -128,6 +128,27 @@ tt_content {
     maispace_banner.templateName = Banner
     maispace_cta < lib.contentElement
     maispace_cta.templateName = Cta
+    maispace_subpages < lib.contentElement
+    maispace_subpages {
+        templateName = Subpages
+        dataProcessing.90 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        dataProcessing.90 {
+            special = directory
+            special.value.field = pages
+            special.value.ifEmpty.data = TSFE:id
+            levels = 1
+            includeSpacer = 0
+            excludeDoktypes = 199,254
+            as = subpages
+            dataProcessing {
+                10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+                10 {
+                    references.fieldName = media
+                    as = media
+                }
+            }
+        }
+    }
     maispace_mediatext < lib.contentElement
     maispace_mediatext.templateName = Mediatext
 

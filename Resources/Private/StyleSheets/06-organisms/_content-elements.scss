@@ -751,6 +751,51 @@
 
 
 // ---------------------------------------------------------------------------
+// Subpages — automatic offer-card grid (menu_subpages theme interpretation)
+// 1-up mobile, 2-up from sm — same rhythm as featureboxes in a BentoBox.
+// ---------------------------------------------------------------------------
+.mai-subpages {
+    display:        flex;
+    flex-direction: column;
+    gap:             var(--space-xl);
+}
+
+.mai-subpages__header {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--space-sm);
+}
+
+.mai-subpages__title {
+    margin: 0;
+}
+
+.mai-subpages__subtitle {
+    margin:      0;
+    font-size:   var(--font-size-base);
+    color:       var(--bgm-ink-2);
+}
+
+.mai-subpages__grid {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                    var(--space-xl) var(--space-lg);
+
+    @include bp-up(sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.mai-subpages__item {
+    height: 100%;
+
+    .button {
+        align-self: flex-start;
+    }
+}
+
+
+// ---------------------------------------------------------------------------
 // Statistic — large number + label, standalone or in a grid row
 // ---------------------------------------------------------------------------
 .mai-statistic {

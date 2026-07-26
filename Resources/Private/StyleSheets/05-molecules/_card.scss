@@ -176,4 +176,34 @@
     flex:        1 1 auto;
 }
 
+// Subpage cards omit the icon badge — drop badge bleed margins/padding.
+.offer-card:not(:has(.offer-card__badge)) {
+    margin-block-start:  0;
+    margin-inline-start: 0;
+    padding-block-start: var(--space-lg);
+}
+
+.offer-card--has-media {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.offer-card__media {
+    overflow: hidden;
+}
+
+.offer-card__image {
+    display:      block;
+    width:        100%;
+    height:       auto;
+    aspect-ratio: 16 / 9;
+    object-fit:   cover;
+}
+
+.offer-card--has-media .offer-card__body {
+    padding: var(--space-lg);
+}
+
 }

@@ -603,6 +603,11 @@ settings:
     type: bool
     category: elements.page
 
+  elements.page.subpages:
+    default: true
+    type: bool
+    category: elements.page
+
   elements.page.mediatext:
     default: true
     type: bool

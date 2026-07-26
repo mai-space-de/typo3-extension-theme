@@ -846,6 +846,14 @@
                 <source>Enable the call-to-action element (maispace_cta).</source>
                 <target>Call-to-Action-Element aktivieren (maispace_cta).</target>
             </trans-unit>
+            <trans-unit id="settings.elements.page.subpages">
+                <source>Subpage Cards</source>
+                <target>Unterseiten-Karten</target>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.page.subpages">
+                <source>Enable the subpage offer-card grid element (maispace_subpages).</source>
+                <target>Unterseiten-Offer-Card-Grid aktivieren (maispace_subpages).</target>
+            </trans-unit>
             <trans-unit id="settings.elements.page.mediatext">
                 <source>Media &amp; Text</source>
                 <target>Medien &amp; Text</target>

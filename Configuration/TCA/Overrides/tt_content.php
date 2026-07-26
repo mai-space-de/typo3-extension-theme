@@ -813,6 +813,27 @@ new CType("maispace_cta", $lang("ctype.cta"), "content-special-html")
     ->setGroup('maispace_page')
     ->register();
 
+new CType("maispace_subpages", $lang("ctype.subpages"), "content-menu-pages")
+    ->addDefaultHeaderPalette()
+    ->addSubheaderField()
+    ->addCustomFields('pages')
+    ->addColumnOverride('pages', [
+        'label' => $lang('field.subpages_parent'),
+        'description' => $lang('field.subpages_parent.description'),
+        'config' => [
+            'type' => 'group',
+            'allowed' => 'pages',
+            'size' => 1,
+            'maxitems' => 1,
+            'minitems' => 0,
+        ],
+    ])
+    ->addCustomFields($sharedTabs)
+    ->addDefaultLanguageTab()
+    ->addDefaultAccessTab()
+    ->setGroup('maispace_page')
+    ->register();
+
 new CType("maispace_mediatext", $lang("ctype.mediatext"), "content-textmedia")
     ->addDefaultHeaderPalette()
     ->addSubheaderField()

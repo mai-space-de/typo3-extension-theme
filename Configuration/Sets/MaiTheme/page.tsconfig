@@ -103,6 +103,10 @@ mod.wizards.newContentElement.wizardItems.maispace_page.elements.maispace_banner
 mod.wizards.newContentElement.wizardItems.maispace_page.elements.maispace_cta.disabled = 1
 [END]
 
+[{$elements.page.subpages} == 0]
+mod.wizards.newContentElement.wizardItems.maispace_page.elements.maispace_subpages.disabled = 1
+[END]
+
 [{$elements.page.mediatext} == 0]
 mod.wizards.newContentElement.wizardItems.maispace_page.elements.maispace_mediatext.disabled = 1
 [END]

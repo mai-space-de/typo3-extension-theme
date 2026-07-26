@@ -151,6 +151,13 @@ mod.wizards.newContentElement.wizardItems {
                     CType = maispace_cta
                 }
             }
+            maispace_subpages {
+                iconIdentifier = content-menu-pages
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.subpages
+                tt_content_defValues {
+                    CType = maispace_subpages
+                }
+            }
             maispace_mediatext {
                 iconIdentifier = content-textmedia
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.mediatext

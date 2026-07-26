@@ -640,6 +640,12 @@
             <trans-unit id="settings.description.elements.page.cta">
                 <source>Enable the call-to-action element (maispace_cta).</source>
             </trans-unit>
+            <trans-unit id="settings.elements.page.subpages">
+                <source>Subpage Cards</source>
+            </trans-unit>
+            <trans-unit id="settings.description.elements.page.subpages">
+                <source>Enable the subpage offer-card grid element (maispace_subpages).</source>
+            </trans-unit>
             <trans-unit id="settings.elements.page.mediatext">
                 <source>Media &amp; Text</source>
             </trans-unit>

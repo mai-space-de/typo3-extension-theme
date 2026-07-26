@@ -1,0 +1,70 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    Subpage offer-card grid (theme interpretation of menu_subpages).
+
+    Data: MenuProcessor special=directory → {subpages}
+    Parent: tt_content.pages, or current page when empty.
+
+    Each item: title, link, data.abstract, media (FilesProcessor).
+</f:comment>
+<f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
+<f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
+
+<f:if condition="{subpages}">
+    <section class="mai-subpages"
+             data-ce-uid="{data.uid}"
+             {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
+        <f:if condition="{header}">
+            <header class="mai-subpages__header">
+                <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-subpages__title'}"/>
+                <f:if condition="{subheader}">
+                    <p class="mai-subpages__subtitle">{subheader}</p>
+                </f:if>
+            </header>
+        </f:if>
+
+        <div class="mai-subpages__grid" role="list">
+            <f:for each="{subpages}" as="item" iteration="iterator">
+                <f:if condition="{item.spacer} == 0">
+                    <f:variable name="cardClass" value="offer-card"/>
+                    <f:if condition="{iterator.isOdd}">
+                        <f:variable name="cardClass" value="offer-card offer-card--gold"/>
+                    </f:if>
+                    <f:if condition="{item.media.0}">
+                        <f:variable name="cardClass" value="{cardClass} offer-card--has-media"/>
+                    </f:if>
+
+                    <article class="mai-subpages__item {cardClass}" role="listitem">
+                        <f:if condition="{item.media.0}">
+                            <div class="offer-card__media">
+                                <f:image image="{item.media.0}"
+                                         alt="{f:if(condition: item.media.0.properties.alternative, then: item.media.0.properties.alternative, else: item.title)}"
+                                         class="offer-card__image"
+                                         loading="lazy"/>
+                            </div>
+                        </f:if>
+
+                        <div class="offer-card__body">
+                            <f:if condition="{item.title}">
+                                <h3 class="offer-card__title">{item.title}</h3>
+                            </f:if>
+
+                            <f:if condition="{item.data.abstract}">
+                                <div class="offer-card__text">{item.data.abstract -> f:format.nl2br()}</div>
+                            </f:if>
+
+                            <f:if condition="{item.link}">
+                                <a href="{item.link}"
+                                   class="button{f:if(condition: iterator.isOdd, then: ' button-secondary')}"
+                                   {f:if(condition: item.target, then: 'target="{item.target}"')}>
+                                    Mehr erfahren
+                                </a>
+                            </f:if>
+                        </div>
+                    </article>
+                </f:if>
+            </f:for>
+        </div>
+    </section>
+</f:if>
+</html>

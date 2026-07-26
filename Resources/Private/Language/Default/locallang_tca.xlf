@@ -452,8 +452,11 @@
             <trans-unit id="ctype.hero"><source>Hero</source></trans-unit>
             <trans-unit id="ctype.banner"><source>Banner</source></trans-unit>
             <trans-unit id="ctype.cta"><source>Call to Action</source></trans-unit>
+            <trans-unit id="ctype.subpages"><source>Subpage Cards</source></trans-unit>
             <trans-unit id="ctype.mediatext"><source>Media &amp; Text</source></trans-unit>
             <trans-unit id="ctype.textmedia"><source>Text &amp; Media</source></trans-unit>
+            <trans-unit id="field.subpages_parent"><source>Parent page</source></trans-unit>
+            <trans-unit id="field.subpages_parent.description"><source>Leave empty to list subpages of the current page.</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — CARDS & COMPONENTS
