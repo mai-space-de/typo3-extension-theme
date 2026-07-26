@@ -752,7 +752,7 @@
 
 // ---------------------------------------------------------------------------
 // Subpages — automatic offer-card grid (menu_subpages theme interpretation)
-// 1-up mobile, 2-up from sm — same rhythm as featureboxes in a BentoBox.
+// auto-fit columns: as many ≥15rem tiles as the container allows.
 // ---------------------------------------------------------------------------
 .mai-subpages {
     display:        flex;
@@ -778,12 +778,8 @@
 
 .mai-subpages__grid {
     display:               grid;
-    grid-template-columns: 1fr;
-    gap:                    var(--space-xl) var(--space-lg);
-
-    @include bp-up(sm) {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    gap:                   1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
 }
 
 .mai-subpages__item {
