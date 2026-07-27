@@ -355,6 +355,10 @@ instance method, fires `AfterBackendThemeAppliedEvent`).
 This namespace is declared **only in `mai_theme`**. Extensions that render frontend
 output must declare `mai_theme` as a dependency; they do not re-declare the namespace.
 
+**Extension template overrides:** `Resources/Private/Templates/Search/Results.html` wraps
+the search plugin in a `mai_turbo` Turbo Frame (`mai-search-results`) for in-place
+filter, form, and pagination updates.
+
 ---
 
 ## 8. EXT:form Finisher

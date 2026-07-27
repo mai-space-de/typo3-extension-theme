@@ -19,7 +19,8 @@
   },
   "suggest": {
     "maispace/mai-assets": "Asset pipeline (SCSS, minification, sprites). Installed via the root composer.json of the parent project.",
-    "maispace/mai-base": "Base utilities and CType/Field helpers. Installed via the root composer.json of the parent project."
+    "maispace/mai-base": "Base utilities and CType/Field helpers. Installed via the root composer.json of the parent project.",
+    "maispace/mai-turbo": "Turbo Frames for partial plugin rendering (search results override). Installed via the root composer.json of the parent project."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

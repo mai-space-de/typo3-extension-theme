@@ -15,6 +15,18 @@
 @layer theme-organisms {
 
 // ---------------------------------------------------------------------------
+// Plugin shell — width cap inside <turbo-frame>; no inline padding (gutter
+// comes from the surrounding page layout).
+// ---------------------------------------------------------------------------
+.mai-news-list,
+.mai-news-detail {
+    max-width:      var(--layout-width-max);
+    margin-inline:  auto;
+    width:          100%;
+    box-sizing:     border-box;
+}
+
+// ---------------------------------------------------------------------------
 // Grid container
 // ---------------------------------------------------------------------------
 .mai-news-list__grid {
@@ -258,12 +270,10 @@
 // Detail page
 // ---------------------------------------------------------------------------
 .mai-news-detail {
-    max-width:  75rem;                             // ~1200 px — wider than prose-width; article has full-width images
-    margin:     0 auto;
-    padding:    var(--space-lg);                   // 24 px
+    padding-block: var(--space-lg);
 
     @include bp-up(md) {
-        padding: var(--space-xl) var(--space-lg);   // 32 px 24 px
+        padding-block: var(--space-xl);
     }
 }
 

@@ -13,6 +13,15 @@
 @layer theme-organisms {
 
 // ---------------------------------------------------------------------------
+// Turbo Frame — custom element defaults only; width is on inner organisms
+// (.mai-news-list, .mai-search, …) so async frame swaps keep the same cap.
+// ---------------------------------------------------------------------------
+turbo-frame {
+    display: block;
+    width:   100%;
+}
+
+// ---------------------------------------------------------------------------
 // Shared inner wrapper — used by most full-width sections.
 // Single source of truth for the page-wrap pattern.
 // ---------------------------------------------------------------------------

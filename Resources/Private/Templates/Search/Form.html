@@ -1,33 +1,37 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:maiTurbo="http://typo3.org/ns/Maispace/MaiTurbo/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <f:comment>
     Search form organism — overrides `EXT:mai_search/Resources/Private/Templates/Search/Form.html`.
-    Renders a themed search form using BGM Design System tokens.
-    Arguments: query (string)
+    Kept for template parity; the Search plugin default action is `results` (see Results.html).
 </f:comment>
 
-<section class="mai-search" aria-label="{f:translate(key: 'search.label', default: 'Site search')}">
-    <f:form action="results" method="post" name="search" class="mai-search__form" role="search">
-        <div class="mai-search__field">
-            <label for="search-query" class="mai-search__label">
-                <f:translate key="search.placeholder" default="Search..."/>
-            </label>
-            <f:form.textfield
-                id="search-query"
-                name="query"
-                value="{query}"
-                placeholder="{f:translate(key: 'search.placeholder', default: 'Search...')}"
-                class="mai-search__input"
-                additionalAttributes="{autocomplete: 'off', type: 'search', 'data-testid': 'search-input'}"
-            />
-            <f:form.submit
-                value="{f:translate(key: 'search.submit', default: 'Search')}"
-                class="mai-search__submit"
-                additionalAttributes="{'data-testid': 'search-submit'}"
-            />
-        </div>
-    </f:form>
-</section>
+<maiTurbo:context.plugin>
+    <maiTurbo:frame id="mai-search-results">
+        <section class="mai-search" aria-label="{f:translate(key: 'search.label', default: 'Site search')}">
+            <f:form action="results" method="get" name="search" class="mai-search__form" role="search">
+                <div class="mai-search__field">
+                    <label for="search-query" class="mai-search__label">
+                        <f:translate key="search.placeholder" default="Search..."/>
+                    </label>
+                    <f:form.textfield
+                        id="search-query"
+                        name="query"
+                        value="{query}"
+                        placeholder="{f:translate(key: 'search.placeholder', default: 'Search...')}"
+                        class="mai-search__input"
+                        additionalAttributes="{autocomplete: 'off', type: 'search', 'data-testid': 'search-input'}"
+                    />
+                    <f:form.submit
+                        value="{f:translate(key: 'search.submit', default: 'Search')}"
+                        class="mai-search__submit"
+                        additionalAttributes="{'data-testid': 'search-submit'}"
+                    />
+                </div>
+            </f:form>
+        </section>
+    </maiTurbo:frame>
+</maiTurbo:context.plugin>
 
 </html>
