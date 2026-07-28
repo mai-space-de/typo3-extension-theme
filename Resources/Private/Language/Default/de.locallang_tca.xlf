@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages"
+          date="2025-01-01T00:00:00Z" product-name="mai_theme">
+        <header/>
+        <body>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 TABS
+             ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="tab.appearance">
+                <source>Appearance &amp; Spacing</source>
+                <target>Erscheinungsbild &amp; Abstand</target>
+            </trans-unit>
+            <trans-unit id="tab.appearance_layout">
+                <source>Appearance &amp; Layout</source>
+                <target>Erscheinungsbild &amp; Layout</target>
+            </trans-unit>
+            <trans-unit id="tab.layout">
+                <source>Layout</source>
+                <target>Layout</target>
+            </trans-unit>
+            <trans-unit id="tab.content">
+                <source>Content</source>
+                <target>Inhalt</target>
+            </trans-unit>
+            <trans-unit id="tab.animation">
+                <source>Animation &amp; Linking</source>
+                <target>Animation &amp; Verlinkung</target>
+            </trans-unit>
+            <trans-unit id="tab.advanced">
+                <source>Advanced</source>
+                <target>Erweitert</target>
+            </trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 SHARED FIELD LABELS
+            ═══════════════════════════════════════════════════════════ -->
+
+            <!-- Appearance -->
+            <trans-unit id="field.bg_color">
+                <source>Background Color</source>
+                <target>Hintergrundfarbe</target>
+            </trans-unit>
+            <trans-unit id="field.bg_image">
+                <source>Background Image</source>
+                <target>Hintergrundbild</target>
+            </trans-unit>
+            <trans-unit id="field.text_color">
+                <source>Text Color</source>
+                <target>Textfarbe</target>
+            </trans-unit>
+            <trans-unit id="field.border_radius">
+                <source>Border Radius</source>
+                <target>Eckenradius</target>
+            </trans-unit>
+            <trans-unit id="field.shadow">
+                <source>Shadow</source>
+                <target>Schatten</target>
+            </trans-unit>
+            <trans-unit id="field.opacity">
+                <source>Opacity</source>
+                <target>Deckkraft</target>
+            </trans-unit>
+
+            <!-- Spacing -->
+            <trans-unit id="field.margin_top">
+                <source>Margin Top</source>
+                <target>Außenabstand oben</target>
+            </trans-unit>
+            <trans-unit id="field.margin_bottom">
+                <source>Margin Bottom</source>
+                <target>Außenabstand unten</target>
+            </trans-unit>
+            <trans-unit id="field.padding_top">
+                <source>Padding Top</source>
+                <target>Innenabstand oben</target>
+            </trans-unit>
+            <trans-unit id="field.padding_bottom">
+                <source>Padding Bottom</source>
+                <target>Innenabstand unten</target>
+            </trans-unit>
+            <trans-unit id="field.max_width">
+                <source>Max Width</source>
+                <target>Maximale Breite</target>
+            </trans-unit>
+            <trans-unit id="field.alignment">
+                <source>Alignment</source>
+                <target>Ausrichtung</target>
+            </trans-unit>
+
+            <!-- Animation -->
+            <trans-unit id="field.animation">
+                <source>Animation</source>
+                <target>Animation</target>
+            </trans-unit>
+            <trans-unit id="field.animation_delay">
+                <source>Animation Delay (ms)</source>
+                <target>Animationsverzögerung (ms)</target>
+            </trans-unit>
+
+            <!-- Linking -->
+            <trans-unit id="field.link">
+                <source>Link</source>
+                <target>Link</target>
+            </trans-unit>
+            <trans-unit id="field.link_text">
+                <source>Link text</source>
+                <target>Linktext</target>
+            </trans-unit>
+            <trans-unit id="field.link_secondary">
+                <source>Secondary link</source>
+                <target>Zweiter Link</target>
+            </trans-unit>
+            <trans-unit id="field.link_secondary_text">
+                <source>Secondary link text</source>
+                <target>Text des zweiten Links</target>
+            </trans-unit>
+            <trans-unit id="field.eyebrow">
+                <source>Eyebrow</source>
+                <target>Vortext</target>
+            </trans-unit>
+            <trans-unit id="field.badge_text">
+                <source>Badge text</source>
+                <target>Badge-Text</target>
+            </trans-unit>
+            <trans-unit id="field.anchor_id">
+                <source>Anchor ID</source>
+                <target>Anker-ID</target>
+            </trans-unit>
+            <trans-unit id="field.aria_label">
+                <source>ARIA Label</source>
+                <target>ARIA-Label</target>
+            </trans-unit>
+
+            <!-- Responsive -->
+            <trans-unit id="field.hide_desktop">
+                <source>Hide on Desktop</source>
+                <target>Auf Desktop ausblenden</target>
+            </trans-unit>
+            <trans-unit id="field.hide_tablet">
+                <source>Hide on Tablet</source>
+                <target>Auf Tablet ausblenden</target>
+            </trans-unit>
+            <trans-unit id="field.hide_mobile">
+                <source>Hide on Mobile</source>
+                <target>Auf Mobilgerät ausblenden</target>
+            </trans-unit>
+            <trans-unit id="field.col_span">
+                <source>Column Width</source>
+                <target>Spaltenbreite</target>
+            </trans-unit>
+
+            <!-- Per-CType fields -->
+            <trans-unit id="field.variant">
+                <source>Variant</source>
+                <target>Variante</target>
+            </trans-unit>
+            <trans-unit id="field.accent">
+                <source>Accent colour</source>
+                <target>Akzentfarbe</target>
+            </trans-unit>
+            <trans-unit id="accent.teal">
+                <source>Teal (default)</source>
+                <target>Türkis (Standard)</target>
+            </trans-unit>
+            <trans-unit id="accent.gold">
+                <source>Gold</source>
+                <target>Gold</target>
+            </trans-unit>
+            <trans-unit id="field.button_style">
+                <source>Button Style</source>
+                <target>Button-Stil</target>
+            </trans-unit>
+            <trans-unit id="field.button_size">
+                <source>Button Size</source>
+                <target>Button-Größe</target>
+            </trans-unit>
+            <trans-unit id="field.icon_identifier">
+                <source>Icon</source>
+                <target>Icon</target>
+            </trans-unit>
+            <trans-unit id="field.icon_size">
+                <source>Icon Size</source>
+                <target>Icon-Größe</target>
+            </trans-unit>
+            <trans-unit id="icon.map_pin"><source>Map pin</source><target>Standortmarkierung</target></trans-unit>
+            <trans-unit id="icon.hand_heart"><source>Hand with heart</source><target>Hand mit Herz</target></trans-unit>
+            <trans-unit id="icon.user"><source>User</source><target>Person</target></trans-unit>
+            <trans-unit id="icon.user_circle"><source>User circle</source><target>Person im Kreis</target></trans-unit>
+            <trans-unit id="icon.users_three"><source>Users</source><target>Personen</target></trans-unit>
+            <trans-unit id="icon.calendar_blank"><source>Calendar</source><target>Kalender</target></trans-unit>
+            <trans-unit id="icon.chat_circle"><source>Chat</source><target>Chat</target></trans-unit>
+            <trans-unit id="icon.book_open"><source>Book</source><target>Buch</target></trans-unit>
+            <trans-unit id="icon.house"><source>House</source><target>Haus</target></trans-unit>
+            <trans-unit id="icon.globe"><source>Globe</source><target>Weltkugel</target></trans-unit>
+            <trans-unit id="icon.envelope_simple"><source>Envelope</source><target>Briefumschlag</target></trans-unit>
+            <trans-unit id="icon.newspaper"><source>Newspaper</source><target>Zeitung</target></trans-unit>
+            <trans-unit id="icon.download_simple"><source>Download</source><target>Download</target></trans-unit>
+            <trans-unit id="icon.question"><source>Question</source><target>Frage</target></trans-unit>
+            <trans-unit id="icon.heart"><source>Heart</source><target>Herz</target></trans-unit>
+            <trans-unit id="icon.flower"><source>Flower</source><target>Blume</target></trans-unit>
+            <trans-unit id="icon.check_circle"><source>Check</source><target>Häkchen</target></trans-unit>
+            <trans-unit id="icon.info"><source>Info</source><target>Info</target></trans-unit>
+            <trans-unit id="icon.warning_circle"><source>Warning</source><target>Warnung</target></trans-unit>
+            <trans-unit id="icon.star"><source>Star</source><target>Stern</target></trans-unit>
+            <trans-unit id="icon.phone"><source>Phone</source><target>Telefon</target></trans-unit>
+            <trans-unit id="field.divider_style">
+                <source>Divider Style</source>
+                <target>Trennlinienstil</target>
+            </trans-unit>
+            <trans-unit id="field.language">
+                <source>Language / Syntax</source>
+                <target>Sprache / Syntax</target>
+            </trans-unit>
+            <trans-unit id="field.media_position">
+                <source>Media Position</source>
+                <target>Medienposition</target>
+            </trans-unit>
+            <trans-unit id="field.content_position">
+                <source>Content Position</source>
+                <target>Inhaltsposition</target>
+            </trans-unit>
+            <trans-unit id="field.overlay_style">
+                <source>Overlay Style</source>
+                <target>Overlay-Stil</target>
+            </trans-unit>
+            <trans-unit id="field.unit">
+                <source>Unit</source>
+                <target>Einheit</target>
+            </trans-unit>
+            <trans-unit id="field.value">
+                <source>Value</source>
+                <target>Wert</target>
+            </trans-unit>
+            <trans-unit id="field.lat">
+                <source>Latitude</source>
+                <target>Breitengrad</target>
+            </trans-unit>
+            <trans-unit id="field.lng">
+                <source>Longitude</source>
+                <target>Längengrad</target>
+            </trans-unit>
+            <trans-unit id="field.zoom">
+                <source>Zoom Level</source>
+                <target>Zoomstufe</target>
+            </trans-unit>
+            <trans-unit id="field.rating_max">
+                <source>Max Stars</source>
+                <target>Maximale Sternanzahl</target>
+            </trans-unit>
+            <trans-unit id="field.rating_value">
+                <source>Rating Value</source>
+                <target>Bewertungswert</target>
+            </trans-unit>
+            <trans-unit id="field.image_before">
+                <source>Before Image</source>
+                <target>Vorher-Bild</target>
+            </trans-unit>
+            <trans-unit id="field.image_after">
+                <source>After Image</source>
+                <target>Nachher-Bild</target>
+            </trans-unit>
+            <trans-unit id="field.address">
+                <source>Address</source>
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="field.phone">
+                <source>Phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="field.email">
+                <source>E-Mail</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="field.opening_hours">
+                <source>Opening Hours</source>
+                <target>Öffnungszeiten</target>
+            </trans-unit>
+            <trans-unit id="field.items">
+                <source>Items</source>
+                <target>Einträge</target>
+            </trans-unit>
+            <trans-unit id="field.slides">
+                <source>Slides</source>
+                <target>Folien</target>
+            </trans-unit>
+
+            <!-- Bento grid fields -->
+            <trans-unit id="bento.colspan">
+                <source>Column Span</source>
+                <target>Spaltenbreite</target>
+            </trans-unit>
+            <trans-unit id="bento.rowspan">
+                <source>Row Span</source>
+                <target>Zeilenhöhe</target>
+            </trans-unit>
+            <trans-unit id="bento.variant">
+                <source>Variant</source>
+                <target>Variante</target>
+            </trans-unit>
+
+            <!-- Video provider fields -->
+            <trans-unit id="field.video_youtube_id">
+                <source>YouTube Video ID</source>
+                <target>YouTube-Video-ID</target>
+            </trans-unit>
+            <trans-unit id="field.video_vimeo_id">
+                <source>Vimeo Video ID</source>
+                <target>Vimeo-Video-ID</target>
+            </trans-unit>
+            <trans-unit id="field.video_poster">
+                <source>Poster Image</source>
+                <target>Vorschaubild</target>
+            </trans-unit>
+            <trans-unit id="field.video_type">
+                <source>Display Mode</source>
+                <target>Anzeigemodus</target>
+            </trans-unit>
+
+            <!-- Image display fields -->
+            <trans-unit id="field.image_ratio">
+                <source>Aspect Ratio</source>
+                <target>Seitenverhältnis</target>
+            </trans-unit>
+            <trans-unit id="field.image_fit">
+                <source>Object Fit</source>
+                <target>Bildanpassung</target>
+            </trans-unit>
+
+            <!-- Advanced -->
+            <trans-unit id="field.custom_class">
+                <source>Custom CSS Class</source>
+                <target>Benutzerdefinierte CSS-Klasse</target>
+            </trans-unit>
+            <trans-unit id="field.custom_id">
+                <source>Custom ID</source>
+                <target>Benutzerdefinierte ID</target>
+            </trans-unit>
+            <trans-unit id="field.data_attrs">
+                <source>Data Attributes</source>
+                <target>Data-Attribute</target>
+            </trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 SELECT ITEM LABELS
+            ═══════════════════════════════════════════════════════════ -->
+
+            <!-- Shadow -->
+            <trans-unit id="shadow.sm"><source>Small</source><target>Klein</target></trans-unit>
+            <trans-unit id="shadow.md"><source>Medium</source><target>Mittel</target></trans-unit>
+            <trans-unit id="shadow.lg"><source>Large</source><target>Groß</target></trans-unit>
+            <trans-unit id="shadow.none"><source>None</source><target>Kein</target></trans-unit>
+
+            <!-- Spacing scale -->
+            <trans-unit id="spacing.inherit"><source>Inherit</source><target>Erben</target></trans-unit>
+            <trans-unit id="spacing.none"><source>None (0)</source><target>Kein (0)</target></trans-unit>
+            <trans-unit id="spacing.2xs"><source>2XS</source><target>2XS</target></trans-unit>
+            <trans-unit id="spacing.xs"><source>XS</source><target>XS</target></trans-unit>
+            <trans-unit id="spacing.sm"><source>SM</source><target>SM</target></trans-unit>
+            <trans-unit id="spacing.md"><source>MD</source><target>MD</target></trans-unit>
+            <trans-unit id="spacing.lg"><source>LG</source><target>LG</target></trans-unit>
+            <trans-unit id="spacing.xl"><source>XL</source><target>XL</target></trans-unit>
+            <trans-unit id="spacing.2xl"><source>2XL</source><target>2XL</target></trans-unit>
+            <trans-unit id="spacing.3xl"><source>3XL</source><target>3XL</target></trans-unit>
+
+            <!-- Alignment -->
+            <trans-unit id="alignment.left"><source>Left</source><target>Links</target></trans-unit>
+            <trans-unit id="alignment.center"><source>Center</source><target>Zentriert</target></trans-unit>
+            <trans-unit id="alignment.right"><source>Right</source><target>Rechts</target></trans-unit>
+
+            <!-- Animation -->
+            <trans-unit id="animation.none"><source>None</source><target>Keine</target></trans-unit>
+            <trans-unit id="animation.fade"><source>Fade In</source><target>Einblenden</target></trans-unit>
+            <trans-unit id="animation.slide"><source>Slide In</source><target>Einschieben</target></trans-unit>
+            <trans-unit id="animation.zoom"><source>Zoom In</source><target>Einzoomen</target></trans-unit>
+
+            <!-- Column span -->
+            <trans-unit id="colspan.auto"><source>Auto</source><target>Automatisch</target></trans-unit>
+
+            <!-- Max width -->
+            <trans-unit id="maxwidth.full"><source>Full Width</source><target>Volle Breite</target></trans-unit>
+            <trans-unit id="maxwidth.content"><source>Content Width</source><target>Inhaltsbreite</target></trans-unit>
+            <trans-unit id="maxwidth.text"><source>Text Width</source><target>Textbreite</target></trans-unit>
+            <trans-unit id="maxwidth.card"><source>Card Width</source><target>Kartenbreite</target></trans-unit>
+
+            <!-- Color tokens -->
+            <trans-unit id="color.inherit"><source>Inherit</source><target>Erben</target></trans-unit>
+            <trans-unit id="color.primary"><source>Primary</source><target>Primär</target></trans-unit>
+            <trans-unit id="color.secondary"><source>Secondary</source><target>Sekundär</target></trans-unit>
+            <trans-unit id="color.surface"><source>Surface</source><target>Fläche</target></trans-unit>
+            <trans-unit id="color.surface-alt"><source>Surface Alt</source><target>Fläche Alt</target></trans-unit>
+            <trans-unit id="color.accent"><source>Accent</source><target>Akzent</target></trans-unit>
+            <trans-unit id="color.muted"><source>Muted</source><target>Gedämpft</target></trans-unit>
+            <trans-unit id="color.dark"><source>Dark</source><target>Dunkel</target></trans-unit>
+            <trans-unit id="color.light"><source>Light</source><target>Hell</target></trans-unit>
+            <trans-unit id="color.danger"><source>Danger</source><target>Gefahr</target></trans-unit>
+            <trans-unit id="color.success"><source>Success</source><target>Erfolg</target></trans-unit>
+            <trans-unit id="color.warning"><source>Warning</source><target>Warnung</target></trans-unit>
+            <trans-unit id="color.info"><source>Info</source><target>Info</target></trans-unit>
+
+            <!-- Border radius tokens -->
+            <trans-unit id="radius.inherit"><source>Inherit</source><target>Erben</target></trans-unit>
+            <trans-unit id="radius.none"><source>None</source><target>Kein</target></trans-unit>
+            <trans-unit id="radius.sm"><source>Small</source><target>Klein</target></trans-unit>
+            <trans-unit id="radius.md"><source>Medium</source><target>Mittel</target></trans-unit>
+            <trans-unit id="radius.lg"><source>Large</source><target>Groß</target></trans-unit>
+            <trans-unit id="radius.full"><source>Full / Pill</source><target>Voll / Pille</target></trans-unit>
+
+            <!-- Variant (alert / callout / badge) -->
+            <trans-unit id="variant.default"><source>Default</source><target>Standard</target></trans-unit>
+            <trans-unit id="variant.info"><source>Info</source><target>Info</target></trans-unit>
+            <trans-unit id="variant.success"><source>Success</source><target>Erfolg</target></trans-unit>
+            <trans-unit id="variant.warning"><source>Warning</source><target>Warnung</target></trans-unit>
+            <trans-unit id="variant.danger"><source>Danger</source><target>Gefahr</target></trans-unit>
+            <trans-unit id="variant.primary"><source>Primary</source><target>Primär</target></trans-unit>
+            <trans-unit id="variant.secondary"><source>Secondary</source><target>Sekundär</target></trans-unit>
+            <trans-unit id="variant.accent"><source>Accent</source><target>Akzent</target></trans-unit>
+
+            <!-- Button style -->
+            <trans-unit id="buttonstyle.solid"><source>Solid</source><target>Gefüllt</target></trans-unit>
+            <trans-unit id="buttonstyle.outline"><source>Outline</source><target>Umrandet</target></trans-unit>
+            <trans-unit id="buttonstyle.ghost"><source>Ghost</source><target>Ghost</target></trans-unit>
+            <trans-unit id="buttonstyle.link"><source>Link</source><target>Link</target></trans-unit>
+
+            <!-- Button size -->
+            <trans-unit id="buttonsize.sm"><source>Small</source><target>Klein</target></trans-unit>
+            <trans-unit id="buttonsize.md"><source>Medium</source><target>Mittel</target></trans-unit>
+            <trans-unit id="buttonsize.lg"><source>Large</source><target>Groß</target></trans-unit>
+
+            <!-- Icon size -->
+            <trans-unit id="iconsize.sm"><source>Small</source><target>Klein</target></trans-unit>
+            <trans-unit id="iconsize.md"><source>Medium</source><target>Mittel</target></trans-unit>
+            <trans-unit id="iconsize.lg"><source>Large</source><target>Groß</target></trans-unit>
+            <trans-unit id="iconsize.xl"><source>Extra Large</source><target>Extra groß</target></trans-unit>
+
+            <!-- Video display type -->
+            <trans-unit id="videotype.content"><source>Content (inline player)</source><target>Inhalt (eingebetteter Player)</target></trans-unit>
+            <trans-unit id="videotype.background"><source>Background (silent loop)</source><target>Hintergrund (stille Endlosschleife)</target></trans-unit>
+
+            <!-- Image aspect ratio -->
+            <trans-unit id="imageratio.auto"><source>Auto (original)</source><target>Automatisch (Original)</target></trans-unit>
+            <trans-unit id="imageratio.square"><source>Square (1:1)</source><target>Quadratisch (1:1)</target></trans-unit>
+            <trans-unit id="imageratio.16_9"><source>Widescreen (16:9)</source><target>Breitbild (16:9)</target></trans-unit>
+            <trans-unit id="imageratio.4_3"><source>Classic (4:3)</source><target>Klassisch (4:3)</target></trans-unit>
+            <trans-unit id="imageratio.3_4"><source>Portrait (3:4)</source><target>Hochformat (3:4)</target></trans-unit>
+            <trans-unit id="imageratio.21_9"><source>Cinematic (21:9)</source><target>Kinoformat (21:9)</target></trans-unit>
+
+            <!-- Image object-fit -->
+            <trans-unit id="imagefit.cover"><source>Cover (crop to fill)</source><target>Ausfüllen (zuschneiden)</target></trans-unit>
+            <trans-unit id="imagefit.contain"><source>Contain (fit inside)</source><target>Einpassen (vollständig sichtbar)</target></trans-unit>
+            <trans-unit id="imagefit.fill"><source>Fill (stretch)</source><target>Strecken</target></trans-unit>
+            <trans-unit id="imagefit.scaledown"><source>Scale down</source><target>Verkleinern</target></trans-unit>
+
+            <!-- Divider style -->
+            <trans-unit id="dividerstyle.solid"><source>Solid</source><target>Durchgezogen</target></trans-unit>
+            <trans-unit id="dividerstyle.dashed"><source>Dashed</source><target>Gestrichelt</target></trans-unit>
+            <trans-unit id="dividerstyle.dotted"><source>Dotted</source><target>Gepunktet</target></trans-unit>
+            <trans-unit id="dividerstyle.gradient"><source>Gradient</source><target>Verlauf</target></trans-unit>
+
+            <!-- Content position (hero / banner) -->
+            <trans-unit id="contentposition.top-left"><source>Top Left</source><target>Oben links</target></trans-unit>
+            <trans-unit id="contentposition.top-center"><source>Top Center</source><target>Oben mittig</target></trans-unit>
+            <trans-unit id="contentposition.top-right"><source>Top Right</source><target>Oben rechts</target></trans-unit>
+            <trans-unit id="contentposition.center-left"><source>Center Left</source><target>Mitte links</target></trans-unit>
+            <trans-unit id="contentposition.center"><source>Center</source><target>Mitte</target></trans-unit>
+            <trans-unit id="contentposition.center-right"><source>Center Right</source><target>Mitte rechts</target></trans-unit>
+            <trans-unit id="contentposition.bottom-left"><source>Bottom Left</source><target>Unten links</target></trans-unit>
+            <trans-unit id="contentposition.bottom-center"><source>Bottom Center</source><target>Unten mittig</target></trans-unit>
+            <trans-unit id="contentposition.bottom-right"><source>Bottom Right</source><target>Unten rechts</target></trans-unit>
+
+            <!-- Overlay style (hero / banner) -->
+            <trans-unit id="overlay.none"><source>None</source><target>Kein</target></trans-unit>
+            <trans-unit id="overlay.dark"><source>Dark</source><target>Dunkel</target></trans-unit>
+            <trans-unit id="overlay.light"><source>Light</source><target>Hell</target></trans-unit>
+            <trans-unit id="overlay.gradient-bottom"><source>Gradient (Bottom)</source><target>Verlauf (unten)</target></trans-unit>
+            <trans-unit id="overlay.gradient-top"><source>Gradient (Top)</source><target>Verlauf (oben)</target></trans-unit>
+
+            <!-- Media position (media &amp; text) -->
+            <trans-unit id="mediaposition.left"><source>Left</source><target>Links</target></trans-unit>
+            <trans-unit id="mediaposition.right"><source>Right</source><target>Rechts</target></trans-unit>
+            <trans-unit id="mediaposition.top"><source>Top</source><target>Oben</target></trans-unit>
+            <trans-unit id="mediaposition.bottom"><source>Bottom</source><target>Unten</target></trans-unit>
+
+            <!-- Code language -->
+            <trans-unit id="codelang.plaintext"><source>Plain Text</source><target>Reiner Text</target></trans-unit>
+            <trans-unit id="codelang.html"><source>HTML</source><target>HTML</target></trans-unit>
+            <trans-unit id="codelang.css"><source>CSS</source><target>CSS</target></trans-unit>
+            <trans-unit id="codelang.javascript"><source>JavaScript</source><target>JavaScript</target></trans-unit>
+            <trans-unit id="codelang.typescript"><source>TypeScript</source><target>TypeScript</target></trans-unit>
+            <trans-unit id="codelang.php"><source>PHP</source><target>PHP</target></trans-unit>
+            <trans-unit id="codelang.python"><source>Python</source><target>Python</target></trans-unit>
+            <trans-unit id="codelang.bash"><source>Bash / Shell</source><target>Bash / Shell</target></trans-unit>
+            <trans-unit id="codelang.sql"><source>SQL</source><target>SQL</target></trans-unit>
+            <trans-unit id="codelang.json"><source>JSON</source><target>JSON</target></trans-unit>
+            <trans-unit id="codelang.yaml"><source>YAML</source><target>YAML</target></trans-unit>
+            <trans-unit id="codelang.xml"><source>XML</source><target>XML</target></trans-unit>
+            <trans-unit id="codelang.typoscript"><source>TypoScript</source><target>TypoScript</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 WIZARD GROUP HEADERS
+            ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="wizard.basic"><source>Basic Elements</source><target>Basiselemente</target></trans-unit>
+            <trans-unit id="wizard.page"><source>Page Sections</source><target>Seitenabschnitte</target></trans-unit>
+            <trans-unit id="wizard.components"><source>Cards &amp; Components</source><target>Karten &amp; Komponenten</target></trans-unit>
+            <trans-unit id="wizard.widgets"><source>UI Widgets</source><target>UI-Widgets</target></trans-unit>
+            <trans-unit id="wizard.forms"><source>Forms &amp; Engagement</source><target>Formulare &amp; Interaktion</target></trans-unit>
+            <trans-unit id="wizard.data"><source>Data &amp; Media</source><target>Daten &amp; Medien</target></trans-unit>
+            <trans-unit id="wizard.feedback"><source>Feedback &amp; State</source><target>Rückmeldung &amp; Status</target></trans-unit>
+            <trans-unit id="wizard.sections"><source>Sections &amp; Layouts</source><target>Abschnitte &amp; Layouts</target></trans-unit>
+            <trans-unit id="wizard.plugins_lists"><source>Lists &amp; Overviews</source><target>Listen &amp; Übersichten</target></trans-unit>
+            <trans-unit id="wizard.plugins_interactive"><source>Forms &amp; Participation</source><target>Formulare &amp; Mitmachen</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — BASIC
+             ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.text"><source>Text</source><target>Text</target></trans-unit>
+            <trans-unit id="ctype.heading"><source>Heading</source><target>Überschrift</target></trans-unit>
+            <trans-unit id="ctype.richtext"><source>Rich Text</source><target>Rich Text</target></trans-unit>
+            <trans-unit id="ctype.image"><source>Image</source><target>Bild</target></trans-unit>
+            <trans-unit id="ctype.video"><source>Video</source><target>Video</target></trans-unit>
+            <trans-unit id="ctype.audio"><source>Audio</source><target>Audio</target></trans-unit>
+            <trans-unit id="ctype.button"><source>Button</source><target>Button</target></trans-unit>
+            <trans-unit id="ctype.linklist"><source>Link List</source><target>Linkliste</target></trans-unit>
+            <trans-unit id="ctype.icon"><source>Icon</source><target>Icon</target></trans-unit>
+            <trans-unit id="ctype.divider"><source>Divider</source><target>Trennlinie</target></trans-unit>
+            <trans-unit id="ctype.breadcrumb"><source>Breadcrumb</source><target>Breadcrumb</target></trans-unit>
+            <trans-unit id="ctype.socialmedia"><source>Social Media Links</source><target>Social-Media-Links</target></trans-unit>
+            <trans-unit id="ctype.embed"><source>Embed</source><target>Einbettung</target></trans-unit>
+            <trans-unit id="ctype.spacer"><source>Spacer</source><target>Abstandshalter</target></trans-unit>
+            <trans-unit id="ctype.callout"><source>Callout</source><target>Callout</target></trans-unit>
+            <trans-unit id="ctype.iconlist"><source>Icon List</source><target>Icon-Liste</target></trans-unit>
+            <trans-unit id="ctype.textcolumns"><source>Text Columns</source><target>Textspalten</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — PAGE SECTIONS
+            ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.hero"><source>Hero</source><target>Hero</target></trans-unit>
+            <trans-unit id="ctype.banner"><source>Banner</source><target>Banner</target></trans-unit>
+            <trans-unit id="ctype.cta"><source>Call to Action</source><target>Call-to-Action</target></trans-unit>
+            <trans-unit id="ctype.subpages"><source>Subpage Cards</source><target>Unterseiten-Karten</target></trans-unit>
+            <trans-unit id="ctype.mediatext"><source>Media &amp; Text</source><target>Medien &amp; Text</target></trans-unit>
+            <trans-unit id="ctype.textmedia"><source>Text &amp; Media</source><target>Text &amp; Medien</target></trans-unit>
+            <trans-unit id="field.subpages_parent"><source>Parent page</source><target>Übergeordnete Seite</target></trans-unit>
+            <trans-unit id="field.subpages_parent.description"><source>Leave empty to list subpages of the current page.</source><target>Leer lassen, um die Unterseiten der aktuellen Seite aufzulisten.</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — CARDS & COMPONENTS
+             ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.card"><source>Card</source><target>Karte</target></trans-unit>
+            <trans-unit id="ctype.teaser"><source>Teaser</source><target>Teaser</target></trans-unit>
+            <trans-unit id="ctype.featurebox"><source>Feature Box</source><target>Feature-Box</target></trans-unit>
+            <trans-unit id="ctype.profile"><source>Profile</source><target>Profil</target></trans-unit>
+            <trans-unit id="ctype.testimonial"><source>Testimonial</source><target>Testimonial</target></trans-unit>
+            <trans-unit id="ctype.quote"><source>Quote</source><target>Zitat</target></trans-unit>
+            <trans-unit id="ctype.logo"><source>Logo</source><target>Logo</target></trans-unit>
+            <trans-unit id="ctype.logoshowcase"><source>Logo Showcase</source><target>Logo-Präsentation</target></trans-unit>
+            <trans-unit id="ctype.statistic"><source>Statistic</source><target>Statistik</target></trans-unit>
+            <trans-unit id="ctype.badge"><source>Badge</source><target>Badge</target></trans-unit>
+            <trans-unit id="ctype.contactinfo"><source>Contact Info</source><target>Kontaktinfo</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — UI WIDGETS
+             ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.slider"><source>Slider</source><target>Slider</target></trans-unit>
+            <trans-unit id="ctype.accordion"><source>Accordion</source><target>Akkordeon</target></trans-unit>
+            <trans-unit id="ctype.tabs"><source>Tabs</source><target>Tabs</target></trans-unit>
+            <trans-unit id="ctype.modal"><source>Modal</source><target>Modal</target></trans-unit>
+            <!-- Timeline CType moved to mai_timeline extension -->
+            <trans-unit id="ctype.faq"><source>FAQ</source><target>FAQ</target></trans-unit>
+            <trans-unit id="ctype.beforeafter"><source>Before / After</source><target>Vorher / Nachher</target></trans-unit>
+            <trans-unit id="ctype.steps"><source>Steps</source><target>Schritte</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — FORMS & ENGAGEMENT
+             ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.form"><source>Form</source><target>Formular</target></trans-unit>
+            <trans-unit id="ctype.newsletter"><source>Newsletter</source><target>Newsletter</target></trans-unit>
+            <trans-unit id="ctype.map"><source>Map</source><target>Karte</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — DATA & MEDIA
+            ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.table"><source>Table</source><target>Tabelle</target></trans-unit>
+            <trans-unit id="ctype.datalist"><source>Data List</source><target>Datenliste</target></trans-unit>
+            <trans-unit id="ctype.gallery"><source>Gallery</source><target>Galerie</target></trans-unit>
+            <trans-unit id="ctype.filelist"><source>File List</source><target>Dateiliste</target></trans-unit>
+            <trans-unit id="ctype.chart"><source>Chart</source><target>Diagramm</target></trans-unit>
+            <trans-unit id="ctype.codeblock"><source>Code Block</source><target>Codeblock</target></trans-unit>
+            <trans-unit id="ctype.progressbar"><source>Progress Bar</source><target>Fortschrittsbalken</target></trans-unit>
+            <trans-unit id="ctype.rating"><source>Rating</source><target>Bewertung</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — FEEDBACK & STATE
+             ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.alert"><source>Alert</source><target>Hinweis</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CTYPE LABELS — SECTIONS & LAYOUTS
+            ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="ctype.section_full"><source>Full Width Section</source><target>Abschnitt in voller Breite</target></trans-unit>
+            <trans-unit id="ctype.section_50_50"><source>50/50 Section</source><target>Abschnitt 50/50</target></trans-unit>
+            <trans-unit id="ctype.section_66_33"><source>2/3 + 1/3 Section</source><target>Abschnitt 2/3 + 1/3</target></trans-unit>
+            <trans-unit id="ctype.section_33_66"><source>1/3 + 2/3 Section</source><target>Abschnitt 1/3 + 2/3</target></trans-unit>
+            <trans-unit id="ctype.section_3col"><source>3 Column Section</source><target>Abschnitt mit 3 Spalten</target></trans-unit>
+            <trans-unit id="ctype.section_4col"><source>4 Column Section</source><target>Abschnitt mit 4 Spalten</target></trans-unit>
+            <trans-unit id="ctype.section_sidebar_r"><source>Sidebar Right (3/4 + 1/4)</source><target>Seitenleiste rechts (3/4 + 1/4)</target></trans-unit>
+            <trans-unit id="ctype.section_sidebar_l"><source>Sidebar Left (1/4 + 3/4)</source><target>Seitenleiste links (1/4 + 3/4)</target></trans-unit>
+            <trans-unit id="ctype.bento"><source>Bento Grid</source><target>Bento-Raster</target></trans-unit>
+            <trans-unit id="ctype.bento.description"><source>Grid container for arranging tiles in a bento-style layout</source><target>Rastercontainer zum Anordnen von Kacheln im Bento-Stil</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 CONTAINER COLUMN NAMES
+            ═══════════════════════════════════════════════════════════ -->
+            <trans-unit id="col.content"><source>Content</source><target>Inhalt</target></trans-unit>
+            <trans-unit id="col.left"><source>Left Column</source><target>Linke Spalte</target></trans-unit>
+            <trans-unit id="col.right"><source>Right Column</source><target>Rechte Spalte</target></trans-unit>
+            <trans-unit id="col.main"><source>Main Content</source><target>Hauptinhalt</target></trans-unit>
+            <trans-unit id="col.sidebar"><source>Sidebar</source><target>Seitenleiste</target></trans-unit>
+            <trans-unit id="col.col1"><source>Column 1</source><target>Spalte 1</target></trans-unit>
+            <trans-unit id="col.col2"><source>Column 2</source><target>Spalte 2</target></trans-unit>
+            <trans-unit id="col.col3"><source>Column 3</source><target>Spalte 3</target></trans-unit>
+            <trans-unit id="col.col4"><source>Column 4</source><target>Spalte 4</target></trans-unit>
+            <trans-unit id="col.wide"><source>Wide Column</source><target>Breite Spalte</target></trans-unit>
+            <trans-unit id="col.narrow"><source>Narrow Column</source><target>Schmale Spalte</target></trans-unit>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 INLINE CHILD RECORD LABELS
+             ═══════════════════════════════════════════════════════════ -->
+
+            <!-- Accordion / FAQ / Steps item -->
+            <trans-unit id="item.accordion"><source>Accordion Item</source><target>Akkordeon-Element</target></trans-unit>
+            <trans-unit id="item.question"><source>Question</source><target>Frage</target></trans-unit>
+            <trans-unit id="item.answer"><source>Answer</source><target>Antwort</target></trans-unit>
+
+            <!-- Tab item -->
+            <trans-unit id="item.tab"><source>Tab</source><target>Tab</target></trans-unit>
+            <trans-unit id="item.tab_title"><source>Tab Title</source><target>Tab-Titel</target></trans-unit>
+            <trans-unit id="item.content"><source>Content</source><target>Inhalt</target></trans-unit>
+
+            <!-- Slider item -->
+            <trans-unit id="item.slide"><source>Slide</source><target>Folie</target></trans-unit>
+            <trans-unit id="item.headline"><source>Headline</source><target>Überschrift</target></trans-unit>
+            <trans-unit id="item.bodytext"><source>Body Text</source><target>Fließtext</target></trans-unit>
+            <trans-unit id="item.link"><source>Link</source><target>Link</target></trans-unit>
+            <trans-unit id="item.image"><source>Image</source><target>Bild</target></trans-unit>
+
+        </body>
+    </file>
+</xliff>
