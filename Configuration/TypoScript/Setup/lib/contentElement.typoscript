@@ -399,11 +399,6 @@ tt_content {
         pluginName = Stories
         vendorName = Maispace
     }
-    maispace_account_account < tt_content.maiaccount_account
-    maispace_account_register < tt_content.maiaccount_register
-    maispace_account_mfa < tt_content.maiaccount_mfa
-    maispace_account_stories < tt_content.maiaccount_stories
-
     ## EXT:mai_canteen
     maicanteen_week = USER
     maicanteen_week {
@@ -419,9 +414,6 @@ tt_content {
         pluginName = Print
         vendorName = Maispace
     }
-    maispace_canteen_week < tt_content.maicanteen_week
-    maispace_canteen_print < tt_content.maicanteen_print
-
     ## EXT:mai_events
     maievents_list = USER
     maievents_list {
@@ -437,8 +429,6 @@ tt_content {
         pluginName = Registration
         vendorName = Maispace
     }
-    maispace_events_list < tt_content.maievents_list
-
     ## EXT:mai_faq
     maifaq_list = USER
     maifaq_list {
@@ -447,8 +437,6 @@ tt_content {
         pluginName = List
         vendorName = Maispace
     }
-    maispace_faq_list < tt_content.maifaq_list
-
     ## EXT:mai_gallery
     maigallery_gallery = USER
     maigallery_gallery {
@@ -473,9 +461,6 @@ tt_content {
         pluginName = Detail
         vendorName = Maispace
     }
-    maispace_jobs_list < tt_content.maijobs_list
-    maispace_jobs_detail < tt_content.maijobs_detail
-
     ## EXT:mai_locations
     mailocations_list = USER
     mailocations_list {
@@ -491,9 +476,6 @@ tt_content {
         pluginName = Detail
         vendorName = Maispace
     }
-    maispace_locations_list < tt_content.mailocations_list
-    maispace_locations_detail < tt_content.mailocations_detail
-
     ## EXT:mai_member
     maimember_view = USER
     maimember_view {
@@ -516,8 +498,6 @@ tt_content {
         pluginName = List
         vendorName = Maispace
     }
-    maispace_member_list < tt_content.maimember_list
-
     ## EXT:mai_news
     mainews_list = USER
     mainews_list {
@@ -533,9 +513,6 @@ tt_content {
         pluginName = Rss
         vendorName = Maispace
     }
-    maispace_news_list < tt_content.mainews_list
-    maispace_news_rss < tt_content.mainews_rss
-
     ## EXT:mai_newsletter
     mainewsletter_newsletter = USER
     mainewsletter_newsletter {
@@ -562,8 +539,6 @@ tt_content {
         pluginName = List
         vendorName = Maispace
     }
-    maispace_resource_list < tt_content.mairesource_list
-
     ## EXT:mai_search
     maisearch_search = USER
     maisearch_search {
@@ -581,8 +556,6 @@ tt_content {
         pluginName = Survey
         vendorName = Maispace
     }
-    maispace_survey_survey < tt_content.maisurvey_survey
-
     ## EXT:mai_team
     maiteam_view = USER
     maiteam_view {
@@ -614,7 +587,4 @@ tt_content {
         pluginName = Single
         vendorName = Maispace
     }
-    maispace_testimonials_list < tt_content.maitestimonials_list
-    maispace_testimonials_slider < tt_content.maitestimonials_slider
-    maispace_testimonials_single < tt_content.maitestimonials_single
 }
