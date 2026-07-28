@@ -9,6 +9,7 @@ use Maispace\MaiBase\TableConfigurationArray\CType;
 // Generic text+media CType (parent for image/media variants rendered
 // through the `theme:molecule.mediaText` Fluid Component).
 new CType('maispace_textmedia', 'LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.textmedia', 'content-textpic')
+    ->setGroup('maispace_page')
     ->addDefaultHeaderPalette()
     ->addCustomFields('bodytext, image, imageorient, imagewidth')
     // TYPO3 14: bodytext has no RTE by default — must enable via columnsOverrides.

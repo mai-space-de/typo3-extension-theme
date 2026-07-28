@@ -621,6 +621,8 @@ $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['itemGroups'] = arra
         'maispace_data'       => $lang('wizard.data'),
         'maispace_feedback'   => $lang('wizard.feedback'),
         'maispace_sections'   => $lang('wizard.sections'),
+        'maispace_plugins_lists'       => $lang('wizard.plugins_lists'),
+        'maispace_plugins_interactive' => $lang('wizard.plugins_interactive'),
     ]
 );
 

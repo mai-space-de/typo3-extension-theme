@@ -225,6 +225,17 @@
                 <source>Slides</source>
             </trans-unit>
 
+            <!-- Bento grid fields -->
+            <trans-unit id="bento.colspan">
+                <source>Column Span</source>
+            </trans-unit>
+            <trans-unit id="bento.rowspan">
+                <source>Row Span</source>
+            </trans-unit>
+            <trans-unit id="bento.variant">
+                <source>Variant</source>
+            </trans-unit>
+
             <!-- Video provider fields -->
             <trans-unit id="field.video_youtube_id">
                 <source>YouTube Video ID</source>
@@ -424,6 +435,8 @@
             <trans-unit id="wizard.data"><source>Data &amp; Media</source></trans-unit>
             <trans-unit id="wizard.feedback"><source>Feedback &amp; State</source></trans-unit>
             <trans-unit id="wizard.sections"><source>Sections &amp; Layouts</source></trans-unit>
+            <trans-unit id="wizard.plugins_lists"><source>Lists &amp; Overviews</source></trans-unit>
+            <trans-unit id="wizard.plugins_interactive"><source>Forms &amp; Participation</source></trans-unit>
 
             <!-- ═══════════════════════════════════════════════════════════
                  CTYPE LABELS — BASIC

@@ -165,6 +165,13 @@ mod.wizards.newContentElement.wizardItems {
                     CType = maispace_mediatext
                 }
             }
+            maispace_textmedia {
+                iconIdentifier = content-textpic
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.textmedia
+                tt_content_defValues {
+                    CType = maispace_textmedia
+                }
+            }
         }
     }
 
@@ -478,6 +485,236 @@ mod.wizards.newContentElement.wizardItems {
                 title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.section_sidebar_l
                 tt_content_defValues {
                     CType = maispace_section_sidebar_l
+                }
+            }
+            maispace_bento {
+                iconIdentifier = content-dashboard
+                title = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:ctype.bento
+                tt_content_defValues {
+                    CType = maispace_bento
+                }
+            }
+        }
+    }
+
+    maispace_plugins_lists {
+        header = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:wizard.plugins_lists
+        show = *
+        elements {
+            maievents_view {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_events/Resources/Private/Language/locallang_db.xlf:tt_content.CType.mai_events_view
+                tt_content_defValues {
+                    CType = mai_events_view
+                }
+            }
+            maievents_list {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_events/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
+                tt_content_defValues {
+                    CType = maievents_list
+                }
+            }
+            mainews_list {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_news/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
+                tt_content_defValues {
+                    CType = mainews_list
+                }
+            }
+            mainews_rss {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_news/Resources/Private/Language/Default/locallang_tca.xlf:plugin.rss.title
+                tt_content_defValues {
+                    CType = mainews_rss
+                }
+            }
+            maijobs_list {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_jobs/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
+                tt_content_defValues {
+                    CType = maijobs_list
+                }
+            }
+            maijobs_detail {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_jobs/Resources/Private/Language/Default/locallang_tca.xlf:plugin.detail.title
+                tt_content_defValues {
+                    CType = maijobs_detail
+                }
+            }
+            mailocations_list {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_locations/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
+                tt_content_defValues {
+                    CType = mailocations_list
+                }
+            }
+            mailocations_detail {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_locations/Resources/Private/Language/Default/locallang_tca.xlf:plugin.detail.title
+                tt_content_defValues {
+                    CType = mailocations_detail
+                }
+            }
+            maifaq_list {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_faq/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
+                tt_content_defValues {
+                    CType = maifaq_list
+                }
+            }
+            mairesource_list {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_resource/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
+                tt_content_defValues {
+                    CType = mairesource_list
+                }
+            }
+            maitestimonials_list {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_testimonials/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
+                tt_content_defValues {
+                    CType = maitestimonials_list
+                }
+            }
+            maitestimonials_slider {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_testimonials/Resources/Private/Language/Default/locallang_tca.xlf:plugin.slider.title
+                tt_content_defValues {
+                    CType = maitestimonials_slider
+                }
+            }
+            maitestimonials_single {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_testimonials/Resources/Private/Language/Default/locallang_tca.xlf:plugin.single.title
+                tt_content_defValues {
+                    CType = maitestimonials_single
+                }
+            }
+            maiteam_view {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_team/Resources/Private/Language/locallang_db.xlf:tt_content.CType.mai_team_view
+                tt_content_defValues {
+                    CType = maiteam_view
+                }
+            }
+            maimember_list {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_member/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
+                tt_content_defValues {
+                    CType = maimember_list
+                }
+            }
+            // Legacy duplicate of maimember_list (same controller/actions) — kept
+            // registered for existing content, hidden from the wizard for new content.
+            maimember_view {
+                disabled = 1
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_member/Resources/Private/Language/locallang_db.xlf:tt_content.CType.mai_member_view
+                tt_content_defValues {
+                    CType = maimember_view
+                }
+            }
+            maicanteen_week {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_canteen/Resources/Private/Language/Default/locallang_tca.xlf:plugin.week.title
+                tt_content_defValues {
+                    CType = maicanteen_week
+                }
+            }
+            maicanteen_print {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_canteen/Resources/Private/Language/Default/locallang_tca.xlf:plugin.print.title
+                tt_content_defValues {
+                    CType = maicanteen_print
+                }
+            }
+            maigallery_gallery {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_gallery/Resources/Private/Language/Default/locallang.xlf:plugin.gallery.title
+                tt_content_defValues {
+                    CType = maigallery_gallery
+                }
+            }
+            // Legacy duplicate of maispace_timeline (UI Widgets group) — kept
+            // registered for existing content, hidden from the wizard for new content.
+            mai_timeline_list {
+                disabled = 1
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_timeline/Resources/Private/Language/Default/locallang_db.xlf:tt_content.CType.mai_timeline_list
+                tt_content_defValues {
+                    CType = mai_timeline_list
+                }
+            }
+        }
+    }
+
+    maispace_plugins_interactive {
+        header = LLL:EXT:mai_theme/Resources/Private/Language/Default/locallang_tca.xlf:wizard.plugins_interactive
+        show = *
+        elements {
+            maiaccount_account {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_account/Resources/Private/Language/Default/locallang_tca.xlf:plugin.account.title
+                tt_content_defValues {
+                    CType = maiaccount_account
+                }
+            }
+            maiaccount_register {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_account/Resources/Private/Language/Default/locallang_tca.xlf:plugin.register.title
+                tt_content_defValues {
+                    CType = maiaccount_register
+                }
+            }
+            maiaccount_mfa {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_account/Resources/Private/Language/Default/locallang_tca.xlf:plugin.mfa.title
+                tt_content_defValues {
+                    CType = maiaccount_mfa
+                }
+            }
+            maiaccount_stories {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_account/Resources/Private/Language/Default/locallang_tca.xlf:plugin.stories.title
+                tt_content_defValues {
+                    CType = maiaccount_stories
+                }
+            }
+            maievents_registration {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_events/Resources/Private/Language/locallang_db.xlf:plugin.registration.title
+                tt_content_defValues {
+                    CType = maievents_registration
+                }
+            }
+            maimember_application {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_member/Resources/Private/Language/locallang_db.xlf:tt_content.CType.mai_member_application
+                tt_content_defValues {
+                    CType = maimember_application
+                }
+            }
+            mainewsletter_newsletter {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_newsletter/Resources/Private/Language/Default/locallang.xlf:plugin.newsletter.title
+                tt_content_defValues {
+                    CType = mainewsletter_newsletter
+                }
+            }
+            maisurvey_survey {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_survey/Resources/Private/Language/Default/locallang_tca.xlf:plugin.survey.title
+                tt_content_defValues {
+                    CType = maisurvey_survey
+                }
+            }
+            maisearch_search {
+                iconIdentifier = mai-content
+                title = LLL:EXT:mai_search/Resources/Private/Language/Default/locallang_tca.xlf:plugin.search.title
+                tt_content_defValues {
+                    CType = maisearch_search
                 }
             }
         }
