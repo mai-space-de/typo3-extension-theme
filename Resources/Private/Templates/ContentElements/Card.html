@@ -1,4 +1,5 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="bodytext" value="{record -> f:render.text(field: 'bodytext')}" />
 <f:variable name="cardClass" value="offer-card"/>
@@ -18,7 +19,7 @@
 
     <div class="offer-card__body">
         <f:if condition="{header}">
-            <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'offer-card__title'}"/>
+            <theme:atom.heading level="{data.header_layout}" text="{header}" class="offer-card__title"/>
         </f:if>
 
         <f:if condition="{bodytext}">

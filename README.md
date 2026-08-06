@@ -3,7 +3,7 @@
 [![TYPO3](https://img.shields.io/badge/TYPO3-13.4%20LTS-orange)](https://typo3.org/)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
-The **frontend component layer** for the entire extension set. All Fluid templates in feature extensions reference components defined here via `sitegeist/fluid-components`. `sitegeist/fluid-components` is never declared outside this extension. `mai_theme` is a practical runtime requirement for every extension that renders frontend output.
+The **frontend component layer** for the entire extension set. All Fluid templates in feature extensions reference components defined here via native TYPO3 Fluid Components (Fluid 4.3+). `mai_theme` is a practical runtime requirement for every extension that renders frontend output.
 
 **Requires:** TYPO3 13.4 LTS / 14.1 · PHP 8.2+
 

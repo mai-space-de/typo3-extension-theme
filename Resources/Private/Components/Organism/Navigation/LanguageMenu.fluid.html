@@ -1,0 +1,73 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:argument name="languages" type="array" optional="{false}" />
+<f:argument name="label" type="string" optional="{true}" />
+<f:argument name="listId" type="string" optional="{true}" default="mai-language-menu-list" />
+<mai:asset.css identifier="mai-language-menu"
+               src="EXT:mai_theme/Resources/Public/Scss/language-menu.scss"
+               priority="0"/>
+<mai:asset.js  identifier="mai-language-menu-js"
+               src="EXT:mai_theme/Resources/Public/JavaScript/language-menu.js"
+               defer="1"
+               priority="0"/>
+
+<f:if condition="{languages -> f:count()} > 1">
+
+    <f:comment>── Resolve current language for the toggle label ────────────────</f:comment>
+    <f:for each="{languages}" as="language">
+        <f:if condition="{language.isCurrent}">
+            <f:variable name="currentLanguage" value="{language}"/>
+        </f:if>
+    </f:for>
+
+    <nav class="mai-language-menu"
+         data-testid="language-switcher"
+         aria-label="{f:if(condition: label, then: label, else: '{f:translate(key: \'language_menu.label\', extensionName: \'mai_theme\')}')}">
+
+        <f:comment>── Disclosure toggle: globe + current language + chevron ────</f:comment>
+        <button type="button"
+                class="mai-language-menu__toggle"
+                data-testid="language-toggle"
+                aria-expanded="false"
+                aria-controls="{listId}">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="mai-language-menu__globe"
+                 aria-hidden="true"
+                 focusable="false"
+                 width="18" height="18" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span class="visually-hidden">{f:translate(key: 'language_menu.label', extensionName: 'mai_theme')}: </span>
+            <span class="mai-language-menu__current">{currentLanguage.label}</span>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="mai-language-menu__arrow"
+                 aria-hidden="true"
+                 focusable="false"
+                 width="12" height="9" viewBox="0 0 12 9">
+                <polygon points="1 0, 11 0, 6 8"/>
+            </svg>
+        </button>
+
+        <f:comment>── Dropdown panel ────────────────────────────────────────────</f:comment>
+        <ul id="{listId}" class="mai-language-menu__list" hidden>
+            <f:for each="{languages}" as="language">
+                <li class="mai-language-menu__item{f:if(condition: language.isCurrent, then: ' mai-language-menu__item--current')}"
+                    lang="{language.hreflang}">
+                    <a href="{language.url}"
+                       class="mai-language-menu__link{f:if(condition: language.isCurrent, then: ' mai-language-menu__link--current')}"
+                       hreflang="{language.hreflang}"
+                       {f:if(condition: language.direction, then: 'dir="{language.direction}"')}
+                       {f:if(condition: language.isCurrent, then: 'aria-current="true"')}>
+                        {language.label}
+                    </a>
+                </li>
+            </f:for>
+        </ul>
+    </nav>
+</f:if>
+</html>

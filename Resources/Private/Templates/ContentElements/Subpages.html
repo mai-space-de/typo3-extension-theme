@@ -1,4 +1,5 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
 <f:comment>
     Subpage offer-card grid (theme interpretation of menu_subpages).
 
@@ -16,7 +17,7 @@
              {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
         <f:if condition="{header}">
             <header class="mai-subpages__header">
-                <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-subpages__title'}"/>
+                <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-subpages__title"/>
                 <f:if condition="{subheader}">
                     <p class="mai-subpages__subtitle">{subheader}</p>
                 </f:if>

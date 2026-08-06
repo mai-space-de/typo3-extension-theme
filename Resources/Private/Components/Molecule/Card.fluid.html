@@ -1,0 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+<f:argument name="image" type="mixed" optional="{true}" />
+<f:argument name="title" type="string" optional="{false}" />
+<f:argument name="text" type="string" optional="{true}" />
+<f:argument name="href" type="string" optional="{true}" />
+<article class="mai-card">
+    <f:if condition="{image}">
+        <theme:atom.image image="{image}" alt="{title}"/>
+    </f:if>
+    <theme:atom.heading level="3" text="{title}"/>
+    <f:if condition="{text}"><p class="mai-card__text">{text -> f:format.raw()}</p></f:if>
+    <f:if condition="{href}">
+        <theme:atom.button href="{href}" variant="secondary">Mehr erfahren</theme:atom.button>
+    </f:if>
+</article>
+</html>

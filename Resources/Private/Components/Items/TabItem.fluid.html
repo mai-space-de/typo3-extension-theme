@@ -1,0 +1,14 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:argument name="item" type="mixed" optional="{false}" />
+<f:argument name="index" type="integer" optional="{false}" />
+<f:argument name="parentUid" type="integer" optional="{false}" />
+<f:argument name="isSelected" type="boolean" optional="{true}" default="false" />
+<section role="tabpanel"
+         id="tabpanel-{parentUid}-{index}"
+         aria-labelledby="tab-{parentUid}-{index}"
+         tabindex="0"
+         hidden="{f:if(condition: isSelected, then: '', else: 'hidden')}"
+         class="mai-tabs__panel">
+    {item.data.content -> f:format.html()}
+</section>
+</html>

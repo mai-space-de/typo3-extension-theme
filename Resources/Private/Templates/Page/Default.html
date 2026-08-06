@@ -1,5 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
       data-namespace-typo3-fluid="true">
 <f:layout name="Default"/>
 
@@ -39,16 +40,16 @@
     <f:mark.contentArea colPos="1">
         <f:cObject typoscriptObjectPath="lib.templates.columns.popovers"/>
     </f:mark.contentArea>
-    <f:render partial="Organism/Navigation/SkipLinks" arguments="{_all}"/>
-    <f:render partial="Organism/Topbar" arguments="{_all}"/>
-    <f:render partial="Organism/Header" arguments="{_all}"/>
+    <theme:organism.navigation.skipLinks/>
+    <theme:organism.topbar languages="{languages}" settings="{settings}"/>
+    <theme:organism.header menuMain="{menuMain}" languages="{languages}" settings="{settings}" siteName="{siteName}"/>
     <main id="main" role="main" tabindex="-1">
         <f:mark.contentArea colPos="3">
             <f:cObject typoscriptObjectPath="lib.templates.columns.beforeContent"/>
         </f:mark.contentArea>
         <f:if condition="{hero}">
             <f:else>
-                <f:render partial="Molecule/PageHeading" arguments="{pageHeading: pageHeading}"/>
+                <theme:molecule.pageHeading pageHeading="{pageHeading}"/>
             </f:else>
         </f:if>
         <f:mark.contentArea colPos="0">
@@ -59,7 +60,7 @@
         <f:mark.contentArea colPos="4">
             <f:cObject typoscriptObjectPath="lib.templates.columns.afterContent"/>
         </f:mark.contentArea>
-        <f:render partial="Organism/Footer" arguments="{_all}"/>
+        <theme:organism.footer menuMain="{menuMain}" footerMain="{footerMain}" settings="{settings}" siteName="{siteName}"/>
         <f:mark.contentArea colPos="5">
             <f:cObject typoscriptObjectPath="lib.templates.columns.footer"/>
         </f:mark.contentArea>

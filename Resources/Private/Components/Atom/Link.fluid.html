@@ -1,0 +1,24 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:argument name="link" type="string" optional="{true}" />
+<f:argument name="href" type="string" optional="{true}" />
+<f:argument name="target" type="string" optional="{true}" />
+<f:argument name="rel" type="string" optional="{true}" />
+<f:argument name="ariaLabel" type="string" optional="{true}" />
+<f:argument name="class" type="string" optional="{true}" />
+<f:if condition="{link}">
+    <f:then>
+        <f:link.typolink parameter="{link}"
+                         class="mai-link {class}"
+                         additionalAttributes="{'aria-label': ariaLabel}"><f:slot /></f:link.typolink>
+    </f:then>
+    <f:else>
+        <a href="{href}"
+           class="mai-link {class}"
+           target="{target}"
+           rel="{f:if(condition: '{target} == \'_blank\'', then: 'noopener noreferrer', else: rel)}"
+           aria-label="{ariaLabel}"><f:slot /></a>
+    </f:else>
+</f:if>
+</html>

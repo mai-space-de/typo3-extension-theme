@@ -1,0 +1,38 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+<f:argument name="items" type="array" optional="{false}" />
+<f:argument name="data" type="array" optional="{false}" />
+<f:argument name="record" type="array" optional="{true}" />
+<f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
+<f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
+<mai:asset.css identifier="mai-tabs-css"
+               src="EXT:mai_theme/Resources/Public/Scss/tabs-widget.scss"
+               priority="0"/>
+<mai:asset.js  identifier="mai-tabs-js"
+               src="EXT:mai_theme/Resources/Public/JavaScript/tabs.js"
+               defer="1"
+               priority="0"/>
+<section class="mai-tabs" data-ce-uid="{data.uid}" aria-label="{f:if(condition: header, then: header, else: 'Tabs')}">
+    <div role="tablist"
+         class="mai-tabs__list">
+        <f:if condition="{items.0}">
+        <f:for each="{items}" as="item" iteration="it">
+            <button type="button"
+                    role="tab"
+                    id="tab-{data.uid}-{it.cycle}"
+                    aria-controls="tabpanel-{data.uid}-{it.cycle}"
+                    aria-selected="{f:if(condition: it.isFirst, then: 'true', else: 'false')}"
+                    tabindex="{f:if(condition: it.isFirst, then: '0', else: '-1')}"
+                    class="mai-tabs__tab">{item.data.tab_title}</button>
+        </f:for>
+    </f:if>
+    </div>
+    <f:if condition="{items.0}">
+        <f:for each="{items}" as="item" iteration="it">
+            <theme:items.tabItem item="{item}" index="{it.cycle}" parentUid="{data.uid}" isSelected="{it.isFirst}"/>
+        </f:for>
+    </f:if>
+</section>
+</html>

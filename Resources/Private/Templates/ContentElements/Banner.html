@@ -1,5 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
       data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
@@ -20,7 +21,7 @@
     </f:if>
     <div class="mai-banner__content">
         <f:if condition="{header}">
-            <f:render partial="Atom/Heading" arguments="{level: data.header_layout, text: header, class: 'mai-banner__title'}"/>
+            <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-banner__title"/>
         </f:if>
         <f:if condition="{bodytext}">
             <div class="mai-banner__body">{bodytext}</div>

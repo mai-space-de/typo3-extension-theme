@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Maispace\MaiTheme\Components\ComponentCollection;
 use Maispace\MaiTheme\Service\BackendThemeService;
 
 defined('TYPO3') or exit('Access denied.');
@@ -17,3 +18,6 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['form']['yamlConfigurations'][1700000001]
 
 $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['mai_theme_default'] =
     'EXT:mai_theme/Configuration/RTE/Default.yaml';
+
+// Global Fluid namespace: <theme:atom.button>, <theme:molecule.card>, etc.
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['theme'] = [ComponentCollection::class];

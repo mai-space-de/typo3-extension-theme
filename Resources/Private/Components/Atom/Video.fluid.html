@@ -1,0 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:argument name="file" type="mixed" optional="{true}" />
+<f:argument name="youtubeId" type="string" optional="{true}" />
+<f:argument name="vimeoId" type="string" optional="{true}" />
+<f:argument name="poster" type="mixed" optional="{true}" />
+<f:argument name="title" type="string" optional="{true}" />
+<f:argument name="type" type="string" optional="{true}" default="content" />
+<f:argument name="class" type="string" optional="{true}" />
+<mai:video.video file="{file}"
+                 youtubeId="{youtubeId}"
+                 vimeoId="{vimeoId}"
+                 poster="{poster}"
+                 title="{title}"
+                 type="{type}"
+                 class="mai-video {class}"/>
+</html>

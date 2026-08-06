@@ -1,0 +1,59 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+<f:argument name="item" type="array" optional="{false}" />
+<f:argument name="depth" type="integer" optional="{false}" default="0" />
+<f:variable name="submenuId" value="mai-submenu-{item.data.uid}-{depth}"/>
+
+<li class="mai-menubar__item{f:if(condition: item.active, then: ' is-active')}{f:if(condition: item.hasSubpages, then: ' has-submenu')}">
+
+    <f:comment>── Plain navigation link (never a toggle) ───────────────────────</f:comment>
+    <a href="{item.link}"
+       class="mai-menubar__link{f:if(condition: item.current, then: ' mai-menubar__link--current')}"
+       {f:if(condition: item.target, then: 'target="{item.target}" rel="noopener noreferrer"')}
+       {f:if(condition: item.current, then: 'aria-current="page"')}>
+        <span class="mai-menubar__link-label">{item.title}</span>
+    </a>
+
+    <f:comment>── Sub-menu disclosure button (only when children exist) ────────</f:comment>
+    <f:if condition="{item.hasSubpages}">
+        <button type="button"
+                class="mai-menubar__toggle mai-menubar__toggle--depth-{depth}"
+                aria-expanded="false"
+                aria-controls="{submenuId}"
+                aria-label="{f:translate(key: 'menubar.submenu_label', arguments: '{0: item.title}', extensionName: 'mai_theme')}">
+            <f:if condition="{depth} == 0">
+                <f:then>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="mai-menubar__arrow mai-menubar__arrow--down"
+                         aria-hidden="true"
+                         focusable="false"
+                         width="12" height="9" viewBox="0 0 12 9">
+                        <polygon points="1 0, 11 0, 6 8"/>
+                    </svg>
+                </f:then>
+                <f:else>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="mai-menubar__arrow mai-menubar__arrow--right"
+                         aria-hidden="true"
+                         focusable="false"
+                         width="9" height="12" viewBox="0 0 9 12">
+                        <polygon points="0 1, 0 11, 8 6"/>
+                    </svg>
+                </f:else>
+            </f:if>
+        </button>
+
+        <f:comment>── Sub-menu (recursive) ─────────────────────────────────</f:comment>
+        <f:variable name="nextDepth" value="{depth + 1}"/>
+        <ul id="{submenuId}"
+            class="mai-menubar__submenu mai-menubar__submenu--depth-{nextDepth}"
+            hidden>
+            <f:for each="{item.children}" as="child">
+                <theme:organism.navigation.menubarItem item="{child}" depth="{nextDepth}"/>
+            </f:for>
+        </ul>
+    </f:if>
+
+</li>
+</html>

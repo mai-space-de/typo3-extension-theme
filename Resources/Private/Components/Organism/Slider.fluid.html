@@ -1,0 +1,37 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+<f:argument name="items" type="array" optional="{false}" />
+<f:argument name="data" type="array" optional="{false}" />
+<f:argument name="record" type="array" optional="{true}" />
+<f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
+<f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
+<mai:asset.css identifier="mai-slider-css"
+               src="EXT:mai_theme/Resources/Public/Scss/slider-widget.scss"
+               priority="0"/>
+<mai:asset.js  identifier="mai-slider-js"
+               src="EXT:mai_theme/Resources/Public/JavaScript/slider.js"
+               defer="1"
+               priority="0"/>
+<section class="mai-slider"
+         data-ce-uid="{data.uid}"
+         role="region"
+         aria-roledescription="carousel"
+         aria-label="{f:if(condition: header, then: header, else: 'Carousel')}">
+    <f:if condition="{header}">
+        <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-slider__title"/>
+    </f:if>
+    <f:if condition="{items.0}">
+        <f:then>
+            <f:spaceless>
+                <div class="mai-slider__track" aria-live="polite">
+                    <f:for each="{items}" as="item" iteration="it">
+                        <theme:items.sliderItem item="{item}" index="{it.cycle}" total="{it.total}" parentUid="{data.uid}"/>
+                    </f:for>
+                </div>
+            </f:spaceless>
+        </f:then>
+    </f:if>
+</section>
+</html>

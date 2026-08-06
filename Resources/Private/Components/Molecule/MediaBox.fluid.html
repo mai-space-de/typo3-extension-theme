@@ -1,0 +1,15 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+<f:argument name="image" type="mixed" optional="{false}" />
+<f:argument name="alt" type="string" optional="{true}" />
+<f:argument name="caption" type="string" optional="{true}" />
+<f:argument name="overlay" type="string" optional="{true}" />
+<f:argument name="class" type="string" optional="{true}" />
+<div class="mai-media-box {class}">
+    <theme:atom.figure image="{image}" alt="{alt}" caption="{caption}"/>
+    <f:if condition="{overlay}">
+        <div class="mai-media-box__overlay">{overlay -> f:format.raw()}</div>
+    </f:if>
+</div>
+</html>

@@ -1,0 +1,14 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:argument name="image" type="mixed" optional="{false}" />
+<f:argument name="alt" type="string" optional="{true}" />
+<f:argument name="class" type="string" optional="{true}" />
+<f:argument name="elementUid" type="string" optional="{true}" />
+<f:argument name="critical" type="string" optional="{true}" default="auto" />
+<mai:image.picture image="{image}"
+                   alt="{alt}"
+                   class="mai-picture {class}"
+                   elementUid="{elementUid}"
+                   critical="{critical}"/>
+</html>

@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+<f:argument name="items" type="array" optional="{false}" />
+<f:argument name="data" type="array" optional="{false}" />
+<mai:asset.css identifier="mai-accordion-css"
+               src="EXT:mai_theme/Resources/Public/Scss/accordion-widget.scss"
+               priority="0"/>
+<section class="mai-accordion"
+         data-ce-uid="{data.uid}"
+         aria-label="{f:if(condition: data.header, then: data.header, else: 'Accordion')}">
+    <f:if condition="{data.header}">
+        <theme:atom.heading level="{data.header_layout}" text="{data.header}" class="mai-accordion__title"/>
+    </f:if>
+    <f:if condition="{items.0}">
+        <f:for each="{items}" as="item" iteration="it">
+            <theme:items.accordionItem item="{item}" index="{it.cycle}" parentUid="{data.uid}"/>
+        </f:for>
+    </f:if>
+</section>
+</html>

@@ -1,0 +1,8 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:argument name="style" type="string" optional="{true}" default="solid" />
+<f:argument name="color" type="string" optional="{true}" />
+<f:argument name="class" type="string" optional="{true}" />
+<hr class="mai-divider mai-divider--{style} {class}"
+    role="presentation"
+    style="{f:if(condition: color, then: '--local-divider-color: {color};')}"/>
+</html>

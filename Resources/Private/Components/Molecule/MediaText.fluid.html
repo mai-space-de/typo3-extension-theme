@@ -1,0 +1,27 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+<f:argument name="image" type="mixed" optional="{true}" />
+<f:argument name="title" type="string" optional="{true}" />
+<f:argument name="text" type="string" optional="{true}" />
+<f:argument name="mediaPosition" type="integer" optional="{true}" default="26" />
+<div class="mai-mediatext mai-mediatext--{f:if(condition: '{mediaPosition} == 25', then: 'right', else: 'left')}">
+    <f:if condition="{image}">
+        <f:variable name="imageAlt" value="{title}" />
+        <f:if condition="{image.properties.alternative}">
+            <f:variable name="imageAlt" value="{image.properties.alternative}" />
+        </f:if>
+        <div class="mai-mediatext__media">
+            <theme:atom.image image="{image}" alt="{imageAlt}"/>
+        </div>
+    </f:if>
+    <div class="mai-mediatext__content">
+        <f:if condition="{title}">
+            <theme:atom.heading level="2" text="{title}" class="mai-mediatext__title"/>
+        </f:if>
+        <f:if condition="{text}">
+            <div class="mai-mediatext__body">{text}</div>
+        </f:if>
+    </div>
+</div>
+</html>

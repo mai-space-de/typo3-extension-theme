@@ -1,0 +1,24 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:argument name="image" type="mixed" optional="{false}" />
+<f:argument name="alt" type="string" optional="{true}" />
+<f:argument name="caption" type="string" optional="{true}" />
+<f:argument name="class" type="string" optional="{true}" />
+<f:argument name="id" type="string" optional="{true}" />
+<f:argument name="breakpoints" type="mixed" optional="{true}" />
+<f:argument name="sizes" type="string" optional="{true}" />
+<mai:image.figure caption="{caption}" class="mai-figure {class}" id="{id}">
+    <f:if condition="{breakpoints}">
+        <f:then>
+            <mai:image.responsiveImage image="{image}"
+                                       breakpoints="{breakpoints}"
+                                       sizes="{sizes}"
+                                       alt="{alt}"/>
+        </f:then>
+        <f:else>
+            <mai:image.picture image="{image}" alt="{alt}"/>
+        </f:else>
+    </f:if>
+</mai:image.figure>
+</html>
