@@ -51,7 +51,7 @@
                             </f:if>
 
                             <f:if condition="{item.data.abstract}">
-                                <div class="offer-card__text">{item.data.abstract -> f:format.nl2br()}</div>
+                                <div class="offer-card__text"><f:render.text record="{item.data}" field="abstract" /></div>
                             </f:if>
 
                             <f:if condition="{item.link}">

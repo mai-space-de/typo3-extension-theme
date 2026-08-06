@@ -1,0 +1,71 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    PKG: Prefix Example Template
+    
+    This template demonstrates the new PKG: prefix for system resources.
+    PKG: is the modern alternative to EXT: for package resources in TYPO3 v14.
+    
+    Syntax: PKG:vendor/package-name:path/within/package
+    
+    Examples:
+    - PKG:maispace/mai-theme:Resources/Public/Scss/main.scss
+    - PKG:maispace/mai-assets:Resources/Public/JavaScript/app.js
+    - PKG:maispace/mai-theme:Resources/Public/Icons/logo.svg
+    
+    Benefits:
+    - Unified resource API (PKG:, FAL:, URI:)
+    - Better caching and performance
+    - Consistent with modern TYPO3 architecture
+    - Backward compatible with EXT: (both work)
+</f:comment>
+
+<f:section name="HeadAssets">
+    <f:comment>
+        Using PKG: prefix for CSS/SCSS files
+        Note: EXT: still works, but PKG: is the recommended approach
+    </f:comment>
+    
+    <mai:asset.css identifier="mai-theme-fonts-pkg"
+                   src="PKG:maispace/mai-theme:Resources/Public/Scss/fonts.scss"
+                   priority="1"/>
+    
+    <mai:asset.css identifier="mai-theme-main-pkg"
+                   src="PKG:maispace/mai-theme:Resources/Public/Scss/main.scss"
+                   priority="1"/>
+    
+    <f:comment>
+        Using PKG: prefix for JavaScript files
+    </f:comment>
+    
+    <mai:asset.js identifier="mai-app-pkg"
+                  src="PKG:maispace/mai-theme:Resources/Public/JavaScript/app.js"/>
+    
+    <f:comment>
+        Using PKG: prefix for SVG icons
+    </f:comment>
+    
+    <mai:svg.inline src="PKG:maispace/mai-theme:Resources/Public/Icons/logo.svg"
+                    title="BGM Pulheim"
+                    class="site-logo"/>
+</f:section>
+
+<f:section name="Main">
+    <f:comment>
+        Traditional EXT: syntax (still supported)
+    </f:comment>
+    
+    <mai:asset.css identifier="mai-theme-fonts-ext"
+                   src="EXT:mai_theme/Resources/Public/Scss/fonts.scss"
+                   priority="1"/>
+    
+    <f:comment>
+        Modern PKG: syntax (recommended)
+    </f:comment>
+    
+    <mai:asset.css identifier="mai-theme-fonts-pkg"
+                   src="PKG:maispace/mai-theme:Resources/Public/Scss/fonts.scss"
+                   priority="1"/>
+</f:section>
+</html>

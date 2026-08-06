@@ -12,7 +12,7 @@
         <f:if condition="{data.tx_maitheme_address}">
             <div class="mai-contactinfo__row">
                 <dt class="mai-contactinfo__label">Adresse</dt>
-                <dd class="mai-contactinfo__value">{data.tx_maitheme_address -> f:format.nl2br()}</dd>
+                <dd class="mai-contactinfo__value"><f:render.text record="{record}" field="tx_maitheme_address" /></dd>
             </div>
         </f:if>
         <f:if condition="{data.tx_maitheme_phone}">
@@ -34,7 +34,7 @@
         <f:if condition="{data.tx_maitheme_opening_hours}">
             <div class="mai-contactinfo__row">
                 <dt class="mai-contactinfo__label">Öffnungszeiten</dt>
-                <dd class="mai-contactinfo__value">{data.tx_maitheme_opening_hours -> f:format.nl2br()}</dd>
+                <dd class="mai-contactinfo__value"><f:render.text record="{record}" field="tx_maitheme_opening_hours" /></dd>
             </div>
         </f:if>
     </dl>
