@@ -92,7 +92,7 @@
                                     arguments="{query: query, type: typeKey, page: 1}"
                                     class="mai-search__filter{f:if(condition: '{type} == {typeKey}', then: ' is-active')}"
                                 >
-                                    {typeKey}
+                                    <f:translate key="search.type.{typeKey}" default="{typeKey}" />
                                     <span class="mai-search__filter-count">({typeCount})</span>
                                 </f:link.action>
                             </li>
@@ -141,7 +141,9 @@
                                     </f:if>
                                     <footer class="mai-search__meta">
                                         <f:if condition="{result.type}">
-                                            <span class="mai-search__type">{result.type}</span>
+                                            <span class="mai-search__type">
+                                                <f:translate key="search.type.{result.type}" default="{result.type}" />
+                                            </span>
                                         </f:if>
                                         <f:if condition="{result.date}">
                                             <time class="mai-search__date" datetime="{result.date -> f:format.date(format: 'Y-m-d')}">
