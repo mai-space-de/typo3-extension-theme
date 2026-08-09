@@ -11,7 +11,10 @@
     <maiTurbo:frame id="mai-search-results">
         <section class="mai-search" aria-label="{f:translate(key: 'search.label', default: 'Site search')}">
             <f:form action="results" method="get" name="search" class="mai-search__form" role="search">
-                <div class="mai-search__field">
+                <div
+                    class="mai-search__field"
+                    data-search-suggest="{f:if(condition: '{suggestEnabled}', then: '1')}"
+                >
                     <label for="search-query" class="mai-search__label">
                         <f:translate key="search.placeholder" default="Search..."/>
                     </label>
@@ -21,8 +24,11 @@
                         value="{query}"
                         placeholder="{f:translate(key: 'search.placeholder', default: 'Search...')}"
                         class="mai-search__input"
-                        additionalAttributes="{autocomplete: 'off', type: 'search', 'data-testid': 'search-input'}"
+                        additionalAttributes="{autocomplete: 'off', type: 'search', 'data-testid': 'search-input', 'data-search-suggest-input': '1'}"
                     />
+                    <f:if condition="{suggestEnabled}">
+                        <ul class="mai-search__suggest-list" data-search-suggest-list hidden="hidden" role="listbox"></ul>
+                    </f:if>
                     <f:form.submit
                         value="{f:translate(key: 'search.submit', default: 'Search')}"
                         class="mai-search__submit"

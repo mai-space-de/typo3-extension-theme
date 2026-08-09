@@ -5,8 +5,8 @@
 <f:comment>
     Search results organism — overrides `EXT:mai_search/Resources/Private/Templates/Search/Results.html`.
     Assigned variables from SearchController:
-        query, type, results, count, types, typeTotal, page, perPage, totalPages,
-        prevPage, nextPage, ragEnabled, synthesisResult
+        query, type, results, count, facets, page, perPage, totalPages,
+        prevPage, nextPage, ragEnabled, suggestEnabled, synthesisResult
     Visual language: BGM Design System (NewsCard / EventRow / form tokens).
 </f:comment>
 
@@ -23,7 +23,10 @@
             </f:if>
 
             <f:form action="results" method="get" name="search" class="mai-search__form" role="search">
-                <div class="mai-search__field">
+                <div
+                    class="mai-search__field"
+                    data-search-suggest="{f:if(condition: '{suggestEnabled}', then: '1')}"
+                >
                     <label for="search-query" class="mai-search__label">
                         <f:translate key="search.placeholder" default="Search..."/>
                     </label>
@@ -33,8 +36,11 @@
                         value="{query}"
                         placeholder="{f:translate(key: 'search.placeholder', default: 'Search...')}"
                         class="mai-search__input"
-                        additionalAttributes="{autocomplete: 'off', type: 'search', 'data-testid': 'search-input'}"
+                        additionalAttributes="{autocomplete: 'off', type: 'search', 'data-testid': 'search-input', 'data-search-suggest-input': '1'}"
                     />
+                    <f:if condition="{suggestEnabled}">
+                        <ul class="mai-search__suggest-list" data-search-suggest-list hidden="hidden" role="listbox"></ul>
+                    </f:if>
                     <f:if condition="{type}">
                         <f:form.hidden name="type" value="{type}" />
                     </f:if>
@@ -72,8 +78,8 @@
                 </aside>
             </f:if>
 
-            <f:if condition="{types}">
-                <nav class="mai-search__filters" aria-label="{f:translate(key: 'search.filters.label', default: 'Filter by type')}">
+            <f:for each="{facets}" as="facet">
+                <nav class="mai-search__filters" aria-label="{f:translate(key: 'search.filters.label', default: 'Filter by {0}', arguments: '{0: facet.label}')}">
                     <ul class="mai-search__filters-list">
                         <li>
                             <f:link.action
@@ -82,24 +88,24 @@
                                 class="mai-search__filter{f:if(condition: '!{type}', then: ' is-active')}"
                             >
                                 <f:translate key="search.filters.all" default="All" />
-                                <span class="mai-search__filter-count">({typeTotal})</span>
+                                <span class="mai-search__filter-count">({facet.total})</span>
                             </f:link.action>
                         </li>
-                        <f:for each="{types}" as="typeCount" key="typeKey">
+                        <f:for each="{facet.values}" as="facetValue">
                             <li>
                                 <f:link.action
                                     action="results"
-                                    arguments="{query: query, type: typeKey, page: 1}"
-                                    class="mai-search__filter{f:if(condition: '{type} == {typeKey}', then: ' is-active')}"
+                                    arguments="{query: query, type: facetValue.value, page: 1}"
+                                    class="mai-search__filter{f:if(condition: '{facetValue.active}', then: ' is-active')}"
                                 >
-                                    <f:translate key="search.type.{typeKey}" default="{typeKey}" />
-                                    <span class="mai-search__filter-count">({typeCount})</span>
+                                    <f:translate key="search.type.{facetValue.value}" default="{facetValue.label}" />
+                                    <span class="mai-search__filter-count">({facetValue.count})</span>
                                 </f:link.action>
                             </li>
                         </f:for>
                     </ul>
                 </nav>
-            </f:if>
+            </f:for>
 
             <f:if condition="{query}">
                 <p class="mai-search__count" role="status">
