@@ -10,7 +10,7 @@
         <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-socialmedia__title"/>
     </f:if>
     <f:if condition="{bodytext}">
-        <ul class="mai-socialmedia__list">{bodytext}</ul>
+        <ul class="mai-socialmedia__list">{bodytext -> f:format.raw()}</ul>
     </f:if>
 </section>
 </html>

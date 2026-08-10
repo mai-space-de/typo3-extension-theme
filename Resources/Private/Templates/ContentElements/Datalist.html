@@ -10,7 +10,7 @@
         <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-datalist__title"/>
     </f:if>
     <f:if condition="{bodytext}">
-        <dl class="mai-datalist__list">{bodytext}</dl>
+        <dl class="mai-datalist__list">{bodytext -> f:format.raw()}</dl>
     </f:if>
 </section>
 </html>

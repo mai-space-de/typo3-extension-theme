@@ -22,7 +22,7 @@
         </consent:gate>
     </div>
     <f:if condition="{bodytext}">
-        <p class="mai-map__description">{bodytext}</p>
+        <p class="mai-map__description">{bodytext -> f:format.raw()}</p>
     </f:if>
 </section>
 </html>

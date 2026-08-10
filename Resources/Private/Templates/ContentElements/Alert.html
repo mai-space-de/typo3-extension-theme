@@ -12,7 +12,7 @@
             <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-alert__title"/>
         </f:if>
         <f:if condition="{bodytext}">
-            <div class="mai-alert__body">{bodytext}</div>
+            <div class="mai-alert__body">{bodytext -> f:format.raw()}</div>
         </f:if>
     </div>
 </aside>

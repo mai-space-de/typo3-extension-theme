@@ -20,7 +20,7 @@
             </f:if>
 
             <f:if condition="{bodytext}">
-                <div class="hero__body">{bodytext}</div>
+                <div class="hero__body">{bodytext -> f:format.raw()}</div>
             </f:if>
 
             <f:if condition="{data.tx_maitheme_link}">

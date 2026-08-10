@@ -11,7 +11,7 @@
         <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-callout__title"/>
     </f:if>
     <f:if condition="{bodytext}">
-        <div class="mai-callout__body">{bodytext}</div>
+        <div class="mai-callout__body">{bodytext -> f:format.raw()}</div>
     </f:if>
 </aside>
 </html>

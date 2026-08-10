@@ -6,7 +6,9 @@
     Search results organism — overrides `EXT:mai_search/Resources/Private/Templates/Search/Results.html`.
     Assigned variables from SearchController:
         query, type, results, count, facets, page, perPage, totalPages,
-        prevPage, nextPage, ragEnabled, suggestEnabled, synthesisResult
+        prevPage, nextPage, ragEnabled, suggestEnabled, synthesisResult,
+        ragStreaming, historyPayload, languageCode, ragContextPayload,
+        ragProviderUnavailable
     Visual language: BGM Design System (NewsCard / EventRow / form tokens).
 </f:comment>
 
@@ -17,7 +19,7 @@
             <f:if condition="{query}">
                 <f:else>
                     <p class="mai-search__lead">
-                        <f:translate key="search.lead" default="Finden Sie Angebote, Neuigkeiten und Seiten rund um Begleitung geflüchteter Menschen in Pulheim."/>
+                        <f:translate key="search.lead"/>
                     </p>
                 </f:else>
             </f:if>
@@ -44,6 +46,11 @@
                     <f:if condition="{type}">
                         <f:form.hidden name="type" value="{type}" />
                     </f:if>
+                    <f:form.hidden
+                        name="history"
+                        value="{historyPayload}"
+                        additionalAttributes="{'data-search-history-field': '1'}"
+                    />
                     <f:form.submit
                         value="{f:translate(key: 'search.submit', default: 'Search')}"
                         class="mai-search__submit"
@@ -52,12 +59,20 @@
                 </div>
             </f:form>
 
+            <f:if condition="{ragProviderUnavailable}">
+                <aside class="mai-search__synthesis mai-search__synthesis--unavailable" role="status">
+                    <p class="mai-search__synthesis-body">
+                        <f:translate key="search.synthesis.unavailable"/>
+                    </p>
+                </aside>
+            </f:if>
+
             <f:if condition="{synthesisResult.answer}">
-                <aside class="mai-search__synthesis" aria-label="{f:translate(key: 'search.synthesis.label', default: 'AI-generated answer')}">
+                <aside class="mai-search__synthesis" aria-label="{f:translate(key: 'search.synthesis.label')}">
                     <header class="mai-search__synthesis-header">
                         <span class="mai-search__synthesis-icon" aria-hidden="true">AI</span>
                         <span class="mai-search__synthesis-title">
-                            <f:translate key="search.synthesis.title" default="AI Answer"/>
+                            <f:translate key="search.synthesis.title"/>
                         </span>
                     </header>
                     <p class="mai-search__synthesis-body">{synthesisResult.answer}</p>
@@ -72,7 +87,42 @@
                     </f:if>
                     <footer class="mai-search__synthesis-footer">
                         <small class="mai-search__synthesis-disclaimer">
-                            <f:translate key="search.synthesis.disclaimer" default="AI-generated summary — verify with search results below."/>
+                            <f:translate key="search.synthesis.disclaimer"/>
+                        </small>
+                    </footer>
+                </aside>
+            </f:if>
+
+            <f:if condition="{ragStreaming}">
+                <aside
+                    class="mai-search__synthesis mai-search__synthesis--streaming"
+                    aria-label="{f:translate(key: 'search.synthesis.label')}"
+                    data-search-stream="1"
+                    data-search-stream-query="{query}"
+                    data-search-stream-type="{type}"
+                    data-search-stream-history="{historyPayload}"
+                    data-search-stream-language="{languageCode}"
+                    data-search-stream-context="{ragContextPayload}"
+                    data-i18n-searching="{f:translate(key: 'search.synthesis.searching')}"
+                    data-i18n-loading="{f:translate(key: 'search.synthesis.loading')}"
+                    data-i18n-error="{f:translate(key: 'search.synthesis.error')}"
+                >
+                    <header class="mai-search__synthesis-header">
+                        <span class="mai-search__synthesis-icon" aria-hidden="true">AI</span>
+                        <span class="mai-search__synthesis-title">
+                            <f:translate key="search.synthesis.title"/>
+                        </span>
+                    </header>
+                    <p class="mai-search__synthesis-body" data-search-stream-answer aria-live="polite"></p>
+                    <p class="mai-search__synthesis-status" data-search-stream-status>
+                        <f:translate key="search.synthesis.loading"/>
+                    </p>
+                    <div data-search-stream-sources-wrapper hidden="hidden">
+                        <ul class="mai-search__synthesis-sources" data-search-stream-sources></ul>
+                    </div>
+                    <footer class="mai-search__synthesis-footer">
+                        <small class="mai-search__synthesis-disclaimer">
+                            <f:translate key="search.synthesis.disclaimer"/>
                         </small>
                     </footer>
                 </aside>

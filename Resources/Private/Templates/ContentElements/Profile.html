@@ -24,7 +24,7 @@
             <p class="mai-profile__role">{subheader}</p>
         </f:if>
         <f:if condition="{bodytext}">
-            <div class="mai-profile__bio">{bodytext}</div>
+            <div class="mai-profile__bio">{bodytext -> f:format.raw()}</div>
         </f:if>
     </div>
 </article>

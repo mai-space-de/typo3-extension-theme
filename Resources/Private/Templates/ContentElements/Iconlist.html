@@ -10,7 +10,7 @@
         <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-iconlist__title"/>
     </f:if>
     <f:if condition="{bodytext}">
-        <ul class="mai-iconlist__list">{bodytext}</ul>
+        <ul class="mai-iconlist__list">{bodytext -> f:format.raw()}</ul>
     </f:if>
 </section>
 </html>

@@ -213,6 +213,8 @@ new Field(
 
 new Field("tt_content", "tx_maitheme_link", $lang("field.link"))
     ->setConfig(new LinkConfig())
+    // Typolink targets are language-agnostic (t3://page?uid=…); inherit from DE.
+    ->setL10nMode("exclude")
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_link_text", $lang("field.link_text"))
@@ -221,6 +223,7 @@ new Field("tt_content", "tx_maitheme_link_text", $lang("field.link_text"))
 
 new Field("tt_content", "tx_maitheme_link_secondary", $lang("field.link_secondary"))
     ->setConfig(new LinkConfig())
+    ->setL10nMode("exclude")
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_link_secondary_text", $lang("field.link_secondary_text"))
@@ -280,6 +283,7 @@ new Field("tt_content", "tx_maitheme_accent", $lang("field.accent"))
             ["label" => $lang("accent.gold"), "value" => "gold"],
         ])
     )
+    ->setL10nMode("exclude")
     ->registerField();
 
 // ── Per-CType specific fields ─────────────────────────────────────────────────
@@ -291,6 +295,7 @@ new Field("tt_content", "tx_maitheme_icon_identifier", $lang("field.icon_identif
             ->setItems(\Maispace\MaiTheme\Icon\ContentIconCatalog::tcaItems())
             ->setDefault('')
     )
+    ->setL10nMode("exclude")
     ->registerField();
 
 new Field("tt_content", "tx_maitheme_icon_size", $lang("field.icon_size"))
@@ -303,6 +308,7 @@ new Field("tt_content", "tx_maitheme_icon_size", $lang("field.icon_size"))
             ["label" => $lang("iconsize.2xl"), "value" => "2xl"],
         ])
     )
+    ->setL10nMode("exclude")
     ->registerField();
 
 // Divider element

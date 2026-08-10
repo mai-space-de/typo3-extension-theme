@@ -277,3 +277,18 @@ To add an icon: drop the SVG into `Icons/Content/`, add it to
   collector (same class of bug the global `<mai:asset.css>` used to have — now
   fixed via `CompiledAssetPublisher`). When we wire component stylesheets for
   real, route that branch through `CompiledAssetPublisher` too.
+
+## 8. `f:render.text` and component arguments
+
+CE templates resolve text fields once via TYPO3's `f:render.text` (TCA-aware;
+returns already-escaped `UnsafeHTML`). Body copy is then output with
+`{bodytext -> f:format.raw()}`.
+
+**Do not** auto-escape that output a second time. Passing the value into a
+fluid-components string argument (e.g. `theme:atom.heading text="{header}"`)
+drops the `UnsafeHTML` marker; Fluid would then turn `Ladies'` into the visible
+entity soup `Ladies&#039;` (`&amp;#039;` in the HTML source).
+
+`Atom/Heading.fluid.html` therefore outputs `{text -> f:format.raw()}`. Callers
+must only pass HTML-safe strings (typically `f:render.text` results). Never pass
+raw editor input into `atom.heading` without escaping first.

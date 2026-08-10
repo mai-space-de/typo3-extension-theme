@@ -10,7 +10,7 @@
         <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-newsletter__title"/>
     </f:if>
     <f:if condition="{bodytext}">
-        <div class="mai-newsletter__intro">{bodytext}</div>
+        <div class="mai-newsletter__intro">{bodytext -> f:format.raw()}</div>
     </f:if>
     <div class="mai-newsletter__form">
         <f:cObject typoscriptObjectPath="tt_content.{data.CType}.20" data="{data}" table="tt_content" />

@@ -40,7 +40,7 @@
                 </button>
             </div>
             <f:if condition="{bodytext}">
-                <div class="mai-modal__body">{bodytext}</div>
+                <div class="mai-modal__body">{bodytext -> f:format.raw()}</div>
             </f:if>
         </div>
     </dialog>

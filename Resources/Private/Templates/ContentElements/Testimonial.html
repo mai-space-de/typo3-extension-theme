@@ -17,7 +17,7 @@
     </f:if>
     <blockquote class="mai-testimonial__blockquote">
         <f:if condition="{bodytext}">
-            <p class="mai-testimonial__text">{bodytext}</p>
+            <p class="mai-testimonial__text">{bodytext -> f:format.raw()}</p>
         </f:if>
         <f:if condition="{header}">
             <figcaption class="mai-testimonial__caption">

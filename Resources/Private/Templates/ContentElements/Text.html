@@ -11,7 +11,7 @@
         <p class="mai-text__subheader">{subheader}</p>
     </f:if>
     <f:if condition="{bodytext}">
-        <div class="mai-text__body">{bodytext}</div>
+        <div class="mai-text__body">{bodytext -> f:format.raw()}</div>
     </f:if>
 </article>
 </html>

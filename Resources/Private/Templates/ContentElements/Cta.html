@@ -14,7 +14,7 @@
             <p class="mai-cta__subtitle">{subheader}</p>
         </f:if>
         <f:if condition="{bodytext}">
-            <div class="mai-cta__body">{bodytext}</div>
+            <div class="mai-cta__body">{bodytext -> f:format.raw()}</div>
         </f:if>
         <f:if condition="{data.tx_maitheme_link}">
             <div class="mai-cta__actions">

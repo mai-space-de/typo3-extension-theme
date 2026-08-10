@@ -22,7 +22,7 @@
             <p class="mai-teaser__subtitle">{subheader}</p>
         </f:if>
         <f:if condition="{bodytext}">
-            <div class="mai-teaser__body">{bodytext}</div>
+            <div class="mai-teaser__body">{bodytext -> f:format.raw()}</div>
         </f:if>
         <f:if condition="{data.tx_maitheme_link}">
             <f:link.typolink parameter="{data.tx_maitheme_link}" class="mai-teaser__link">

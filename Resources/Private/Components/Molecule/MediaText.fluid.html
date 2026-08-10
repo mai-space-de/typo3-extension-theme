@@ -20,7 +20,7 @@
             <theme:atom.heading level="2" text="{title}" class="mai-mediatext__title"/>
         </f:if>
         <f:if condition="{text}">
-            <div class="mai-mediatext__body">{text}</div>
+            <div class="mai-mediatext__body">{text -> f:format.raw()}</div>
         </f:if>
     </div>
 </div>

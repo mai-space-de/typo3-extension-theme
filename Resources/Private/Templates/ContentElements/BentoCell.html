@@ -7,6 +7,6 @@
      data-ce-uid="{data.uid}"
      style="--col-span: {data.tx_maitheme_bento_colspan}; --row-span: {data.tx_maitheme_bento_rowspan};">
     <f:if condition="{header}"><h3>{header}</h3></f:if>
-    <f:if condition="{bodytext}">{bodytext}</f:if>
+    <f:if condition="{bodytext}">{bodytext -> f:format.raw()}</f:if>
 </div>
 </html>

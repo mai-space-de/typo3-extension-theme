@@ -8,7 +8,7 @@
         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <blockquote class="mai-quote__blockquote">
         <f:if condition="{bodytext}">
-            <p class="mai-quote__text">{bodytext}</p>
+            <p class="mai-quote__text">{bodytext -> f:format.raw()}</p>
         </f:if>
     </blockquote>
     <f:if condition="{header}">

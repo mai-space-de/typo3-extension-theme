@@ -26,7 +26,7 @@
             <p class="mai-featurebox__subtitle">{subheader}</p>
         </f:if>
         <f:if condition="{bodytext}">
-            <div class="mai-featurebox__body">{bodytext}</div>
+            <div class="mai-featurebox__body">{bodytext -> f:format.raw()}</div>
         </f:if>
         <f:if condition="{data.tx_maitheme_link}">
             <f:link.typolink parameter="{data.tx_maitheme_link}" class="mai-featurebox__link button{f:if(condition: data.tx_maitheme_accent, then: ' button-secondary')}">
