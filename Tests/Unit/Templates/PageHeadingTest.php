@@ -11,17 +11,17 @@ use PHPUnit\Framework\TestCase;
  */
 final class PageHeadingTest extends TestCase
 {
-    private const PARTIAL_PATH = __DIR__ . '/../../../Resources/Private/Partials/Molecule/PageHeading.html';
+    private const COMPONENT_PATH = __DIR__ . '/../../../Resources/Private/Components/Molecule/PageHeading.fluid.html';
 
     private const DEFAULT_TEMPLATE_PATH = __DIR__ . '/../../../Resources/Private/Templates/Page/Default.html';
 
     private const LANDING_TEMPLATE_PATH = __DIR__ . '/../../../Resources/Private/Templates/Page/Landing.html';
 
-    public function testPageHeadingPartialExistsAndRendersH1(): void
+    public function testPageHeadingComponentExistsAndRendersH1(): void
     {
-        self::assertFileExists(self::PARTIAL_PATH);
+        self::assertFileExists(self::COMPONENT_PATH);
 
-        $contents = (string) file_get_contents(self::PARTIAL_PATH);
+        $contents = (string) file_get_contents(self::COMPONENT_PATH);
 
         self::assertStringContainsString('data-namespace-typo3-fluid="true"', $contents);
         self::assertStringContainsString('<h1 class="mai-page__title">', $contents);
@@ -33,7 +33,7 @@ final class PageHeadingTest extends TestCase
         $contents = (string) file_get_contents(self::DEFAULT_TEMPLATE_PATH);
 
         self::assertMatchesRegularExpression(
-            '/<f:if condition="\{hero\}">[\s\S]*partial="Molecule\/PageHeading"[\s\S]*arguments="\{pageHeading: pageHeading\}"/',
+            '/<f:if condition="\{hero\}">[\s\S]*<f:else>[\s\S]*theme:molecule\.pageHeading pageHeading="\{pageHeading\}"/',
             $contents,
             'Default.html must render PageHeading only when no Hero CE is present',
         );
@@ -44,9 +44,9 @@ final class PageHeadingTest extends TestCase
         $contents = (string) file_get_contents(self::LANDING_TEMPLATE_PATH);
 
         self::assertMatchesRegularExpression(
-            '/partial="Molecule\/PageHeading"[\s\S]*arguments="\{pageHeading: pageHeading\}"/',
+            '/theme:molecule\.pageHeading pageHeading="\{pageHeading\}"/',
             $contents,
-            'Landing.html must pass pageHeading into the PageHeading partial',
+            'Landing.html must pass pageHeading into the PageHeading component',
         );
     }
 
