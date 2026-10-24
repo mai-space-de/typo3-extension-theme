@@ -292,7 +292,7 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maispace_timeline {
-                iconIdentifier = content-timeline
+                iconIdentifier = mai-timeline
                 title = LLL:EXT:mai_timeline/Resources/Private/Language/Default/locallang_db.xlf:ctype.timeline
                 tt_content_defValues {
                     CType = maispace_timeline
@@ -502,28 +502,28 @@ mod.wizards.newContentElement.wizardItems {
         show = *
         elements {
             maievents_view {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-events
                 title = LLL:EXT:mai_events/Resources/Private/Language/locallang_db.xlf:tt_content.CType.mai_events_view
                 tt_content_defValues {
                     CType = mai_events_view
                 }
             }
             maievents_list {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-events
                 title = LLL:EXT:mai_events/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
                 tt_content_defValues {
                     CType = maievents_list
                 }
             }
             mainews_list {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-news
                 title = LLL:EXT:mai_news/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
                 tt_content_defValues {
                     CType = mainews_list
                 }
             }
             mainews_rss {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-news-rss
                 title = LLL:EXT:mai_news/Resources/Private/Language/Default/locallang_tca.xlf:plugin.rss.title
                 tt_content_defValues {
                     CType = mainews_rss
@@ -558,7 +558,7 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maifaq_list {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-faq
                 title = LLL:EXT:mai_faq/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
                 tt_content_defValues {
                     CType = maifaq_list
@@ -572,21 +572,21 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maitestimonials_list {
-                iconIdentifier = mai-content
+                iconIdentifier = maispace_testimonials_list
                 title = LLL:EXT:mai_testimonials/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
                 tt_content_defValues {
                     CType = maitestimonials_list
                 }
             }
             maitestimonials_slider {
-                iconIdentifier = mai-content
+                iconIdentifier = maispace_testimonials_slider
                 title = LLL:EXT:mai_testimonials/Resources/Private/Language/Default/locallang_tca.xlf:plugin.slider.title
                 tt_content_defValues {
                     CType = maitestimonials_slider
                 }
             }
             maitestimonials_single {
-                iconIdentifier = mai-content
+                iconIdentifier = maispace_testimonials_single
                 title = LLL:EXT:mai_testimonials/Resources/Private/Language/Default/locallang_tca.xlf:plugin.single.title
                 tt_content_defValues {
                     CType = maitestimonials_single
@@ -631,7 +631,7 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maigallery_gallery {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-gallery
                 title = LLL:EXT:mai_gallery/Resources/Private/Language/Default/locallang.xlf:plugin.gallery.title
                 tt_content_defValues {
                     CType = maigallery_gallery
@@ -641,7 +641,7 @@ mod.wizards.newContentElement.wizardItems {
             // registered for existing content, hidden from the wizard for new content.
             mai_timeline_list {
                 disabled = 1
-                iconIdentifier = mai-content
+                iconIdentifier = mai-timeline
                 title = LLL:EXT:mai_timeline/Resources/Private/Language/Default/locallang_db.xlf:tt_content.CType.mai_timeline_list
                 tt_content_defValues {
                     CType = mai_timeline_list
@@ -683,7 +683,7 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maievents_registration {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-events-registration
                 title = LLL:EXT:mai_events/Resources/Private/Language/locallang_db.xlf:plugin.registration.title
                 tt_content_defValues {
                     CType = maievents_registration
@@ -697,7 +697,7 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             mainewsletter_newsletter {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-newsletter
                 title = LLL:EXT:mai_newsletter/Resources/Private/Language/Default/locallang.xlf:plugin.newsletter.title
                 tt_content_defValues {
                     CType = mainewsletter_newsletter
