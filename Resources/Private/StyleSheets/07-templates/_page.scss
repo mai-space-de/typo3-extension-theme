@@ -16,4 +16,17 @@
     margin-block-end: var(--space-sm);
 }
 
+// BGM-32 — News (doktype 120) and Event (doktype 121) detail pages render
+// the title immediately followed by free-form body content (richtext,
+// mediatext, heading blocks, …) with no shared wrapper class to hook into,
+// so the generic title/body rhythm above reads as "in einer Flucht" there.
+// `page-type-*-detail` is a presentational body class set in
+// Setup/page/body.typoscript purely for this scoping — it carries no markup
+// change in mai_news/mai_events themselves. List/calendar pages keep the
+// default rhythm since they use a different doktype (1).
+body.page-type-news-detail .mai-page__title,
+body.page-type-event-detail .mai-page__title {
+    margin-block-end: var(--space-2xl);
+}
+
 }

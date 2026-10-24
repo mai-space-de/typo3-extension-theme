@@ -8,6 +8,20 @@ page {
             wrap = <body id="page-|" class="
         }
 
+        # BGM-32: presentational hook for doktype-scoped CSS (News/Event detail
+        # pages render a title + body-only content shape with no other shared
+        # class — see 07-templates/_page.scss). Empty for every other doktype.
+        50 = CASE
+        50 {
+            key.data = page:doktype
+            120 = TEXT
+            120.value = page-type-news-detail
+            121 = TEXT
+            121.value = page-type-event-detail
+            default = TEXT
+            default.value =
+        }
+
         # Close class attribute and tag
         # (class content is appended by other extensions via stdWrap or COA items between 10 and 90)
         90 = TEXT
