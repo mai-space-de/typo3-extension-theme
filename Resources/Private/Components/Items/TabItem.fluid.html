@@ -3,12 +3,13 @@
 <f:argument name="index" type="integer" optional="{false}" />
 <f:argument name="parentUid" type="integer" optional="{false}" />
 <f:argument name="isSelected" type="boolean" optional="{true}" default="false" />
+<f:variable name="content" value="{item.record -> f:render.text(field: 'content')}" />
 <section role="tabpanel"
          id="tabpanel-{parentUid}-{index}"
          aria-labelledby="tab-{parentUid}-{index}"
          tabindex="0"
          hidden="{f:if(condition: isSelected, then: '', else: 'hidden')}"
          class="mai-tabs__panel">
-    {item.data.content -> f:format.html()}
+    {content -> f:format.raw()}
 </section>
 </html>

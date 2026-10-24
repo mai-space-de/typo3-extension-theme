@@ -205,6 +205,7 @@ tt_content {
             }
             orderBy = sort
             as = items
+            dataProcessing.20 = record-transformation
         }
     }
     maispace_faq < tt_content.maispace_accordion
@@ -228,6 +229,7 @@ tt_content {
                 references.fieldName = image
                 as = images
             }
+            dataProcessing.20 = record-transformation
         }
     }
 
@@ -244,6 +246,7 @@ tt_content {
             }
             orderBy = sort
             as = items
+            dataProcessing.20 = record-transformation
         }
     }
     maispace_tab < tt_content.maispace_tabs

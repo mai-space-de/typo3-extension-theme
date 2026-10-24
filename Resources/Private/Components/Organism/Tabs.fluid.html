@@ -19,13 +19,14 @@
          class="mai-tabs__list">
         <f:if condition="{items.0}">
         <f:for each="{items}" as="item" iteration="it">
+            <f:variable name="tabTitle" value="{item.record -> f:render.text(field: 'tab_title')}" />
             <button type="button"
                     role="tab"
                     id="tab-{data.uid}-{it.cycle}"
                     aria-controls="tabpanel-{data.uid}-{it.cycle}"
                     aria-selected="{f:if(condition: it.isFirst, then: 'true', else: 'false')}"
                     tabindex="{f:if(condition: it.isFirst, then: '0', else: '-1')}"
-                    class="mai-tabs__tab">{item.data.tab_title}</button>
+                    class="mai-tabs__tab">{tabTitle}</button>
         </f:for>
     </f:if>
     </div>

@@ -4,16 +4,18 @@
 <f:argument name="item" type="mixed" optional="{false}" />
 <f:argument name="index" type="integer" optional="{false}" />
 <f:argument name="parentUid" type="integer" optional="{false}" />
+<f:variable name="question" value="{item.record -> f:render.text(field: 'question')}" />
+<f:variable name="answer" value="{item.record -> f:render.text(field: 'answer')}" />
 <details class="mai-accordion__item"
          id="accordion-{parentUid}-{index}"
          data-index="{index}">
     <summary class="mai-accordion__header"
              id="accordion-summary-{parentUid}-{index}">
-        <span class="mai-accordion__question">{item.data.question}</span>
+        <span class="mai-accordion__question">{question}</span>
         <span class="mai-accordion__icon" aria-hidden="true">&#9660;</span>
     </summary>
     <div class="mai-accordion__panel" role="region" aria-labelledby="accordion-summary-{parentUid}-{index}">
-        {item.data.answer -> f:format.html()}
+        {answer -> f:format.raw()}
     </div>
 </details>
 </html>

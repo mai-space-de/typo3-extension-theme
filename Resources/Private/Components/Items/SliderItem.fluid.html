@@ -6,6 +6,8 @@
 <f:argument name="index" type="integer" optional="{false}" />
 <f:argument name="total" type="integer" optional="{false}" />
 <f:argument name="parentUid" type="integer" optional="{false}" />
+<f:variable name="headline" value="{item.record -> f:render.text(field: 'headline')}" />
+<f:variable name="bodytext" value="{item.record -> f:render.text(field: 'bodytext')}" />
 <div class="mai-slider__item"
     role="group"
     aria-roledescription="slide"
@@ -18,11 +20,11 @@
                            class="mai-slider__image"/>
     </f:if>
     <div class="mai-slider__body">
-        <f:if condition="{item.data.headline}">
-            <theme:atom.heading level="3" text="{item.data.headline}" class="mai-slider__headline"/>
+        <f:if condition="{headline}">
+            <theme:atom.heading level="3" text="{headline}" class="mai-slider__headline"/>
         </f:if>
-        <f:if condition="{item.data.bodytext}">
-            <div class="mai-slider__text">{item.data.bodytext -> f:format.html()}</div>
+        <f:if condition="{bodytext}">
+            <div class="mai-slider__text">{bodytext -> f:format.raw()}</div>
         </f:if>
         <f:if condition="{item.data.link}">
             <theme:atom.link link="{item.data.link}" class="mai-slider__link">{item.data.headline}</theme:atom.link>
