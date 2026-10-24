@@ -530,28 +530,28 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maijobs_list {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-jobs
                 title = LLL:EXT:mai_jobs/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
                 tt_content_defValues {
                     CType = maijobs_list
                 }
             }
             maijobs_detail {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-jobs
                 title = LLL:EXT:mai_jobs/Resources/Private/Language/Default/locallang_tca.xlf:plugin.detail.title
                 tt_content_defValues {
                     CType = maijobs_detail
                 }
             }
             mailocations_list {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-locations
                 title = LLL:EXT:mai_locations/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
                 tt_content_defValues {
                     CType = mailocations_list
                 }
             }
             mailocations_detail {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-locations
                 title = LLL:EXT:mai_locations/Resources/Private/Language/Default/locallang_tca.xlf:plugin.detail.title
                 tt_content_defValues {
                     CType = mailocations_detail
@@ -593,14 +593,14 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maiteam_view {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-team
                 title = LLL:EXT:mai_team/Resources/Private/Language/locallang_db.xlf:tt_content.CType.mai_team_view
                 tt_content_defValues {
                     CType = maiteam_view
                 }
             }
             maimember_list {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-member
                 title = LLL:EXT:mai_member/Resources/Private/Language/Default/locallang_tca.xlf:plugin.list.title
                 tt_content_defValues {
                     CType = maimember_list
@@ -610,7 +610,7 @@ mod.wizards.newContentElement.wizardItems {
             // registered for existing content, hidden from the wizard for new content.
             maimember_view {
                 disabled = 1
-                iconIdentifier = mai-content
+                iconIdentifier = mai-member
                 title = LLL:EXT:mai_member/Resources/Private/Language/locallang_db.xlf:tt_content.CType.mai_member_view
                 tt_content_defValues {
                     CType = maimember_view
@@ -655,28 +655,28 @@ mod.wizards.newContentElement.wizardItems {
         show = *
         elements {
             maiaccount_account {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-account
                 title = LLL:EXT:mai_account/Resources/Private/Language/Default/locallang_tca.xlf:plugin.account.title
                 tt_content_defValues {
                     CType = maiaccount_account
                 }
             }
             maiaccount_register {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-account-register
                 title = LLL:EXT:mai_account/Resources/Private/Language/Default/locallang_tca.xlf:plugin.register.title
                 tt_content_defValues {
                     CType = maiaccount_register
                 }
             }
             maiaccount_mfa {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-account-mfa
                 title = LLL:EXT:mai_account/Resources/Private/Language/Default/locallang_tca.xlf:plugin.mfa.title
                 tt_content_defValues {
                     CType = maiaccount_mfa
                 }
             }
             maiaccount_stories {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-account-stories
                 title = LLL:EXT:mai_account/Resources/Private/Language/Default/locallang_tca.xlf:plugin.stories.title
                 tt_content_defValues {
                     CType = maiaccount_stories
@@ -690,7 +690,7 @@ mod.wizards.newContentElement.wizardItems {
                 }
             }
             maimember_application {
-                iconIdentifier = mai-content
+                iconIdentifier = mai-member-application
                 title = LLL:EXT:mai_member/Resources/Private/Language/locallang_db.xlf:tt_content.CType.mai_member_application
                 tt_content_defValues {
                     CType = maimember_application
