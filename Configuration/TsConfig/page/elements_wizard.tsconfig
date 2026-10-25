@@ -606,6 +606,13 @@ mod.wizards.newContentElement.wizardItems {
                     CType = maimember_list
                 }
             }
+            maimember_detail {
+                iconIdentifier = mai-member
+                title = LLL:EXT:mai_member/Resources/Private/Language/Default/locallang_tca.xlf:plugin.detail.title
+                tt_content_defValues {
+                    CType = maimember_detail
+                }
+            }
             // Legacy duplicate of maimember_list (same controller/actions) — kept
             // registered for existing content, hidden from the wizard for new content.
             maimember_view {

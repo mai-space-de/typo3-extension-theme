@@ -51,6 +51,10 @@
                 <source>Legal</source>
                 <target>قانوني</target>
             </trans-unit>
+            <trans-unit id="footer.cookie_settings" resname="footer.cookie_settings">
+                <source>Cookie settings</source>
+                <target>إعدادات ملفات تعريف الارتباط</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

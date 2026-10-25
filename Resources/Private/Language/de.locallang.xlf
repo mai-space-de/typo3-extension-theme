@@ -55,6 +55,10 @@
             <source>Practical, helpful, warm-hearted. Since 2023.</source>
             <target>Praxisnah, hilfsbereit, herzlich. Seit 2023.</target>
         </trans-unit>
+        <trans-unit id="footer.cookie_settings" resname="footer.cookie_settings">
+            <source>Cookie settings</source>
+            <target>Cookie-Einstellungen</target>
+        </trans-unit>
         <trans-unit id="nav.close" resname="nav.close">
             <source>Close navigation</source>
             <target>Navigation schließen</target>

@@ -13,7 +13,9 @@
     </f:if>
     <div class="mai-map__container">
         <consent:gate category="maps"
-                      placeholder="Diese Karte wird von OpenStreetMap geladen. Bitte akzeptieren Sie die Kategorie „Karten“, um die Karte anzuzeigen.">
+                      media="1"
+                      actionLabel="{f:translate(key: 'LLL:EXT:mai_consent/Resources/Private/Language/locallang.xlf:gate.map.load')}"
+                      placeholder="{f:translate(key: 'LLL:EXT:mai_consent/Resources/Private/Language/locallang.xlf:gate.map.placeholder')}">
             <iframe class="mai-map__frame"
                     src="https://www.openstreetmap.org/export/embed.html?bbox={data.tx_maitheme_lng}%2C{data.tx_maitheme_lat}%2C{data.tx_maitheme_lng}%2C{data.tx_maitheme_lat}&amp;layer=mapnik&amp;marker={data.tx_maitheme_lat}%2C{data.tx_maitheme_lng}&amp;zoom={f:if(condition: data.tx_maitheme_zoom, then: data.tx_maitheme_zoom, else: 14)}"
                     title="{f:if(condition: header, then: header, else: 'Karte')}"

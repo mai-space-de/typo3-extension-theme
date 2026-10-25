@@ -51,6 +51,10 @@
                 <source>Legal</source>
                 <target>Правове</target>
             </trans-unit>
+            <trans-unit id="footer.cookie_settings" resname="footer.cookie_settings">
+                <source>Cookie settings</source>
+                <target>Налаштування файлів cookie</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

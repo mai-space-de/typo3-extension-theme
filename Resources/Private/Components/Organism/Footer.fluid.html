@@ -52,14 +52,14 @@
                 </f:if>
             </f:for>
 
-            <f:comment>── Legal links from footer menu folder ──────────────────────</f:comment>
-            <f:if condition="{footerMain}">
-                <nav class="site-footer__column site-footer__column--legal"
-                     aria-labelledby="footer-col-legal">
-                    <h2 id="footer-col-legal" class="site-footer__heading">
-                        {f:translate(key: 'footer.legal_heading', extensionName: 'mai_theme')}
-                    </h2>
-                    <ul class="site-footer__list">
+            <f:comment>── Legal links from footer menu folder, plus cookie settings ─</f:comment>
+            <nav class="site-footer__column site-footer__column--legal"
+                 aria-labelledby="footer-col-legal">
+                <h2 id="footer-col-legal" class="site-footer__heading">
+                    {f:translate(key: 'footer.legal_heading', extensionName: 'mai_theme')}
+                </h2>
+                <ul class="site-footer__list">
+                    <f:if condition="{footerMain}">
                         <f:for each="{footerMain}" as="item">
                             <li>
                                 <a href="{item.link}"
@@ -67,9 +67,16 @@
                                    {f:if(condition: item.target, then: 'target="{item.target}" rel="noopener noreferrer"')}>{item.title}</a>
                             </li>
                         </f:for>
-                    </ul>
-                </nav>
-            </f:if>
+                    </f:if>
+                    <li>
+                        <button type="button"
+                                class="site-footer__link site-footer__cookie"
+                                data-consent-action="openSettings">
+                            {f:translate(key: 'footer.cookie_settings', extensionName: 'mai_theme')}
+                        </button>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 

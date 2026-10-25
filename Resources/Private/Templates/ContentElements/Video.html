@@ -11,10 +11,14 @@
         <theme:atom.heading level="{data.header_layout}" text="{header}" class="mai-video__title"/>
     </f:if>
     <div class="mai-video__container">
+        <f:variable name="videoPoster" value="{f:if(condition: data.tx_maitheme_video_poster.0.publicUrl, then: data.tx_maitheme_video_poster.0.publicUrl)}" />
         <f:if condition="{data.tx_maitheme_video_youtube_id}">
             <f:then>
                 <consent:gate category="video"
-                              placeholder="Dieses Video wird von YouTube geladen. Bitte akzeptieren Sie die Kategorie „Videos“, um das Video anzusehen.">
+                              media="1"
+                              poster="{videoPoster}"
+                              actionLabel="{f:translate(key: 'LLL:EXT:mai_consent/Resources/Private/Language/locallang.xlf:gate.video.load')}"
+                              placeholder="{f:translate(key: 'LLL:EXT:mai_consent/Resources/Private/Language/locallang.xlf:gate.video.placeholder')}">
                     <iframe class="mai-video__frame"
                             src="https://www.youtube-nocookie.com/embed/{data.tx_maitheme_video_youtube_id}"
                             title="{f:if(condition: header, then: header, else: 'YouTube Video')}"
@@ -27,7 +31,10 @@
                 <f:if condition="{data.tx_maitheme_video_vimeo_id}">
                     <f:then>
                         <consent:gate category="video"
-                                      placeholder="Dieses Video wird von Vimeo geladen. Bitte akzeptieren Sie die Kategorie „Videos“, um das Video anzusehen.">
+                                      media="1"
+                                      poster="{videoPoster}"
+                                      actionLabel="{f:translate(key: 'LLL:EXT:mai_consent/Resources/Private/Language/locallang.xlf:gate.video.load')}"
+                                      placeholder="{f:translate(key: 'LLL:EXT:mai_consent/Resources/Private/Language/locallang.xlf:gate.vimeo.placeholder')}">
                             <iframe class="mai-video__frame"
                                     src="https://player.vimeo.com/video/{data.tx_maitheme_video_vimeo_id}"
                                     title="{f:if(condition: header, then: header, else: 'Vimeo Video')}"
