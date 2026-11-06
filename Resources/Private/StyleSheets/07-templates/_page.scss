@@ -29,4 +29,15 @@ body.page-type-event-detail .mai-page__title {
     margin-block-end: var(--space-2xl);
 }
 
+// The richtext keeps a centred prose measure. On a news detail page that
+// measure starts to the right of the page title. Share the title column
+// and let the copy flow at 85ch from the same left edge.
+body.page-type-news-detail .mai-richtext {
+    max-width: var(--layout-content-width);
+}
+
+body.page-type-news-detail .mai-richtext__body {
+    max-width: 85ch;
+}
+
 }
