@@ -1,0 +1,19 @@
+## lib.lookPreview — Frontend-Rendering eines Inhaltselements für EXT:look.
+##
+## Zuerst die Theme-Assets (CSS-Variablen, Schriften, Bundle), danach dasselbe
+## tt_content-Objekt wie im Frontend. Look sammelt die Assets ein und setzt
+## sie in den Kopf des Vorschaurahmens. Das SVG-Sprite kommt danach, weil die
+## Icon-ViewHelper ihre Symbole erst beim Rendern des Elements registrieren.
+
+lib.lookPreview = COA
+lib.lookPreview {
+    10 = FLUIDTEMPLATE
+    10 {
+        file = EXT:mai_theme/Resources/Private/Templates/Preview/Assets.html
+    }
+    20 < tt_content
+    30 = FLUIDTEMPLATE
+    30 {
+        file = EXT:mai_theme/Resources/Private/Templates/Preview/Sprite.html
+    }
+}

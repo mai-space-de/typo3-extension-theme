@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:comment>
+    Läuft nur im Look-Vorschaurequest. Die ViewHelper schreiben in den
+    AssetCollector, Look übernimmt die Tags in den Kopf des Rahmens.
+    Die Seite selbst bindet dieselben Dateien bereits ein; der Collector
+    dedupliziert sie.
+</f:comment>
+<f:asset.css identifier="mai-look-theme-vars" priority="1"><f:cObject typoscriptObjectPath="lib.themeVars" /></f:asset.css>
+<f:comment>
+    Das Badge der Featurebox ragt um die halbe Badge-Höhe (2rem) über die
+    Karte. Der Vorschaurahmen schneidet Overflow ab und misst nur die
+    Body-Höhe, deshalb braucht genau dieser Fall Innenabstand.
+</f:comment>
+<f:asset.css identifier="mai-look-preview-chrome" priority="1">
+body:has(.mai-featurebox) { padding-block-start: 2.5rem; }
+</f:asset.css>
+<mai:asset.css identifier="mai-theme-fonts" src="EXT:mai_theme/Resources/Public/Scss/fonts.scss" priority="1" integrity="none" />
+<mai:asset.css identifier="mai-theme-main" src="EXT:mai_theme/Resources/Public/Scss/main.scss" priority="1" integrity="none" />
+<mai:asset.css identifier="mai-theme-bundle" src="EXT:mai_theme/Resources/Private/StyleSheets/bundle.scss" priority="1" integrity="none" />
+</html>
