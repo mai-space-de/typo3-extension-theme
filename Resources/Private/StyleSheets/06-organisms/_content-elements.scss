@@ -2672,4 +2672,26 @@ turbo-frame {
     p { margin: 0; }
 }
 
+// Abstand davor/danach. Klassen setzt ContentElementSpaceClasses an das
+// Wurzelelement. "Keiner" setzt keine Klasse. Die Werte sind die Spacing-Tokens.
+$ce-space-tokens: (
+    2xs: var(--space-2xs),
+    xs:  var(--space-xs),
+    sm:  var(--space-sm),
+    md:  var(--space-md),
+    lg:  var(--space-lg),
+    xl:  var(--space-xl),
+    2xl: var(--space-2xl),
+    3xl: var(--space-3xl),
+    4xl: var(--space-4xl),
+);
+
+@each $token, $space in $ce-space-tokens {
+    // #main > … beats the section-rhythm rule, which uses the same ID.
+    .mai-ce-space-before-#{$token},
+    #main > .mai-ce-space-before-#{$token} { margin-block-start: $space; }
+    .mai-ce-space-after-#{$token},
+    #main > .mai-ce-space-after-#{$token}  { margin-block-end: $space; }
+}
+
 } // @layer theme-organisms

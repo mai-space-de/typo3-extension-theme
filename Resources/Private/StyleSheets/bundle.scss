@@ -1,4 +1,5 @@
-// Subpages auto-fit grid + SCSS import-tree cache invalidation (2026-07-27);
+// Content-element space classes follow the spacing tokens (2026-11-06b).
+// News-detail prose shares the title column at 85ch (2026-11-06).
 // bump this file when organism partials change so mai_assets content-hash cache invalidates.
 @import "01-settings/variables";
 

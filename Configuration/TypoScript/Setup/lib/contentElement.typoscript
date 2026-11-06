@@ -598,3 +598,7 @@ tt_content {
         vendorName = Maispace
     }
 }
+
+# space_before_class / space_after_class → Klasse am Wurzelelement.
+# Leerer Wert ("Keiner") lässt das Markup unverändert.
+tt_content.stdWrap.postUserFunc = Maispace\MaiTheme\Frontend\ContentElementSpaceClasses->apply

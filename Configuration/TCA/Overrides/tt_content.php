@@ -541,7 +541,8 @@ ExtensionManagementUtility::addFieldsToPalette(
 ExtensionManagementUtility::addFieldsToPalette(
     "tt_content",
     "maispace_spacing",
-    'tx_maitheme_margin_top, tx_maitheme_margin_bottom, --linebreak--,
+    'space_before_class, space_after_class, --linebreak--,
+     tx_maitheme_margin_top, tx_maitheme_margin_bottom, --linebreak--,
      tx_maitheme_padding_top, tx_maitheme_padding_bottom, --linebreak--,
      tx_maitheme_max_width, tx_maitheme_alignment',
 );

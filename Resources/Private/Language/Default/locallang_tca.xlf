@@ -282,6 +282,7 @@
             <!-- Spacing scale -->
             <trans-unit id="spacing.inherit"><source>Inherit</source></trans-unit>
             <trans-unit id="spacing.none"><source>None (0)</source></trans-unit>
+            <trans-unit id="spacing.keiner"><source>None</source></trans-unit>
             <trans-unit id="spacing.2xs"><source>2XS</source></trans-unit>
             <trans-unit id="spacing.xs"><source>XS</source></trans-unit>
             <trans-unit id="spacing.sm"><source>SM</source></trans-unit>
@@ -290,6 +291,7 @@
             <trans-unit id="spacing.xl"><source>XL</source></trans-unit>
             <trans-unit id="spacing.2xl"><source>2XL</source></trans-unit>
             <trans-unit id="spacing.3xl"><source>3XL</source></trans-unit>
+            <trans-unit id="spacing.4xl"><source>4XL</source></trans-unit>
 
             <!-- Alignment -->
             <trans-unit id="alignment.left"><source>Left</source></trans-unit>

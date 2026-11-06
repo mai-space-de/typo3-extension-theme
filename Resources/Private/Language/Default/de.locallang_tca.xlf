@@ -355,6 +355,7 @@
             <!-- Spacing scale -->
             <trans-unit id="spacing.inherit"><source>Inherit</source><target>Erben</target></trans-unit>
             <trans-unit id="spacing.none"><source>None (0)</source><target>Kein (0)</target></trans-unit>
+            <trans-unit id="spacing.keiner"><source>None</source><target>Keiner</target></trans-unit>
             <trans-unit id="spacing.2xs"><source>2XS</source><target>2XS</target></trans-unit>
             <trans-unit id="spacing.xs"><source>XS</source><target>XS</target></trans-unit>
             <trans-unit id="spacing.sm"><source>SM</source><target>SM</target></trans-unit>
@@ -363,6 +364,7 @@
             <trans-unit id="spacing.xl"><source>XL</source><target>XL</target></trans-unit>
             <trans-unit id="spacing.2xl"><source>2XL</source><target>2XL</target></trans-unit>
             <trans-unit id="spacing.3xl"><source>3XL</source><target>3XL</target></trans-unit>
+            <trans-unit id="spacing.4xl"><source>4XL</source><target>4XL</target></trans-unit>
 
             <!-- Alignment -->
             <trans-unit id="alignment.left"><source>Left</source><target>Links</target></trans-unit>
