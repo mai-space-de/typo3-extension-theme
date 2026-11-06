@@ -21,3 +21,21 @@ services:
         command: 'theme:move-navigation-pages'
         description: 'Move main-navigation pages under the Hauptnavigation folder (uid=28).'
         schedulable: false
+
+  dashboard.widget.maiThemeManual:
+    class: 'ProudNerds\PnBackendManual\Widgets\ManualWidget'
+    arguments:
+      $options:
+        file: 'EXT:mai_theme/Resources/Private/Manual/Manual.md'
+        numbered: true
+        contentsDepth: 2
+        printButton: true
+    tags:
+      - name: dashboard.widget
+        identifier: 'maiThemeManual'
+        groupNames: 'documentation'
+        title: 'Handbuch: Theme'
+        description: 'Kurze Anleitung zu den Inhaltselementen des Themes.'
+        iconIdentifier: 'content-book'
+        height: 'medium'
+        width: 'medium'
