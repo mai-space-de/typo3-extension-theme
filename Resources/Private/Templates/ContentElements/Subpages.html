@@ -1,4 +1,6 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
       data-namespace-typo3-fluid="true">
 <f:comment>
     Subpage offer-card grid (theme interpretation of menu_subpages).
@@ -38,10 +40,12 @@
                     <article class="mai-subpages__item {cardClass}" role="listitem">
                         <f:if condition="{item.media.0}">
                             <div class="offer-card__media">
-                                <f:image image="{item.media.0}"
-                                         alt="{f:if(condition: item.media.0.properties.alternative, then: item.media.0.properties.alternative, else: item.title)}"
-                                         class="offer-card__image"
-                                         loading="lazy"/>
+                                <mai:image.picture image="{item.media.0}"
+                                                   alt="{f:if(condition: item.media.0.properties.alternative, then: item.media.0.properties.alternative, else: item.title)}"
+                                                   class="offer-card__image"
+                                                   slot="subpage-card"
+                                                   elementUid="{data.uid}"
+                                                   critical="false"/>
                             </div>
                         </f:if>
 

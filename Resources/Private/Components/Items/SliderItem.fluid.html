@@ -17,6 +17,8 @@
     <f:if condition="{item.images.0}">
         <mai:image.picture image="{item.images.0}"
                            alt="{item.data.headline}"
+                           slot="slider"
+                           elementUid="{parentUid}"
                            class="mai-slider__image"/>
     </f:if>
     <div class="mai-slider__body">

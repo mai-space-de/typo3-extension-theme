@@ -42,17 +42,12 @@
                 <mai:image.picture image="{images.0}"
                                    alt="{images.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'BGM Pulheim')}"
                                    elementUid="{data.uid}"
+                                   slot="hero"
                                    width="1600"
+                                   sizes="100vw"
                                    fileExtension="jpg"
                                    critical="auto"
-                                   class="hero__image">
-                    <mai:image.picture.source media="(max-width: 767px)"
-                                             srcset="{0: 400, 1: 800}"
-                                             sizes="100vw" />
-                    <mai:image.picture.source media="(min-width: 768px)"
-                                             srcset="{0: 1200, 1: 1600}"
-                                             sizes="100vw" />
-                </mai:image.picture>
+                                   class="hero__image"/>
                 <f:if condition="{data.tx_maitheme_badge_text}">
                     <span class="hero__badge">{data.tx_maitheme_badge_text}</span>
                 </f:if>

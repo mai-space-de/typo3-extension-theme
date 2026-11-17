@@ -12,7 +12,7 @@
             <f:variable name="imageAlt" value="{image.properties.alternative}" />
         </f:if>
         <div class="mai-mediatext__media">
-            <theme:atom.image image="{image}" alt="{imageAlt}"/>
+            <theme:atom.image image="{image}" alt="{imageAlt}" slot="mediatext"/>
         </div>
     </f:if>
     <div class="mai-mediatext__content">

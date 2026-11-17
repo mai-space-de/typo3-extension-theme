@@ -1,14 +1,22 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
       data-namespace-typo3-fluid="true">
 <figure class="mai-image{f:if(condition: data.tx_maitheme_alignment, then: ' mai-image--{data.tx_maitheme_alignment}')}"
         data-ce-uid="{data.uid}"
         {f:if(condition: data.tx_maitheme_anchor_id, then: 'id="{data.tx_maitheme_anchor_id}"', else: 'id="c{data.uid}"')}>
     <f:if condition="{images}">
-        <f:image image="{images.0}"
-                 alt="{images.0.properties.alternative}"
-                 title="{images.0.properties.title}"
-                 class="mai-image__img"
-                 loading="lazy"/>
+        <f:switch expression="{data.tx_maitheme_alignment}">
+            <f:case value="left"><f:variable name="imageSlot" value="image-side"/></f:case>
+            <f:case value="right"><f:variable name="imageSlot" value="image-side"/></f:case>
+            <f:defaultCase><f:variable name="imageSlot" value="image"/></f:defaultCase>
+        </f:switch>
+        <mai:image.picture image="{images.0}"
+                           alt="{images.0.properties.alternative}"
+                           class="mai-image__img"
+                           slot="{imageSlot}"
+                           elementUid="{data.uid}"
+                           critical="auto"/>
         <f:if condition="{images.0.properties.description}">
             <figcaption class="mai-image__caption">{images.0.properties.description}</figcaption>
         </f:if>

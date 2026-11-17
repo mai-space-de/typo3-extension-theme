@@ -1,4 +1,6 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
       data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
@@ -11,19 +13,23 @@
     <div class="mai-beforeafter__widget" data-widget="beforeafter">
         <div class="mai-beforeafter__before">
             <f:if condition="{data.tx_maitheme_image_before}">
-                <f:image image="{data.tx_maitheme_image_before.0}"
-                         alt="{data.tx_maitheme_image_before.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'Vorher')}"
-                         class="mai-beforeafter__img"
-                         loading="lazy"/>
+                <mai:image.picture image="{data.tx_maitheme_image_before.0}"
+                                   alt="{data.tx_maitheme_image_before.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'Vorher')}"
+                                   class="mai-beforeafter__img"
+                                   slot="beforeafter"
+                                   elementUid="{data.uid}"
+                                   critical="auto"/>
             </f:if>
             <span class="mai-beforeafter__label" aria-hidden="true">Vorher</span>
         </div>
         <div class="mai-beforeafter__after">
             <f:if condition="{data.tx_maitheme_image_after}">
-                <f:image image="{data.tx_maitheme_image_after.0}"
-                         alt="{data.tx_maitheme_image_after.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'Nachher')}"
-                         class="mai-beforeafter__img"
-                         loading="lazy"/>
+                <mai:image.picture image="{data.tx_maitheme_image_after.0}"
+                                   alt="{data.tx_maitheme_image_after.0.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: 'Nachher')}"
+                                   class="mai-beforeafter__img"
+                                   slot="beforeafter"
+                                   elementUid="{data.uid}"
+                                   critical="auto"/>
             </f:if>
             <span class="mai-beforeafter__label" aria-hidden="true">Nachher</span>
         </div>

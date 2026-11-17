@@ -37,12 +37,17 @@ html {
 // Constrain replaced elements to their container and display them as blocks to
 // remove the phantom gap below inline images.
 img,
-picture,
 video,
 canvas,
 svg {
     max-inline-size: 100%;
     display: block;
+}
+
+// The picture wrapper must not sit between a sized container and its img,
+// otherwise width/height and object-fit on the image stop reaching the box.
+picture {
+    display: contents;
 }
 
 // Inherit fonts for form controls (browser resets ignore these by default).

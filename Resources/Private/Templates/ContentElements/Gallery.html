@@ -1,4 +1,6 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
       data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
@@ -16,10 +18,12 @@
                        href="{file.publicUrl}"
                        data-lightbox="gallery-{data.uid}"
                        aria-label="{file.properties.alternative -> f:if(condition: '{0}', then: '{0}', else: file.name)}">
-                        <f:image image="{file}"
-                                 alt="{file.properties.alternative}"
-                                 class="mai-gallery__img"
-                                 loading="lazy"/>
+                        <mai:image.picture image="{file}"
+                                           alt="{file.properties.alternative}"
+                                           class="mai-gallery__img"
+                                           slot="content-gallery"
+                                           elementUid="{data.uid}"
+                                           critical="auto"/>
                     </a>
                 </li>
             </f:for>

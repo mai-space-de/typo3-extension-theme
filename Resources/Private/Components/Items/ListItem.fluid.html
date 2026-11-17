@@ -18,12 +18,14 @@
                                  class="mai-list-item__media-link">
                         <mai:image.picture image="{item.media.0}"
                                            alt="{item.title}"
+                                           slot="list-card"
                                            class="mai-list-item__image"/>
                     </f:link.page>
                 </f:then>
                 <f:else>
                     <mai:image.picture image="{item.media.0}"
                                        alt="{item.title}"
+                                       slot="list-card"
                                        class="mai-list-item__image"/>
                 </f:else>
             </f:if>

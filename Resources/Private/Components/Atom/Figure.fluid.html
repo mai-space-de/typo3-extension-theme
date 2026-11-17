@@ -7,17 +7,30 @@
 <f:argument name="class" type="string" optional="{true}" />
 <f:argument name="id" type="string" optional="{true}" />
 <f:argument name="breakpoints" type="mixed" optional="{true}" />
-<f:argument name="sizes" type="string" optional="{true}" />
+<f:argument name="sizes" type="string" optional="{true}" default="100vw" />
+<f:argument name="slot" type="string" optional="{true}" />
+<f:argument name="elementUid" type="integer" optional="{true}" />
+<f:argument name="critical" type="string" optional="{true}" default="auto" />
+<f:argument name="width" type="integer" optional="{true}" />
 <mai:image.figure caption="{caption}" class="mai-figure {class}" id="{id}">
     <f:if condition="{breakpoints}">
         <f:then>
             <mai:image.responsiveImage image="{image}"
                                        breakpoints="{breakpoints}"
                                        sizes="{sizes}"
+                                       slot="{slot}"
+                                       elementUid="{elementUid}"
+                                       critical="{critical}"
                                        alt="{alt}"/>
         </f:then>
         <f:else>
-            <mai:image.picture image="{image}" alt="{alt}"/>
+            <mai:image.picture image="{image}"
+                               alt="{alt}"
+                               slot="{slot}"
+                               elementUid="{elementUid}"
+                               critical="{critical}"
+                               width="{width}"
+                               sizes="{sizes}"/>
         </f:else>
     </f:if>
 </mai:image.figure>

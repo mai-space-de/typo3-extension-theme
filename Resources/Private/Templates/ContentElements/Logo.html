@@ -1,4 +1,6 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
       data-namespace-typo3-fluid="true">
 <section class="mai-logo"
          data-ce-uid="{data.uid}"
@@ -7,17 +9,23 @@
         <f:if condition="{data.tx_maitheme_link}">
             <f:then>
                 <f:link.typolink parameter="{data.tx_maitheme_link}" class="mai-logo__link">
-                    <f:image image="{images.0}"
-                             alt="{images.0.properties.alternative}"
-                             class="mai-logo__img"
-                             loading="lazy"/>
+                    <mai:image.picture image="{images.0}"
+                                       alt="{images.0.properties.alternative}"
+                                       class="mai-logo__img"
+                                       slot="logo"
+                                       width="480"
+                                       elementUid="{data.uid}"
+                                       critical="auto"/>
                 </f:link.typolink>
             </f:then>
             <f:else>
-                <f:image image="{images.0}"
-                         alt="{images.0.properties.alternative}"
-                         class="mai-logo__img"
-                         loading="lazy"/>
+                <mai:image.picture image="{images.0}"
+                                   alt="{images.0.properties.alternative}"
+                                   class="mai-logo__img"
+                                   slot="logo"
+                                   width="480"
+                                   elementUid="{data.uid}"
+                                   critical="auto"/>
             </f:else>
         </f:if>
     </f:if>

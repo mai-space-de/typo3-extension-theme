@@ -7,7 +7,7 @@
 <f:argument name="href" type="string" optional="{true}" />
 <article class="mai-card">
     <f:if condition="{image}">
-        <theme:atom.image image="{image}" alt="{title}"/>
+        <theme:atom.image image="{image}" alt="{title}" slot="card"/>
     </f:if>
     <theme:atom.heading level="3" text="{title}"/>
     <f:if condition="{text}"><p class="mai-card__text">{text -> f:format.raw()}</p></f:if>

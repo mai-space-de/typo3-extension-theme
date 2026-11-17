@@ -7,7 +7,7 @@
 <f:argument name="overlay" type="string" optional="{true}" />
 <f:argument name="class" type="string" optional="{true}" />
 <div class="mai-media-box {class}">
-    <theme:atom.figure image="{image}" alt="{alt}" caption="{caption}"/>
+    <theme:atom.figure image="{image}" alt="{alt}" caption="{caption}" slot="media-box"/>
     <f:if condition="{overlay}">
         <div class="mai-media-box__overlay">{overlay -> f:format.raw()}</div>
     </f:if>

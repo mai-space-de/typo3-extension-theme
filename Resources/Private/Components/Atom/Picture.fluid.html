@@ -6,9 +6,15 @@
 <f:argument name="class" type="string" optional="{true}" />
 <f:argument name="elementUid" type="string" optional="{true}" />
 <f:argument name="critical" type="string" optional="{true}" default="auto" />
+<f:argument name="slot" type="string" optional="{true}" />
+<f:argument name="width" type="integer" optional="{true}" />
+<f:argument name="sizes" type="string" optional="{true}" default="100vw" />
 <mai:image.picture image="{image}"
                    alt="{alt}"
                    class="mai-picture {class}"
                    elementUid="{elementUid}"
-                   critical="{critical}"/>
+                   critical="{critical}"
+                   slot="{slot}"
+                   width="{width}"
+                   sizes="{sizes}"/>
 </html>

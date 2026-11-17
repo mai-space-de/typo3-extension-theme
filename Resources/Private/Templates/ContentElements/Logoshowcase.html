@@ -1,4 +1,6 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:mai="http://typo3.org/ns/Maispace/MaiAssets/ViewHelpers"
+      xmlns:theme="http://typo3.org/ns/Maispace/MaiTheme/Components/ComponentCollection"
       data-namespace-typo3-fluid="true">
 <f:variable name="header" value="{record -> f:render.text(field: 'header')}" />
 <f:variable name="subheader" value="{record -> f:render.text(field: 'subheader')}" />
@@ -12,10 +14,13 @@
         <ul class="mai-logoshowcase__grid">
             <f:for each="{images}" as="file">
                 <li class="mai-logoshowcase__item">
-                    <f:image image="{file}"
-                             alt="{file.properties.alternative}"
-                             class="mai-logoshowcase__logo"
-                             loading="lazy"/>
+                    <mai:image.picture image="{file}"
+                                       alt="{file.properties.alternative}"
+                                       class="mai-logoshowcase__logo"
+                                       slot="logo-showcase"
+                                       width="320"
+                                       elementUid="{data.uid}"
+                                       critical="auto"/>
                 </li>
             </f:for>
         </ul>
